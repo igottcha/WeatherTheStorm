@@ -13,6 +13,9 @@
 		9E8700F624535C8C005AD32A /* WeatherTheStorm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E8700F424535C8C005AD32A /* WeatherTheStorm.xcdatamodeld */; };
 		9E8700F824535C8F005AD32A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E8700F724535C8F005AD32A /* Assets.xcassets */; };
 		9E8700FB24535C8F005AD32A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8700F924535C8F005AD32A /* LaunchScreen.storyboard */; };
+		E9BF39102453A52C004E928D /* CurrentWeather_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BF390F2453A52C004E928D /* CurrentWeather_Extension.swift */; };
+		E9BF39132453A7DB004E928D /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BF39122453A7DB004E928D /* CoreDataStack.swift */; };
+		E9BF39152453B202004E928D /* HourlyWeather_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BF39142453B202004E928D /* HourlyWeather_Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		9E8700F724535C8F005AD32A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E8700FA24535C8F005AD32A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E8700FC24535C8F005AD32A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9BF390F2453A52C004E928D /* CurrentWeather_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CurrentWeather_Extension.swift; path = WeatherTheStorm/CurrentWeather_Extension.swift; sourceTree = SOURCE_ROOT; };
+		E9BF39122453A7DB004E928D /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		E9BF39142453B202004E928D /* HourlyWeather_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HourlyWeather_Extension.swift; path = WeatherTheStorm/Helpers/HourlyWeather_Extension.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				9E8700F424535C8C005AD32A /* WeatherTheStorm.xcdatamodeld */,
+				E9BF39112453A7B1004E928D /* Helpers */,
 				9E87010424535D40005AD32A /* Model */,
 				9E87010524535D48005AD32A /* Controllers */,
 				9E87010824535D67005AD32A /* View */,
@@ -80,6 +87,8 @@
 		9E87010424535D40005AD32A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E9BF390F2453A52C004E928D /* CurrentWeather_Extension.swift */,
+				E9BF39142453B202004E928D /* HourlyWeather_Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -113,6 +122,14 @@
 				9E8700F124535C8C005AD32A /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		E9BF39112453A7B1004E928D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E9BF39122453A7DB004E928D /* CoreDataStack.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,7 +203,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9BF39132453A7DB004E928D /* CoreDataStack.swift in Sources */,
+				E9BF39102453A52C004E928D /* CurrentWeather_Extension.swift in Sources */,
 				9E8700EC24535C8C005AD32A /* AppDelegate.swift in Sources */,
+				E9BF39152453B202004E928D /* HourlyWeather_Extension.swift in Sources */,
 				9E8700F624535C8C005AD32A /* WeatherTheStorm.xcdatamodeld in Sources */,
 				9E8700EE24535C8C005AD32A /* SceneDelegate.swift in Sources */,
 			);
