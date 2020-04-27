@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AirQuality" representedClassName="AirQuality" syncable="YES" codeGenerationType="class">
-        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="weather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather" inverseName="airQuality" inverseEntity="Weather"/>
     </entity>
     <entity name="CurrentWeather" representedClassName="CurrentWeather" syncable="YES" codeGenerationType="class">
@@ -67,6 +67,5 @@
         <element name="Trip" positionX="-18" positionY="27" width="128" height="103"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="73"/>
         <element name="Weather" positionX="-54" positionY="0" width="128" height="118"/>
-
     </elements>
 </model>
