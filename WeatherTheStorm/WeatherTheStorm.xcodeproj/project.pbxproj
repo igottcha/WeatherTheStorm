@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E29CC2C2453A0B700CA3891 /* Day_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E29CC2B2453A0B700CA3891 /* Day_Extension.swift */; };
+		9E29CC2E2453A24200CA3891 /* DailyForecast_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E29CC2D2453A24200CA3891 /* DailyForecast_Extension.swift */; };
+		9E29CC312453AAC300CA3891 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E29CC302453AAC300CA3891 /* CoreDataStack.swift */; };
 		9E8700EC24535C8C005AD32A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8700EB24535C8C005AD32A /* AppDelegate.swift */; };
 		9E8700EE24535C8C005AD32A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8700ED24535C8C005AD32A /* SceneDelegate.swift */; };
 		9E8700F324535C8C005AD32A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8700F124535C8C005AD32A /* Main.storyboard */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E29CC2B2453A0B700CA3891 /* Day_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day_Extension.swift; sourceTree = "<group>"; };
+		9E29CC2D2453A24200CA3891 /* DailyForecast_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecast_Extension.swift; sourceTree = "<group>"; };
+		9E29CC302453AAC300CA3891 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9E8700E824535C8C005AD32A /* WeatherTheStorm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherTheStorm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8700EB24535C8C005AD32A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E8700ED24535C8C005AD32A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E29CC2F2453AAB800CA3891 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9E29CC302453AAC300CA3891 /* CoreDataStack.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		9E8700DF24535C8C005AD32A = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +70,7 @@
 		9E8700EA24535C8C005AD32A /* WeatherTheStorm */ = {
 			isa = PBXGroup;
 			children = (
+				9E29CC2F2453AAB800CA3891 /* Helpers */,
 				9E8700F424535C8C005AD32A /* WeatherTheStorm.xcdatamodeld */,
 				9E87010424535D40005AD32A /* Model */,
 				9E87010524535D48005AD32A /* Controllers */,
@@ -80,6 +95,8 @@
 		9E87010424535D40005AD32A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9E29CC2B2453A0B700CA3891 /* Day_Extension.swift */,
+				9E29CC2D2453A24200CA3891 /* DailyForecast_Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -186,7 +203,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E29CC2C2453A0B700CA3891 /* Day_Extension.swift in Sources */,
+				9E29CC312453AAC300CA3891 /* CoreDataStack.swift in Sources */,
 				9E8700EC24535C8C005AD32A /* AppDelegate.swift in Sources */,
+				9E29CC2E2453A24200CA3891 /* DailyForecast_Extension.swift in Sources */,
 				9E8700F624535C8C005AD32A /* WeatherTheStorm.xcdatamodeld in Sources */,
 				9E8700EE24535C8C005AD32A /* SceneDelegate.swift in Sources */,
 			);
