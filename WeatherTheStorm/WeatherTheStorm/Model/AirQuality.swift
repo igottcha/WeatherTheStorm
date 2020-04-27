@@ -10,9 +10,9 @@ import Foundation
 import CoreData
 
 extension AirQuality {
-    convenience init(index: Int16, moc: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(index: Int, moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
-        self.index = index
+        self.index = Int64(index)
     }
 }
 
