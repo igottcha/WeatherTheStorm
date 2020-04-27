@@ -6,29 +6,31 @@
 //  Copyright © 2020 Gottfredson. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
 
 class UserController {
     
+    //MARK: - CRUD FUNCTION
     
     func createUser(name: String) {
-         User(name: name)
-        saveToPersistentStore()
+        User(name: name)
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        //saveToPersistentStore()
         
     }
     
     func updateUser(user: User, name: String?) {
         if name != nil { user.name = name}
-        saveToPersistentStore()
-        
+        //saveToPersistentStore()
         
     }
     
-    func saveToPersistentStore(){
-        do{
-            try CoreDataStack.context.save()
-        }catch{
-            print("There was an error saving the data!!! \(#function) \(error.localizedDescription)")
-        }
-    }
+//    func saveToPersistentStore(){
+//        do{
+//            try CoreDataStack.context.save()
+//        }catch{
+//            print("There was an error saving the data!!! \(#function) \(error.localizedDescription)")
+//        }
+//    }
 }
