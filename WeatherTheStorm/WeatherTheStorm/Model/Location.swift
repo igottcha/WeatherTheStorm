@@ -8,16 +8,19 @@
 
 import Foundation
 import CoreData
+import CoreLocation
 
 extension Location {
-    convenience init(destination: String, moc: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(destination: CLPlacemark, moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
         self.destination = destination
     }
 }
 
-extension Location {
-    enum CodingKeys: String, CodingKey {
-        case location
-    }
-}
+//extension Location {
+//    enum CodingKeys: String, CodingKey {
+//        case location
+//    }
+//}
+
+
