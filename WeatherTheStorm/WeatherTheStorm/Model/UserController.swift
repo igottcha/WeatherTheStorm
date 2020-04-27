@@ -7,9 +7,26 @@
 //
 
 import UIKit
-
+import CoreData
 
 class UserController {
+    
+    var fetchResultsController: NSFetchedResultsController<User>
+       
+       //MARK: - Source of truth
+       
+    init(){
+        let request: NSFetchRequest<User> = User.fetchRequest()
+        
+        let resultsController: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultsController = resultsController
+        do{
+            try fetchResultsController.performFetch()
+            
+        }catch{
+            print("There Was an error fetching the data, \(error.localizedDescription)\(#function)")
+        }
+    }
     
     //MARK: - CRUD FUNCTION
     
