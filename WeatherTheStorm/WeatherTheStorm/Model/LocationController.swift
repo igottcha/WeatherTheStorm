@@ -29,6 +29,26 @@ class LocationController {
      }
  }
     
+    //MARK: - GeoCoding
+    
+    func getPlacemark(searchTerm: String, completion: @escaping (Result<CLPlacemark, LocationError>) -> Void) {
+        
+        let geocoder = CLGeocoder()
+        
+        geocoder.geocodeAddressString(searchTerm) { (placemarks, error) in
+            if let error = error {
+                print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
+                completion(.failure(.thrown(error)))
+                return
+            }
+            
+            guard let placemark = placemarks?.first else { completion(.failure(.unableToFindLocation)); return }
+                        
+            completion(.success(placemark))
+            return
+        }
+    }
+    
     //MARK: - CRUD Function
     
     func createLocation(destination: CLPlacemark) {
