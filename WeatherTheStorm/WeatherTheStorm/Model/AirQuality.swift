@@ -7,18 +7,12 @@
 //
 
 import Foundation
-import CoreData
 
-extension AirQuality {
-    convenience init(index: Int, moc: NSManagedObjectContext = CoreDataStack.context) {
-        self.init(context: moc)
-        self.index = Int64(index)
-    }
-}
-
-extension AirQuality {
+struct AirQuality: Codable {
+    
+    let index: Int
+    
     enum CodingKeys: String, CodingKey {
-        case mainus
-        case pl
+        case index = "aqius"
     }
 }

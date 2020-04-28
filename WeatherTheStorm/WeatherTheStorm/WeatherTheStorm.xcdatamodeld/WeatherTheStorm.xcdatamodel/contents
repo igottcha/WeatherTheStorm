@@ -1,44 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="AirQuality" representedClassName="AirQuality" syncable="YES" codeGenerationType="class">
-        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather" inverseName="airQuality" inverseEntity="Weather"/>
-    </entity>
-    <entity name="CurrentWeather" representedClassName="CurrentWeather" syncable="YES" codeGenerationType="class">
-        <attribute name="feelsLike" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="humidity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="precipitationAmount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="pressure" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="uvIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="visibility" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="windDirection" optional="YES" attributeType="String"/>
-        <attribute name="windSpeed" optional="YES" attributeType="String"/>
-        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather" inverseName="current" inverseEntity="Weather"/>
-    </entity>
-    <entity name="DailyForecast" representedClassName="DailyForecast" syncable="YES" codeGenerationType="class">
-        <attribute name="dow" optional="YES" attributeType="String"/>
-        <attribute name="lowTemp" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="maxTemp" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="dailyForecast" inverseEntity="Day"/>
-        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather" inverseName="dailyForecast" inverseEntity="Weather"/>
-    </entity>
-    <entity name="Day" representedClassName="Day" syncable="YES" codeGenerationType="class">
-        <attribute name="chanceOfPrecipitation" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="cloudCoverPercent" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="precipitationType" optional="YES" attributeType="String"/>
-        <relationship name="dailyForecast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyForecast" inverseName="day" inverseEntity="DailyForecast"/>
-    </entity>
-    <entity name="HourlyForecast" representedClassName="HourlyForecast" syncable="YES" codeGenerationType="class">
-        <attribute name="cloudCoverPercentage" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="feelsLike" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="temp" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="time" optional="YES" attributeType="String"/>
-        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather" inverseName="hourlyForecast" inverseEntity="Weather"/>
-    </entity>
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="destination" optional="YES" attributeType="Transformable" customClassName="CoreLocation.CLPlacemark"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="location" inverseEntity="Trip"/>
-        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather" inverseName="location" inverseEntity="Weather"/>
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES" codeGenerationType="class">
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -50,22 +14,9 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="trips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Trip" inverseName="user" inverseEntity="Trip"/>
     </entity>
-    <entity name="Weather" representedClassName="Weather" syncable="YES" codeGenerationType="class">
-        <relationship name="airQuality" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AirQuality" inverseName="weather" inverseEntity="AirQuality"/>
-        <relationship name="current" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrentWeather" inverseName="weather" inverseEntity="CurrentWeather"/>
-        <relationship name="dailyForecast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyForecast" inverseName="weather" inverseEntity="DailyForecast"/>
-        <relationship name="hourlyForecast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HourlyForecast" inverseName="weather" inverseEntity="HourlyForecast"/>
-        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="weather" inverseEntity="Location"/>
-    </entity>
     <elements>
-        <element name="AirQuality" positionX="9" positionY="144" width="128" height="73"/>
-        <element name="CurrentWeather" positionX="0" positionY="126" width="128" height="178"/>
-        <element name="DailyForecast" positionX="18" positionY="90" width="128" height="118"/>
-        <element name="Day" positionX="36" positionY="108" width="128" height="103"/>
-        <element name="HourlyForecast" positionX="0" positionY="81" width="128" height="118"/>
-        <element name="Location" positionX="-36" positionY="9" width="128" height="28"/>
+        <element name="Location" positionX="-36" positionY="9" width="128" height="73"/>
         <element name="Trip" positionX="-18" positionY="27" width="128" height="103"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="73"/>
-        <element name="Weather" positionX="-54" positionY="0" width="128" height="118"/>
     </elements>
 </model>
