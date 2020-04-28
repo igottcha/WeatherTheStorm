@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CgS-9J-N8l">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Trip Weather-->
+        <scene sceneID="w2f-wP-QPD">
+            <objects>
+                <navigationController id="CgS-9J-N8l" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Trip Weather" image="airplane" catalog="system" selectedImage="airplane" id="6Zd-lS-gNx"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QD0-vG-ZfO">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Him-1f-Pcc" kind="relationship" relationship="rootViewController" id="nPx-Gf-RI3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mol-zK-gXG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-501" y="201"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Vnv-mr-RZw">
+            <objects>
+                <viewController id="Him-1f-Pcc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ynk-pv-IdM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="fWN-Ce-2YR"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="h9S-7G-u2N"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IR0-Kl-cti" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="314" y="201"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="airplane" catalog="system" width="128" height="115"/>
+    </resources>
+</document>

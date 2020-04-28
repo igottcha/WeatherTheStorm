@@ -23,6 +23,10 @@
 		9E8700FB24535C8F005AD32A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8700F924535C8F005AD32A /* LaunchScreen.storyboard */; };
 		9E9F3686245753570044086A /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9F3684245753560044086A /* Day.swift */; };
 		9E9F3687245753570044086A /* DailyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9F3685245753560044086A /* DailyForecast.swift */; };
+		E978FBF92458BA8C00E2DD82 /* ForecastSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E978FBF82458BA8C00E2DD82 /* ForecastSB.storyboard */; };
+		E978FBFB2458BB2100E2DD82 /* WorkWeatherSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E978FBFA2458BB2100E2DD82 /* WorkWeatherSB.storyboard */; };
+		E978FBFD2458BB8000E2DD82 /* TripWeatherSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E978FBFC2458BB8000E2DD82 /* TripWeatherSB.storyboard */; };
+		E978FC012458BBE100E2DD82 /* NotificationsSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E978FC002458BBE100E2DD82 /* NotificationsSB.storyboard */; };
 		E9B6BC0A24575F3A00F0209A /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B6BC0924575F3A00F0209A /* CurrentWeather.swift */; };
 		E9B6BC0C24575F6500F0209A /* HourlyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B6BC0B24575F6500F0209A /* HourlyWeather.swift */; };
 		E9B6BC0E245784DB00F0209A /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B6BC0D245784DB00F0209A /* UserController.swift */; };
@@ -47,6 +51,10 @@
 		9E8700FC24535C8F005AD32A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E9F3684245753560044086A /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		9E9F3685245753560044086A /* DailyForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyForecast.swift; sourceTree = "<group>"; };
+		E978FBF82458BA8C00E2DD82 /* ForecastSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ForecastSB.storyboard; sourceTree = "<group>"; };
+		E978FBFA2458BB2100E2DD82 /* WorkWeatherSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkWeatherSB.storyboard; sourceTree = "<group>"; };
+		E978FBFC2458BB8000E2DD82 /* TripWeatherSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TripWeatherSB.storyboard; sourceTree = "<group>"; };
+		E978FC002458BBE100E2DD82 /* NotificationsSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotificationsSB.storyboard; sourceTree = "<group>"; };
 		E9B6BC0924575F3A00F0209A /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		E9B6BC0B24575F6500F0209A /* HourlyWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeather.swift; sourceTree = "<group>"; };
 		E9B6BC0D245784DB00F0209A /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserController.swift; path = WeatherTheStorm/Model/UserController.swift; sourceTree = SOURCE_ROOT; };
@@ -158,6 +166,10 @@
 			isa = PBXGroup;
 			children = (
 				9E8700F124535C8C005AD32A /* Main.storyboard */,
+				E978FBF82458BA8C00E2DD82 /* ForecastSB.storyboard */,
+				E978FBFA2458BB2100E2DD82 /* WorkWeatherSB.storyboard */,
+				E978FBFC2458BB8000E2DD82 /* TripWeatherSB.storyboard */,
+				E978FC002458BBE100E2DD82 /* NotificationsSB.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,7 +232,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E978FBF92458BA8C00E2DD82 /* ForecastSB.storyboard in Resources */,
+				E978FC012458BBE100E2DD82 /* NotificationsSB.storyboard in Resources */,
 				9E8700FB24535C8F005AD32A /* LaunchScreen.storyboard in Resources */,
+				E978FBFB2458BB2100E2DD82 /* WorkWeatherSB.storyboard in Resources */,
+				E978FBFD2458BB8000E2DD82 /* TripWeatherSB.storyboard in Resources */,
 				9E8700F824535C8F005AD32A /* Assets.xcassets in Resources */,
 				9E8700F324535C8C005AD32A /* Main.storyboard in Resources */,
 			);
