@@ -12,8 +12,8 @@ class TripController {
     
     //MARK: - CRUD Function
     
-    func createTrip (startDate: Date, endDate: Date, location: Location, user: User) {
-        Trip(startDate: startDate, endDate: endDate, location: location, user: user, moc: CoreDataStack.context)
+    func createTrip (startDate: Date, endDate: Date, location: Location) {
+        Trip(startDate: startDate, endDate: endDate, location: location, moc: CoreDataStack.context)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
