@@ -31,7 +31,7 @@ class LocationController {
     
     //MARK: - GeoCoding
     
-    func getPlacemark(searchTerm: String, completion: @escaping (Result<CLPlacemark, LocationError>) -> Void) {
+    static func getPlacemark(searchTerm: String, completion: @escaping (Result<CLPlacemark, LocationError>) -> Void) {
         
         let geocoder = CLGeocoder()
         
