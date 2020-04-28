@@ -10,12 +10,11 @@ import Foundation
 import CoreData
 
 extension Trip {
-    convenience init(startDate: Date = Date(), endDate: Date = Date(), location: Location, user: User, moc: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(startDate: Date = Date(), endDate: Date = Date(), location: Location, moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
         self.startDate = startDate
         self.endDate = endDate
         self.location = location
-        self.user = user
     }
 }
 

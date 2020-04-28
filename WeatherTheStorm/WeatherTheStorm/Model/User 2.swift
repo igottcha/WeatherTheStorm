@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 extension User {
-    convenience init(name: String, trips: [Trip] = [], moc: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(name: String, moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
         self.name = name
     }

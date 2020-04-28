@@ -11,43 +11,26 @@ import CoreData
 
 class UserController {
     
-    var fetchResultsController: NSFetchedResultsController<User>
-       
-       //MARK: - Source of truth
-       
-    init(){
-        let request: NSFetchRequest<User> = User.fetchRequest()
-        
-        let resultsController: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchResultsController = resultsController
-        do{
-            try fetchResultsController.performFetch()
-            
-        }catch{
-            print("There Was an error fetching the data, \(error.localizedDescription)\(#function)")
-        }
+    static let shared = UserController()
+    
+    typealias UserName = String
+    static let userKey = "UserKey"
+    var userName = UserName()
+    
+    func saveUser(userName: UserName) {
+        UserDefaults.standard.set(userName, forKey: UserController.userKey)
     }
     
-    //MARK: - CRUD FUNCTION
-    
-    func createUser(name: String) {
-        User(name: name)
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        //saveToPersistentStore()
-        
+    func loadUser() {
+        guard let savedUser = UserDefaults.standard.string(forKey: UserController.userKey) else { return }
+        self.userName = savedUser
     }
     
-    func updateUser(user: User, name: String?) {
-        if name != nil { user.name = name}
-        //saveToPersistentStore()
-        
-    }
     
-//    func saveToPersistentStore(){
-//        do{
-//            try CoreDataStack.context.save()
-//        }catch{
-//            print("There was an error saving the data!!! \(#function) \(error.localizedDescription)")
-//        }
+//    var usersName: String {
+//        get { UserDefaults.standard.string(forKey: #function) }
+//        set { UserDefaults.standard.setValue(newValue, forKey: #function) }
 //    }
+    
+
 }
