@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8Ve-Qu-XWx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="x9y-Ub-ZZb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +10,7 @@
         <!--Test View Controller-->
         <scene sceneID="ZmG-Zs-uba">
             <objects>
-                <viewController id="8Ve-Qu-XWx" customClass="TestViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ForecastSB" id="8Ve-Qu-XWx" customClass="TestViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mdg-nL-Ns6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -26,6 +26,7 @@
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="saveButtonTapped:" destination="8Ve-Qu-XWx" eventType="touchUpInside" id="2KQ-5f-EJR"/>
+                                    <segue destination="BK0-i4-bfj" kind="show" id="dEa-W9-ajn"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiP-c9-MCI">
@@ -47,12 +48,92 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Hp4-QH-lMR"/>
                     </view>
+                    <navigationItem key="navigationItem" id="HVy-qV-I1q"/>
                     <connections>
                         <outlet property="userNameTextField" destination="j2x-XE-k2s" id="cVR-Xr-nQX"/>
                         <outlet property="welcomeLabel" destination="eiP-c9-MCI" id="eCp-MD-Xqy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZE-7z-awB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="542" y="44"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="2I9-2l-kjJ">
+            <objects>
+                <tabBarController id="BK0-i4-bfj" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="T7f-TO-N9l"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Wp-UW-yRj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="lGM-NP-CYE" kind="relationship" relationship="viewControllers" id="GBg-cb-o7J"/>
+                        <segue destination="YVN-1a-Ev9" kind="relationship" relationship="viewControllers" id="Fx1-Fz-oLX"/>
+                        <segue destination="F5p-rw-gYl" kind="relationship" relationship="viewControllers" id="P1y-pU-pJf"/>
+                        <segue destination="P6M-97-zQX" kind="relationship" relationship="viewControllers" id="K75-Fx-LSe"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qcr-JF-44x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1317" y="44"/>
+        </scene>
+        <!--ForecastSB-->
+        <scene sceneID="bEN-uI-rvr">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="toForecast" storyboardName="ForecastSB" id="lGM-NP-CYE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="EDu-oW-5Uu"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4yq-W2-ype" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1880" y="-274"/>
+        </scene>
+        <!--WorkWeatherSB-->
+        <scene sceneID="OFr-fa-OBW">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="toWorkWeatherSB" storyboardName="WorkWeatherSB" id="YVN-1a-Ev9" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="K5M-dG-O9n"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WVX-lL-bGA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1891" y="-177"/>
+        </scene>
+        <!--TripWeatherSB-->
+        <scene sceneID="FTk-PX-ihm">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TripWeatherSB" id="F5p-rw-gYl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="pLV-wy-HoE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eoX-Uf-VtV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1880" y="-113"/>
+        </scene>
+        <!--NotificationsSB-->
+        <scene sceneID="y9d-z8-ENz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NotificationsSB" id="P6M-97-zQX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="W3r-EB-z5C"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PEa-pf-jLK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1880" y="-17"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KSY-sS-QBY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="x9y-Ub-ZZb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="C9b-zl-ivX">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8Ve-Qu-XWx" kind="relationship" relationship="rootViewController" id="8Xv-pI-626"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TY9-cc-tgo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-168.11594202898553" y="43.526785714285715"/>
         </scene>
