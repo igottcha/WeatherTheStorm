@@ -10,6 +10,13 @@ import UIKit
 
 class TripController {
     
+    static func calcNumOfDays(between firstDate: Date, and secondDate: Date) -> Int {
+        
+        let distance = firstDate.distance(to: secondDate)
+        //converted distance from seconds to days and type Int
+        return Int(distance / (60 * 60 * 24))
+    }
+    
     //MARK: - CRUD Function
     
     func createTrip (startDate: Date, endDate: Date, location: Location) {
