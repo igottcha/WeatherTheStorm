@@ -50,6 +50,7 @@ class TripDetailViewController: UIViewController {
             }
             
         }
+        
         navigationController?.popViewController(animated: true)
     }
     
