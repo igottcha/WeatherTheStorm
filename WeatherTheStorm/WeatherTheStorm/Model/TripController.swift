@@ -10,6 +10,9 @@ import UIKit
 
 class TripController {
     
+    //MARK: - Properties
+    static let shared = TripController()
+    
     //MARK: - CRUD Function
     
     func createTrip (startDate: Date, endDate: Date, location: Location) {
