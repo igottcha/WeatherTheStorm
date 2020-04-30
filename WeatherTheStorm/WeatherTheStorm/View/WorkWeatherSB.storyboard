@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AGf-p2-eOj">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,25 +25,111 @@
             </objects>
             <point key="canvasLocation" x="-688" y="171"/>
         </scene>
-        <!--View Controller-->
+        <!--Test View Controller-->
         <scene sceneID="YBn-BN-Pd6">
             <objects>
-                <viewController id="TQH-6t-lid" sceneMemberID="viewController">
+                <viewController id="TQH-6t-lid" customClass="APITestViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qvT-lo-lPD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7JA-s2-lQI">
+                                <rect key="frame" x="43.5" y="220" width="327" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XhW-s3-J4V">
+                                        <rect key="frame" x="0.0" y="0.0" width="159.5" height="30"/>
+                                        <state key="normal" title="Hourly">
+                                            <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hourlyForecastButtonTapped:" destination="TQH-6t-lid" eventType="touchUpInside" id="wAL-tH-6h4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmf-Bu-ojc">
+                                        <rect key="frame" x="167.5" y="0.0" width="159.5" height="30"/>
+                                        <state key="normal" title="Daily">
+                                            <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dailyForecastButtonTapped:" destination="TQH-6t-lid" eventType="touchUpInside" id="Yn9-dI-KY8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gJQ-pD-rrd">
+                                <rect key="frame" x="43.5" y="246" width="327" height="404"/>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="sectionIndexBackgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="forecastCell" textLabel="PbL-QK-TBT" detailTextLabel="GGO-lS-K8f" imageView="Uj4-2b-WW7" style="IBUITableViewCellStyleValue1" id="zBa-xw-81W">
+                                        <rect key="frame" x="0.0" y="28" width="327" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zBa-xw-81W" id="xye-90-h5f">
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PbL-QK-TBT">
+                                                    <rect key="frame" x="59" y="12" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GGO-lS-K8f">
+                                                    <rect key="frame" x="263" y="12" width="44" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="sun.max.fill" catalog="system" id="Uj4-2b-WW7">
+                                                    <rect key="frame" x="21.5" y="11" width="21" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently it is" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7D-4s-uFl">
+                                <rect key="frame" x="139.5" y="143" width="135.5" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="gJQ-pD-rrd" firstAttribute="height" secondItem="qvT-lo-lPD" secondAttribute="height" multiplier="0.450893" id="8qn-dM-O07"/>
+                            <constraint firstItem="gJQ-pD-rrd" firstAttribute="top" secondItem="7JA-s2-lQI" secondAttribute="bottom" constant="-4" id="FJJ-iH-mf1"/>
+                            <constraint firstItem="7JA-s2-lQI" firstAttribute="top" secondItem="y7D-4s-uFl" secondAttribute="bottom" constant="48" id="O1O-5s-Qpt"/>
+                            <constraint firstItem="gJQ-pD-rrd" firstAttribute="centerX" secondItem="qvT-lo-lPD" secondAttribute="centerX" id="hjP-9r-dyk"/>
+                            <constraint firstItem="7JA-s2-lQI" firstAttribute="width" secondItem="gJQ-pD-rrd" secondAttribute="width" id="hz5-VB-3VM"/>
+                            <constraint firstItem="gJQ-pD-rrd" firstAttribute="centerY" secondItem="qvT-lo-lPD" secondAttribute="centerY" id="ncc-Kd-0wt"/>
+                            <constraint firstItem="7JA-s2-lQI" firstAttribute="centerX" secondItem="qvT-lo-lPD" secondAttribute="centerX" id="ovP-wt-uFO"/>
+                            <constraint firstItem="gJQ-pD-rrd" firstAttribute="width" secondItem="qvT-lo-lPD" secondAttribute="width" multiplier="0.789855" id="qy5-c6-Fjd"/>
+                            <constraint firstItem="y7D-4s-uFl" firstAttribute="centerX" secondItem="qvT-lo-lPD" secondAttribute="centerX" id="yIQ-Yc-53M"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="aJB-iW-NFo"/>
                     </view>
                     <navigationItem key="navigationItem" id="3mq-xy-hF0"/>
+                    <connections>
+                        <outlet property="currentWeatherLabel" destination="y7D-4s-uFl" id="Mg0-Xe-EfQ"/>
+                        <outlet property="dailyForecastButton" destination="rmf-Bu-ojc" id="QC9-fY-IoV"/>
+                        <outlet property="forecastTableView" destination="gJQ-pD-rrd" id="eVd-jO-sZj"/>
+                        <outlet property="hourlyForecastButton" destination="XhW-s3-J4V" id="wjh-C1-2Qv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z2d-6X-Rzu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77" y="171"/>
+            <point key="canvasLocation" x="76.811594202898561" y="170.75892857142856"/>
         </scene>
     </scenes>
     <resources>
         <image name="car" catalog="system" width="128" height="93"/>
         <image name="car.fill" catalog="system" width="128" height="93"/>
+        <image name="sun.max.fill" catalog="system" width="128" height="124"/>
     </resources>
 </document>

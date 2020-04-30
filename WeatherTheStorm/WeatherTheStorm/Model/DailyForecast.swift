@@ -8,12 +8,16 @@
 
 import Foundation
 
+struct DailyTopLevelObject: Codable {
+    var forecasts: [DailyForecast]
+}
+
 struct DailyForecast: Codable {
     
-    let lowTemp: Int
-    let maxTemp: Int
+    let lowTemp: Int?
+    let maxTemp: Int?
     let dow: String
-    let day: Day
+    let day: Day?
        
     enum CodingKeys: String, CodingKey {
         case lowTemp = "min_temp"

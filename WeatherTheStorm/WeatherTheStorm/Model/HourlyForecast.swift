@@ -8,6 +8,10 @@
 
 import Foundation
 
+struct HourlyTopLevelObject: Codable {
+    var forecasts: [HourlyForecast]
+}
+
 struct HourlyForecast: Codable {
 
     let cloudCoverPercentage: Double
@@ -18,8 +22,12 @@ struct HourlyForecast: Codable {
     enum CodingKeys: String, CodingKey{
         
         case cloudCoverPercentage = "clds"
-        case feelsLike
+        case feelsLike = "feels_like"
         case temp
-        case time = "expire_time_gmt"
+        case time = "fcst_valid_local"
     }
+    
+    
 }
+
+
