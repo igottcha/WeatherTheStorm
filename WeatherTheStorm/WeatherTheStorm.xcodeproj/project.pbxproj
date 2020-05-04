@@ -30,6 +30,7 @@
 		9E8700FB24535C8F005AD32A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8700F924535C8F005AD32A /* LaunchScreen.storyboard */; };
 		9E9F3686245753570044086A /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9F3684245753560044086A /* Day.swift */; };
 		9E9F3687245753570044086A /* DailyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9F3685245753560044086A /* DailyForecast.swift */; };
+		9EC6BC07245CCD250090CA45 /* AirQualityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC6BC06245CCD250090CA45 /* AirQualityController.swift */; };
 		E978FBF92458BA8C00E2DD82 /* ForecastSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E978FBF82458BA8C00E2DD82 /* ForecastSB.storyboard */; };
 		E978FBFB2458BB2100E2DD82 /* WorkWeatherSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E978FBFA2458BB2100E2DD82 /* WorkWeatherSB.storyboard */; };
 		E978FBFD2458BB8000E2DD82 /* TripWeatherSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E978FBFC2458BB8000E2DD82 /* TripWeatherSB.storyboard */; };
@@ -65,6 +66,7 @@
 		9E8700FC24535C8F005AD32A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E9F3684245753560044086A /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		9E9F3685245753560044086A /* DailyForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyForecast.swift; sourceTree = "<group>"; };
+		9EC6BC06245CCD250090CA45 /* AirQualityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AirQualityController.swift; path = WeatherTheStorm/Model/AirQualityController.swift; sourceTree = SOURCE_ROOT; };
 		E978FBF82458BA8C00E2DD82 /* ForecastSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ForecastSB.storyboard; sourceTree = "<group>"; };
 		E978FBFA2458BB2100E2DD82 /* WorkWeatherSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkWeatherSB.storyboard; sourceTree = "<group>"; };
 		E978FBFC2458BB8000E2DD82 /* TripWeatherSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TripWeatherSB.storyboard; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				9E731C402458C0C200B5420D /* CurrentWeatherController.swift */,
 				9E731C422458C0F300B5420D /* HourlyWeatherController.swift */,
 				9E731C442458C12600B5420D /* DailyForecastController.swift */,
+				9EC6BC06245CCD250090CA45 /* AirQualityController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				9E731C3F2458BAEF00B5420D /* NetworkController.swift in Sources */,
 				9E8700EE24535C8C005AD32A /* SceneDelegate.swift in Sources */,
 				E9B6BC0A24575F3A00F0209A /* CurrentWeather.swift in Sources */,
+				9EC6BC07245CCD250090CA45 /* AirQualityController.swift in Sources */,
 				4ED3275F2453A08500558297 /* Location.swift in Sources */,
 				9E731C412458C0C200B5420D /* CurrentWeatherController.swift in Sources */,
 				9E9F3686245753570044086A /* Day.swift in Sources */,

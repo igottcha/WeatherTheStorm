@@ -50,7 +50,7 @@ class NetworkController {
             newBaseURL.appendPathComponent("\(numOfDays)day")
         } else {
             newBaseURL.appendPathComponent("hourly")
-            newBaseURL.appendPathComponent("24hour")
+            newBaseURL.appendPathComponent("48hour")
         }
         
         newBaseURL.appendPathExtension("json")

@@ -10,13 +10,14 @@ import UIKit
 import CoreLocation
 
 class APITestViewController: UIViewController {
-
+    
     //MARK: - Outlets
     
     @IBOutlet weak var currentWeatherLabel: UILabel!
     @IBOutlet weak var hourlyForecastButton: UIButton!
     @IBOutlet weak var dailyForecastButton: UIButton!
     @IBOutlet weak var forecastTableView: UITableView!
+    @IBOutlet weak var airQualityIndexLabel: UILabel!
     
     //MARK: - Test Properties
     
@@ -26,7 +27,7 @@ class APITestViewController: UIViewController {
     var endDate: Date {
         dateComponent.day = 3
         return Calendar.current.date(byAdding: dateComponent, to: startDate) ?? Date()
-        }
+    }
     var coordinate: CLLocationCoordinate2D?
     var currentWeather: CurrentWeather?
     
@@ -104,7 +105,7 @@ class APITestViewController: UIViewController {
             }
         }
     }
-
+    
     func fetchHourlyForecast() {
         LocationController.getPlacemark(searchTerm: searchTerm) { (result) in
             switch result {
@@ -120,21 +121,44 @@ class APITestViewController: UIViewController {
         }
     }
     
+    func fetchAQI() {
+        LocationController.getPlacemark(searchTerm: searchTerm) { (result) in
+            switch result {
+            case .success(let placemark):
+                self.coordinate = placemark.location?.coordinate
+                guard let coordinate = self.coordinate else { return }
+                AirQualityController.shared.fetchAQI(coordinate: coordinate) { (result) in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let airQuality):
+                            self.airQualityIndexLabel.text = "Air Quality Index: \(airQuality.index)"
+                        case .failure(let error):
+                            print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
+                        }
+                    }
+                }
+            case .failure(let error):
+                print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
+            }
+        }
+    }
+    
     //MARK: - Methods
     
     func updateViews() {
         fetchCurrentWeather()
         fetchDailyForecast()
         fetchHourlyForecast()
+        fetchAQI()
     }
 }
 
 extension APITestViewController:  UITableViewDataSource, UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         hourlyForecastButton.isSelected ? HourlyWeatherController.shared.forecasts.count : DailyForecastController.shared.forecasts.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "forecastCell", for: indexPath)
         
@@ -153,5 +177,5 @@ extension APITestViewController:  UITableViewDataSource, UITableViewDelegate {
     
     
     
-
+    
 }

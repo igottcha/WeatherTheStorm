@@ -29,22 +29,14 @@ class CurrentWeatherController {
         guard let finalURL = urlComponents?.url else { completion(.failure(.invalidURL)); return }
         print(finalURL)
         
-        URLSession.shared.dataTask(with: finalURL) { (data, _, error) in
-            if let error = error {
-                print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
-                completion(.failure(.thrownError(error)))
+        NetworkController.genericAPICall(url: finalURL, type: CurrentWeather.self) { (result) in
+            switch result {
+            case .success(let currentWeather):
+                completion(.success(currentWeather))
                 return
-            }
-            
-            guard let data = data else { completion(.failure(.noData)); return }
-            
-            do {
-                let decodedData = try JSONDecoder().decode(CurrentWeather.self, from: data)
-                completion(.success(decodedData))
-            } catch {
+            case .failure(let error):
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
-                completion(.failure(.unableToDecode))
             }
-        }.resume()
+        }
     }
 }
