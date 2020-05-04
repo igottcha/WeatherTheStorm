@@ -16,3 +16,16 @@ struct AirQuality: Codable {
         case index = "aqius"
     }
 }
+
+struct AQITopLevelObject: Codable {
+    var data: AQIData
+}
+
+struct AQIData: Codable {
+    var current: AQICurrent
+}
+
+struct AQICurrent: Codable {
+    var pollution: AirQuality
+}
+
