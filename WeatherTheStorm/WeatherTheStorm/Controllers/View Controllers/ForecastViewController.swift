@@ -55,7 +55,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
             location.fetchCityAndCountry { city, country, error in
                 guard let city = city, let country = country, error == nil else { return }
                 //print(city + ", " + country)  // Rio de Janeiro, Brazil
-                LocationController.shared.getPlacemark(searchTerm: city) { (result) in
+                LocationController.getPlacemark(searchTerm: city) { (result) in
                     switch result {
                         
                     case .success(let placeMark):
