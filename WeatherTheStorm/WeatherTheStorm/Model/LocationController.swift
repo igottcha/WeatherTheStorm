@@ -11,13 +11,14 @@ import CoreData
 import CoreLocation
 
 class LocationController {
-    
+    static let shared = LocationController()
     var fetchResultsController: NSFetchedResultsController<Location>
     
     //MARK: - Source of truth
     
  init(){
      let request: NSFetchRequest<Location> = Location.fetchRequest()
+    request.sortDescriptors = [NSSortDescriptor(key: "destination", ascending: true )]
      
      let resultsController: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
          fetchResultsController = resultsController
