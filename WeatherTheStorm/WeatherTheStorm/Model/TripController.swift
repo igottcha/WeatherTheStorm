@@ -30,7 +30,8 @@ class TripController {
         } catch {
             print("There was an error \(error.localizedDescription)")
         }
-
+    }
+    
     static func calcNumOfDays(between firstDate: Date, and secondDate: Date) -> Int {
         
         let distance = firstDate.distance(to: secondDate)
