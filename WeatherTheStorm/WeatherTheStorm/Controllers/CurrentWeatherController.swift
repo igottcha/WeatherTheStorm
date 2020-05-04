@@ -20,7 +20,7 @@ class CurrentWeatherController {
         guard let baseURL = baseURL else { completion(.failure(.invalidURL)); return }
         
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
-        urlComponents?.queryItems = [URLQueryItem(name: "geocode", value: "\(coordinate.latitude)%2C\(coordinate.longitude)"),
+        urlComponents?.queryItems = [URLQueryItem(name: "geocode", value: "\(coordinate.latitude),\(coordinate.longitude)"),
                                     URLQueryItem(name: "units", value: unitValue),
                                     URLQueryItem(name: "language", value: language),
                                     URLQueryItem(name: "format", value: "json"),
@@ -31,9 +31,9 @@ class CurrentWeatherController {
         
         NetworkController.genericAPICall(url: finalURL, type: CurrentWeather.self) { (result) in
             switch result {
-            case .success(let currentWeatherForecast):
-                guard let currentWeather = currentWeatherForecast.first else { completion(.failure(.unableToDecode)); return }
+            case .success(let currentWeather):
                 completion(.success(currentWeather))
+                return
             case .failure(let error):
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
             }

@@ -65,7 +65,7 @@ class NetworkController {
         return finalURL
     }
     
-    static func genericAPICall<T: Codable> (url: URL, type: T.Type, completion: @escaping (Result<[T], GenericError>) -> Void) {
+    static func genericAPICall<T: Codable> (url: URL, type: T.Type, completion: @escaping (Result<T, GenericError>) -> Void) {
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {
@@ -77,7 +77,7 @@ class NetworkController {
             guard let data = data else { completion(.failure(.noData)); return }
             
             do {
-                let decodedData: [T] = try JSONDecoder().decode([T].self, from: data)
+                let decodedData = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decodedData))
             } catch {
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
