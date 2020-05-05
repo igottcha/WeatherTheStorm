@@ -192,7 +192,6 @@
 				4ED7139B2458BA1F00F15547 /* TripDetailViewController.swift */,
 				E978FC042458DE8F00E2DD82 /* ForecastViewController.swift */,
 				E92E8A1F245A0C3B00E5354B /* ForecastDetailViewController.swift */,
-<<<<<<< Updated upstream
 				9E7835AB2460BE5A008B4CF1 /* NewReminderTableViewController.swift */,
 				9E7835AD2460BF45008B4CF1 /* LocationSearchTableViewCell.swift */,
 =======
