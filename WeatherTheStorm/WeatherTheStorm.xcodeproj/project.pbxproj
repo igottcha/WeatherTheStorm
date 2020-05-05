@@ -313,7 +313,6 @@
 				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
 				4E6C765F245A0D6F00F401D3 /* TripTableViewCell.swift in Sources */,
 				9E731C452458C12600B5420D /* DailyForecastController.swift in Sources */,
-<<<<<<< Updated upstream
 				9E7835AE2460BF45008B4CF1 /* LocationSearchTableViewCell.swift in Sources */,
 				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
 =======
