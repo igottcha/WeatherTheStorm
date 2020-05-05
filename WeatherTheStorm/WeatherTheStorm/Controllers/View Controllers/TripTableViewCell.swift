@@ -17,9 +17,9 @@ class TripTableViewCell: UITableViewCell {
     var trip: Trip? {
         didSet {
             guard let trip = trip else { return }
-            locationLabel.text = "Location: \(trip.location)"
-            startDateLabel.text = "Start Date: \(trip.startDate)"
-            endDateLabel.text = "End Date: \(trip.endDate)"
+            locationLabel.text = "Location: \(String(describing: trip.location))"
+            startDateLabel.text = "Start Date: \(String(describing: trip.startDate))"
+            endDateLabel.text = "End Date: \(String(describing: trip.endDate))"
         }
     }
     

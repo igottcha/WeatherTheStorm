@@ -52,7 +52,6 @@ class TripController {
         trip.endDate = endDate
         trip.location = location
         saveToPersistentStore()
-        
     }
     
     func deleteTrip (trip: Trip) {

@@ -42,7 +42,7 @@ class TripDetailViewController: UIViewController {
             LocationController.getPlacemark(searchTerm: destination) { (result) in
                 switch result {
                 case .success(let placemark):
-                    let location = Location(destination: placemark)
+                    let location = Location(destination: placemark, weather: nil)
                     TripController.shared.createTrip(startDate: fromDate, endDate: toDate, location: location)
                 case .failure(let error):
                     print("Error getting the location of the trip")

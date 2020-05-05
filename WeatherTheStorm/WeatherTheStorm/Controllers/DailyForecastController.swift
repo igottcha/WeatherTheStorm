@@ -11,17 +11,13 @@ import CoreLocation.CLLocation
 
 class DailyForecastController {
     
-    static let shared = DailyForecastController()
-    var forecasts: [DailyForecast] = []
-    
-    func fetchForecast(coordinate: CLLocationCoordinate2D, firstDate: Date, secondDate: Date, completion: @escaping () -> Void) {
-       guard let apiURL = NetworkController.buildForecastURL(coordinate: coordinate, firstDate: firstDate, secondDate: secondDate, isDaily: true) else { return }
+    static func fetchForecast(location: Location, coordinate: CLLocationCoordinate2D, firstDate: Date, secondDate: Date, completion: @escaping () -> Void) {
+        guard let apiURL = NetworkController.buildForecastURL(coordinate: coordinate, firstDate: firstDate, secondDate: secondDate, isDaily: true) else { return }
         NetworkController.genericAPICall(url: apiURL, type: DailyTopLevelObject.self) { (result) in
             switch result {
             case .success(let topLevelOjbect):
                 let forecasts = topLevelOjbect.forecasts
-                self.forecasts = forecasts
-                print(self.forecasts)
+                location.weather?.dailyForecasts = forecasts
             case .failure(let error):
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
             }

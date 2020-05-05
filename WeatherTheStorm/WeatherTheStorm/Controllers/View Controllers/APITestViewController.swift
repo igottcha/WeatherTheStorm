@@ -19,6 +19,10 @@ class APITestViewController: UIViewController {
     @IBOutlet weak var forecastTableView: UITableView!
     @IBOutlet weak var airQualityIndexLabel: UILabel!
     
+    @IBOutlet weak var aipIndexLabel: UILabel!
+    @IBOutlet weak var currentTempLabel: UILabel!
+    @IBOutlet weak var hourlyTempLabel: UILabel!
+    
     //MARK: - Test Properties
     
     let searchTerm = "lehi"
@@ -28,11 +32,12 @@ class APITestViewController: UIViewController {
         dateComponent.day = 3
         return Calendar.current.date(byAdding: dateComponent, to: startDate) ?? Date()
     }
-    var coordinate: CLLocationCoordinate2D?
+    var location: Location?
     var currentWeather: CurrentWeather?
     
     //MARK: - Properties
     
+    var trip: Trip?
     
     
     //MARK: - LifeCycle
@@ -73,13 +78,15 @@ class APITestViewController: UIViewController {
         LocationController.getPlacemark(searchTerm: searchTerm) { (result) in
             switch result {
             case .success(let placemark):
-                self.coordinate = placemark.location?.coordinate
-                guard let coordinate = self.coordinate else { return }
-                CurrentWeatherController.fetchForecast(coordinate: coordinate) { (result) in
+                self.location = Location(destination: placemark, weather: nil)
+                guard let location = self.location, let coordinate = location.destination?.location?.coordinate else { return }
+                CurrentWeatherController.fetchForecast(location: location, coordinate: coordinate) { (result) in
                     switch result {
-                    case .success(let currentWeather):
+                    case .success(_):
+                        guard let weather = location.weather else { return }
                         DispatchQueue.main.async {
-                            self.currentWeatherLabel.text = "Currently it feels like \(currentWeather.feelsLike)°"
+                            self.currentWeatherLabel.text = "Currently it feels like \(weather.current.feelsLike)°"
+                            print(weather)
                         }
                     case .failure(let error):
                         print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
@@ -95,10 +102,11 @@ class APITestViewController: UIViewController {
         LocationController.getPlacemark(searchTerm: searchTerm) { (result) in
             switch result {
             case .success(let placemark):
-                self.coordinate = placemark.location?.coordinate
-                guard let coordinate = self.coordinate else { return }
-                DailyForecastController.shared.fetchForecast(coordinate: coordinate, firstDate: self.startDate, secondDate: self.endDate) {
+                self.location = Location(destination: placemark, weather: nil)
+                guard let location = self.location, let coordinate = location.destination?.location?.coordinate else { return }
+                DailyForecastController.fetchForecast(location: location, coordinate: coordinate, firstDate: self.startDate, secondDate: self.endDate) {
                     self.forecastTableView.reloadData()
+                    print(location)
                 }
             case .failure(let error):
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
@@ -110,10 +118,11 @@ class APITestViewController: UIViewController {
         LocationController.getPlacemark(searchTerm: searchTerm) { (result) in
             switch result {
             case .success(let placemark):
-                self.coordinate = placemark.location?.coordinate
-                guard let coordinate = self.coordinate else { return }
-                HourlyWeatherController.shared.fetchForecast(coordinate: coordinate, firstDate: self.startDate, secondDate: self.endDate) {
+                self.location = Location(destination: placemark, weather: nil)
+                guard let location = self.location, let coordinate = location.destination?.location?.coordinate else { return }
+                HourlyWeatherController.fetchForecast(location: location, coordinate: coordinate, firstDate: self.startDate, secondDate: self.endDate) {
                     self.forecastTableView.reloadData()
+                    print(location)
                 }
             case .failure(let error):
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
@@ -125,13 +134,15 @@ class APITestViewController: UIViewController {
         LocationController.getPlacemark(searchTerm: searchTerm) { (result) in
             switch result {
             case .success(let placemark):
-                self.coordinate = placemark.location?.coordinate
-                guard let coordinate = self.coordinate else { return }
-                AirQualityController.shared.fetchAQI(coordinate: coordinate) { (result) in
+                self.location = Location(destination: placemark, weather: nil)
+                guard let location = self.location, let coordinate = location.destination?.location?.coordinate else { return }
+                AirQualityController.shared.fetchAQI(location: location, coordinate: coordinate) { (result) in
                     DispatchQueue.main.async {
                         switch result {
-                        case .success(let airQuality):
-                            self.airQualityIndexLabel.text = "Air Quality Index: \(airQuality.index)"
+                        case .success(_):
+                            guard let weather = location.weather else { return }
+                            self.airQualityIndexLabel.text = "Air Quality Index: \(weather.airQuality.index)"
+                            print(weather)
                         case .failure(let error):
                             print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
                         }
@@ -156,20 +167,23 @@ class APITestViewController: UIViewController {
 extension APITestViewController:  UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        hourlyForecastButton.isSelected ? HourlyWeatherController.shared.forecasts.count : DailyForecastController.shared.forecasts.count
+        guard let weather = location?.weather else { return 0 }
+        return hourlyForecastButton.isSelected ? weather.hourlyForecasts.count : weather.dailyForecasts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "forecastCell", for: indexPath)
         
+        guard let weather = location?.weather else { return UITableViewCell() }
+        
         if hourlyForecastButton.isSelected {
-            let hourly = HourlyWeatherController.shared.forecasts[indexPath.row]
+            let hourly = weather.hourlyForecasts[indexPath.row]
             cell.textLabel?.text = hourly.time
             cell.detailTextLabel?.text = String(hourly.temp)
         } else {
-            let daily = DailyForecastController.shared.forecasts[indexPath.row]
+            let daily = weather.dailyForecasts[indexPath.row]
             cell.textLabel?.text = daily.dow
-            cell.detailTextLabel?.text = "\(daily.maxTemp)"
+            cell.detailTextLabel?.text = "\(String(describing: daily.maxTemp))"
         }
         
         return cell

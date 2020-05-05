@@ -53,7 +53,7 @@ class LocationController {
     //MARK: - CRUD Function
     
     func createLocation(destination: CLPlacemark) {
-        Location(destination: destination)
+        Location(destination: destination, weather: nil)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
