@@ -16,7 +16,7 @@ class CurrentWeatherController {
     private static var unitValue = "e"
     private static let language = "en-US"
     
-    static func fetchForecast(coordinate: CLLocationCoordinate2D, completion: @escaping (Result<CurrentWeather, GenericError>) -> Void) {
+    static func fetchForecast(location: Location, coordinate: CLLocationCoordinate2D, completion: @escaping (Result<CurrentWeather, GenericError>) -> Void) {
         guard let baseURL = baseURL else { completion(.failure(.invalidURL)); return }
         
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
@@ -32,6 +32,7 @@ class CurrentWeatherController {
         NetworkController.genericAPICall(url: finalURL, type: CurrentWeather.self) { (result) in
             switch result {
             case .success(let currentWeather):
+                location.weather?.current = currentWeather
                 completion(.success(currentWeather))
                 return
             case .failure(let error):

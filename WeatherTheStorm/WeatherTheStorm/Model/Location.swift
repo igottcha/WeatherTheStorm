@@ -11,9 +11,10 @@ import CoreData
 import CoreLocation
 
 extension Location {
-    convenience init(destination: CLPlacemark, moc: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(destination: CLPlacemark, weather: Weather?, moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
         self.destination = destination
+        self.weather = weather
     }
 }
 

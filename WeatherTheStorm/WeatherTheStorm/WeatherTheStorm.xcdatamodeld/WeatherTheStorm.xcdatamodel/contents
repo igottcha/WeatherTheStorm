@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="destination" optional="YES" attributeType="Transformable" customClassName="CoreLocation.CLPlacemark"/>
+        <attribute name="weather" optional="YES" attributeType="Transformable" customClassName="Weather"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="location" inverseEntity="Trip"/>
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES" codeGenerationType="class">
@@ -10,7 +11,7 @@
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="trip" inverseEntity="Location"/>
     </entity>
     <elements>
-        <element name="Location" positionX="-36" positionY="9" width="128" height="73"/>
+        <element name="Location" positionX="-36" positionY="9" width="128" height="88"/>
         <element name="Trip" positionX="-18" positionY="27" width="128" height="88"/>
     </elements>
 </model>
