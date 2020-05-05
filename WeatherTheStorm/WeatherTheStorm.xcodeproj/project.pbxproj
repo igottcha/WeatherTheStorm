@@ -319,7 +319,6 @@
 =======
 				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
 				E9BB5B382460B7CC0024CB8F /* HourlyForecastTableViewCell.swift in Sources */,
->>>>>>> Stashed changes
 				E978FC072458E5B800E2DD82 /* DateExtension.swift in Sources */,
 				E9B6BC0C24575F6500F0209A /* HourlyForecast.swift in Sources */,
 				E9B6BC0E245784DB00F0209A /* UserController.swift in Sources */,
