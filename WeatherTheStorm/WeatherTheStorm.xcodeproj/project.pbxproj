@@ -315,7 +315,6 @@
 				9E731C452458C12600B5420D /* DailyForecastController.swift in Sources */,
 				9E7835AE2460BF45008B4CF1 /* LocationSearchTableViewCell.swift in Sources */,
 				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
-=======
 				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
 				E9BB5B382460B7CC0024CB8F /* HourlyForecastTableViewCell.swift in Sources */,
 				E978FC072458E5B800E2DD82 /* DateExtension.swift in Sources */,
