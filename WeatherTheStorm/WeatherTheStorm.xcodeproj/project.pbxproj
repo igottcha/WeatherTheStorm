@@ -196,7 +196,6 @@
 				9E7835AD2460BF45008B4CF1 /* LocationSearchTableViewCell.swift */,
 =======
 				E9BB5B372460B7CC0024CB8F /* HourlyForecastTableViewCell.swift */,
->>>>>>> Stashed changes
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
