@@ -194,7 +194,6 @@
 				E92E8A1F245A0C3B00E5354B /* ForecastDetailViewController.swift */,
 				9E7835AB2460BE5A008B4CF1 /* NewReminderTableViewController.swift */,
 				9E7835AD2460BF45008B4CF1 /* LocationSearchTableViewCell.swift */,
-=======
 				E9BB5B372460B7CC0024CB8F /* HourlyForecastTableViewCell.swift */,
 			);
 			path = "View Controllers";
