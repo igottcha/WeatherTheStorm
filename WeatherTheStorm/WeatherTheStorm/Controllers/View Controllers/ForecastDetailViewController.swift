@@ -15,14 +15,14 @@ class ForecastDetailViewController: UIViewController {
     //MARK:- OUTLETS
     
    
+    @IBOutlet weak var hourlyForecastTableView: UITableView!
     @IBOutlet weak var greetingLabel: UILabel!
- 
+    @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
-    
-    @IBOutlet weak var feelslikeLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var wearLabel: UILabel!
+    @IBOutlet weak var feelsLikeLabel: UILabel!
     
+    @IBOutlet weak var wearLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -31,7 +31,8 @@ class ForecastDetailViewController: UIViewController {
         setupDateLabel()
         setupTempLabel()
         setupFeelsLikelabel()
-
+        hourlyForecastTableView.delegate = self
+        hourlyForecastTableView.dataSource = self
        
     }
     
@@ -50,7 +51,7 @@ class ForecastDetailViewController: UIViewController {
        
        func setupFeelsLikelabel(){
            
-           feelslikeLabel.text = "Feels like (feels like will go here)"
+           feelsLikeLabel.text = "Feels like (feels like will go here)"
        }
        
     
@@ -65,4 +66,20 @@ class ForecastDetailViewController: UIViewController {
     }
     */
 
+}
+
+extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 12
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = hourlyForecastTableView.dequeueReusableCell(withIdentifier: "hourlyForecastTableViewCell", for: indexPath) as? HourlyForecastTableViewCell else {return UITableViewCell()}
+        
+        return cell
+        
+    }
+    
+    
+    
 }
