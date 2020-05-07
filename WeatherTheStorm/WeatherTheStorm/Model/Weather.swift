@@ -21,7 +21,7 @@ public class Weather: NSObject, Codable {
         self.dailyForecasts = dailyForecasts
         self.airQuality = airQuality
     }
-    
+
 }
 
 //extension Weather: NSObject {
