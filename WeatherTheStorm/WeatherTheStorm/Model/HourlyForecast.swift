@@ -8,16 +8,27 @@
 
 import Foundation
 
-struct HourlyTopLevelObject: Codable {
+class HourlyTopLevelObject: Codable {
     var forecasts: [HourlyForecast]
+    
+    init(forecasts: [HourlyForecast]) {
+        self.forecasts = forecasts
+    }
 }
 
-struct HourlyForecast: Codable {
+class HourlyForecast: Codable {
 
     let cloudCoverPercentage: Double
     let feelsLike: Int
     let temp: Int
     let time: String
+    
+    init(cloudCoverPercentage: Double, feelsLike: Int, temp: Int, time: String){
+        self.cloudCoverPercentage = cloudCoverPercentage
+        self.feelsLike = feelsLike
+        self.temp = temp
+        self.time = time
+    }
     
     enum CodingKeys: String, CodingKey{
         

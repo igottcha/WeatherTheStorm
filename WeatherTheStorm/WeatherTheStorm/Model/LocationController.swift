@@ -52,9 +52,10 @@ class LocationController {
     
     //MARK: - CRUD Function
     
-    func createLocation(destination: CLPlacemark) {
-        Location(destination: destination, weather: nil)
+    func createLocation(destination: CLPlacemark) -> Location {
+       let location = Location(destination: destination, weather: nil)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    return location
     }
     
     func deleteLocation(location: Location) {

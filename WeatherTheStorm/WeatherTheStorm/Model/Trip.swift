@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 extension Trip {
+    @discardableResult
     convenience init(startDate: Date = Date(), endDate: Date = Date(), location: Location, moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
         self.startDate = startDate
