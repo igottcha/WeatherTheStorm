@@ -11,16 +11,20 @@ import CoreLocation.CLLocation
 
 class HourlyWeatherController {
     
-    static func fetchForecast(location: Location, coordinate: CLLocationCoordinate2D, firstDate: Date, secondDate: Date, completion: @escaping () -> Void) {
-        guard let apiURL = NetworkController.buildForecastURL(coordinate: coordinate, firstDate: firstDate, secondDate: secondDate, isDaily: false) else { return }
+    static func fetchForecast(location: Location, completion: @escaping (Result<HourlyTopLevelObject, GenericError>) -> Void ) {
+        guard let coordinate = location.destination?.location?.coordinate else {return}
+        guard let apiURL = NetworkController.buildForecastURL(coordinate: coordinate, firstDate: nil, secondDate: nil, isDaily: false) else { return }
         NetworkController.genericAPICall(url: apiURL, type: HourlyTopLevelObject.self) { (result) in
             switch result {
             case .success(let topLevelObject):
                 let forecasts = topLevelObject.forecasts
-                location.weather?.hourlyForecasts = forecasts
+                location.weather = Weather(current: nil, hourlyForecasts: forecasts, dailyForecasts: nil, airQuality: nil)
+                //location.weather?.hourlyForecasts = forecasts
+                print(location.weather?.hourlyForecasts)
             case .failure(let error):
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
             }
+            completion(result)
         }
     }
     
