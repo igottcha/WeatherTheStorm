@@ -11,10 +11,12 @@ import CoreLocation
 
 class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     
+    var location: Location?
     var date: Date = Date()
     var locationManager: CLLocationManager?
     var userCity: String = ""
-      
+    
+    
     
     //MARK:- OUTLETS
     @IBOutlet weak var greetingLabel: UILabel!
@@ -22,8 +24,8 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var feelsLikeLabel: UILabel!
     @IBOutlet weak var upArrowImageView: UIImageView!
-    
     @IBOutlet weak var swipeUpLabel: UILabel!
+    @IBOutlet weak var hourleForecastCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,9 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         setupSwipeUp()
         locationManager = CLLocationManager()
         setupLocationManager()
+        hourleForecastCollectionView.delegate = self
+        hourleForecastCollectionView.dataSource = self
+        
         
     }
     
@@ -51,40 +56,38 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         if let clLocation = locations.last {
             print(clLocation.coordinate.latitude)
             let location = CLLocation(latitude: clLocation.coordinate.latitude, longitude: clLocation.coordinate.longitude)
+            getCity(location: location)
             
-            location.fetchCityAndCountry { city, country, error in
-                guard let city = city, let country = country, error == nil else { return }
-                //print(city + ", " + country)  // Rio de Janeiro, Brazil
-                LocationController.getPlacemark(searchTerm: city) { (result) in
-                    switch result {
-                        
-                    case .success(let placeMark):
-                        var userLocation = placeMark
-                        
-                        if userLocation.name != nil{
-                            var cityName = userLocation.name!
-                            //print("the name of the city is \(cityName)")
-                            
-                            self.userCity = cityName
-                            self.setupGreetingLabel()
-                        }
-                    case .failure(let error):
-                        print(error.localizedDescription)
+        }
+        
+    }
+    
+    func getCity(location: CLLocation) {
+        location.fetchCityAndCountry { city, country, error in
+            guard let city = city, let country = country, error == nil else { return }
+            //print(city + ", " + country)  // Rio de Janeiro, Brazil
+            LocationController.getPlacemark(searchTerm: city) { (result) in
+                switch result {
+                    
+                case .success(let placeMark):
+                    let userLocation = placeMark
+                    
+                    if userLocation.name != nil{
+                        let cityName = userLocation.name!
+                        let weatherLocation = LocationController.shared.createLocation(destination: placeMark)
+                        self.location = weatherLocation
+                        self.userCity = cityName
+                        self.setupGreetingLabel()
+                        if self.location != nil { self.getWeather(location: self.location!)}
                         
                     }
-                    
-                    
-                    
+                case .failure(let error):
+                    print(error.localizedDescription)
                     
                 }
                 
             }
-            
-            
-            
         }
-        
-        
     }
     
     
@@ -126,6 +129,21 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         print("Swiped")
     }
     
+    func getWeather(location: Location){
+        HourlyWeatherController.fetchForecast(location: location) { (result) in
+            switch (result){
+                
+            case .success(_):
+                DispatchQueue.main.async {
+                    self.hourleForecastCollectionView.reloadData()
+                }
+                
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
     
     
     
@@ -140,5 +158,28 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
      // Pass the selected object to the new view controller.
      }
      */
+    
+}
+
+extension ForecastViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let hourliesCount = self.location?.weather?.hourlyForecasts?.count else {return 0}
+        return hourliesCount
+        
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = hourleForecastCollectionView.dequeueReusableCell(withReuseIdentifier: "hourlyForecastCell", for: indexPath) as? HourlyForecastCollectionViewCell else {return UICollectionViewCell()}
+        
+        guard let location = self.location else {return cell}
+        
+        let hourlyWeather = location.weather?.hourlyForecasts?[indexPath.row]
+        cell.hourlyTimeLabel.text = hourlyWeather?.time
+        
+        
+        return cell
+    }
+    
     
 }

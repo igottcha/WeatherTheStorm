@@ -10,12 +10,12 @@ import Foundation
 
 public class Weather: NSObject, Codable {
     
-    var current: CurrentWeather
-    var hourlyForecasts: [HourlyForecast]
-    var dailyForecasts: [DailyForecast]
-    var airQuality: AirQuality
+    var current: CurrentWeather?
+    var hourlyForecasts: [HourlyForecast]?
+    var dailyForecasts: [DailyForecast]?
+    var airQuality: AirQuality?
     
-    init(current: CurrentWeather, hourlyForecasts: [HourlyForecast], dailyForecasts: [DailyForecast], airQuality: AirQuality) {
+    init(current: CurrentWeather?, hourlyForecasts: [HourlyForecast]?, dailyForecasts: [DailyForecast]?, airQuality: AirQuality?) {
         self.current = current
         self.hourlyForecasts = hourlyForecasts
         self.dailyForecasts = dailyForecasts

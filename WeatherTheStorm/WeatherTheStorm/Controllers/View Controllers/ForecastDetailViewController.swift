@@ -12,9 +12,10 @@ class ForecastDetailViewController: UIViewController {
     //MARK: PROPERTIES
     
     var date: Date = Date()
+    var location:Location?
     //MARK:- OUTLETS
     
-   
+    
     @IBOutlet weak var hourlyForecastTableView: UITableView!
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
@@ -31,55 +32,43 @@ class ForecastDetailViewController: UIViewController {
         setupDateLabel()
         setupTempLabel()
         setupFeelsLikelabel()
-        hourlyForecastTableView.delegate = self
-        hourlyForecastTableView.dataSource = self
        
+        
+        
     }
     
     func setupGreetingLabel(){
-       greetingLabel.text = "Good Morning, \(UserController.shared.userName)! it's a (Phrase Will Go Here) day in (Location will go here)"
-       }
-
-       func setupDateLabel() {
-           dateLabel.text = self.date.formatDate()
-           
-       }
-       
-       func setupTempLabel(){
-           tempLabel.text = "72º"
-       }
-       
-       func setupFeelsLikelabel(){
-           
-           feelsLikeLabel.text = "Feels like (feels like will go here)"
-       }
-       
+        greetingLabel.text = "Good Morning, \(UserController.shared.userName)! it's a (Phrase Will Go Here) day in (Location will go here)"
+    }
     
-
+    func setupDateLabel() {
+        dateLabel.text = self.date.formatDate()
+        
+    }
+    
+    func setupTempLabel(){
+        tempLabel.text = "\(location?.weather?.current?.temperature)"
+    }
+    
+    func setupFeelsLikelabel(){
+        
+        feelsLikeLabel.text = "Feels like (feels like will go here)"
+    }
+    
+    
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
-
-extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = hourlyForecastTableView.dequeueReusableCell(withIdentifier: "hourlyForecastTableViewCell", for: indexPath) as? HourlyForecastTableViewCell else {return UITableViewCell()}
-        
-        return cell
-        
-    }
-    
-    
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
 }
+
+
+
+
