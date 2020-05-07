@@ -47,7 +47,7 @@ class TripCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, UI
         DailyForecastController.fetchForecast(location: location, coordinate: coordinate, firstDate: startDate, secondDate: endDate) {
             
         }
-        HourlyWeatherController.fetchForecast(location: location, coordinate: coordinate, firstDate: startDate, secondDate: endDate) {
+        HourlyWeatherController.fetchForecast(location: location) { _ in
             
         }
         CurrentWeatherController.fetchForecast(location: location, coordinate: coordinate) { (result) in
@@ -73,7 +73,7 @@ class TripCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //Same issue as Sean
         guard let weather = trip?.location?.weather else {return 0}
-        return weather.dailyForecasts.count
+        return weather.dailyForecasts?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -81,10 +81,10 @@ class TripCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, UI
         guard let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: "forecastCell", for: indexPath) as? DailyForecastCollectionViewCell else { return UICollectionViewCell() }
         guard let weather = trip?.location?.weather else { return UICollectionViewCell()}
 
-        let weatherForecast = weather.dailyForecasts[indexPath.row]
+        let weatherForecast = weather.dailyForecasts?[indexPath.row]
 
         //cell.currentTempLabel.text = "\(String(describing: weatherForecast.lowTemp))"
-        cell.dateLabel.text = "\(String(describing: weatherForecast.day))"
+        cell.dateLabel.text = "\(String(describing: weatherForecast?.day))"
         //cell.weatherStatusImage.image = "\(someImage)"
 
         return cell

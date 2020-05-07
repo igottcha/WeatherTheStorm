@@ -24,8 +24,8 @@ class DailyForecastCollectionViewCell: UICollectionViewCell {
            DailyForecastController.fetchForecast(location: location, coordinate: coordinate, firstDate: startDate, secondDate: endDate) {
                
            }
-           HourlyWeatherController.fetchForecast(location: location, coordinate: coordinate, firstDate: startDate, secondDate: endDate) {
-               
+        HourlyWeatherController.fetchForecast(location: location) {_ in
+            
            }
            CurrentWeatherController.fetchForecast(location: location, coordinate: coordinate) { (result) in
                switch result {
