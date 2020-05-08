@@ -45,11 +45,11 @@ class NetworkController {
             .appendingPathComponent("forecast")
             
         if isDaily {
-            guard let firstDate = firstDate,
-                let secondDate = secondDate else {return nil}
-            let numOfDays = TripController.calcNumOfDays(between: firstDate, and: secondDate)
+//            guard let firstDate = firstDate,
+//                let secondDate = secondDate else {return nil}
+//            let numOfDays = TripController.calcNumOfDays(between: firstDate, and: secondDate)
             newBaseURL.appendPathComponent("daily")
-            newBaseURL.appendPathComponent("\(numOfDays)day")
+            newBaseURL.appendPathComponent("10day")
         } else {
             newBaseURL.appendPathComponent("hourly")
             newBaseURL.appendPathComponent("48hour")

@@ -1,22 +1,20 @@
 //
-//  TripCollectionViewCell.swift
+//  TripsTableViewCell.swift
 //  WeatherTheStorm
 //
-//  Created by Hin Wong on 5/5/20.
+//  Created by Hin Wong on 5/8/20.
 //  Copyright © 2020 Gottfredson. All rights reserved.
 //
 
 import UIKit
 
-class TripCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class TripsTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    //MARK: - Outlet
+    //MARK: - Outlets
     
     @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var startDateLabel: UILabel!
-    @IBOutlet weak var endDateLabel: UILabel!
-    @IBOutlet weak var forecastCollectionView: UICollectionView!
-    
+    @IBOutlet weak var datesLabel: UILabel!
+    @IBOutlet weak var dailyForecastCollectionView: UICollectionView!
     
     //MARK: - Properties
     
@@ -29,11 +27,10 @@ class TripCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, UI
                 let startDate = trip.startDate,
                 let endDate = trip.endDate else { return }
             
-            locationLabel.text = "Location: \(city), \(state), \(country)"
-            startDateLabel.text = "Start Date: \(startDate.formatDate())"
-            endDateLabel.text = "End Date: \(endDate.formatDate())"
-            forecastCollectionView.delegate = self
-            forecastCollectionView.dataSource = self
+            locationLabel.text =  "\(city), \(state), \(country)"
+            datesLabel.text = "\(startDate.formatDate()) - \(endDate.formatDate())"
+            dailyForecastCollectionView.delegate = self
+            dailyForecastCollectionView.dataSource = self
             
         }
     }
@@ -44,12 +41,23 @@ class TripCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, UI
             let startDate = trip.startDate,
             let endDate = trip.endDate else { return }
         
-        DailyForecastController.fetchForecast(location: location, coordinate: coordinate, firstDate: startDate, secondDate: endDate) {
+        DailyForecastController.fetchForecast(location: location, coordinate: coordinate, firstDate: startDate, secondDate: endDate) { (result) in
+            switch result {
+            case .success(let dailyForecast):
+                print(dailyForecast)
+                DispatchQueue.main.async {
+                    self.dailyForecastCollectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error, error.localizedDescription)
+            }
             
         }
+        
         HourlyWeatherController.fetchForecast(location: location) { _ in
             
         }
+        
         CurrentWeatherController.fetchForecast(location: location, coordinate: coordinate) { (result) in
             switch result {
             case .success(let currentWeather):
@@ -68,28 +76,28 @@ class TripCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, UI
         }
     }
     
-    //MARK: - Collection view methods
+    //MARK: - Collection View Methods
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //Same issue as Sean
-        guard let weather = trip?.location?.weather else {return 0}
-        return weather.dailyForecasts?.count ?? 0
+        guard let dailyWeather = trip?.location?.weather?.dailyForecasts?.count else { return 0 }
+        return dailyWeather
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        guard let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: "forecastCell", for: indexPath) as? DailyForecastCollectionViewCell else { return UICollectionViewCell() }
-        guard let weather = trip?.location?.weather else { return UICollectionViewCell()}
-
-        let weatherForecast = weather.dailyForecasts?[indexPath.row]
-
-        //cell.currentTempLabel.text = "\(String(describing: weatherForecast.lowTemp))"
-        cell.dateLabel.text = "\(String(describing: weatherForecast?.day))"
-        //cell.weatherStatusImage.image = "\(someImage)"
-
+        guard let cell = dailyForecastCollectionView.dequeueReusableCell(withReuseIdentifier: "dailyForecastCell", for: indexPath) as? DailyForecastCollectionViewCell else { return UICollectionViewCell() }
+        guard let weather = trip?.location?.weather?.dailyForecasts else { return UICollectionViewCell() }
+        let daily = weather[indexPath.row]
+        
+        guard let lowTemp = daily.lowTemp,
+        let highTemp = daily.maxTemp else { return UICollectionViewCell() }
+        
+        cell.temperaturesLabel.text = "\(lowTemp) - \(highTemp)"
+        //cell.weatherImageView.image = "some image"
+        cell.forecastDateLabel.text = daily.dow
+        
+        
         return cell
     }
+    
+    
 }
-
-// TODO: - Define the logic for different images depending on weather conditions
-
