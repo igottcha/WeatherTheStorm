@@ -40,7 +40,7 @@ class WeatherAlertsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //weatherNotifs = []
+        weatherNotifs = []
         updateEmptyState()
         tableView.backgroundView = previewView
         setGradientBackground()
@@ -52,9 +52,7 @@ class WeatherAlertsTableViewController: UITableViewController {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
         gradientLayer.colors = [UIColor(named: "alertTabBackgroundTopColor")?.cgColor ?? UIColor.yellow.cgColor, UIColor(named: "alertTabBackgroundBottomColor")?.cgColor ?? UIColor.white.cgColor]
-//        let view = UIView.init(frame: self.view.frame)
         previewView.layer.insertSublayer(gradientLayer, at: 0)
-        //tableView.backgroundView = previewView
     }
     
     func updateEmptyState() {
