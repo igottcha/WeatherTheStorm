@@ -13,6 +13,9 @@ import CoreLocation
 class LocationController {
     static let shared = LocationController()
     var fetchResultsController: NSFetchedResultsController<Location>
+    var sortedLocations = [[HomeController.shared.homeLocation],
+                           [WorkController.shared.workLocation],
+                           [TripController.shared.tripLocations]]
     
     //MARK: - Source of truth
     
