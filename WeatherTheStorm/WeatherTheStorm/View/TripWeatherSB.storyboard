@@ -111,11 +111,6 @@
                                                                         </constraints>
                                                                     </collectionViewCellContentView>
                                                                     <size key="customSize" width="76" height="128"/>
-                                                                    <connections>
-                                                                        <outlet property="forecastDateLabel" destination="hoc-72-Thd" id="KJw-w5-MIP"/>
-                                                                        <outlet property="temperaturesLabel" destination="k4Z-7W-2OW" id="lck-RK-oiU"/>
-                                                                        <outlet property="weatherImageView" destination="vTd-cD-zI5" id="rmd-2j-OLf"/>
-                                                                    </connections>
                                                                 </collectionViewCell>
                                                             </cells>
                                                         </collectionView>
@@ -142,8 +137,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dailyForecastCollectionView" destination="hZX-y5-4Wa" id="cD8-06-d8F"/>
-                                            <outlet property="datesLabel" destination="amK-sC-TyK" id="r4s-lb-H6D"/>
-                                            <outlet property="locationLabel" destination="exJ-Op-z2z" id="FRQ-m8-DSV"/>
+                                            <outlet property="datesLabel" destination="amK-sC-TyK" id="gzv-3S-yO0"/>
+                                            <outlet property="locationLabel" destination="exJ-Op-z2z" id="mYK-P7-aPD"/>
                                             <segue destination="CpL-qF-jyb" kind="show" identifier="toTripDetailVC" id="xCF-TB-4vR"/>
                                         </connections>
                                     </tableViewCell>
@@ -229,9 +224,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="destinationTextField" destination="O8s-FS-qDo" id="XqQ-iq-tiY"/>
-                        <outlet property="fromDatePicker" destination="FQC-L2-Fs2" id="C8i-p9-YLm"/>
-                        <outlet property="toDatePicker" destination="8I8-W5-yuy" id="P6u-W0-ND5"/>
+                        <outlet property="destinationTextField" destination="O8s-FS-qDo" id="rRs-6d-CIW"/>
+                        <outlet property="fromDatePicker" destination="FQC-L2-Fs2" id="lvP-rs-ZWm"/>
+                        <outlet property="toDatePicker" destination="8I8-W5-yuy" id="3NZ-VQ-TCA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JPr-5U-RaX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

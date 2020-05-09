@@ -48,9 +48,7 @@ class TripDetailViewController: UIViewController {
                     print("Error getting the location of the trip")
                 }
             }
-            
         }
-        
         navigationController?.popViewController(animated: true)
     }
     
