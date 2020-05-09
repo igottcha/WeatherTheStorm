@@ -11,7 +11,7 @@ import Foundation
 class WeatherNotificationController {
     
     static let shared = WeatherNotificationController()
-    var weatherNotifications: [WeatherNotification] = []
+    var notifications: [WeatherNotification] = []
     
     
 }

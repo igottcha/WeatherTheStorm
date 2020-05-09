@@ -42,8 +42,8 @@
 		9E9F3687245753570044086A /* DailyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9F3685245753560044086A /* DailyForecast.swift */; };
 		9EC2150C24635329008921FC /* DayOfTheWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC2150B24635329008921FC /* DayOfTheWeek.swift */; };
 		9EC6BC07245CCD250090CA45 /* AirQualityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC6BC06245CCD250090CA45 /* AirQualityController.swift */; };
-		9EDEBCFC2464AA4E003DBEC8 /* WeatherAlertsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDEBCFB2464AA4E003DBEC8 /* WeatherAlertsTableViewController.swift */; };
-		9EDEBCFE2464AA7C003DBEC8 /* WeatherAlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDEBCFD2464AA7C003DBEC8 /* WeatherAlertTableViewCell.swift */; };
+		9EDEBCFC2464AA4E003DBEC8 /* WeatherNotificationListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDEBCFB2464AA4E003DBEC8 /* WeatherNotificationListTableViewController.swift */; };
+		9EDEBCFE2464AA7C003DBEC8 /* WeatherNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDEBCFD2464AA7C003DBEC8 /* WeatherNotificationTableViewCell.swift */; };
 		9EDEBD002464B74F003DBEC8 /* WeatherNotification+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDEBCFF2464B74F003DBEC8 /* WeatherNotification+Convenience.swift */; };
 		E92E8A20245A0C3B00E5354B /* ForecastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92E8A1F245A0C3B00E5354B /* ForecastDetailViewController.swift */; };
 		E978FBF92458BA8C00E2DD82 /* ForecastSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E978FBF82458BA8C00E2DD82 /* ForecastSB.storyboard */; };
@@ -97,8 +97,8 @@
 		9E9F3685245753560044086A /* DailyForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyForecast.swift; sourceTree = "<group>"; };
 		9EC2150B24635329008921FC /* DayOfTheWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfTheWeek.swift; sourceTree = "<group>"; };
 		9EC6BC06245CCD250090CA45 /* AirQualityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AirQualityController.swift; path = WeatherTheStorm/Model/AirQualityController.swift; sourceTree = SOURCE_ROOT; };
-		9EDEBCFB2464AA4E003DBEC8 /* WeatherAlertsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAlertsTableViewController.swift; sourceTree = "<group>"; };
-		9EDEBCFD2464AA7C003DBEC8 /* WeatherAlertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAlertTableViewCell.swift; sourceTree = "<group>"; };
+		9EDEBCFB2464AA4E003DBEC8 /* WeatherNotificationListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherNotificationListTableViewController.swift; sourceTree = "<group>"; };
+		9EDEBCFD2464AA7C003DBEC8 /* WeatherNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		9EDEBCFF2464B74F003DBEC8 /* WeatherNotification+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherNotification+Convenience.swift"; sourceTree = "<group>"; };
 		E92E8A1F245A0C3B00E5354B /* ForecastDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDetailViewController.swift; sourceTree = "<group>"; };
 		E978FBF82458BA8C00E2DD82 /* ForecastSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ForecastSB.storyboard; sourceTree = "<group>"; };
@@ -219,8 +219,8 @@
 				9E7835AD2460BF45008B4CF1 /* LocationSearchTableViewCell.swift */,
 				E9BB5B3B24632B730024CB8F /* HourlyForecastCollectionViewCell.swift */,
 				4E5BA4392462226700A9583D /* DailyForecastCollectionViewCell.swift */,
-				9EDEBCFB2464AA4E003DBEC8 /* WeatherAlertsTableViewController.swift */,
-				9EDEBCFD2464AA7C003DBEC8 /* WeatherAlertTableViewCell.swift */,
+				9EDEBCFB2464AA4E003DBEC8 /* WeatherNotificationListTableViewController.swift */,
+				9EDEBCFD2464AA7C003DBEC8 /* WeatherNotificationTableViewCell.swift */,
 				9E83BF8A2465F27B00B3830E /* WeatherNotificationTimingViewController.swift */,
 			);
 			path = "View Controllers";
@@ -348,13 +348,13 @@
 				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
 				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
 				E978FC072458E5B800E2DD82 /* DateExtension.swift in Sources */,
-				9EDEBCFE2464AA7C003DBEC8 /* WeatherAlertTableViewCell.swift in Sources */,
+				9EDEBCFE2464AA7C003DBEC8 /* WeatherNotificationTableViewCell.swift in Sources */,
 				E9B6BC0C24575F6500F0209A /* HourlyForecast.swift in Sources */,
 				4E5BA4362462087700A9583D /* TripCollectionViewCell.swift in Sources */,
 				E9B6BC0E245784DB00F0209A /* UserController.swift in Sources */,
 				9E731C3B2458A66400B5420D /* ErrorExtension.swift in Sources */,
 				9E731C3F2458BAEF00B5420D /* NetworkController.swift in Sources */,
-				9EDEBCFC2464AA4E003DBEC8 /* WeatherAlertsTableViewController.swift in Sources */,
+				9EDEBCFC2464AA4E003DBEC8 /* WeatherNotificationListTableViewController.swift in Sources */,
 				9E83BF892465BB6B00B3830E /* HomeController.swift in Sources */,
 				9E8700EE24535C8C005AD32A /* SceneDelegate.swift in Sources */,
 				9EDEBD002464B74F003DBEC8 /* WeatherNotification+Convenience.swift in Sources */,

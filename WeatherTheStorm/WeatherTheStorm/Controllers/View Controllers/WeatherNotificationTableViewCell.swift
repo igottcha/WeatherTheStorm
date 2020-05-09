@@ -1,5 +1,5 @@
 //
-//  WeatherAlertTableViewCell.swift
+//  WeatherNotificationTableViewCell.swift
 //  WeatherTheStorm
 //
 //  Created by Chris Gottfredson on 5/7/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherAlertTableViewCell: UITableViewCell {
+class WeatherNotificationTableViewCell: UITableViewCell {
 
     //MARK: - Outlets
     
