@@ -15,6 +15,11 @@ class TripController {
     static let shared = TripController()
     
     var fetchedResultsController: NSFetchedResultsController<Trip>
+    var tripLocations: [Location] {
+        guard let trips: [Trip] = fetchedResultsController.fetchedObjects else { return [] }
+        let locations: [Location] = (trips.filter({$0.location != nil}).map({ $0.location }) as! [Location])
+        return locations
+    }
     
     init() {
         
