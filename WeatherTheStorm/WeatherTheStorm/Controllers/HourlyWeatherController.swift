@@ -18,8 +18,11 @@ class HourlyWeatherController {
             switch result {
             case .success(let topLevelObject):
                 let forecasts = topLevelObject.forecasts
-                location.weather = Weather(current: nil, hourlyForecasts: forecasts, dailyForecasts: nil, airQuality: nil)
-                //location.weather?.hourlyForecasts = forecasts
+                if (location.weather != nil)  {
+                    location.weather?.hourlyForecasts = forecasts
+                } else {
+                    location.weather = Weather(current: nil, hourlyForecasts: forecasts, dailyForecasts: nil, airQuality: nil)
+                }
                 print(location.weather?.hourlyForecasts)
             case .failure(let error):
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
