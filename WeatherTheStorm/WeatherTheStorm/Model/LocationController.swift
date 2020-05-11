@@ -95,4 +95,6 @@ class LocationController {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
+   
+    
 }
