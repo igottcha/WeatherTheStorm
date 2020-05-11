@@ -74,8 +74,8 @@ class WeatherNotificationListTableViewController: UITableViewController {
         
         cell.boxView.layer.cornerRadius = 7
         cell.nameLabel.text = weatherNotification.name
-        cell.addressLabel.text = "\(String(describing: weatherNotification.location))"
-        cell.frequencyAndTimeLabel.text = "\(String(describing: date.day)), \(String(describing: weatherNotification.time))"
+        cell.addressLabel.text = "\(weatherNotification.location)"
+        cell.frequencyAndTimeLabel.text = "\(date.day), \(weatherNotification.time)"
 
         return cell
     }

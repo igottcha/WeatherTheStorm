@@ -18,7 +18,7 @@
             </userInfo>
         </attribute>
         <attribute name="isActive" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="location" optional="YES" attributeType="Transformable" customClassName="CoreLocation.CLLocation"/>
+        <attribute name="location" attributeType="Transformable" customClassName="CoreLocation.CLLocation"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="specificDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="time" attributeType="Date" usesScalarValueType="NO"/>
