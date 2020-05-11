@@ -9,14 +9,10 @@
 /* Begin PBXBuildFile section */
 		4E52863A2457906F00AA1096 /* TripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5286392457906F00AA1096 /* TripController.swift */; };
 		4E52863C2457978800AA1096 /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E52863B2457978800AA1096 /* LocationController.swift */; };
-		4E77633B2465B31B00B7D1B6 /* TripsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E77633A2465B31B00B7D1B6 /* TripsTableViewCell.swift */; };
-		4E77633D2465B7F700B7D1B6 /* DailyForecastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E77633C2465B7F700B7D1B6 /* DailyForecastCollectionViewCell.swift */; };
 		4ED3275B2453A02800558297 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED3275A2453A02800558297 /* CoreDataStack.swift */; };
 		4ED3275D2453A07600558297 /* AirQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED3275C2453A07600558297 /* AirQuality.swift */; };
 		4ED3275F2453A08500558297 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED3275E2453A08500558297 /* Location.swift */; };
 		4ED327612453A09300558297 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED327602453A09200558297 /* Trip.swift */; };
-		4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7139B2458BA1F00F15547 /* TripDetailViewController.swift */; };
-		4ED7139E2458D5D400F15547 /* TripListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7139D2458D5D400F15547 /* TripListViewController.swift */; };
 		9E731C37245899FE00B5420D /* WeatherTheStorm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E731C35245899FD00B5420D /* WeatherTheStorm.xcdatamodeld */; };
 		9E731C3924589F5C00B5420D /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E731C3824589F5C00B5420D /* TestViewController.swift */; };
 		9E731C3B2458A66400B5420D /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E731C3A2458A66400B5420D /* ErrorExtension.swift */; };
@@ -55,14 +51,10 @@
 /* Begin PBXFileReference section */
 		4E5286392457906F00AA1096 /* TripController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripController.swift; path = WeatherTheStorm/Model/TripController.swift; sourceTree = SOURCE_ROOT; };
 		4E52863B2457978800AA1096 /* LocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationController.swift; path = WeatherTheStorm/Model/LocationController.swift; sourceTree = SOURCE_ROOT; };
-		4E77633A2465B31B00B7D1B6 /* TripsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsTableViewCell.swift; sourceTree = "<group>"; };
-		4E77633C2465B7F700B7D1B6 /* DailyForecastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DailyForecastCollectionViewCell.swift; path = WeatherTheStorm/View/DailyForecastCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		4ED3275A2453A02800558297 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		4ED3275C2453A07600558297 /* AirQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirQuality.swift; sourceTree = "<group>"; };
 		4ED3275E2453A08500558297 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		4ED327602453A09200558297 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
-		4ED7139B2458BA1F00F15547 /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
-		4ED7139D2458D5D400F15547 /* TripListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListViewController.swift; sourceTree = "<group>"; };
 		9E731C36245899FD00B5420D /* WeatherTheStorm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherTheStorm.xcdatamodel; sourceTree = "<group>"; };
 		9E731C3824589F5C00B5420D /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		9E731C3A2458A66400B5420D /* ErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
@@ -192,18 +184,14 @@
 		9E87010624535D51005AD32A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4E77633C2465B7F700B7D1B6 /* DailyForecastCollectionViewCell.swift */,
 				9E731C3824589F5C00B5420D /* TestViewController.swift */,
-				4ED7139D2458D5D400F15547 /* TripListViewController.swift */,
 				9E731C482458DA3300B5420D /* APITestViewController.swift */,
-				4ED7139B2458BA1F00F15547 /* TripDetailViewController.swift */,
 				E978FC042458DE8F00E2DD82 /* ForecastViewController.swift */,
 				E92E8A1F245A0C3B00E5354B /* ForecastDetailViewController.swift */,
 				9E7835AB2460BE5A008B4CF1 /* NewReminderTableViewController.swift */,
 				9E7835AD2460BF45008B4CF1 /* LocationSearchTableViewCell.swift */,
 				9EC2150924620879008921FC /* NotificationCollectionViewController.swift */,
 				E9BB5B3B24632B730024CB8F /* HourlyForecastCollectionViewCell.swift */,
-				4E77633A2465B31B00B7D1B6 /* TripsTableViewCell.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -317,21 +305,16 @@
 				9E731C3924589F5C00B5420D /* TestViewController.swift in Sources */,
 				9E7835AC2460BE5A008B4CF1 /* NewReminderTableViewController.swift in Sources */,
 				9E9F3687245753570044086A /* DailyForecast.swift in Sources */,
-				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
 				9E731C452458C12600B5420D /* DailyForecastController.swift in Sources */,
 				9E7835AE2460BF45008B4CF1 /* LocationSearchTableViewCell.swift in Sources */,
-				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
-				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
 				E978FC072458E5B800E2DD82 /* DateExtension.swift in Sources */,
 				E9B6BC0C24575F6500F0209A /* HourlyForecast.swift in Sources */,
 				E9B6BC0E245784DB00F0209A /* UserController.swift in Sources */,
 				9E731C3B2458A66400B5420D /* ErrorExtension.swift in Sources */,
-				4E77633D2465B7F700B7D1B6 /* DailyForecastCollectionViewCell.swift in Sources */,
 				9EC2150A24620879008921FC /* NotificationCollectionViewController.swift in Sources */,
 				9E731C3F2458BAEF00B5420D /* NetworkController.swift in Sources */,
 				9E8700EE24535C8C005AD32A /* SceneDelegate.swift in Sources */,
 				E92E8A20245A0C3B00E5354B /* ForecastDetailViewController.swift in Sources */,
-				4ED7139E2458D5D400F15547 /* TripListViewController.swift in Sources */,
 				E9B6BC0A24575F3A00F0209A /* CurrentWeather.swift in Sources */,
 				9EC6BC07245CCD250090CA45 /* AirQualityController.swift in Sources */,
 				4ED3275F2453A08500558297 /* Location.swift in Sources */,
@@ -341,7 +324,6 @@
 				4ED327612453A09300558297 /* Trip.swift in Sources */,
 				9EC2150C24635329008921FC /* DayOfTheWeek.swift in Sources */,
 				9E731C432458C0F300B5420D /* HourlyWeatherController.swift in Sources */,
-				4E77633B2465B31B00B7D1B6 /* TripsTableViewCell.swift in Sources */,
 				9E731C37245899FE00B5420D /* WeatherTheStorm.xcdatamodeld in Sources */,
 				4E52863A2457906F00AA1096 /* TripController.swift in Sources */,
 				4E52863C2457978800AA1096 /* LocationController.swift in Sources */,
