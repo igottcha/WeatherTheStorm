@@ -15,6 +15,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     var date: Date = Date()
     var locationManager: CLLocationManager?
     var userCity: String = ""
+    var phrase: String = ""
     
     
     
@@ -31,13 +32,14 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         //setupGreetingLabel()
         setupDateLabel()
-        setupTempLabel()
+        
         setupFeelsLikelabel()
         setupSwipeUp()
         locationManager = CLLocationManager()
         setupLocationManager()
         hourleForecastCollectionView.delegate = self
         hourleForecastCollectionView.dataSource = self
+        setupCollectionViewCells()
         
         
     }
@@ -77,7 +79,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
                         let weatherLocation = LocationController.shared.createLocation(destination: placeMark)
                         self.location = weatherLocation
                         self.userCity = cityName
-                        self.setupGreetingLabel()
+                        //self.setupGreetingLabel()
                         if self.location != nil { self.getWeather(location: self.location!)}
                         
                     }
@@ -96,7 +98,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setupGreetingLabel(){
-        greetingLabel.text = "Good Morning, \(UserController.shared.userName)! it's a (Phrase Will Go Here) day in \(userCity)"
+        greetingLabel.text = "Good Morning, \(UserController.shared.userName)! it's a \(phrase) day in \(userCity)"
     }
     
     func setupDateLabel() {
@@ -105,12 +107,13 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setupTempLabel(){
-        tempLabel.text = "72º"
+        guard let currentTemp = self.location?.weather?.current?.temperature else {return}
+        tempLabel.text = "\(currentTemp)º"
     }
     
     func setupFeelsLikelabel(){
-        
-        feelsLikeLabel.text = "Feels like (feels like will go here)"
+        guard let feelLike = self.location?.weather?.current?.feelsLike else {return}
+        feelsLikeLabel.text = "Feels like \(feelLike)º"
     }
     
     func setupSwipeUp() {
@@ -136,13 +139,48 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
             case .success(_):
                 DispatchQueue.main.async {
                     self.hourleForecastCollectionView.reloadData()
+                    CurrentWeatherController.fetchForecast(location: location) { (result) in
+                        switch (result){
+                            
+                        case .success(_):
+                            DispatchQueue.main.async {
+                            self.setupTempLabel()
+                            self.setupFeelsLikelabel()
+                            self.setupPhrase()
+                            self.setupGreetingLabel()
+                            }
+                        case .failure(_):
+                            break
+                        }
+                    }
                 }
+                
                 
             case .failure(_):
                 break
             }
         }
     }
+    
+    func setupCollectionViewCells() {
+        let width = view.frame.size.width / 3
+        let layout = hourleForecastCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: width, height: width)
+    }
+    
+    func stringToDate(_ dateString: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        guard let date = formatter.date(from: dateString) else { return Date()}
+        return date
+        
+    }
+    func setupPhrase(){
+        guard let weatherPhrase = self.location?.weather?.current?.phrase else {return}
+        self.phrase = weatherPhrase
+    }
+    
     
     
     
@@ -174,8 +212,13 @@ extension ForecastViewController: UICollectionViewDelegate, UICollectionViewData
         
         guard let location = self.location else {return cell}
         
-        let hourlyWeather = location.weather?.hourlyForecasts?[indexPath.row]
-        cell.hourlyTimeLabel.text = hourlyWeather?.time
+        guard let hourlyWeather = location.weather?.hourlyForecasts?[indexPath.row] else {return cell}
+        let time = stringToDate(hourlyWeather.time)
+        let hour = time.hour()
+        
+        
+        cell.hourlyTimeLabel.text = hour
+        cell.hourlyTempLabel.text = "\(String(hourlyWeather.temp))º"
         
         
         return cell
@@ -183,3 +226,6 @@ extension ForecastViewController: UICollectionViewDelegate, UICollectionViewData
     
     
 }
+
+
+

@@ -50,7 +50,7 @@ class TripCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, UI
         HourlyWeatherController.fetchForecast(location: location) { _ in
             
         }
-        CurrentWeatherController.fetchForecast(location: location, coordinate: coordinate) { (result) in
+        CurrentWeatherController.fetchForecast(location: location) { (result) in
             switch result {
             case .success(let currentWeather):
                 print(currentWeather)

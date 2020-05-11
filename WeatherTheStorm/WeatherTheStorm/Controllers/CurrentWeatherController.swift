@@ -16,8 +16,9 @@ class CurrentWeatherController {
     private static var unitValue = "e"
     private static let language = "en-US"
     
-    static func fetchForecast(location: Location, coordinate: CLLocationCoordinate2D, completion: @escaping (Result<CurrentWeather, GenericError>) -> Void) {
+    static func fetchForecast(location: Location,  completion: @escaping (Result<CurrentWeather, GenericError>) -> Void) {
         guard let baseURL = baseURL else { completion(.failure(.invalidURL)); return }
+        guard let coordinate = location.destination?.location?.coordinate else {return}
         
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
         urlComponents?.queryItems = [URLQueryItem(name: "geocode", value: "\(coordinate.latitude),\(coordinate.longitude)"),

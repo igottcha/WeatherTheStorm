@@ -63,7 +63,7 @@
                                 <state key="normal" title="Button" image="mappin.circle" catalog="system"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rer-mC-41V">
-                                <rect key="frame" x="242" y="139" width="100" height="89.5"/>
+                                <rect key="frame" x="242" y="139" width="101" height="89.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="89.5" id="gBh-Sp-neo"/>
                                     <constraint firstAttribute="width" constant="101" id="wXY-8T-oJF"/>
@@ -84,7 +84,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="6K7-Se-yWJ"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="c7C-gx-ofu">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="c7C-gx-ofu">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -92,19 +92,19 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="hourlyForecastCell" id="VdY-4F-nKD" customClass="HourlyForecastCollectionViewCell" customModule="WeatherTheStorm" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="103"/>
+                                        <rect key="frame" x="0.0" y="12.5" width="128" height="103"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6MT-oj-nAq">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="103"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHq-He-66R">
-                                                    <rect key="frame" x="43" y="19" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHq-He-66R">
+                                                    <rect key="frame" x="13" y="19" width="102" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgJ-9h-ivM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgJ-9h-ivM">
                                                     <rect key="frame" x="43" y="74" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -118,7 +118,7 @@
                                                 <constraint firstItem="QgJ-9h-ivM" firstAttribute="width" secondItem="6MT-oj-nAq" secondAttribute="width" multiplier="0.328125" id="5bc-hI-lgu"/>
                                                 <constraint firstItem="QgJ-9h-ivM" firstAttribute="centerX" secondItem="6MT-oj-nAq" secondAttribute="centerX" id="DTm-MZ-97z"/>
                                                 <constraint firstItem="xnD-rQ-gfn" firstAttribute="centerX" secondItem="6MT-oj-nAq" secondAttribute="centerX" id="VwI-dr-dem"/>
-                                                <constraint firstItem="oHq-He-66R" firstAttribute="width" secondItem="6MT-oj-nAq" secondAttribute="width" multiplier="0.328125" id="dIm-2u-Rxe"/>
+                                                <constraint firstItem="oHq-He-66R" firstAttribute="width" secondItem="6MT-oj-nAq" secondAttribute="width" multiplier="0.8" id="dIm-2u-Rxe"/>
                                                 <constraint firstItem="xnD-rQ-gfn" firstAttribute="leading" secondItem="6MT-oj-nAq" secondAttribute="leading" constant="41.5" id="dte-e5-qpa"/>
                                                 <constraint firstAttribute="bottom" secondItem="QgJ-9h-ivM" secondAttribute="bottom" constant="8" id="ghK-Ge-IdT"/>
                                                 <constraint firstItem="oHq-He-66R" firstAttribute="centerX" secondItem="6MT-oj-nAq" secondAttribute="centerX" id="h5M-eD-fEx"/>
