@@ -11,8 +11,15 @@ import CoreData
 import CoreLocation
 
 class LocationController {
+
     static let shared = LocationController()
     var fetchResultsController: NSFetchedResultsController<Location>
+    var tripLocations: [Location]?
+    var sortedLocations: [[Location]]? {
+        didSet {
+            sortLocations()
+        }
+    }
     
     //MARK: - Source of truth
     
@@ -29,6 +36,31 @@ class LocationController {
          print("There Was an error fetching the data, \(error.localizedDescription)\(#function)")
      }
  }
+
+    //MARK: - Methods
+    
+    func sortLocations() {
+    
+        var homeLocations: [Location]
+        var workLocations: [Location]
+        let trips = TripController.shared.tripLocations
+        
+        if let homeLocation = HomeController.shared.homeLocation {
+          homeLocations = [homeLocation]
+        } else {
+            homeLocations = []
+        }
+        
+        if let workLocation = WorkController.shared.workLocation {
+          workLocations = [workLocation]
+        } else {
+            workLocations = []
+        }
+        
+        sortedLocations?.append(homeLocations)
+        sortedLocations?.append(workLocations)
+        sortedLocations?.append(trips)
+    }
     
     //MARK: - GeoCoding
     
