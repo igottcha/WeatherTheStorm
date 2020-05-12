@@ -4,7 +4,7 @@
         <attribute name="destination" optional="YES" attributeType="Transformable" customClassName="CoreLocation.CLPlacemark"/>
         <attribute name="weather" optional="YES" attributeType="Transformable" customClassName="Weather"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="location" inverseEntity="Trip"/>
-        <relationship name="weatherNotification" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherNotification" inverseName="location" inverseEntity="WeatherNotification"/>
+        <relationship name="weatherNotification" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="WeatherNotification" inverseName="location" inverseEntity="WeatherNotification"/>
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES" codeGenerationType="class">
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
