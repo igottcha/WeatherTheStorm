@@ -35,7 +35,7 @@ class WeatherNotificationTimingViewController: UIViewController {
         setNotificationButton.layer.cornerRadius = 7
         setNotificationButton.isHidden = true
     }
-
+    
     //MARK: - Actions
     
     @IBAction func repeatTextFieldDidBeginEditing(_ sender: UITextField) {
@@ -44,7 +44,7 @@ class WeatherNotificationTimingViewController: UIViewController {
     @IBAction func setNotificationButtonTapped(_ sender: UIButton) {
     }
     
-
+    
     //MARK: - Methods
     
     func sortWeekdayArray() -> [String] {
@@ -75,19 +75,20 @@ class WeatherNotificationTimingViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    //MARK: - Repeat Frequency TableView
+    //MARK: - Notification Alert Controller
     
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func setAlertNotification(location: Location) {
+        guard let weatherNotification = location.weatherNotification, let weather = location.weather, let weatherPhrase = weather.current?.phrase, let feelsLikeTemp = weather.current?.feelsLike, let city = location.destination?.locality else { return }
+        let clothingPhrase = "CLOTHING STRING PLACEHOLDER"
+        let notificationText = "Hi \(UserController.shared.userName), It's \(weatherPhrase) today in \(city). Feels like \(feelsLikeTemp)°. You'll want to \(clothingPhrase)."
+        
+        let alert = UIAlertController(title: weatherNotification.name, message: notificationText, preferredStyle: .alert)
+        
+        let closeButton = UIAlertAction(title: "Close", style: .cancel, handler: nil)
+        
+        alert.addAction(closeButton)
+        self.present(self, animated: true, completion: nil)
+    }
     
 }
 
@@ -130,10 +131,10 @@ extension WeatherNotificationTimingViewController: UITableViewDelegate, UITableV
         toolBar.sizeToFit()
         
         let tableViewDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(tableViewDonePressed))
-            toolBar.setItems([tableViewDoneButton], animated: true)
-            
-            repeatTextField.inputAccessoryView = toolBar
-            repeatTextField.inputView = daysOfTheWeekTableView
+        toolBar.setItems([tableViewDoneButton], animated: true)
+        
+        repeatTextField.inputAccessoryView = toolBar
+        repeatTextField.inputView = daysOfTheWeekTableView
         return toolBar
     }
     

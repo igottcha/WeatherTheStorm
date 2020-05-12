@@ -4,6 +4,7 @@
         <attribute name="destination" optional="YES" attributeType="Transformable" customClassName="CoreLocation.CLPlacemark"/>
         <attribute name="weather" optional="YES" attributeType="Transformable" customClassName="Weather"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="location" inverseEntity="Trip"/>
+        <relationship name="weatherNotification" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherNotification" inverseName="location" inverseEntity="WeatherNotification"/>
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES" codeGenerationType="class">
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -18,14 +19,14 @@
             </userInfo>
         </attribute>
         <attribute name="isActive" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="location" attributeType="Transformable" customClassName="CoreLocation.CLLocation"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="specificDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="time" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="location" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="weatherNotification" inverseEntity="Location"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="notification" inverseEntity="Trip"/>
     </entity>
     <elements>
-        <element name="Location" positionX="-36" positionY="9" width="128" height="88"/>
+        <element name="Location" positionX="-36" positionY="9" width="128" height="103"/>
         <element name="Trip" positionX="-18" positionY="27" width="128" height="103"/>
         <element name="WeatherNotification" positionX="-27" positionY="45" width="128" height="148"/>
     </elements>
