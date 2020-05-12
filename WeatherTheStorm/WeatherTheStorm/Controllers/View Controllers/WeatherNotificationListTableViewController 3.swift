@@ -63,20 +63,19 @@ class WeatherNotificationListTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count ?? 0
-        
+        return WeatherNotificationController.shared.notifications.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WeatherNotificationTableViewCell else { return UITableViewCell() }
         
-        let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
+        let weatherNotification = WeatherNotificationController.shared.notifications[indexPath.row]
         guard let date = weatherNotification.specificDate else { return UITableViewCell() }
         
         cell.boxView.layer.cornerRadius = 7
         cell.nameLabel.text = weatherNotification.name
-        cell.addressLabel.text = "\(String(describing: weatherNotification.location))"
-        cell.frequencyAndTimeLabel.text = "\(String(describing: date.day)), \(String(describing: weatherNotification.time))"
+        cell.addressLabel.text = "\(weatherNotification.location)"
+        cell.frequencyAndTimeLabel.text = "\(date.day), \(weatherNotification.time)"
 
         return cell
     }

@@ -12,7 +12,7 @@ import CoreLocation
 
 extension Location {
     @discardableResult
-    convenience init(destination: CLPlacemark, weather: Weather?, moc: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(destination: CLPlacemark, weather: Weather?, weatherNotification: [WeatherNotification] = [], moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
         self.destination = destination
         self.weather = weather

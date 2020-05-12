@@ -19,6 +19,13 @@ class NewReminderTableViewController: UITableViewController {
         super.viewDidLoad()
 
     }
+    
+    //MARK: - Actions
+    
+//    @IBAction func closeViewButtonTapped(_ sender: UIBarButtonItem) {
+//        segue
+//    }
+    
 
     // MARK: - Table view data source
 
@@ -65,6 +72,7 @@ class NewReminderTableViewController: UITableViewController {
         if segue.identifier == "toAddNotificationTiming" {
             guard let indexPath = tableView.indexPathForSelectedRow, let destinationVC = segue.destination as? WeatherNotificationTimingViewController, let locations = LocationController.shared.sortedLocations else { return }
             let location = locations[indexPath.section][indexPath.row]
+            
             destinationVC.location = location
         }
     }
