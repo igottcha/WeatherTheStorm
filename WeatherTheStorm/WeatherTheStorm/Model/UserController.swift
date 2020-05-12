@@ -15,7 +15,10 @@ class UserController {
     
     typealias UserName = String
     static let userKey = "UserKey"
+    typealias IsMale = Bool
+    static let genderKey = "genderKey"
     var userName = UserName()
+    var isMale = IsMale()
     
     func saveUser(userName: UserName) {
         UserDefaults.standard.set(userName, forKey: UserController.userKey)
@@ -24,6 +27,15 @@ class UserController {
     func loadUser() {
         guard let savedUser = UserDefaults.standard.string(forKey: UserController.userKey) else { return }
         self.userName = savedUser
+    }
+    
+    func saveGender(gender: IsMale) {
+        UserDefaults.standard.set(gender, forKey: UserController.genderKey)
+    }
+    
+    func loadGender() {
+        let savedGender = UserDefaults.standard.bool(forKey: UserController.genderKey)
+        self.isMale = savedGender
     }
     
     

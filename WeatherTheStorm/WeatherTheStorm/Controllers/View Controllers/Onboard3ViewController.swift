@@ -11,8 +11,9 @@ import UIKit
 class Onboard3ViewController: UIViewController {
 
     @IBOutlet weak var LiveLabel: UILabel!
-    @IBOutlet weak var cityTextField: UITextField!
-    @IBOutlet weak var searchImageView: UITextField!
+
+    @IBOutlet weak var citySearchBar: UISearchBar!
+    
     @IBOutlet weak var whyLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     
@@ -28,17 +29,23 @@ class Onboard3ViewController: UIViewController {
         setGradientBackground()
         setupWhyLabel()
         setupProgressLabel()
+        setupNextButton()
+        citySearchBar.delegate = self
+        
         
     }
     
     func setupLiveLabel() {
-        LiveLabel.text = "Where do you live, (name)?"
+        UserController.shared.loadUser()
+        let userName = UserController.shared.userName
+        
+        LiveLabel.text = "Where do you live, \(userName)?"
     }
     
     func setupSearchBar() {
        
-        cityTextField.layer.cornerRadius = 15
-        cityTextField.clipsToBounds = true
+       citySearchBar.layer.cornerRadius = 15
+       citySearchBar.clipsToBounds = true
         
         
     }
@@ -70,20 +77,9 @@ class Onboard3ViewController: UIViewController {
           
       }
     
-    func searchCity(){
-        guard let searchTerm = cityTextField.text, !searchTerm.isEmpty else {return}
-        LocationController.getPlacemark(searchTerm: searchTerm) { (result) in
-            switch (result) {
-                
-            case .success( let placemark):
-                let home = placemark
-                LocationController.shared.createLocation(destination: home)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-        
-    }
+   
+    
+    
     
 
     /*
@@ -96,6 +92,27 @@ class Onboard3ViewController: UIViewController {
     }
     */
 
+}
+
+extension Onboard3ViewController : UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+    
+        guard let searchTerm = citySearchBar.text, !searchTerm.isEmpty else {return}
+        print(searchTerm)
+        LocationController.getPlacemark(searchTerm: searchTerm) { (result) in
+            switch (result) {
+                
+            case .success(let placeMark):
+            let userHome = LocationController.shared.createLocation(destination: placeMark)
+            print(userHome)
+            HomeController.shared.homeLocation = userHome
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
 }
 
 
