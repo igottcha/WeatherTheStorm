@@ -1,5 +1,5 @@
 //
-//  NewReminderTableViewController.swift
+//  NewWNTableViewController.swift
 //  WeatherTheStorm
 //
 //  Created by Chris Gottfredson on 5/4/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewReminderTableViewController: UITableViewController {
+class NewWNTableViewController: UITableViewController {
 
     //MARK: - Outlets
     
@@ -70,7 +70,7 @@ class NewReminderTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toAddNotificationTiming" {
-            guard let indexPath = tableView.indexPathForSelectedRow, let destinationVC = segue.destination as? WeatherNotificationTimingViewController, let locations = LocationController.shared.sortedLocations else { return }
+            guard let indexPath = tableView.indexPathForSelectedRow, let destinationVC = segue.destination as? WNTimingViewController, let locations = LocationController.shared.sortedLocations else { return }
             let location = locations[indexPath.section][indexPath.row]
             
             destinationVC.location = location

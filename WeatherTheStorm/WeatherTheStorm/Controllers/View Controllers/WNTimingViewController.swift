@@ -1,5 +1,5 @@
 //
-//  WeatherNotificationTimingViewController.swift
+//  WNTimingViewController.swift
 //  WeatherTheStorm
 //
 //  Created by Chris Gottfredson on 5/8/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherNotificationTimingViewController: UIViewController {
+class WNTimingViewController: UIViewController {
     
     //MARK: - Outlets
     
@@ -92,7 +92,7 @@ class WeatherNotificationTimingViewController: UIViewController {
     
 }
 
-extension WeatherNotificationTimingViewController: UITableViewDelegate, UITableViewDataSource {
+extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         WeatherNotificationController.shared.daysOfTheWeek.count

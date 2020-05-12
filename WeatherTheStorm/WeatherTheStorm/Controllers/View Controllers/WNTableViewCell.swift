@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherNotificationTableViewCell: UITableViewCell {
+class WNTableViewCell: UITableViewCell {
 
     //MARK: - Outlets
     
