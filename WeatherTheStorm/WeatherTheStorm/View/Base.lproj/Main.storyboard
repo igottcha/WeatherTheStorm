@@ -300,7 +300,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="lGM-NP-CYE" kind="relationship" relationship="viewControllers" id="GBg-cb-o7J"/>
-                        <segue destination="YVN-1a-Ev9" kind="relationship" relationship="viewControllers" id="Fx1-Fz-oLX"/>
                         <segue destination="F5p-rw-gYl" kind="relationship" relationship="viewControllers" id="P1y-pU-pJf"/>
                         <segue destination="P6M-97-zQX" kind="relationship" relationship="viewControllers" id="K75-Fx-LSe"/>
                     </connections>
