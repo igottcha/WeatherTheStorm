@@ -126,7 +126,7 @@
                         <constraint firstItem="3vf-sL-FNL" firstAttribute="leading" secondItem="PTK-P9-ihz" secondAttribute="leading" constant="40" id="LLn-3f-iWf"/>
                         <constraint firstItem="3vf-sL-FNL" firstAttribute="centerY" secondItem="PTK-P9-ihz" secondAttribute="centerY" multiplier="0.5" id="Wwy-Wo-cgI"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="A6G-Y6-Gxy"/>
+                    <viewLayoutGuide key="safeArea" id="fsa-e2-vXA"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="665" y="556"/>
@@ -136,7 +136,7 @@
             <objects>
                 <tableViewController id="tKq-RA-UJG" customClass="NewReminderTableViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jeT-DD-zRV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -232,20 +232,31 @@
                                 <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="repeatTextFieldDidBeginEditing:" destination="F4r-Zt-84f" eventType="editingDidBegin" id="BVd-iA-Suw"/>
+                                </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wT4-z8-jXX">
+                                <rect key="frame" x="196.66666666666663" y="575.33333333333337" width="186.33333333333337" height="102.33333333333337"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Set Notification"/>
+                                <connections>
+                                    <action selector="setNotificationButtonTapped:" destination="F4r-Zt-84f" eventType="touchUpInside" id="3fQ-SV-hQG"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NSr-zW-rLD">
-                                <rect key="frame" x="0.0" y="374" width="414" height="342"/>
+                                <rect key="frame" x="0.0" y="356" width="414" height="360"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dayOfTheWeekCell" textLabel="5i0-ps-KDj" style="IBUITableViewCellStyleDefault" id="dqZ-M7-sVf">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dayOfTheWeekCell" textLabel="55P-VW-JPa" style="IBUITableViewCellStyleDefault" id="G5W-Q4-0Rk">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dqZ-M7-sVf" id="gEV-8y-XX0">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G5W-Q4-0Rk" id="w92-fH-t8h">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5i0-ps-KDj">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Every Monday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="55P-VW-JPa">
                                                     <rect key="frame" x="20" y="0.0" width="342" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -256,38 +267,49 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <sections/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="398-Uz-kNC" firstAttribute="top" secondItem="Zw6-qa-OTk" secondAttribute="bottom" constant="8" id="1g6-A4-Ngx"/>
-                            <constraint firstItem="HmJ-og-tZ4" firstAttribute="leading" secondItem="HCq-tq-T36" secondAttribute="leading" constant="45" id="7X5-1x-f7d"/>
+                            <constraint firstItem="wT4-z8-jXX" firstAttribute="centerX" secondItem="Zsk-pE-xyu" secondAttribute="centerX" multiplier="1.4" id="6gP-tR-EY0"/>
+                            <constraint firstItem="HmJ-og-tZ4" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="45" id="7X5-1x-f7d"/>
                             <constraint firstItem="BWB-Oa-srj" firstAttribute="top" secondItem="gZk-dr-vmx" secondAttribute="bottom" constant="20" id="7hC-p6-sRR"/>
-                            <constraint firstItem="Zw6-qa-OTk" firstAttribute="top" secondItem="HCq-tq-T36" secondAttribute="top" constant="18" id="98M-wN-6v1"/>
-                            <constraint firstItem="398-Uz-kNC" firstAttribute="centerX" secondItem="Zsk-pE-xyu" secondAttribute="centerX" id="9mQ-YG-3rT"/>
-                            <constraint firstItem="Zw6-qa-OTk" firstAttribute="leading" secondItem="HCq-tq-T36" secondAttribute="leading" constant="20" id="Aop-KF-zWd"/>
-                            <constraint firstItem="gZk-dr-vmx" firstAttribute="leading" secondItem="HCq-tq-T36" secondAttribute="leading" constant="54" id="CqH-se-fPa"/>
+                            <constraint firstItem="Zw6-qa-OTk" firstAttribute="top" secondItem="JQL-Pe-VJW" secondAttribute="top" constant="18" id="98M-wN-6v1"/>
+                            <constraint firstItem="398-Uz-kNC" firstAttribute="centerX" secondItem="JQL-Pe-VJW" secondAttribute="centerX" id="9mQ-YG-3rT"/>
+                            <constraint firstItem="Zw6-qa-OTk" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="20" id="Aop-KF-zWd"/>
+                            <constraint firstItem="gZk-dr-vmx" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="54" id="CqH-se-fPa"/>
                             <constraint firstItem="HmJ-og-tZ4" firstAttribute="top" secondItem="myS-lj-T5V" secondAttribute="bottom" constant="8" id="Cwh-TY-VTh"/>
                             <constraint firstItem="gZk-dr-vmx" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.25" id="ITX-Lp-9AF"/>
-                            <constraint firstItem="BWB-Oa-srj" firstAttribute="leading" secondItem="HCq-tq-T36" secondAttribute="leading" constant="45" id="JRS-O6-h7m"/>
+                            <constraint firstItem="wT4-z8-jXX" firstAttribute="centerY" secondItem="Zsk-pE-xyu" secondAttribute="centerY" multiplier="1.75" id="Ilv-wn-CbV"/>
+                            <constraint firstItem="BWB-Oa-srj" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="45" id="JRS-O6-h7m"/>
                             <constraint firstItem="myS-lj-T5V" firstAttribute="top" secondItem="398-Uz-kNC" secondAttribute="bottom" constant="8" id="Msn-Kg-qer"/>
-                            <constraint firstItem="HCq-tq-T36" firstAttribute="trailing" secondItem="myS-lj-T5V" secondAttribute="trailing" constant="20" id="V8K-Pl-Apc"/>
+                            <constraint firstItem="JQL-Pe-VJW" firstAttribute="trailing" secondItem="myS-lj-T5V" secondAttribute="trailing" constant="20" id="V8K-Pl-Apc"/>
                             <constraint firstItem="398-Uz-kNC" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.85" id="goC-Je-ygY"/>
-                            <constraint firstItem="myS-lj-T5V" firstAttribute="leading" secondItem="HCq-tq-T36" secondAttribute="leading" constant="20" id="i3j-n5-UNr"/>
+                            <constraint firstItem="myS-lj-T5V" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="20" id="i3j-n5-UNr"/>
                             <constraint firstItem="gZk-dr-vmx" firstAttribute="top" secondItem="HmJ-og-tZ4" secondAttribute="bottom" constant="16" id="ja5-wt-L6R"/>
+                            <constraint firstItem="wT4-z8-jXX" firstAttribute="width" secondItem="JQL-Pe-VJW" secondAttribute="width" multiplier="0.45" id="lQO-YT-3y0"/>
                             <constraint firstItem="3VZ-BT-Xng" firstAttribute="top" secondItem="BWB-Oa-srj" secondAttribute="bottom" constant="8" id="lwr-PP-xDv"/>
                             <constraint firstItem="3VZ-BT-Xng" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.25" id="rmQ-BT-HVJ"/>
-                            <constraint firstItem="3VZ-BT-Xng" firstAttribute="leading" secondItem="HCq-tq-T36" secondAttribute="leading" constant="54" id="vSG-Af-f6H"/>
+                            <constraint firstItem="3VZ-BT-Xng" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="54" id="vSG-Af-f6H"/>
+                            <constraint firstItem="wT4-z8-jXX" firstAttribute="height" secondItem="JQL-Pe-VJW" secondAttribute="height" multiplier="0.167" id="xXy-DV-F1w"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="HCq-tq-T36"/>
+                        <viewLayoutGuide key="safeArea" id="JQL-Pe-VJW"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Add Notification" id="xl7-YQ-lpp">
                         <barButtonItem key="rightBarButtonItem" systemItem="stop" id="PN3-hB-gv3">
                             <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addressLabel" destination="398-Uz-kNC" id="zZF-Ro-msE"/>
+                        <outlet property="daysOfTheWeekTableView" destination="NSr-zW-rLD" id="rza-lr-gd5"/>
+                        <outlet property="repeatTextField" destination="3VZ-BT-Xng" id="xdX-iP-Asu"/>
+                        <outlet property="setNotificationButton" destination="wT4-z8-jXX" id="LOx-Fk-7T7"/>
+                        <outlet property="timeTextField" destination="gZk-dr-vmx" id="QTH-nA-cU7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVo-1O-YPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

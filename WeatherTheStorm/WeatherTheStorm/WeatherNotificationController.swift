@@ -13,5 +13,6 @@ class WeatherNotificationController {
     static let shared = WeatherNotificationController()
     var notifications: [WeatherNotification] = []
     
+    let daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
 }
