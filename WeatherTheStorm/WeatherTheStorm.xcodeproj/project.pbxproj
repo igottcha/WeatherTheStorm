@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4E52863A2457906F00AA1096 /* TripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5286392457906F00AA1096 /* TripController.swift */; };
 		4E52863C2457978800AA1096 /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E52863B2457978800AA1096 /* LocationController.swift */; };
+		4E92285A246B083E00136C5B /* TripListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E922859246B083E00136C5B /* TripListTableViewController.swift */; };
+		4E92285C246B08AB00136C5B /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92285B246B08AB00136C5B /* TripDetailViewController.swift */; };
+		4E92285E246B090B00136C5B /* TripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92285D246B090B00136C5B /* TripTableViewCell.swift */; };
 		4ED3275B2453A02800558297 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED3275A2453A02800558297 /* CoreDataStack.swift */; };
 		4ED3275D2453A07600558297 /* AirQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED3275C2453A07600558297 /* AirQuality.swift */; };
 		4ED3275F2453A08500558297 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED3275E2453A08500558297 /* Location.swift */; };
@@ -60,6 +63,9 @@
 /* Begin PBXFileReference section */
 		4E5286392457906F00AA1096 /* TripController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripController.swift; path = WeatherTheStorm/Model/TripController.swift; sourceTree = SOURCE_ROOT; };
 		4E52863B2457978800AA1096 /* LocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationController.swift; path = WeatherTheStorm/Model/LocationController.swift; sourceTree = SOURCE_ROOT; };
+		4E922859246B083E00136C5B /* TripListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListTableViewController.swift; sourceTree = "<group>"; };
+		4E92285B246B08AB00136C5B /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
+		4E92285D246B090B00136C5B /* TripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableViewCell.swift; sourceTree = "<group>"; };
 		4ED3275A2453A02800558297 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		4ED3275C2453A07600558297 /* AirQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirQuality.swift; sourceTree = "<group>"; };
 		4ED3275E2453A08500558297 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -204,21 +210,21 @@
 		9E87010624535D51005AD32A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4E5BA4352462087700A9583D /* TripCollectionViewCell.swift */,
 				9E731C3824589F5C00B5420D /* Onboard1ViewController.swift */,
 				E9E7AE362465FF0900F36E41 /* Onboard2ViewController.swift */,
 				E9A307A324662F3F00B3A29B /* Onboard3ViewController.swift */,
-				4ED7139D2458D5D400F15547 /* TripListViewController.swift */,
 				9E731C482458DA3300B5420D /* APITestViewController.swift */,
 				E978FC042458DE8F00E2DD82 /* ForecastViewController.swift */,
 				E92E8A1F245A0C3B00E5354B /* ForecastDetailViewController.swift */,
 				9E7835AB2460BE5A008B4CF1 /* NewReminderTableViewController.swift */,
 				9E7835AD2460BF45008B4CF1 /* LocationSearchTableViewCell.swift */,
 				E9BB5B3B24632B730024CB8F /* HourlyForecastCollectionViewCell.swift */,
-				4E5BA4392462226700A9583D /* DailyForecastCollectionViewCell.swift */,
 				9EDEBCFB2464AA4E003DBEC8 /* WeatherNotificationListTableViewController.swift */,
 				9EDEBCFD2464AA7C003DBEC8 /* WeatherNotificationTableViewCell.swift */,
 				9E83BF8A2465F27B00B3830E /* WeatherNotificationTimingViewController.swift */,
+				4E922859246B083E00136C5B /* TripListTableViewController.swift */,
+				4E92285B246B08AB00136C5B /* TripDetailViewController.swift */,
+				4E92285D246B090B00136C5B /* TripTableViewCell.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -327,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E92285E246B090B00136C5B /* TripTableViewCell.swift in Sources */,
 				E9A4F5C1245CA46800BDCBD1 /* LocationExtension.swift in Sources */,
 				9E8700EC24535C8C005AD32A /* AppDelegate.swift in Sources */,
 				9E731C492458DA3300B5420D /* APITestViewController.swift in Sources */,
@@ -340,10 +347,9 @@
 				9E9F3687245753570044086A /* DailyForecast.swift in Sources */,
 				9E731C452458C12600B5420D /* DailyForecastController.swift in Sources */,
 				9E7835AE2460BF45008B4CF1 /* LocationSearchTableViewCell.swift in Sources */,
+				4E92285C246B08AB00136C5B /* TripDetailViewController.swift in Sources */,
 				9E83BF8B2465F27B00B3830E /* WeatherNotificationTimingViewController.swift in Sources */,
-				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
 				E9A307A424662F3F00B3A29B /* Onboard3ViewController.swift in Sources */,
-				4ED7139C2458BA1F00F15547 /* TripDetailViewController.swift in Sources */,
 				E978FC072458E5B800E2DD82 /* DateExtension.swift in Sources */,
 				9EDEBCFE2464AA7C003DBEC8 /* WeatherNotificationTableViewCell.swift in Sources */,
 				E9B6BC0C24575F6500F0209A /* HourlyForecast.swift in Sources */,
@@ -359,6 +365,7 @@
 				9EC6BC07245CCD250090CA45 /* AirQualityController.swift in Sources */,
 				4ED3275F2453A08500558297 /* Location.swift in Sources */,
 				E978FC052458DE8F00E2DD82 /* ForecastViewController.swift in Sources */,
+				4E92285A246B083E00136C5B /* TripListTableViewController.swift in Sources */,
 				9E731C412458C0C200B5420D /* CurrentWeatherController.swift in Sources */,
 				9E9F3686245753570044086A /* Day.swift in Sources */,
 				4ED327612453A09300558297 /* Trip.swift in Sources */,
