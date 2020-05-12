@@ -20,7 +20,6 @@ class WNTimingViewController: UIViewController {
     
     //MARK: - Properties
     
-    var weatherNotification: WeatherNotification?
     var location: Location?
     let datePicker = UIDatePicker()
     
@@ -29,8 +28,10 @@ class WNTimingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         daysOfTheWeekTableView.isHidden = true
-        guard let city = location?.destination?.locality, let address = location?.destination?.thoroughfare, let state = location?.destination?.administrativeArea, let country = location?.destination?.country else { return }
-        addressLabel.text = "\(address), \(city), \(state), \(country)"
+        daysOfTheWeekTableView.delegate = self
+        daysOfTheWeekTableView.dataSource = self
+        guard let city = location?.destination?.locality, let state = location?.destination?.administrativeArea, let country = location?.destination?.country else { return }
+        addressLabel.text = "\(city), \(state), \(country)"
         createDatePicker()
         setNotificationButton.layer.cornerRadius = 7
         setNotificationButton.isHidden = true
@@ -42,13 +43,16 @@ class WNTimingViewController: UIViewController {
         daysOfTheWeekTableView.isHidden = false
     }
     @IBAction func setNotificationButtonTapped(_ sender: UIButton) {
+        guard let location = location, let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification, let frequency = repeatTextField.text, !frequency.isEmpty else { return }
+        WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, specificDate: nil, time: datePicker.date)
+        setAlertNotification(location: location)
     }
     
     
     //MARK: - Methods
     
     func sortWeekdayArray() -> [String] {
-        guard let week = DateFormatter().weekdaySymbols, let notificationFrequency = weatherNotification?.frequency else { return [] }
+        guard let week = DateFormatter().weekdaySymbols, let weatherNotification = location?.weatherNotification?.firstObject as? WeatherNotification, let notificationFrequency = weatherNotification.frequency else { return [] }
         return notificationFrequency.sorted { week.firstIndex(of: $0)! < week.firstIndex(of: $1)!}
     }
     
@@ -95,12 +99,12 @@ class WNTimingViewController: UIViewController {
 extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        WeatherNotificationController.shared.daysOfTheWeek.count
+        DateFormatter().calendar.weekdaySymbols.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "dayOfTheWeekCell", for: indexPath)
-        let dow = WeatherNotificationController.shared.daysOfTheWeek[indexPath.row]
+        let dow = DateFormatter().calendar.weekdaySymbols[indexPath.row]
         
         cell.textLabel?.text = "Every \(dow)"
         
@@ -110,8 +114,8 @@ extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .checkmark
-            guard let day = cell.textLabel?.text else { return }
-            weatherNotification?.frequency?.append(day)
+            guard let day = cell.textLabel?.text, let weatherNotification = location?.weatherNotification?.firstObject as? WeatherNotification else { return }
+            weatherNotification.frequency?.append(day)
             repeatTextField.text = sortWeekdayArray().compactMap({$0}).joined(separator: ",")
             
         }
@@ -120,9 +124,9 @@ extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .none
-            guard let day = cell.textLabel?.text, let dayIndex = weatherNotification?.frequency?.firstIndex(of: day)
+            guard let day = cell.textLabel?.text, let weatherNotification = location?.weatherNotification?.firstObject as? WeatherNotification, let dayIndex = weatherNotification.frequency?.firstIndex(of: day)
                 else { return }
-            weatherNotification?.frequency?.remove(at: dayIndex)
+            weatherNotification.frequency?.remove(at: dayIndex)
         }
     }
     

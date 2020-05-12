@@ -35,6 +35,7 @@
 		9E8700F324535C8C005AD32A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8700F124535C8C005AD32A /* Main.storyboard */; };
 		9E8700F824535C8F005AD32A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E8700F724535C8F005AD32A /* Assets.xcassets */; };
 		9E8700FB24535C8F005AD32A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8700F924535C8F005AD32A /* LaunchScreen.storyboard */; };
+		9E9CEFBC246B20F200F76A9A /* WNLocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9CEFBB246B20F200F76A9A /* WNLocationListViewController.swift */; };
 		9E9D401F2464CCE20022AF39 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9D401E2464CCE20022AF39 /* UIViewExtension.swift */; };
 		9E9F3686245753570044086A /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9F3684245753560044086A /* Day.swift */; };
 		9E9F3687245753570044086A /* DailyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9F3685245753560044086A /* DailyForecast.swift */; };
@@ -90,6 +91,7 @@
 		9E8700F724535C8F005AD32A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E8700FA24535C8F005AD32A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E8700FC24535C8F005AD32A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E9CEFBB246B20F200F76A9A /* WNLocationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WNLocationListViewController.swift; sourceTree = "<group>"; };
 		9E9D401E2464CCE20022AF39 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		9E9F3684245753560044086A /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		9E9F3685245753560044086A /* DailyForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyForecast.swift; sourceTree = "<group>"; };
@@ -215,9 +217,10 @@
 				E92E8A1F245A0C3B00E5354B /* ForecastDetailViewController.swift */,
 				9E7835AD2460BF45008B4CF1 /* LocationSearchTableViewCell.swift */,
 				E9BB5B3B24632B730024CB8F /* HourlyForecastCollectionViewCell.swift */,
-				9E7835AB2460BE5A008B4CF1 /* NewWNTableViewController.swift */,
 				9EDEBCFB2464AA4E003DBEC8 /* WNListTableViewController.swift */,
 				9EDEBCFD2464AA7C003DBEC8 /* WNTableViewCell.swift */,
+				9E7835AB2460BE5A008B4CF1 /* NewWNTableViewController.swift */,
+				9E9CEFBB246B20F200F76A9A /* WNLocationListViewController.swift */,
 				9E83BF8A2465F27B00B3830E /* WNTimingViewController.swift */,
 				4E922859246B083E00136C5B /* TripListTableViewController.swift */,
 				4E92285B246B08AB00136C5B /* TripDetailViewController.swift */,
@@ -372,6 +375,7 @@
 				4E52863C2457978800AA1096 /* LocationController.swift in Sources */,
 				E9BB5B3C24632B730024CB8F /* HourlyForecastCollectionViewCell.swift in Sources */,
 				9E83BF872465BB5F00B3830E /* Work Controller.swift in Sources */,
+				9E9CEFBC246B20F200F76A9A /* WNLocationListViewController.swift in Sources */,
 				4ED3275B2453A02800558297 /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
