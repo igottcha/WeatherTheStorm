@@ -11,13 +11,13 @@
         <!--Notifications-->
         <scene sceneID="YF6-8u-H2h">
             <objects>
-                <tableViewController id="nMu-6d-IvL" customClass="WeatherNotificationListTableViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="nMu-6d-IvL" customClass="WNListTableViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="133-Uo-GUx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="boxCell" rowHeight="195" id="PwF-D5-teV" customClass="WeatherNotificationTableViewCell" customModule="WeatherTheStorm" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="boxCell" rowHeight="195" id="PwF-D5-teV" customClass="WNTableViewCell" customModule="WeatherTheStorm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.333332061767578" width="414" height="195"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PwF-D5-teV" id="OZm-FW-mza">
@@ -51,7 +51,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm Frequency and Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUQ-Ab-366">
-                                                                    <rect key="frame" x="0.0" y="61.333333333333343" width="205.33333333333334" height="28.666666666666664"/>
+                                                                    <rect key="frame" x="0.0" y="61.333333333333336" width="205.33333333333334" height="28.666666666666664"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -139,9 +139,9 @@
         <!--Add Notification-->
         <scene sceneID="O6i-Iz-7Bz">
             <objects>
-                <tableViewController id="tKq-RA-UJG" customClass="NewReminderTableViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="tKq-RA-UJG" customClass="NewWNTableViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jeT-DD-zRV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -243,7 +243,7 @@
         <!--Add Notification-->
         <scene sceneID="yF7-Oe-dVr">
             <objects>
-                <viewController id="F4r-Zt-84f" customClass="WeatherNotificationTimingViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="F4r-Zt-84f" customClass="WNTimingViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zsk-pE-xyu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,5 +1,5 @@
 //
-//  WeatherNotificationListTableViewController.swift
+//  WNListTableViewController.swift
 //  WeatherTheStorm
 //
 //  Created by Chris Gottfredson on 5/7/20.
@@ -25,7 +25,7 @@ class WeatherNotif {
  
 }
 
-class WeatherNotificationListTableViewController: UITableViewController {
+class WNListTableViewController: UITableViewController {
 
     
     //MARK: - Outlets
@@ -68,7 +68,7 @@ class WeatherNotificationListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WeatherNotificationTableViewCell else { return UITableViewCell() }
+       guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell else { return UITableViewCell() }
         
         let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
         guard let date = weatherNotification.specificDate else { return UITableViewCell() }
@@ -82,7 +82,7 @@ class WeatherNotificationListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let cell = cell as? WeatherNotificationTableViewCell
+        let cell = cell as? WNTableViewCell
         cell?.backgroundColor = .clear
     }
     
