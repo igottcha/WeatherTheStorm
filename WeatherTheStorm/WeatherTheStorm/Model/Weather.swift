@@ -24,6 +24,3 @@ public class Weather: NSObject, Codable {
 
 }
 
-//extension Weather: NSObject {
-//    
-//}

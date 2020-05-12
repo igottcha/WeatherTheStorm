@@ -4,7 +4,7 @@
         <attribute name="destination" optional="YES" attributeType="Transformable" customClassName="CoreLocation.CLPlacemark"/>
         <attribute name="weather" optional="YES" attributeType="Transformable" customClassName="Weather"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="location" inverseEntity="Trip"/>
-        <relationship name="weatherNotification" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherNotification" inverseName="location" inverseEntity="WeatherNotification"/>
+        <relationship name="weatherNotification" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherNotification" inverseName="location" inverseEntity="WeatherNotification"/>
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES" codeGenerationType="class">
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -18,7 +18,7 @@
                 <entry key="attributeRawValueEnumType" value="Frequency"/>
             </userInfo>
         </attribute>
-        <attribute name="isActive" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="specificDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="time" attributeType="Date" usesScalarValueType="NO"/>

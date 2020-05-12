@@ -166,7 +166,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Bse-tC-4fW" kind="presentation" id="KUI-c1-nBK"/>
+                                    <segue destination="F4r-Zt-84f" kind="show" identifier="toAddNotificationTiming" id="ey1-zz-GgF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -314,7 +314,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVo-1O-YPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3550.7246376811595" y="553.53260869565224"/>
+            <point key="canvasLocation" x="2849" y="557"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="uUB-wK-RQc">
@@ -347,6 +347,7 @@
         <!--Navigation Controller-->
         <scene sceneID="DSE-Te-I2s">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MUj-bq-5cp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fbd-qW-wnW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Vd-sh-Lk3">
@@ -359,27 +360,8 @@
                         <segue destination="tKq-RA-UJG" kind="relationship" relationship="rootViewController" id="PCu-Wd-XC1"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MUj-bq-5cp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1386.9565217391305" y="555.97826086956525"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="mSr-9T-G1F">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bse-tC-4fW" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jws-Re-0Uv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="F4r-Zt-84f" kind="relationship" relationship="rootViewController" id="Iwl-jr-2fc"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ftf-0M-4FO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2805.7971014492755" y="553.53260869565224"/>
         </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
