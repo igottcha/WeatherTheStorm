@@ -17,9 +17,6 @@ class WNTableViewCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var frequencyAndTimeLabel: UILabel!
     
-    //MARK: - Properties
-    
-    
     //MARK: - Actions
     
     @IBAction func isActiveSwitch(_ sender: UISwitch) {

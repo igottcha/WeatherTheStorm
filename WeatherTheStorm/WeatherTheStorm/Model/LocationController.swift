@@ -16,9 +16,7 @@ class LocationController {
     var fetchResultsController: NSFetchedResultsController<Location>
     var tripLocations: [Location]?
     var sortedLocations: [[Location]]? {
-        didSet {
-            sortLocations()
-        }
+        sortLocations()
     }
     
     //MARK: - Source of truth
@@ -39,11 +37,12 @@ class LocationController {
 
     //MARK: - Methods
     
-    func sortLocations() {
-    
+    func sortLocations() -> [[Location]] {
+        
         var homeLocations: [Location]
         var workLocations: [Location]
         let trips = TripController.shared.tripLocations
+        var allLocations: [[Location]] = [[]]
         
         if let homeLocation = HomeController.shared.homeLocation {
           homeLocations = [homeLocation]
@@ -57,9 +56,10 @@ class LocationController {
             workLocations = []
         }
         
-        sortedLocations?.append(homeLocations)
-        sortedLocations?.append(workLocations)
-        sortedLocations?.append(trips)
+        allLocations.insert(homeLocations, at: 0)
+        allLocations.insert(workLocations, at: 1)
+        allLocations.insert(trips, at: 2)
+        return allLocations
     }
     
     //MARK: - GeoCoding

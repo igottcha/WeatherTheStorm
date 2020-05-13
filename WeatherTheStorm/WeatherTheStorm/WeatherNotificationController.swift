@@ -14,7 +14,7 @@ class WeatherNotificationController {
     //MARK: - Singleton and Source of Truth
     
     static let shared = WeatherNotificationController()
-    var notifications: [WeatherNotification] = []
+    var frequencies: [String] = []
     
     let daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
@@ -44,9 +44,9 @@ class WeatherNotificationController {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
-    func updateWeatherNotification(weatherNotification: WeatherNotification, frequency: [String]?, isActive: Bool, specificDate: Date, time: Date) {
-        weatherNotification.frequency = frequency
+    func updateWeatherNotification(weatherNotification: WeatherNotification, isActive: Bool, frequency: [String], specificDate: Date?, time: Date) {
         weatherNotification.isActive = isActive
+        weatherNotification.frequency = frequency
         weatherNotification.specificDate = specificDate
         weatherNotification.time = time
         (UIApplication.shared.delegate as! AppDelegate).saveContext()

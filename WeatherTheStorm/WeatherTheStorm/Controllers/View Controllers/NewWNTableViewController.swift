@@ -22,9 +22,7 @@ class NewWNTableViewController: UITableViewController {
     
     //MARK: - Actions
     
-//    @IBAction func closeViewButtonTapped(_ sender: UIBarButtonItem) {
-//        segue
-//    }
+
     
 
     // MARK: - Table view data source
