@@ -23,7 +23,6 @@ class HourlyWeatherController {
                 } else {
                     location.weather = Weather(current: nil, hourlyForecasts: forecasts, dailyForecasts: nil, airQuality: nil)
                 }
-                print(location.weather?.hourlyForecasts)
             case .failure(let error):
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
             }
