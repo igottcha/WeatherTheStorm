@@ -29,7 +29,7 @@ class DailyForecastController {
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
                 completion(.failure(error))
             }
-            
+            completion(result)
         }
     }
 }

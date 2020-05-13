@@ -31,6 +31,7 @@ class Onboard3ViewController: UIViewController {
         setupProgressLabel()
         setupNextButton()
         citySearchBar.delegate = self
+        nextButton.isHidden = true
         
         
     }
@@ -107,6 +108,8 @@ extension Onboard3ViewController : UISearchBarDelegate {
             let userHome = LocationController.shared.createLocation(destination: placeMark)
             print(userHome)
             HomeController.shared.homeLocation = userHome
+            WeatherNotificationController.shared.createWeatherNotification(location: userHome, name: "homeSean")
+            self.nextButton.isHidden = false
             case .failure(let error):
                 print(error.localizedDescription)
             }

@@ -12,47 +12,53 @@ class ForecastDetailViewController: UIViewController {
     //MARK: PROPERTIES
     
     var date: Date = Date()
-    var location:Location?
+    var location :Location?
     //MARK:- OUTLETS
-    
-    
-    @IBOutlet weak var hourlyForecastTableView: UITableView!
-    @IBOutlet weak var greetingLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var gear: UIImageView!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var phraseLabel: UILabel!
+    @IBOutlet weak var dateLabel: UIStackView!
     @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var feelsLikeLabel: UILabel!
+    @IBOutlet weak var highLabel: UILabel!
+    @IBOutlet weak var lowLabel: UIStackView!
+    @IBOutlet weak var feelsLikeLAbel: UILabel!
+    @IBOutlet weak var topContainer: UIView!
+    @IBOutlet weak var middleContainer: UIView!
     
-    @IBOutlet weak var wearLabel: UILabel!
+    
+   
+
+    
+ 
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupGreetingLabel()
-        setupDateLabel()
-        setupTempLabel()
-        setupFeelsLikelabel()
+        setupTopContainer()
+        setupMiddleContainer()
        
         
         
     }
     
-    func setupGreetingLabel(){
-        greetingLabel.text = "Good Morning, \(UserController.shared.userName)! it's a (Phrase Will Go Here) day in (Location will go here)"
+    func setupTopContainer() {
+        setGradientBackground()
     }
     
-    func setupDateLabel() {
-        dateLabel.text = self.date.formatDate()
+    func setGradientBackground() {
+        
+        let  gradientLayer = CAGradientLayer()
+        gradientLayer.frame = topContainer.bounds
+        gradientLayer.colors = [UIColor(named: "HomeControllerTopBG")?.cgColor ?? UIColor.blue.cgColor, UIColor(named: "HomeControllerBottBG")?.cgColor ?? UIColor.cyan]
+       topContainer.layer.insertSublayer(gradientLayer, at: 0)
+        
         
     }
     
-    func setupTempLabel(){
-        tempLabel.text = "\(location?.weather?.current?.temperature)"
-    }
-    
-    func setupFeelsLikelabel(){
-        
-        feelsLikeLabel.text = "Feels like (feels like will go here)"
+    func setupMiddleContainer() {
+        middleContainer.backgroundColor = UIColor(named: "HomeControllerBottBG")
+        middleContainer.layer.cornerRadius = 20
+        middleContainer.clipsToBounds = true
     }
     
     
