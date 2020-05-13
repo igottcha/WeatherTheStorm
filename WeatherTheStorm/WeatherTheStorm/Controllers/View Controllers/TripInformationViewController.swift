@@ -26,6 +26,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         guard let trip = trip else { return }
         getWeather(for: trip)
         updateViews()
+        setUpRecommendations()
        
     }
     
@@ -43,10 +44,30 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     func updateViews() {
         guard let location = trip?.location?.destination?.locality,
             let currentTemp = trip?.location?.weather?.current?.temperature,
-            let feelsLike =  trip?.location?.weather?.current?.feelsLike else { return }
-        recommendationsLabel.text = "We recommend bringing the following items for your trip: Rain jacket, rain boots, umbrella"
-        weatherForecastLabel.text = "Your trip to \(location) is coming up. The weather is currently \(currentTemp) degrees. It feels like \(feelsLike) degrees. Be sure to bring x, y, z."
+            let feelsLike =  trip?.location?.weather?.current?.feelsLike,
+            let state = trip?.location?.destination?.administrativeArea else { return }
+        
+        weatherForecastLabel.text = "Your trip to \(location), \(state) is coming up. The weather is currently \(currentTemp) degrees. It feels like \(feelsLike) degrees. Have a nice trip!"
+        
     }
+    
+    func setUpRecommendations() {
+        guard let temp = trip?.location?.weather?.current?.temperature else { return }
+        if temp >= 70 {
+            recommendationsLabel.text = "We recommend bringing the following items for your trip: Short sleeves, breathable fabrics, and shorts."
+        } else if temp <= 69 || temp >= 60 {
+            recommendationsLabel.text = "We recommend bringing the following items for your trip: Long sleeves, light sweater or jacket, and long pants."
+        } else if temp <= 59 || temp >= 50 {
+            recommendationsLabel.text = "It's sweater weather! Wear pants and a light jacket."
+        } else if temp <= 49 || temp >= 40 {
+            recommendationsLabel.text = "It's a bit chilly out today. Wear a warm jacket and long pants."
+        } else if temp <= 39 || temp >= 30 {
+            recommendationsLabel.text = "It's pretty chilly today. Best wear a winter coat, hat, and gloves."
+        } else if temp <= 29 {
+            recommendationsLabel.text = "It's a cold one out there! Bundle up with a winter coat, scarf, hat, and gloves. Bonus for wooly socks."
+        }
+    }
+    
     
     //MARK: - Weather Info Methods
     
@@ -78,6 +99,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
                 print(currentWeather)
                 DispatchQueue.main.async {
                     self.updateViews()
+                    self.setUpRecommendations()
                 }
                 
             case .failure(let error):

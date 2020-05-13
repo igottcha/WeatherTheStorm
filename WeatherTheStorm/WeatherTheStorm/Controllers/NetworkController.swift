@@ -49,7 +49,7 @@ class NetworkController {
 //                let secondDate = secondDate else {return nil}
 //            let numOfDays = TripController.calcNumOfDays(between: firstDate, and: secondDate)
             newBaseURL.appendPathComponent("daily")
-            newBaseURL.appendPathComponent("10day")
+            newBaseURL.appendPathComponent("7day")
         } else {
             newBaseURL.appendPathComponent("hourly")
             newBaseURL.appendPathComponent("48hour")
