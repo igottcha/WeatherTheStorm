@@ -41,19 +41,27 @@ class WeatherNotificationController {
     
     func createWeatherNotification(location: Location, name: String) {
         WeatherNotification(location: location, name: name)
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        saveToPersistentStore()
     }
     
-    func updateWeatherNotification(weatherNotification: WeatherNotification, isActive: Bool, frequency: [String], specificDate: Date?, time: Date) {
+    func updateWeatherNotification(weatherNotification: WeatherNotification, isActive: Bool, frequency: [String]?, specificDate: Date?, time: Date?) {
         weatherNotification.isActive = isActive
         weatherNotification.frequency = frequency
         weatherNotification.specificDate = specificDate
         weatherNotification.time = time
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        saveToPersistentStore()
     }
     
     func deleteWeatherNotificaiton(weatherNotification: WeatherNotification) {
         weatherNotification.managedObjectContext?.delete(weatherNotification)
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        saveToPersistentStore()
+    }
+    
+    func saveToPersistentStore() {
+        do {
+            try CoreDataStack.context.save()
+        } catch  {
+            print("Error when trying to save. \(error.localizedDescription)\(#function)")
+        }
     }
 }

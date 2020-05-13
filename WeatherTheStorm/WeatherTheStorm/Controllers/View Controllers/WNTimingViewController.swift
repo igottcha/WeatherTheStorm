@@ -51,7 +51,10 @@ class WNTimingViewController: UIViewController {
         setAlertNotification(location: location)
         print(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count)
         DispatchQueue.main.async {
-            self.navigationController?.popToRootViewController(animated: true)
+            self.dismiss(animated: true) {
+                print("successfully dismissed")
+            }
+            //self.navigationController?.popToRootViewController(animated: true)
         }
     }
     @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {

@@ -58,12 +58,13 @@ class WNListTableViewController: UITableViewController {
        guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell else { return UITableViewCell() }
         
         let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
-        guard let date = weatherNotification.specificDate else { return UITableViewCell() }
+        let frequency = weatherNotification.frequency ?? ["TBD"]
+        let time = weatherNotification.time?.hour() ?? Date().hour()
         
         cell.boxView.layer.cornerRadius = 7
         cell.nameLabel.text = weatherNotification.name
         cell.addressLabel.text = "\(String(describing: weatherNotification.location))"
-        cell.frequencyAndTimeLabel.text = "\(String(describing: date.day)), \(String(describing: weatherNotification.time))"
+        cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")), at \(time)"
 
         return cell
     }
