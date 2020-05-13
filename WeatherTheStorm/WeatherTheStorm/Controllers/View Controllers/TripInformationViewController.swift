@@ -21,9 +21,10 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        forecastCollectionView.reloadData()
         forecastCollectionView.delegate = self
         forecastCollectionView.dataSource = self
+        guard let trip = trip else { return }
+        getWeather(for: trip)
         updateViews()
        
     }
@@ -35,18 +36,16 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     
     //MARK: - Properties
     
-    var trip: Trip? {
-        didSet{
-            guard let trip = trip else { return }
-        }
-    }
+    var trip: Trip?
     
     //MARK: - View functions
     
     func updateViews() {
-        guard let location = trip?.location?.destination?.locality else { return }
+        guard let location = trip?.location?.destination?.locality,
+            let currentTemp = trip?.location?.weather?.current?.temperature,
+            let feelsLike =  trip?.location?.weather?.current?.feelsLike else { return }
         recommendationsLabel.text = "We recommend bringing the following items for your trip: Rain jacket, rain boots, umbrella"
-        weatherForecastLabel.text = "Your trip to \(location) is coming up. The weather is (insert weather condition here). Be sure to bring (insert recommendations here)"
+        weatherForecastLabel.text = "Your trip to \(location) is coming up. The weather is currently \(currentTemp) degrees. It feels like \(feelsLike) degrees. Be sure to bring x, y, z."
     }
     
     //MARK: - Weather Info Methods
@@ -63,6 +62,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
                 print(dailyForecast)
                 DispatchQueue.main.async {
                     self.forecastCollectionView.reloadData()
+                    
                 }
             case .failure(let error):
                 print(error, error.localizedDescription)
@@ -76,6 +76,10 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
             switch result {
             case .success(let currentWeather):
                 print(currentWeather)
+                DispatchQueue.main.async {
+                    self.updateViews()
+                }
+                
             case .failure(let error):
                 print(error, error.localizedDescription)
             }
@@ -103,12 +107,12 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         guard let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: "forecastCell", for: indexPath) as? ForecastCollectionViewCell else { return UICollectionViewCell() }
         guard let weather = trip?.location?.weather?.dailyForecasts else { return UICollectionViewCell() }
         let daily = weather[indexPath.row]
-        guard let lowTemp = daily.lowTemp,
-            let highTemp = daily.maxTemp else { return UICollectionViewCell() }
         
-        cell.lowTempLabel.text = "\(lowTemp)"
-        cell.highTempLabel.text = "\(highTemp)"
         cell.dateLabel.text = "\(daily.dow)"
+        
+        cell.lowTempLabel.text = "\(daily.lowTemp ?? 0)"
+        cell.highTempLabel.text = daily.maxTemp != nil ? "\(daily.maxTemp!)" : "N/A"
+        
         
         return cell
     }
