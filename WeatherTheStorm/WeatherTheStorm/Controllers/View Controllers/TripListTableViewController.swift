@@ -56,9 +56,9 @@ class TripListTableViewController: UITableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toTripDetailVC" {
+        if segue.identifier == "toTripInformationVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
-                let destinationVC = segue.destination as? TripDetailViewController else { return }
+                let destinationVC = segue.destination as? TripInformationViewController else { return }
             let trip = TripController.shared.fetchedResultsController.object(at: indexPath)
             destinationVC.trip = trip
         }
