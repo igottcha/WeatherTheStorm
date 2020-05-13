@@ -98,6 +98,7 @@ class Onboard2ViewController: UIViewController {
     
     
     @IBAction func nextButtonTapped(_ sender: Any) {
+     performSegue(withIdentifier: "toCitySelectionVC", sender: self)
     }
     
  

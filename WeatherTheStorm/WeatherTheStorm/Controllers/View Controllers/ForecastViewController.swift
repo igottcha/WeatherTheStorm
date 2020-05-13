@@ -16,6 +16,8 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     var userCity: String = ""
     var phrase: String = ""
+    var userIsMale: Bool?
+    var userName: String?
     
     
     
@@ -25,95 +27,162 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var feelsLikeLabel: UILabel!
     @IBOutlet weak var upArrowImageView: UIImageView!
-    @IBOutlet weak var swipeUpLabel: UILabel!
     @IBOutlet weak var hourleForecastCollectionView: UICollectionView!
+    @IBOutlet weak var bottomContainer: UIView!
+    @IBOutlet weak var HighLabel: UILabel!
+    @IBOutlet weak var LowLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //setupGreetingLabel()
+        setGradientBackground()
         setupDateLabel()
-        
-        setupFeelsLikelabel()
         setupSwipeUp()
-        locationManager = CLLocationManager()
-        setupLocationManager()
+        grabUserDetails()
         hourleForecastCollectionView.delegate = self
         hourleForecastCollectionView.dataSource = self
-        setupCollectionViewCells()
+        
+        setupCollectionView()
+        setupBottomContainer()
+        
+        
+        
+    }
+    
+    func grabUserDetails() {
+        getUserCity()
+        getUserName()
+        getUserGender()
         
         
     }
     
-    
-    func setupLocationManager() {
-        locationManager?.delegate = self
-        locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager?.requestWhenInUseAuthorization()
-        locationManager?.startUpdatingLocation()
-    }
-    
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])  {
-        //var userLocation = CLPlacemark()
-        if let clLocation = locations.last {
-            print(clLocation.coordinate.latitude)
-            let location = CLLocation(latitude: clLocation.coordinate.latitude, longitude: clLocation.coordinate.longitude)
-            getCity(location: location)
-            
-        }
+    func getUserCity() {
+        let home = HomeController.shared.homeLocation
+        self.location = home
+        setLocationWeather(home: self.location!)
+        setupCityLabel()
+        
+        
         
     }
     
-    func getCity(location: CLLocation) {
-        location.fetchCityAndCountry { city, country, error in
-            guard let city = city, let country = country, error == nil else { return }
-            //print(city + ", " + country)  // Rio de Janeiro, Brazil
-            LocationController.getPlacemark(searchTerm: city) { (result) in
-                switch result {
-                    
-                case .success(let placeMark):
-                    let userLocation = placeMark
-                    
-                    if userLocation.name != nil{
-                        let cityName = userLocation.name!
-                        let weatherLocation = LocationController.shared.createLocation(destination: placeMark)
-                        self.location = weatherLocation
-                        self.userCity = cityName
-                        //self.setupGreetingLabel()
-                        if self.location != nil { self.getWeather(location: self.location!)}
-                        
-                    }
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    
-                }
+    func setupCityLabel() {
+        
+        guard let cityName = self.location?.destination?.locality else {return}
+        cityLabel.textColor = .white
+        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+        let underlineAttributedString = NSAttributedString(string: "\(cityName)", attributes: underlineAttribute)
+        cityLabel.attributedText = underlineAttributedString
+        self.userCity = cityName
+    }
+    
+    func getUserName() {
+        UserController.shared.loadUser()
+        self.userName = UserController.shared.userName
+        
+    }
+    
+    func getUserGender() {
+        UserController.shared.loadGender()
+        self.userIsMale = UserController.shared.isMale
+        
+        
+    }
+    
+    func setLocationWeather(home: Location) {
+        HourlyWeatherController.fetchForecast(location: home) { (result) in
+            switch (result){
                 
+            case .success(_):
+                DispatchQueue.main.async {
+                    self.hourleForecastCollectionView.reloadData()
+                    CurrentWeatherController.fetchForecast(location: home) { (result) in
+                        switch (result) {
+                            
+                        case .success(_):
+                            DispatchQueue.main.async {
+                                self.setupTempLabel()
+                                self.setupFeelsLikelabel()
+                                self.setupPhrase()
+                                self.setupGreetingLabel()
+                                self.setupHighLowLabels()
+                                DailyForecastController.fetchForecast(location: home, coordinate: (home.destination?.location!.coordinate)!, firstDate: Date(), secondDate: Date() + 10) { (result) in
+                                    switch (result){
+                                        
+                                    case .success(let dailyForecasts):
+                                        DispatchQueue.main.async {
+                                            
+                                            
+                                            self.location?.weather?.dailyForecasts = dailyForecasts.forecasts
+                                            self.setupHighLowLabels()
+                                            AirQualityController.shared.fetchAQI(location: home, coordinate: (home.destination?.location!.coordinate)!) { (result) in
+                                                switch (result) {
+                                                    
+                                                case .success(let AQI):
+                                                    self.location?.weather?.airQuality = AQI
+                                                case .failure(_):
+                                                    break
+                                                }
+                                            }
+                                        }
+                                        
+                                    case .failure(_):
+                                        break
+                                    }
+                                }
+                                
+                            }
+                        case .failure(_):
+                            break
+                        }
+                    }
+                }
+            case .failure(_):
+                break
             }
         }
+        
     }
     
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location update Failed, \(error)")
+    func setupHighLowLabels() {
+        HighLabel.textColor = .white
+        LowLabel.textColor = .white
+        guard let today = location?.weather?.dailyForecasts?[0] else {return}
+        let todaysHigh = today.maxTemp
+        let todaysLow = today.lowTemp
+        HighLabel.text = "\(String(describing: todaysHigh))"
+        LowLabel.text = "\(String(describing: todaysLow))"
+        
+    
+        
     }
+    
+    
     
     func setupGreetingLabel(){
-        greetingLabel.text = "Good Morning, \(UserController.shared.userName)! it's a \(phrase) day in \(userCity)"
+        greetingLabel.text = "Hello, \(UserController.shared.userName)! it's a \(phrase) day in \(userCity)"
+        greetingLabel.textColor = .white
+        
     }
     
     func setupDateLabel() {
         dateLabel.text = self.date.formatDate()
+        dateLabel.textColor = .white
         
     }
     
     func setupTempLabel(){
         guard let currentTemp = self.location?.weather?.current?.temperature else {return}
         tempLabel.text = "\(currentTemp)º"
+        tempLabel.textColor = .white
     }
     
     func setupFeelsLikelabel(){
         guard let feelLike = self.location?.weather?.current?.feelsLike else {return}
         feelsLikeLabel.text = "Feels like \(feelLike)º"
+        feelsLikeLabel.textColor = .white
     }
     
     func setupSwipeUp() {
@@ -132,41 +201,8 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         print("Swiped")
     }
     
-    func getWeather(location: Location){
-        HourlyWeatherController.fetchForecast(location: location) { (result) in
-            switch (result){
-                
-            case .success(_):
-                DispatchQueue.main.async {
-                    self.hourleForecastCollectionView.reloadData()
-                    CurrentWeatherController.fetchForecast(location: location) { (result) in
-                        switch (result){
-                            
-                        case .success(_):
-                            DispatchQueue.main.async {
-                            self.setupTempLabel()
-                            self.setupFeelsLikelabel()
-                            self.setupPhrase()
-                            self.setupGreetingLabel()
-                            }
-                        case .failure(_):
-                            break
-                        }
-                    }
-                }
-                
-                
-            case .failure(_):
-                break
-            }
-        }
-    }
     
-    func setupCollectionViewCells() {
-        let width = view.frame.size.width / 3
-        let layout = hourleForecastCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width)
-    }
+    
     
     func stringToDate(_ dateString: String) -> Date {
         let formatter = DateFormatter()
@@ -180,6 +216,29 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         guard let weatherPhrase = self.location?.weather?.current?.phrase else {return}
         self.phrase = weatherPhrase
     }
+    
+    func setGradientBackground() {
+        
+        let  gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        gradientLayer.colors = [UIColor(named: "HomeControllerTopBG")?.cgColor ?? UIColor.blue.cgColor, UIColor(named: "HomeControllerBottBG")?.cgColor ?? UIColor.cyan]
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        
+    }
+    
+    func setupCollectionView() {
+        hourleForecastCollectionView.layer.cornerRadius = 5
+        hourleForecastCollectionView.clipsToBounds = true
+    }
+    
+    func setupBottomContainer() {
+        bottomContainer.backgroundColor = UIColor(named: "HomeForecastBottomContainer")
+        bottomContainer.layer.cornerRadius = 15
+        bottomContainer.clipsToBounds = true
+    }
+    
+    
     
     
     
@@ -199,7 +258,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     
 }
 
-extension ForecastViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ForecastViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let hourliesCount = self.location?.weather?.hourlyForecasts?.count else {return 0}
         return hourliesCount
@@ -223,6 +282,18 @@ extension ForecastViewController: UICollectionViewDelegate, UICollectionViewData
         
         return cell
     }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.frame.size.height
+        let layout = hourleForecastCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: width, height: width)
+        return layout.itemSize
+    }
+    
     
     
 }

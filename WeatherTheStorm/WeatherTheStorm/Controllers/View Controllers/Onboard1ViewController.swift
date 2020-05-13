@@ -43,6 +43,7 @@ class TestViewController: UIViewController {
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         guard let text = userNameTextField.text, !text.isEmpty else { return }
         UserController.shared.saveUser(userName: text)
+        performSegue(withIdentifier: "toGenderSelectionVC", sender: self)
     }
     
     func setupWhyAsking() {

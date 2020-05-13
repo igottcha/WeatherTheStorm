@@ -27,7 +27,6 @@
                                 <state key="normal" title="Next"/>
                                 <connections>
                                     <action selector="saveButtonTapped:" destination="8Ve-Qu-XWx" eventType="touchUpInside" id="2KQ-5f-EJR"/>
-                                    <segue destination="TQA-xt-3x3" kind="show" id="OxN-rv-Icl"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiP-c9-MCI">
@@ -87,6 +86,7 @@
                         <outlet property="userNameTextField" destination="j2x-XE-k2s" id="cVR-Xr-nQX"/>
                         <outlet property="welcomeLabel" destination="eiP-c9-MCI" id="eCp-MD-Xqy"/>
                         <outlet property="whyLabel" destination="g0m-UC-fW9" id="DoD-em-Y1W"/>
+                        <segue destination="TQA-xt-3x3" kind="show" identifier="toGenderSelectionVC" id="cVc-1C-lJm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZE-7z-awB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -123,7 +123,6 @@
                                 <state key="normal" title="Next"/>
                                 <connections>
                                     <action selector="nextButtonTapped:" destination="TQA-xt-3x3" eventType="touchUpInside" id="Tui-UQ-kR9"/>
-                                    <segue destination="e19-G1-LLA" kind="show" id="ARL-vD-Tg6"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="4Nz-Oe-TWN">
@@ -214,6 +213,7 @@
                         <outlet property="maleLabel" destination="fQR-A9-OYW" id="Rd2-Uh-2Md"/>
                         <outlet property="nextButton" destination="NP0-bt-yQg" id="zpH-b7-EWM"/>
                         <outlet property="progressLabel" destination="Vun-Tm-n2g" id="8XW-wz-I27"/>
+                        <segue destination="e19-G1-LLA" kind="show" identifier="toCitySelectionVC" id="lCO-Ge-RtE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZXY-qI-OzT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
