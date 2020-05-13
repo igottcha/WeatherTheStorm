@@ -15,6 +15,7 @@ class WNTimingViewController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var timeTextField: UITextField!
     @IBOutlet weak var repeatTextField: UITextField!
+    @IBOutlet weak var tableViewToolBar: UIToolbar!
     @IBOutlet weak var daysOfTheWeekTableView: UITableView!
     @IBOutlet weak var setNotificationButton: UIButton!
     
@@ -30,8 +31,7 @@ class WNTimingViewController: UIViewController {
         daysOfTheWeekTableView.isHidden = true
         daysOfTheWeekTableView.delegate = self
         daysOfTheWeekTableView.dataSource = self
-        guard let city = location?.destination?.locality, let state = location?.destination?.administrativeArea, let country = location?.destination?.country else { return }
-        addressLabel.text = "\(city), \(state), \(country)"
+        updateView()
         createDatePicker()
         setNotificationButton.layer.cornerRadius = 7
         setNotificationButton.isHidden = true
@@ -46,14 +46,27 @@ class WNTimingViewController: UIViewController {
         guard let location = location, let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification, let frequency = repeatTextField.text, !frequency.isEmpty else { return }
         WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, specificDate: nil, time: datePicker.date)
         setAlertNotification(location: location)
+        navigationController?.popToRootViewController(animated: true)
+    }
+    @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {
+        daysOfTheWeekTableView.isHidden = true
+        setNotificationButton.isHidden = false
+        self.view.endEditing(true)
+        repeatTextField.text = "Every \(sortWeekdayArray().compactMap({$0}).joined(separator: ", "))"
     }
     
     
     //MARK: - Methods
     
     func sortWeekdayArray() -> [String] {
-        guard let week = DateFormatter().weekdaySymbols, let weatherNotification = location?.weatherNotification?.firstObject as? WeatherNotification, let notificationFrequency = weatherNotification.frequency else { return [] }
-        return notificationFrequency.sorted { week.firstIndex(of: $0)! < week.firstIndex(of: $1)!}
+        guard let week = DateFormatter().weekdaySymbols else { return [] }
+        let frequencies = WeatherNotificationController.shared.frequencies
+        return frequencies.sorted { week.firstIndex(of: $0)! < week.firstIndex(of: $1)!}
+    }
+    
+    func updateView() {
+        guard let city = location?.destination?.locality, let state = location?.destination?.administrativeArea, let country = location?.destination?.country else { return }
+        addressLabel.text = "\(city), \(state), \(country)"
     }
     
     //MARK: - DatePicker
@@ -113,33 +126,40 @@ extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
-            cell.accessoryType = .checkmark
-            guard let day = cell.textLabel?.text, let weatherNotification = location?.weatherNotification?.firstObject as? WeatherNotification else { return }
-            weatherNotification.frequency?.append(day)
-            repeatTextField.text = sortWeekdayArray().compactMap({$0}).joined(separator: ",")
+            cell.accessoryType = cell.accessoryType == .checkmark ? .none : .checkmark
+            cell.accessoryView?.tintColor = .black
+            guard let cellText = cell.textLabel?.text else { return }
+            let day = cellText.replacingOccurrences(of: "Every ", with: "")
+            WeatherNotificationController.shared.frequencies.append(day)
+            
+            //frequencies.append(day)
             
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
-            cell.accessoryType = .none
-            guard let day = cell.textLabel?.text, let weatherNotification = location?.weatherNotification?.firstObject as? WeatherNotification, let dayIndex = weatherNotification.frequency?.firstIndex(of: day)
+            cell.accessoryType = cell.accessoryType == .checkmark ? .none : .checkmark
+            cell.accessoryView?.tintColor = .black
+            var frequencies = WeatherNotificationController.shared.frequencies
+            guard let day = cell.textLabel?.text,let dayIndex = frequencies.firstIndex(of: day)
                 else { return }
-            weatherNotification.frequency?.remove(at: dayIndex)
+            frequencies.remove(at: dayIndex)
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
+  
+        tableViewToolBar.barTintColor = .systemRed
+        tableViewToolBar.tintColor = .black
         
         let tableViewDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(tableViewDonePressed))
-        toolBar.setItems([tableViewDoneButton], animated: true)
+        tableViewToolBar.setItems([tableViewDoneButton], animated: true)
         
-        repeatTextField.inputAccessoryView = toolBar
+        repeatTextField.textAlignment = .left
+        repeatTextField.inputAccessoryView = tableViewToolBar
         repeatTextField.inputView = daysOfTheWeekTableView
-        return toolBar
+        return tableViewToolBar
     }
     
     @objc func tableViewDonePressed() {

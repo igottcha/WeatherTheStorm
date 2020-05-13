@@ -280,9 +280,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3VZ-BT-Xng">
-                                <rect key="frame" x="54" y="290" width="94" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3VZ-BT-Xng">
+                                <rect key="frame" x="54" y="290" width="281.5" height="34"/>
                                 <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -297,19 +298,31 @@
                                     <action selector="setNotificationButtonTapped:" destination="F4r-Zt-84f" eventType="touchUpInside" id="3fQ-SV-hQG"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NSr-zW-rLD">
-                                <rect key="frame" x="0.0" y="360" width="375" height="287"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="34" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NSr-zW-rLD">
+                                <rect key="frame" x="0.0" y="372" width="375" height="275"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <toolbar key="tableHeaderView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="OoV-Lr-NHs">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <items>
+                                        <barButtonItem style="done" systemItem="done" id="QyD-WC-2LL">
+                                            <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="tableViewDoneButtonTapped:" destination="F4r-Zt-84f" id="luw-dy-7St"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </items>
+                                </toolbar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dayOfTheWeekCell" textLabel="55P-VW-JPa" style="IBUITableViewCellStyleDefault" id="G5W-Q4-0Rk">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dayOfTheWeekCell" textLabel="55P-VW-JPa" style="IBUITableViewCellStyleDefault" id="G5W-Q4-0Rk">
+                                        <rect key="frame" x="0.0" y="100.5" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G5W-Q4-0Rk" id="w92-fH-t8h">
-                                            <rect key="frame" x="0.0" y="0.0" width="336" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Every Monday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="55P-VW-JPa">
-                                                    <rect key="frame" x="15" y="0.0" width="313" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -317,6 +330,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -338,9 +352,8 @@
                             <constraint firstItem="BWB-Oa-srj" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="45" id="JRS-O6-h7m"/>
                             <constraint firstItem="HA4-r2-wcn" firstAttribute="height" secondItem="JQL-Pe-VJW" secondAttribute="height" multiplier="0.075" id="JeL-ub-WAm"/>
                             <constraint firstItem="myS-lj-T5V" firstAttribute="top" secondItem="398-Uz-kNC" secondAttribute="bottom" constant="8" id="Msn-Kg-qer"/>
-                            <constraint firstItem="NSr-zW-rLD" firstAttribute="height" relation="lessThanOrEqual" secondItem="Zsk-pE-xyu" secondAttribute="height" multiplier="0.5" id="SVe-Wb-VKP"/>
                             <constraint firstItem="JQL-Pe-VJW" firstAttribute="trailing" secondItem="myS-lj-T5V" secondAttribute="trailing" constant="20" id="V8K-Pl-Apc"/>
-                            <constraint firstItem="NSr-zW-rLD" firstAttribute="top" secondItem="3VZ-BT-Xng" secondAttribute="bottom" priority="750" constant="36" id="VDy-Rv-nh0"/>
+                            <constraint firstItem="NSr-zW-rLD" firstAttribute="top" secondItem="3VZ-BT-Xng" secondAttribute="bottom" priority="750" constant="48" id="VDy-Rv-nh0"/>
                             <constraint firstItem="NSr-zW-rLD" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" id="YYh-Q8-MKb"/>
                             <constraint firstItem="JQL-Pe-VJW" firstAttribute="trailing" secondItem="HA4-r2-wcn" secondAttribute="trailing" id="bkJ-OD-7I3"/>
                             <constraint firstItem="HA4-r2-wcn" firstAttribute="leading" secondItem="Zsk-pE-xyu" secondAttribute="leading" id="bvg-gF-0XC"/>
@@ -349,7 +362,7 @@
                             <constraint firstItem="gZk-dr-vmx" firstAttribute="top" secondItem="HmJ-og-tZ4" secondAttribute="bottom" constant="16" id="ja5-wt-L6R"/>
                             <constraint firstItem="wT4-z8-jXX" firstAttribute="width" secondItem="JQL-Pe-VJW" secondAttribute="width" multiplier="0.45" id="lQO-YT-3y0"/>
                             <constraint firstItem="3VZ-BT-Xng" firstAttribute="top" secondItem="BWB-Oa-srj" secondAttribute="bottom" constant="8" id="lwr-PP-xDv"/>
-                            <constraint firstItem="3VZ-BT-Xng" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.25" id="rmQ-BT-HVJ"/>
+                            <constraint firstItem="3VZ-BT-Xng" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.75" id="rmQ-BT-HVJ"/>
                             <constraint firstItem="NSr-zW-rLD" firstAttribute="trailing" secondItem="JQL-Pe-VJW" secondAttribute="trailing" id="taM-oD-TrD"/>
                             <constraint firstItem="3VZ-BT-Xng" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="54" id="vSG-Af-f6H"/>
                             <constraint firstAttribute="bottom" secondItem="NSr-zW-rLD" secondAttribute="bottom" id="vXj-kh-Uxb"/>
@@ -370,12 +383,13 @@
                         <outlet property="daysOfTheWeekTableView" destination="NSr-zW-rLD" id="rza-lr-gd5"/>
                         <outlet property="repeatTextField" destination="3VZ-BT-Xng" id="xdX-iP-Asu"/>
                         <outlet property="setNotificationButton" destination="wT4-z8-jXX" id="LOx-Fk-7T7"/>
+                        <outlet property="tableViewToolBar" destination="OoV-Lr-NHs" id="aoO-iz-fgO"/>
                         <outlet property="timeTextField" destination="gZk-dr-vmx" id="QTH-nA-cU7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVo-1O-YPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2158" y="556"/>
+            <point key="canvasLocation" x="2157.5999999999999" y="555.47226386806597"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="uUB-wK-RQc">

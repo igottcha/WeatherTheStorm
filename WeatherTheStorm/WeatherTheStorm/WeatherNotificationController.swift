@@ -14,7 +14,7 @@ class WeatherNotificationController {
     //MARK: - Singleton and Source of Truth
     
     static let shared = WeatherNotificationController()
-    var notifications: [WeatherNotification] = []
+    var frequencies: [String] = []
     
     let daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
