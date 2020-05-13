@@ -21,7 +21,7 @@
         <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="specificDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="time" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="location" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="weatherNotification" inverseEntity="Location"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="notification" inverseEntity="Trip"/>
     </entity>
