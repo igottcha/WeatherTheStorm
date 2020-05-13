@@ -12,6 +12,7 @@ class WNTimingViewController: UIViewController {
     
     //MARK: - Outlets
     
+    @IBOutlet weak var addNotificationLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var timeTextField: UITextField!
     @IBOutlet weak var repeatTextField: UITextField!
@@ -22,6 +23,7 @@ class WNTimingViewController: UIViewController {
     //MARK: - Properties
     
     var location: Location?
+    var section: String?
     let datePicker = UIDatePicker()
     
     //MARK: -  Lifecycle
@@ -43,10 +45,14 @@ class WNTimingViewController: UIViewController {
         daysOfTheWeekTableView.isHidden = false
     }
     @IBAction func setNotificationButtonTapped(_ sender: UIButton) {
-        guard let location = location, let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification, let frequency = repeatTextField.text, !frequency.isEmpty else { return }
-        WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, specificDate: nil, time: datePicker.date)
+        guard let location = location, let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification else { return }
+        let frequency = sortWeekdayArray()
+        WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: frequency, specificDate: nil, time: datePicker.date)
         setAlertNotification(location: location)
-        navigationController?.popToRootViewController(animated: true)
+        print(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count)
+        DispatchQueue.main.async {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {
         daysOfTheWeekTableView.isHidden = true
@@ -65,7 +71,8 @@ class WNTimingViewController: UIViewController {
     }
     
     func updateView() {
-        guard let city = location?.destination?.locality, let state = location?.destination?.administrativeArea, let country = location?.destination?.country else { return }
+        guard let section = section, let city = location?.destination?.locality, let state = location?.destination?.administrativeArea, let country = location?.destination?.country else { return }
+        addNotificationLabel.text = "Add \(section) Notification"
         addressLabel.text = "\(city), \(state), \(country)"
     }
     

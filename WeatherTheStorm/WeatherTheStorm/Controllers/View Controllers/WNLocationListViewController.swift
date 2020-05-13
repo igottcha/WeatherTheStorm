@@ -13,7 +13,7 @@ class WNLocationListViewController: UIViewController {
     //MARK: - Outlets
     
     @IBOutlet weak var toolBar: UIToolbar!
-    @IBOutlet weak var addNotificatonTitleBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var addNotificationLabel: UILabel!
     @IBOutlet weak var closeViewBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var locationListTableView: UITableView!
     
@@ -38,8 +38,22 @@ class WNLocationListViewController: UIViewController {
         if segue.identifier == "toAddNotificationTiming" {
             guard let indexPath = locationListTableView.indexPathForSelectedRow, let destinationVC = segue.destination as? WNTimingViewController, let locations = LocationController.shared.sortedLocations else { return }
             let location = locations[indexPath.section][indexPath.row]
-            
+            var section: String {
+                switch indexPath.section {
+                case 0:
+                    return "Home"
+                case 1:
+                    return "Work"
+                case 2:
+                    return "Trip"
+                case 3:
+                    return "Fave"
+                default:
+                    return "Other"
+                }
+            }
             destinationVC.location = location
+            destinationVC.section = section
         }
     }
 
@@ -66,7 +80,7 @@ extension WNLocationListViewController: UITableViewDelegate, UITableViewDataSour
         guard let city = location.destination?.locality, let state = location.destination?.administrativeArea, let country = location.destination?.country else { return UITableViewCell() }
         
         cell.textLabel?.text = "\(city), \(state), \(country)"
-
+        
         return cell
     }
     

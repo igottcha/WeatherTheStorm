@@ -9,22 +9,6 @@
 import UIKit
 import CoreLocation
 
-class WeatherNotif {
-    
-    var name: String
-    var address: String
-    var frequency: String
-    var time: String
-    
-    init(name: String, address: String, frequency: String, time: String) {
-        self.name = name
-        self.address = address
-        self.frequency = frequency
-        self.time = time
-    }
- 
-}
-
 class WNListTableViewController: UITableViewController {
 
     
@@ -35,16 +19,19 @@ class WNListTableViewController: UITableViewController {
     
     //MARK: - Properties
     
-     var weatherNotifs = [WeatherNotif(name: "Home" , address: "Lehi, UT", frequency: "Daily", time: "8:00am"), WeatherNotif(name: "Work", address: "Orem, UT", frequency: "Monday, Wednesday, Friday", time: "8:30am"), WeatherNotif(name: "Trip", address: "Bangkok, TH", frequency: "Friday", time: "10:00am")]
     
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weatherNotifs = []
         updateEmptyState()
         tableView.backgroundView = previewView
         setGradientBackground()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
     }
 
     //MARK: - Methods
@@ -57,7 +44,7 @@ class WNListTableViewController: UITableViewController {
     }
     
     func updateEmptyState() {
-            previewLabel.isHidden = !weatherNotifs.isEmpty
+        previewLabel.isHidden = !(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects != nil || WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count != 0 )
     }
     
     // MARK: - Table view data source

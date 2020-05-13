@@ -44,8 +44,9 @@ class WeatherNotificationController {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
-    func updateWeatherNotification(weatherNotification: WeatherNotification, isActive: Bool, specificDate: Date?, time: Date) {
+    func updateWeatherNotification(weatherNotification: WeatherNotification, isActive: Bool, frequency: [String], specificDate: Date?, time: Date) {
         weatherNotification.isActive = isActive
+        weatherNotification.frequency = frequency
         weatherNotification.specificDate = specificDate
         weatherNotification.time = time
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
