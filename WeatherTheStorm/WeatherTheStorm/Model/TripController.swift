@@ -49,26 +49,19 @@ class TripController {
     
     func createTrip (startDate: Date, endDate: Date, location: Location) {
         Trip(startDate: startDate, endDate: endDate, location: location)
-        saveToPersistentStore()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     func updateTrip (withTrip trip: Trip, withStartDate startDate: Date, withEndDate endDate: Date, withLocation location: Location) {
         trip.startDate = startDate
         trip.endDate = endDate
         trip.location = location
-        saveToPersistentStore()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     func deleteTrip (trip: Trip) {
         trip.managedObjectContext?.delete(trip)
-        saveToPersistentStore()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
-    func saveToPersistentStore() {
-          do {
-              try CoreDataStack.context.save()
-          } catch {
-              print("Error with saving data")
-          }
-      }
 }
