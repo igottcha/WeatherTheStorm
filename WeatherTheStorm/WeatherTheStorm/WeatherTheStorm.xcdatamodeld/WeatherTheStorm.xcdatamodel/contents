@@ -13,11 +13,7 @@
         <relationship name="notification" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="WeatherNotification" inverseName="trip" inverseEntity="WeatherNotification"/>
     </entity>
     <entity name="WeatherNotification" representedClassName="WeatherNotification" syncable="YES" codeGenerationType="class">
-        <attribute name="frequency" optional="YES" attributeType="Transformable" customClassName="[String]">
-            <userInfo>
-                <entry key="attributeRawValueEnumType" value="Frequency"/>
-            </userInfo>
-        </attribute>
+        <attribute name="frequency" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="specificDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

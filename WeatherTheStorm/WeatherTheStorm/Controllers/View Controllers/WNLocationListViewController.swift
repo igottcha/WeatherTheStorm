@@ -29,7 +29,10 @@ class WNLocationListViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func closeViewButtonTapped(_ sender: UIBarButtonItem) {
-        navigationController?.popToRootViewController(animated: true)
+            self.dismiss(animated: true) {
+                print("successfully dismissed")
+            }
+            //self.navigationController?.popToRootViewController(animated: true)
     }
     
     // MARK: - Navigation

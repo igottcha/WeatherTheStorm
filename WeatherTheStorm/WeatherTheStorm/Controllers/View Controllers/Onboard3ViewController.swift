@@ -108,7 +108,11 @@ extension Onboard3ViewController : UISearchBarDelegate {
             let userHome = LocationController.shared.createLocation(destination: placeMark)
             print(userHome)
             HomeController.shared.homeLocation = userHome
-            WeatherNotificationController.shared.createWeatherNotification(location: userHome, name: "homeSean")
+            
+            if userHome.weatherNotification?.count == 0 {
+            WeatherNotificationController.shared.createWeatherNotification(location: userHome, name: "Home")
+            }
+            
             self.nextButton.isHidden = false
             case .failure(let error):
                 print(error.localizedDescription)
