@@ -17,7 +17,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     var userCity: String = ""
     var phrase: String = ""
     var userIsMale: Bool?
-    var userName: String?
+    var userName = ""
     
     
     
@@ -107,7 +107,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
                                 self.setupPhrase()
                                 self.setupGreetingLabel()
                                 self.setupHighLowLabels()
-                                DailyForecastController.fetchForecast(location: home, coordinate: (home.destination?.location!.coordinate)!, firstDate: Date(), secondDate: Date() + 10) { (result) in
+                                DailyForecastController.fetchForecast(location: home, coordinate: (home.destination?.location!.coordinate)!, firstDate: Date(), secondDate: Date() + 9) { (result) in
                                     switch (result){
                                         
                                     case .success(let dailyForecasts):
@@ -149,11 +149,20 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     func setupHighLowLabels() {
         HighLabel.textColor = .white
         LowLabel.textColor = .white
-        guard let today = location?.weather?.dailyForecasts?[0] else {return}
-        let todaysHigh = today.maxTemp
-        let todaysLow = today.lowTemp
-        HighLabel.text = "\(String(describing: todaysHigh))"
-        LowLabel.text = "\(String(describing: todaysLow))"
+        guard let today = location?.weather?.dailyForecasts?[0],
+        let todaysHigh = today.maxTemp,
+            let todaysLow = today.lowTemp else {return}
+        
+        if today.lowTemp == nil || today.maxTemp == nil
+        {
+            HighLabel.isHidden = true
+            LowLabel.isHidden = true
+            
+        }
+        else {
+        HighLabel.text = "\(String(todaysHigh))"
+        LowLabel.text = "\(String(todaysLow))"
+    }
         
     
         
@@ -198,7 +207,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     
     @objc func swipeAction(swipe: UISwipeGestureRecognizer) {
         performSegue(withIdentifier: "toForecastDetail", sender: self)
-        print("Swiped")
+       
     }
     
     
@@ -246,15 +255,26 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
-    /*
-     // MARK: - Navigation
+    
+    
+    
      
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
+
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
+        if segue.identifier == "toForecastDetail" {
+            if let destinationVC = segue.destination as? ForecastDetailViewController {
+                let  location = self.location
+                let userIsMale = self.userIsMale
+                let userCity = self.userCity
+                let userName = self.userName
+                destinationVC.location = location
+                destinationVC.userIsMale = userIsMale
+                destinationVC.userName = userName
+                destinationVC.userCity = userCity
+            }
+        }
      }
-     */
+     
     
 }
 
