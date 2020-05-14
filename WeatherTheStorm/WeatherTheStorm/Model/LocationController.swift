@@ -86,13 +86,13 @@ class LocationController {
     
     func createLocation(destination: CLPlacemark) -> Location {
         let location = Location(destination: destination, weather: nil)
-        saveToPersistentStore()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         return location
     }
     
     func deleteLocation(location: Location) {
         location.managedObjectContext?.delete(location)
-        saveToPersistentStore()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         }
     
     func saveToPersistentStore() {

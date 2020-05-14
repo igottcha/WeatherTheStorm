@@ -142,8 +142,6 @@ extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
             let day = cellText.replacingOccurrences(of: "Every ", with: "")
             WeatherNotificationController.shared.frequencies.append(day)
             
-            //frequencies.append(day)
-            
         }
     }
     

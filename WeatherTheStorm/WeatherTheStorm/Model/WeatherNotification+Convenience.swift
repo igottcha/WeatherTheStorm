@@ -12,7 +12,7 @@ import CoreLocation.CLLocation
 
 extension WeatherNotification {
     @discardableResult
-    convenience init(frequency: [String]?, isActive: Bool = false, location: Location, name: String, specificDate: Date?, time: Date?, trip: Trip?, moc: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(frequency: Data?, isActive: Bool = false, location: Location, name: String, specificDate: Date?, time: Date?, trip: Trip?, moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
         self.frequency = frequency
         self.isActive = isActive

@@ -41,20 +41,24 @@ class WeatherNotificationController {
     
     func createWeatherNotification(location: Location, name: String) {
         WeatherNotification(location: location, name: name)
-        saveToPersistentStore()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     func updateWeatherNotification(weatherNotification: WeatherNotification, isActive: Bool, frequency: [String]?, specificDate: Date?, time: Date?) {
+        if let frequency = frequency {
+            let arrayAsString: String = frequency.description
+            let stringAsData = arrayAsString.data(using: String.Encoding.utf16)
+            weatherNotification.frequency = stringAsData
+        }
         weatherNotification.isActive = isActive
-        weatherNotification.frequency = frequency
         weatherNotification.specificDate = specificDate
         weatherNotification.time = time
-        saveToPersistentStore()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     func deleteWeatherNotificaiton(weatherNotification: WeatherNotification) {
         weatherNotification.managedObjectContext?.delete(weatherNotification)
-        saveToPersistentStore()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     func saveToPersistentStore() {

@@ -55,10 +55,11 @@ class WNListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell else { return UITableViewCell() }
+       guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell, let data = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath).frequency else { return UITableViewCell() }
         
         let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
-        let frequency = weatherNotification.frequency ?? ["TBD"]
+        
+        let frequency: [String] = try! JSONDecoder().decode([String].self, from: data) ?? ["TBD"]
         let time = weatherNotification.time?.hour() ?? Date().hour()
         
         cell.boxView.layer.cornerRadius = 7
