@@ -51,6 +51,7 @@
 		9EDEBCFE2464AA7C003DBEC8 /* WNTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDEBCFD2464AA7C003DBEC8 /* WNTableViewCell.swift */; };
 		9EDEBD002464B74F003DBEC8 /* WeatherNotification+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDEBCFF2464B74F003DBEC8 /* WeatherNotification+Convenience.swift */; };
 		E92E8A20245A0C3B00E5354B /* ForecastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92E8A1F245A0C3B00E5354B /* ForecastDetailViewController.swift */; };
+		E9459B2E246D984D008B144A /* HomeDailyForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9459B2D246D984D008B144A /* HomeDailyForecastTableViewCell.swift */; };
 		E978FBF92458BA8C00E2DD82 /* ForecastSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E978FBF82458BA8C00E2DD82 /* ForecastSB.storyboard */; };
 		E978FBFB2458BB2100E2DD82 /* WorkWeatherSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E978FBFA2458BB2100E2DD82 /* WorkWeatherSB.storyboard */; };
 		E978FBFD2458BB8000E2DD82 /* TripWeatherSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E978FBFC2458BB8000E2DD82 /* TripWeatherSB.storyboard */; };
@@ -113,6 +114,7 @@
 		9EDEBCFD2464AA7C003DBEC8 /* WNTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WNTableViewCell.swift; sourceTree = "<group>"; };
 		9EDEBCFF2464B74F003DBEC8 /* WeatherNotification+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherNotification+Convenience.swift"; sourceTree = "<group>"; };
 		E92E8A1F245A0C3B00E5354B /* ForecastDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDetailViewController.swift; sourceTree = "<group>"; };
+		E9459B2D246D984D008B144A /* HomeDailyForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDailyForecastTableViewCell.swift; sourceTree = "<group>"; };
 		E978FBF82458BA8C00E2DD82 /* ForecastSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ForecastSB.storyboard; sourceTree = "<group>"; };
 		E978FBFA2458BB2100E2DD82 /* WorkWeatherSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkWeatherSB.storyboard; sourceTree = "<group>"; };
 		E978FBFC2458BB8000E2DD82 /* TripWeatherSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TripWeatherSB.storyboard; sourceTree = "<group>"; };
@@ -241,8 +243,12 @@
 				4E922859246B083E00136C5B /* TripListTableViewController.swift */,
 				4E92285B246B08AB00136C5B /* TripDetailViewController.swift */,
 				4E92285D246B090B00136C5B /* TripTableViewCell.swift */,
+
+				E9459B2D246D984D008B144A /* HomeDailyForecastTableViewCell.swift */,
+
 				4E92285F246B30E100136C5B /* TripInformationViewController.swift */,
 				4E922861246B349500136C5B /* ForecastCollectionViewCell.swift */,
+
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -353,6 +359,7 @@
 			files = (
 				9E54966D246DA3F0008385CC /* Weather+Convenience.swift in Sources */,
 				4E92285E246B090B00136C5B /* TripTableViewCell.swift in Sources */,
+				E9459B2E246D984D008B144A /* HomeDailyForecastTableViewCell.swift in Sources */,
 				E9A4F5C1245CA46800BDCBD1 /* LocationExtension.swift in Sources */,
 				9E8700EC24535C8C005AD32A /* AppDelegate.swift in Sources */,
 				9E731C3D2458B5C500B5420D /* Weather.swift in Sources */,
