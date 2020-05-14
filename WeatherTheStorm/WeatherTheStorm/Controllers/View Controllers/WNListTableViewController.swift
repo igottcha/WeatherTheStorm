@@ -44,7 +44,7 @@ class WNListTableViewController: UITableViewController {
     }
     
     func updateEmptyState() {
-        previewLabel.isHidden = !(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects != nil || WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count != 0 )
+        previewLabel.isHidden = (WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count != 0)
     }
     
     // MARK: - Table view data source
@@ -63,8 +63,9 @@ class WNListTableViewController: UITableViewController {
         let time = weatherNotification.time?.hour() ?? Date().hour()
         
         cell.boxView.layer.cornerRadius = 7
+        cell.isNotificationActiveSwitch.isOn = weatherNotification.isActive
         cell.nameLabel.text = weatherNotification.name
-        cell.addressLabel.text = "\(String(describing: weatherNotification.location))"
+        cell.addressLabel.text = "\(weatherNotification.location?.city ?? ""), \(weatherNotification.location?.state ?? ""), \(weatherNotification.location?.country ?? "")"
         cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")), at \(time)"
 
         return cell

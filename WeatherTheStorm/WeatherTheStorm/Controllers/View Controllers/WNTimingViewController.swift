@@ -41,6 +41,11 @@ class WNTimingViewController: UIViewController {
     
     //MARK: - Actions
     
+    @IBAction func closeViewBarButtonTapped(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true) {
+            print("Dismissal is success")
+        }
+    }
     @IBAction func repeatTextFieldDidBeginEditing(_ sender: UITextField) {
         daysOfTheWeekTableView.isHidden = false
     }
@@ -48,7 +53,7 @@ class WNTimingViewController: UIViewController {
         guard let location = location, let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification else { return }
         let frequency = sortWeekdayArray()
         WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: frequency, specificDate: nil, time: datePicker.date)
-        setAlertNotification(location: location)
+        //setAlertNotification(location: location)
         print(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count)
         DispatchQueue.main.async {
             self.dismiss(animated: true) {
