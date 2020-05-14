@@ -106,21 +106,20 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
                                 self.setupFeelsLikelabel()
                                 self.setupPhrase()
                                 self.setupGreetingLabel()
-                                self.setupHighLowLabels()
+                                //self.setupHighLowLabels()
                                 DailyForecastController.fetchForecast(location: home, coordinate: (home.destination?.location!.coordinate)!, firstDate: Date(), secondDate: Date() + 10) { (result) in
                                     switch (result){
                                         
                                     case .success(let dailyForecasts):
                                         DispatchQueue.main.async {
-                                            
-                                            
-                                            self.location?.weather?.dailyForecasts = dailyForecasts.forecasts
+                                        //self.location?.weather?.dailyForecasts = NSOrderedSet(array: dailyForecasts.forecasts)
                                             self.setupHighLowLabels()
                                             AirQualityController.shared.fetchAQI(location: home, coordinate: (home.destination?.location!.coordinate)!) { (result) in
                                                 switch (result) {
                                                     
                                                 case .success(let AQI):
-                                                    self.location?.weather?.airQuality = AQI
+                                                    print(AQI)
+                                                    //self.location?.weather?.airQualityIndex = Int64(AQI)
                                                 case .failure(_):
                                                     break
                                                 }
@@ -149,7 +148,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     func setupHighLowLabels() {
         HighLabel.textColor = .white
         LowLabel.textColor = .white
-        guard let today = location?.weather?.dailyForecasts?[0] else {return}
+        guard let today = location?.weather?.dailyForecasts?.object(at: 0) as? DailyForecast else {return}
         let todaysHigh = today.maxTemp
         let todaysLow = today.lowTemp
         HighLabel.text = "\(String(describing: todaysHigh))"
@@ -271,8 +270,8 @@ extension ForecastViewController: UICollectionViewDelegate, UICollectionViewData
         
         guard let location = self.location else {return cell}
         
-        guard let hourlyWeather = location.weather?.hourlyForecasts?[indexPath.row] else {return cell}
-        let time = stringToDate(hourlyWeather.time)
+        guard let hourlyWeather = location.weather?.hourlyForecasts?[indexPath.row] as? HourlyForecast else {return cell}
+        let time = stringToDate(hourlyWeather.time ?? "12:00")
         let hour = time.hour()
         
         

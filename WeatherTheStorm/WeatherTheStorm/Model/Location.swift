@@ -19,10 +19,5 @@ extension Location {
     }
 }
 
-//extension Location {
-//    enum CodingKeys: String, CodingKey {
-//        case location
-//    }
-//}
 
 

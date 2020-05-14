@@ -127,13 +127,13 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: "forecastCell", for: indexPath) as? ForecastCollectionViewCell else { return UICollectionViewCell() }
-        guard let weather = trip?.location?.weather?.dailyForecasts else { return UICollectionViewCell() }
-        let daily = weather[indexPath.row]
+        guard let daily = trip?.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast else { return UICollectionViewCell() }
+
         
         cell.dateLabel.text = "\(daily.dow)"
         
         cell.lowTempLabel.text = "\(daily.lowTemp ?? 0)"
-        cell.highTempLabel.text = daily.maxTemp != nil ? "\(daily.maxTemp!)" : "N/A"
+        cell.highTempLabel.text = daily.maxTemp != nil ? "\(daily.maxTemp)" : "N/A"
         
         
         return cell

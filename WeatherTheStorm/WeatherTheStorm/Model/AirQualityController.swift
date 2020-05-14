@@ -30,7 +30,7 @@ class AirQualityController {
             switch result {
             case .success(let topLevelObject):
                 let airQuality = topLevelObject.data.current.pollution
-                location.weather?.airQuality = airQuality
+                location.weather?.airQualityIndex = Int64(airQuality.index)
                 completion(.success(airQuality))
                 return
             case .failure(let error):

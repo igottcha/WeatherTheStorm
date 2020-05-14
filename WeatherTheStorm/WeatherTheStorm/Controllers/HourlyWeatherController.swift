@@ -17,11 +17,12 @@ class HourlyWeatherController {
         NetworkController.genericAPICall(url: apiURL, type: HourlyTopLevelObject.self) { (result) in
             switch result {
             case .success(let topLevelObject):
-                let forecasts = topLevelObject.forecasts
+                let forecasts = topLevelObject.forecasts.map { HourlyForecast(cloudCoverPercentage: Int64($0.cloudCoverPercentage), feelsLike: Int64($0.feelsLike), temp: Int64($0.temp), time: $0.time, shortPhrase: $0.shortPhrase) }
+                
                 if (location.weather != nil)  {
-                    location.weather?.hourlyForecasts = forecasts
+                    location.weather?.hourlyForecasts = NSOrderedSet(array: forecasts)
                 } else {
-                    location.weather = Weather(current: nil, hourlyForecasts: forecasts, dailyForecasts: nil, airQuality: nil)
+                    location.weather = Weather(current: nil, hourlyForecasts: forecasts)
                 }
             case .failure(let error):
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")

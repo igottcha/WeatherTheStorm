@@ -33,7 +33,9 @@ class CurrentWeatherController {
         NetworkController.genericAPICall(url: finalURL, type: CurrentWeather.self) { (result) in
             switch result {
             case .success(let currentWeather):
-                location.weather?.current = currentWeather
+                //location.weather?.current = currentWeather
+                let current = Current(pressure: currentWeather.pressure, feelsLike: Int64(currentWeather.feelsLike), humidity: Int64(currentWeather.humidity), phrase: currentWeather.phrase, precipitationAmount: currentWeather.precipitationAmount, temperature: Int64(currentWeather.temperature), uvIndex: Int64(currentWeather.uvIndex), visibility: Int64(currentWeather.visibility), windSpeed: Int64(currentWeather.windSpeed), windDirection: currentWeather.windDirection)
+                location.weather?.current = current
                 completion(.success(currentWeather))
                 return
             case .failure(let error):

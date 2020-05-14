@@ -9,10 +9,10 @@
 import Foundation
 
 struct DailyTopLevelObject: Codable {
-    var forecasts: [DailyForecast]
+    var forecasts: [DailyWeatherForecast]
 }
 
-struct DailyForecast: Codable {
+struct DailyWeatherForecast: Codable {
     
     let lowTemp: Int?
     let maxTemp: Int?
