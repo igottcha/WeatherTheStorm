@@ -37,11 +37,12 @@ class NetworkController {
     private static var unitValue = "e"
     private static let language = "en-US"
     
-    static func buildForecastURL(coordinate: CLLocationCoordinate2D, firstDate: Date?, secondDate: Date?, isDaily: Bool) -> URL? {
+    static func buildForecastURL(latitude: String, longitude: String, firstDate: Date?, secondDate: Date?, isDaily: Bool) -> URL? {
         
         guard let baseURL = baseForecastURL else { return nil }
         
-        var newBaseURL = baseURL.appendingPathComponent(String(coordinate.latitude)).appendingPathComponent(String(coordinate.longitude))
+        var newBaseURL = baseURL.appendingPathComponent(latitude)
+            .appendingPathComponent(longitude)
             .appendingPathComponent("forecast")
             
         if isDaily {
@@ -49,7 +50,7 @@ class NetworkController {
 //                let secondDate = secondDate else {return nil}
 //            let numOfDays = TripController.calcNumOfDays(between: firstDate, and: secondDate)
             newBaseURL.appendPathComponent("daily")
-            newBaseURL.appendPathComponent("10day")
+            newBaseURL.appendPathComponent("7day")
         } else {
             newBaseURL.appendPathComponent("hourly")
             newBaseURL.appendPathComponent("48hour")

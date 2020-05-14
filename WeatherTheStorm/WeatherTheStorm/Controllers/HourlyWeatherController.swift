@@ -12,18 +12,17 @@ import CoreLocation.CLLocation
 class HourlyWeatherController {
     
     static func fetchForecast(location: Location, completion: @escaping (Result<HourlyTopLevelObject, GenericError>) -> Void ) {
-        guard let coordinate = location.destination?.location?.coordinate else {return}
-        guard let apiURL = NetworkController.buildForecastURL(coordinate: coordinate, firstDate: nil, secondDate: nil, isDaily: false) else { return }
+        guard let latitude = location.latitude, let longitude = location.longitude, let apiURL = NetworkController.buildForecastURL(latitude: latitude, longitude: longitude, firstDate: nil, secondDate: nil, isDaily: false) else { return }
         NetworkController.genericAPICall(url: apiURL, type: HourlyTopLevelObject.self) { (result) in
             switch result {
             case .success(let topLevelObject):
-                let forecasts = topLevelObject.forecasts
+                let forecasts = topLevelObject.forecasts.map { HourlyForecast(cloudCoverPercentage: Int64($0.cloudCoverPercentage), feelsLike: Int64($0.feelsLike), temp: Int64($0.temp), time: $0.time, shortPhrase: $0.shortPhrase) }
+                
                 if (location.weather != nil)  {
-                    location.weather?.hourlyForecasts = forecasts
+                    location.weather?.hourlyForecasts = NSOrderedSet(array: forecasts)
                 } else {
-                    location.weather = Weather(current: nil, hourlyForecasts: forecasts, dailyForecasts: nil, airQuality: nil)
+                    location.weather = Weather(current: nil, hourlyForecasts: forecasts)
                 }
-                print(location.weather?.hourlyForecasts)
             case .failure(let error):
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
             }

@@ -9,22 +9,6 @@
 import UIKit
 import CoreLocation
 
-class WeatherNotif {
-    
-    var name: String
-    var address: String
-    var frequency: String
-    var time: String
-    
-    init(name: String, address: String, frequency: String, time: String) {
-        self.name = name
-        self.address = address
-        self.frequency = frequency
-        self.time = time
-    }
- 
-}
-
 class WNListTableViewController: UITableViewController {
 
     
@@ -35,16 +19,19 @@ class WNListTableViewController: UITableViewController {
     
     //MARK: - Properties
     
-     var weatherNotifs = [WeatherNotif(name: "Home" , address: "Lehi, UT", frequency: "Daily", time: "8:00am"), WeatherNotif(name: "Work", address: "Orem, UT", frequency: "Monday, Wednesday, Friday", time: "8:30am"), WeatherNotif(name: "Trip", address: "Bangkok, TH", frequency: "Friday", time: "10:00am")]
     
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weatherNotifs = []
         updateEmptyState()
         tableView.backgroundView = previewView
         setGradientBackground()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
     }
 
     //MARK: - Methods
@@ -57,7 +44,7 @@ class WNListTableViewController: UITableViewController {
     }
     
     func updateEmptyState() {
-            previewLabel.isHidden = !weatherNotifs.isEmpty
+        previewLabel.isHidden = (WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count != 0)
     }
     
     // MARK: - Table view data source
@@ -68,15 +55,18 @@ class WNListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell else { return UITableViewCell() }
+       guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell, let data = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath).frequency else { return UITableViewCell() }
         
         let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
-        guard let date = weatherNotification.specificDate else { return UITableViewCell() }
+        
+        let frequency: [String] = try! JSONDecoder().decode([String].self, from: data) ?? ["TBD"]
+        let time = weatherNotification.time?.hour() ?? Date().hour()
         
         cell.boxView.layer.cornerRadius = 7
+        cell.isNotificationActiveSwitch.isOn = weatherNotification.isActive
         cell.nameLabel.text = weatherNotification.name
-        cell.addressLabel.text = "\(String(describing: weatherNotification.location))"
-        cell.frequencyAndTimeLabel.text = "\(String(describing: date.day)), \(String(describing: weatherNotification.time))"
+        cell.addressLabel.text = "\(weatherNotification.location?.city ?? ""), \(weatherNotification.location?.state ?? ""), \(weatherNotification.location?.country ?? "")"
+        cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")), at \(time)"
 
         return cell
     }

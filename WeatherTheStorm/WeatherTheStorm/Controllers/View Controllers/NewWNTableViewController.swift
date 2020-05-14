@@ -22,9 +22,7 @@ class NewWNTableViewController: UITableViewController {
     
     //MARK: - Actions
     
-//    @IBAction func closeViewButtonTapped(_ sender: UIBarButtonItem) {
-//        segue
-//    }
+
     
 
     // MARK: - Table view data source
@@ -43,7 +41,7 @@ class NewWNTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reminderLocationCell", for: indexPath)
         guard let locations = LocationController.shared.sortedLocations else { return UITableViewCell() }
         let location = locations[indexPath.section][indexPath.row]
-        guard let city = location.destination?.locality, let state = location.destination?.administrativeArea, let country = location.destination?.country else { return UITableViewCell() }
+        guard let city = location.city, let state = location.state, let country = location.country else { return UITableViewCell() }
         
         cell.textLabel?.text = "\(city), \(state), \(country)"
 

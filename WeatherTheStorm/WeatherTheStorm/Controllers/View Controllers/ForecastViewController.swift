@@ -69,7 +69,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     
     func setupCityLabel() {
         
-        guard let cityName = self.location?.destination?.locality else {return}
+        guard let cityName = self.location?.city else {return}
         cityLabel.textColor = .white
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
         let underlineAttributedString = NSAttributedString(string: "\(cityName)", attributes: underlineAttribute)
@@ -106,21 +106,22 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
                                 self.setupFeelsLikelabel()
                                 self.setupPhrase()
                                 self.setupGreetingLabel()
-                                self.setupHighLowLabels()
-                                DailyForecastController.fetchForecast(location: home, coordinate: (home.destination?.location!.coordinate)!, firstDate: Date(), secondDate: Date() + 9) { (result) in
+
+                                //self.setupHighLowLabels()
+                                DailyForecastController.fetchForecast(location: home, firstDate: Date(), secondDate: Date() + 9) { (result) in
+
                                     switch (result){
                                         
                                     case .success(let dailyForecasts):
                                         DispatchQueue.main.async {
-                                            
-                                            
-                                            self.location?.weather?.dailyForecasts = dailyForecasts.forecasts
+                                        //self.location?.weather?.dailyForecasts = NSOrderedSet(array: dailyForecasts.forecasts)
                                             self.setupHighLowLabels()
-                                            AirQualityController.shared.fetchAQI(location: home, coordinate: (home.destination?.location!.coordinate)!) { (result) in
+                                            AirQualityController.shared.fetchAQI(location: home) { (result) in
                                                 switch (result) {
                                                     
                                                 case .success(let AQI):
-                                                    self.location?.weather?.airQuality = AQI
+                                                    print(AQI)
+                                                    //self.location?.weather?.airQualityIndex = Int64(AQI)
                                                 case .failure(_):
                                                     break
                                                 }
@@ -149,23 +150,19 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     func setupHighLowLabels() {
         HighLabel.textColor = .white
         LowLabel.textColor = .white
-        guard let today = location?.weather?.dailyForecasts?[0],
-        let todaysHigh = today.maxTemp,
-            let todaysLow = today.lowTemp else {return}
-        
+
+        guard let today = location?.weather?.dailyForecasts?.object(at: 0) as? DailyForecast else {return}
+      
         if today.lowTemp == nil || today.maxTemp == nil
         {
             HighLabel.isHidden = true
             LowLabel.isHidden = true
-            
-        }
+                   }
         else {
-        HighLabel.text = "\(String(todaysHigh))"
-        LowLabel.text = "\(String(todaysLow))"
+        HighLabel.text = "\(String(today.maxTemp))"
+        LowLabel.text = "\(String(today.lowTemp))"
     }
-        
-    
-        
+
     }
     
     
@@ -291,8 +288,8 @@ extension ForecastViewController: UICollectionViewDelegate, UICollectionViewData
         
         guard let location = self.location else {return cell}
         
-        guard let hourlyWeather = location.weather?.hourlyForecasts?[indexPath.row] else {return cell}
-        let time = stringToDate(hourlyWeather.time)
+        guard let hourlyWeather = location.weather?.hourlyForecasts?[indexPath.row] as? HourlyForecast else {return cell}
+        let time = stringToDate(hourlyWeather.time ?? "12:00")
         let hour = time.hour()
         
         

@@ -39,10 +39,10 @@ class TripDetailViewController: UIViewController {
             LocationController.getPlacemark(searchTerm: destination) { (result) in
                 switch result {
                 case .success(let placemark):
-                    let location = Location(destination: placemark, weather: nil)
+                    guard let location = LocationController.shared.createLocation(destination: placemark) else { return }
                     TripController.shared.createTrip(startDate: startDate, endDate: endDate, location: location)
                 case .failure(let error):
-                    print("Error getting the location of the trip")
+                    print("Error getting the location of the trip: \(error)")
                 }
             }
         }
@@ -53,6 +53,6 @@ class TripDetailViewController: UIViewController {
         guard let trip = trip else { return }
         fromDatePicker.date = trip.startDate ?? Date()
         toDatePicker.date = trip.endDate ?? Date()
-        destinationTextField.text = trip.location?.destination?.locality ?? ""
+        destinationTextField.text = trip.location?.city ?? ""
     }
 }

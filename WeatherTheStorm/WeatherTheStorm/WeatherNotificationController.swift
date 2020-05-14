@@ -14,7 +14,7 @@ class WeatherNotificationController {
     //MARK: - Singleton and Source of Truth
     
     static let shared = WeatherNotificationController()
-    var notifications: [WeatherNotification] = []
+    var frequencies: [String] = []
     
     let daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
@@ -44,8 +44,12 @@ class WeatherNotificationController {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
-    func updateWeatherNotification(weatherNotification: WeatherNotification, frequency: [String]?, isActive: Bool, specificDate: Date, time: Date) {
-        weatherNotification.frequency = frequency
+    func updateWeatherNotification(weatherNotification: WeatherNotification, isActive: Bool, frequency: [String]?, specificDate: Date?, time: Date?) {
+        if let frequency = frequency {
+            let arrayAsString: String = frequency.description
+            let stringAsData = arrayAsString.data(using: String.Encoding.utf16)
+            weatherNotification.frequency = stringAsData
+        }
         weatherNotification.isActive = isActive
         weatherNotification.specificDate = specificDate
         weatherNotification.time = time
@@ -55,5 +59,13 @@ class WeatherNotificationController {
     func deleteWeatherNotificaiton(weatherNotification: WeatherNotification) {
         weatherNotification.managedObjectContext?.delete(weatherNotification)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    }
+    
+    func saveToPersistentStore() {
+        do {
+            try CoreDataStack.context.save()
+        } catch  {
+            print("Error when trying to save. \(error.localizedDescription)\(#function)")
+        }
     }
 }

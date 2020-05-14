@@ -6,23 +6,13 @@
 //  Copyright © 2020 Gottfredson. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 enum CoreDataStack {
     
-    static let container: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "WeatherTheStorm")
-        container.loadPersistentStores { (_, error) in
-            if let error = error {
-                fatalError("Failed to load persistet stores \(error)")
-            }
-        }
-        return container
-    } ()
+    private static let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    static let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
     
-    static var context: NSManagedObjectContext {
-        return container.viewContext
-    }
 }
 

@@ -11,55 +11,55 @@ import CoreData
 import CoreLocation
 
 class LocationController {
-
+    
     static let shared = LocationController()
     var fetchResultsController: NSFetchedResultsController<Location>
     var tripLocations: [Location]?
     var sortedLocations: [[Location]]? {
-        didSet {
-            sortLocations()
-        }
+        sortLocations()
     }
     
     //MARK: - Source of truth
     
- init(){
-     let request: NSFetchRequest<Location> = Location.fetchRequest()
-    request.sortDescriptors = [NSSortDescriptor(key: "destination", ascending: true )]
-     
-     let resultsController: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
-         fetchResultsController = resultsController
-     do{
-         try fetchResultsController.performFetch()
-         
-     }catch{
-         print("There Was an error fetching the data, \(error.localizedDescription)\(#function)")
-     }
- }
-
+    init(){
+        let request: NSFetchRequest<Location> = Location.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "city", ascending: true )]
+        
+        let resultsController: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResultsController = resultsController
+        do{
+            try fetchResultsController.performFetch()
+            
+        }catch{
+            print("There Was an error fetching the data, \(error.localizedDescription)\(#function)")
+        }
+    }
+    
     //MARK: - Methods
     
-    func sortLocations() {
-    
+    func sortLocations() -> [[Location]] {
+        
         var homeLocations: [Location]
         var workLocations: [Location]
         let trips = TripController.shared.tripLocations
+        var allLocations: [[Location]] = [[]]
         
         if let homeLocation = HomeController.shared.homeLocation {
-          homeLocations = [homeLocation]
+            homeLocations = [homeLocation]
         } else {
             homeLocations = []
         }
         
         if let workLocation = WorkController.shared.workLocation {
-          workLocations = [workLocation]
+            workLocations = [workLocation]
         } else {
             workLocations = []
         }
         
-        sortedLocations?.append(homeLocations)
-        sortedLocations?.append(workLocations)
-        sortedLocations?.append(trips)
+        allLocations.insert(homeLocations, at: 0)
+        allLocations.insert(workLocations, at: 1)
+        allLocations.insert(trips, at: 2)
+        return allLocations
     }
     
     //MARK: - GeoCoding
@@ -76,7 +76,7 @@ class LocationController {
             }
             
             guard let placemark = placemarks?.first else { completion(.failure(.unableToFindLocation)); return }
-                        
+            
             completion(.success(placemark))
             return
         }
@@ -84,17 +84,25 @@ class LocationController {
     
     //MARK: - CRUD Function
     
-    func createLocation(destination: CLPlacemark) -> Location {
-       let location = Location(destination: destination, weather: nil)
+    func createLocation(destination: CLPlacemark) -> Location? {
+        guard let city = destination.locality, let state = destination.administrativeArea, let country = destination.country, let latitude = destination.location?.coordinate.latitude.description, let longitude = destination.location?.coordinate.longitude.description else { return nil}
+        let location = Location(city: city, state: state, country: country, latitutde: latitude, longitude: longitude, weather: nil)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
-    return location
+        return location
     }
     
     func deleteLocation(location: Location) {
         location.managedObjectContext?.delete(location)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        }
+    
+    func saveToPersistentStore() {
+        do {
+            try CoreDataStack.context.save()
+        } catch  {
+            print("Error when trying to save. \(error.localizedDescription)\(#function)")
+        }
     }
     
-   
     
 }
