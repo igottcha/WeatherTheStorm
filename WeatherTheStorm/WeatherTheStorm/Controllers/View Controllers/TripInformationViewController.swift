@@ -45,9 +45,10 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         guard let location = trip?.location?.destination?.locality,
             let currentTemp = trip?.location?.weather?.current?.temperature,
             let feelsLike =  trip?.location?.weather?.current?.feelsLike,
-            let state = trip?.location?.destination?.administrativeArea else { return }
+            let state = trip?.location?.destination?.administrativeArea,
+            let phrase = trip?.location?.weather?.current?.phrase else { return }
         
-        weatherForecastLabel.text = "Your trip to \(location), \(state) is coming up. The weather is currently \(currentTemp) degrees. It feels like \(feelsLike) degrees. Have a nice trip!"
+        weatherForecastLabel.text = "Your trip to \(location), \(state) is coming up, and it is looking mostly \(phrase). The weather is currently \(currentTemp) degrees, and feels like \(feelsLike) degrees. Have a nice trip!"
         
     }
     
@@ -67,6 +68,8 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
             recommendationsLabel.text = "It's a cold one out there! Bundle up with a winter coat, scarf, hat, and gloves. Bonus for wooly socks."
         }
     }
+    
+    //TODO: - Set up logic for illustrations
     
     
     //MARK: - Weather Info Methods
