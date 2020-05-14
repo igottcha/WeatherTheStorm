@@ -32,20 +32,20 @@
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvO-u9-XSN">
                                                             <rect key="frame" x="0.0" y="0.0" width="354" height="99"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JK1-2g-2XB">
                                                             <rect key="frame" x="0.0" y="109" width="354" height="99"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.1668256675" green="0.65629688980000001" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="jg5-Eo-htN" secondAttribute="bottom" id="NEZ-sj-No6"/>
                                                 <constraint firstItem="jg5-Eo-htN" firstAttribute="leading" secondItem="G3J-zX-QWM" secondAttribute="leading" id="OHD-Pc-zYG"/>
@@ -126,7 +126,7 @@
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ekb-5K-Spy">
                                         <rect key="frame" x="0.0" y="404" width="414" height="404"/>
-                                        <color key="backgroundColor" red="0.1668256675" green="0.65629688980000001" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fNb-nZ-yoj">
                                             <size key="itemSize" width="128" height="320"/>
                                             <size key="estimatedItemSize" width="128" height="320"/>
@@ -246,73 +246,56 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cjl-YI-LVP">
-                                <rect key="frame" x="0.0" y="292.5" width="414" height="248"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="noY-lv-jLV">
+                                <rect key="frame" x="0.0" y="272.5" width="414" height="510.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QaZ-Ru-Kh0">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="248"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BbN-Rh-kBZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="207" height="24"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="fhg-do-XMe">
-                                                <rect key="frame" x="0.0" y="32" width="207" height="216"/>
-                                            </datePicker>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4oA-mS-4mR">
-                                        <rect key="frame" x="207" y="0.0" width="207" height="248"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Date:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Th7-lz-rMz">
-                                                <rect key="frame" x="0.0" y="0.0" width="207" height="24"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="iUb-cH-cuB">
-                                                <rect key="frame" x="0.0" y="32" width="207" height="216"/>
-                                            </datePicker>
-                                        </subviews>
-                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLJ-sC-doe">
+                                        <rect key="frame" x="160.5" y="0.0" width="93.5" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="mgQ-nX-fHc">
+                                        <rect key="frame" x="47" y="32" width="320" height="222.5"/>
+                                    </datePicker>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Date:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orT-dT-2eD">
+                                        <rect key="frame" x="164.5" y="262.5" width="85" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="vfV-xO-D9S">
+                                        <rect key="frame" x="47" y="294.5" width="320" height="216"/>
+                                    </datePicker>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2t7-KW-aXq">
-                                <rect key="frame" x="40" y="640.5" width="334" height="77.5"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Save Trip">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveButtonTapped:" destination="93G-y1-frc" eventType="touchUpInside" id="0Ik-aG-bdq"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Qk6-fZ-s0X" firstAttribute="trailing" secondItem="noY-lv-jLV" secondAttribute="trailing" id="2e9-Lr-HqP"/>
                             <constraint firstItem="Qk6-fZ-s0X" firstAttribute="trailing" secondItem="87L-wx-cWs" secondAttribute="trailing" constant="20" id="5Xd-JU-MCr"/>
                             <constraint firstItem="SEt-3E-wV2" firstAttribute="leading" secondItem="Qk6-fZ-s0X" secondAttribute="leading" constant="20" id="CE9-wI-3EX"/>
-                            <constraint firstItem="cjl-YI-LVP" firstAttribute="leading" secondItem="Qk6-fZ-s0X" secondAttribute="leading" id="ETw-tZ-az6"/>
                             <constraint firstItem="Qk6-fZ-s0X" firstAttribute="trailing" secondItem="SEt-3E-wV2" secondAttribute="trailing" constant="20" id="GIS-kV-3dH"/>
                             <constraint firstItem="87L-wx-cWs" firstAttribute="top" secondItem="Qk6-fZ-s0X" secondAttribute="top" constant="10" id="JAf-jP-SqE"/>
                             <constraint firstItem="87L-wx-cWs" firstAttribute="leading" secondItem="Qk6-fZ-s0X" secondAttribute="leading" constant="20" id="M7s-KQ-W8j"/>
-                            <constraint firstItem="2t7-KW-aXq" firstAttribute="top" secondItem="cjl-YI-LVP" secondAttribute="bottom" constant="100" id="MJv-Da-Phf"/>
-                            <constraint firstItem="Qk6-fZ-s0X" firstAttribute="trailing" secondItem="2t7-KW-aXq" secondAttribute="trailing" constant="40" id="N3U-Ka-Dim"/>
+                            <constraint firstItem="noY-lv-jLV" firstAttribute="top" secondItem="SEt-3E-wV2" secondAttribute="bottom" constant="10" id="QTV-i6-jr1"/>
+                            <constraint firstItem="Qk6-fZ-s0X" firstAttribute="bottom" secondItem="noY-lv-jLV" secondAttribute="bottom" constant="30" id="SjM-zM-rIl"/>
                             <constraint firstItem="SEt-3E-wV2" firstAttribute="top" secondItem="87L-wx-cWs" secondAttribute="bottom" constant="55" id="d5y-zv-ZHG"/>
-                            <constraint firstItem="Qk6-fZ-s0X" firstAttribute="bottom" secondItem="2t7-KW-aXq" secondAttribute="bottom" constant="95" id="drU-sY-m13"/>
-                            <constraint firstAttribute="trailing" secondItem="cjl-YI-LVP" secondAttribute="trailing" id="snp-xV-xQf"/>
-                            <constraint firstItem="2t7-KW-aXq" firstAttribute="leading" secondItem="Qk6-fZ-s0X" secondAttribute="leading" constant="40" id="uuf-h7-YcB"/>
-                            <constraint firstItem="cjl-YI-LVP" firstAttribute="top" secondItem="SEt-3E-wV2" secondAttribute="bottom" constant="30" id="xPa-b4-DxJ"/>
+                            <constraint firstItem="noY-lv-jLV" firstAttribute="leading" secondItem="b4t-gf-bTy" secondAttribute="leading" id="qBX-x8-QHQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Qk6-fZ-s0X"/>
                     </view>
-                    <navigationItem key="navigationItem" id="cuj-s1-hP0"/>
+                    <navigationItem key="navigationItem" id="cuj-s1-hP0">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="NM1-tc-o2n">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="93G-y1-frc" id="rJH-ts-tgl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="destinationTextField" destination="SPD-Y6-QH7" id="EA5-Aa-26k"/>
-                        <outlet property="fromDatePicker" destination="fhg-do-XMe" id="i0q-LZ-CWf"/>
-                        <outlet property="toDatePicker" destination="iUb-cH-cuB" id="sf6-jD-mNu"/>
+                        <outlet property="fromDatePicker" destination="mgQ-nX-fHc" id="R6m-nM-yoe"/>
+                        <outlet property="toDatePicker" destination="vfV-xO-D9S" id="Hcd-De-lhy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zgQ-II-rxZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
