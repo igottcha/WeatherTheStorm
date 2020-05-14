@@ -9,14 +9,14 @@
 import Foundation
 
 class HourlyTopLevelObject: Codable {
-    var forecasts: [HourlyForecast]
+    var forecasts: [HourlyWeatherForecast]
     
-    init(forecasts: [HourlyForecast]) {
+    init(forecasts: [HourlyWeatherForecast]) {
         self.forecasts = forecasts
     }
 }
 
-class HourlyForecast: Codable {
+class HourlyWeatherForecast: Codable {
 
     let cloudCoverPercentage: Double
     let feelsLike: Int

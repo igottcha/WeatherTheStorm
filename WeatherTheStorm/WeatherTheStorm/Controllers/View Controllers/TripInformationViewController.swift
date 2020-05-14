@@ -42,14 +42,13 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     //MARK: - View functions
     
     func updateViews() {
-        guard let location = trip?.location?.destination?.locality,
+        guard let city = trip?.location?.city,
             let currentTemp = trip?.location?.weather?.current?.temperature,
             let feelsLike =  trip?.location?.weather?.current?.feelsLike,
-            let state = trip?.location?.destination?.administrativeArea,
-            let phrase = trip?.location?.weather?.current?.phrase else { return }
+            let phrase = trip?.location?.weather?.current?.phrase,
+            let state = trip?.location?.state else { return }
         
-        weatherForecastLabel.text = "Your trip to \(location), \(state) is coming up, and it is looking mostly \(phrase). The weather is currently \(currentTemp) degrees, and feels like \(feelsLike) degrees. Have a nice trip!"
-        
+        weatherForecastLabel.text = "Your trip to \(city), \(state) is coming up, and it is looking mostly \(phrase). The weather is currently \(currentTemp) degrees, and feels like \(feelsLike) degrees. Have a nice trip!"        
     }
     
     func setUpRecommendations() {
@@ -76,11 +75,10 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     
     func getWeather(for trip: Trip) {
         guard let location = trip.location,
-            let coordinate = location.destination?.location?.coordinate,
             let startDate = trip.startDate,
             let endDate = trip.endDate else { return }
         
-        DailyForecastController.fetchForecast(location: location, coordinate: coordinate, firstDate: startDate, secondDate: endDate) { (result) in
+        DailyForecastController.fetchForecast(location: location, firstDate: startDate, secondDate: endDate) { (result) in
             switch result {
             case .success(let dailyForecast):
                 print(dailyForecast)
@@ -109,7 +107,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
                 print(error, error.localizedDescription)
             }
         }
-        AirQualityController.shared.fetchAQI(location: location, coordinate: coordinate) { (result) in
+        AirQualityController.shared.fetchAQI(location: location) { (result) in
             switch result {
             case .success(let airQuality):
                 print(airQuality)
@@ -130,13 +128,13 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: "forecastCell", for: indexPath) as? ForecastCollectionViewCell else { return UICollectionViewCell() }
-        guard let weather = trip?.location?.weather?.dailyForecasts else { return UICollectionViewCell() }
-        let daily = weather[indexPath.row]
+        guard let daily = trip?.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast else { return UICollectionViewCell() }
+
         
         cell.dateLabel.text = "\(daily.dow)"
         
         cell.lowTempLabel.text = "\(daily.lowTemp ?? 0)"
-        cell.highTempLabel.text = daily.maxTemp != nil ? "\(daily.maxTemp!)" : "N/A"
+        cell.highTempLabel.text = daily.maxTemp != nil ? "\(daily.maxTemp)" : "N/A"
         
         
         return cell

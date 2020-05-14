@@ -44,7 +44,7 @@ class WNListTableViewController: UITableViewController {
     }
     
     func updateEmptyState() {
-        previewLabel.isHidden = !(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects != nil || WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count != 0 )
+        previewLabel.isHidden = (WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count != 0)
     }
     
     // MARK: - Table view data source
@@ -55,15 +55,17 @@ class WNListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell else { return UITableViewCell() }
+       guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell, let data = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath).frequency else { return UITableViewCell() }
         
         let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
-        let frequency = weatherNotification.frequency ?? ["TBD"]
+        
+        let frequency: [String] = try! JSONDecoder().decode([String].self, from: data) ?? ["TBD"]
         let time = weatherNotification.time?.hour() ?? Date().hour()
         
         cell.boxView.layer.cornerRadius = 7
+        cell.isNotificationActiveSwitch.isOn = weatherNotification.isActive
         cell.nameLabel.text = weatherNotification.name
-        cell.addressLabel.text = "\(String(describing: weatherNotification.location))"
+        cell.addressLabel.text = "\(weatherNotification.location?.city ?? ""), \(weatherNotification.location?.state ?? ""), \(weatherNotification.location?.country ?? "")"
         cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")), at \(time)"
 
         return cell

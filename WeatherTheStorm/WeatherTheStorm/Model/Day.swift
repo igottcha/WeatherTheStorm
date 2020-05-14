@@ -11,14 +11,14 @@ import Foundation
 struct Day: Codable {
     
     let chanceOfPrecipitation: Int
-    let cloudCoverPercent: Int
+    let cloudCoverPercentage: Int
     let precipitationType: String
     let shortPhrase: String
     
     
     enum CodingKeys: String, CodingKey {
         case chanceOfPrecipitation = "pop"
-        case cloudCoverPercent = "clds"
+        case cloudCoverPercentage = "clds"
         case precipitationType = "precip_type"
         case shortPhrase = "phrase_32char"
     }

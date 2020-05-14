@@ -90,6 +90,7 @@
                                     <outlet property="addressLabel" destination="uVL-7j-hiS" id="gxy-up-KVG"/>
                                     <outlet property="boxView" destination="Ozf-vC-lbf" id="8AC-Ox-vYW"/>
                                     <outlet property="frequencyAndTimeLabel" destination="EUQ-Ab-366" id="Uxp-CI-AH3"/>
+                                    <outlet property="isNotificationActiveSwitch" destination="c2u-2C-Vl2" id="9hy-lN-IBw"/>
                                     <outlet property="nameLabel" destination="KxC-4Q-8kB" id="5NJ-0q-ZpN"/>
                                 </connections>
                             </tableViewCell>
@@ -239,7 +240,7 @@
                                     <barButtonItem style="done" systemItem="stop" id="MmN-LY-U00">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <action selector="closeViewButtonTapped:" destination="b33-mq-e8a" id="ZPU-gb-VK2"/>
+                                            <action selector="closeViewBarButtonTapped:" destination="F4r-Zt-84f" id="o0I-Rn-iKa"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>

@@ -41,6 +41,11 @@ class WNTimingViewController: UIViewController {
     
     //MARK: - Actions
     
+    @IBAction func closeViewBarButtonTapped(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true) {
+            print("Dismissal is success")
+        }
+    }
     @IBAction func repeatTextFieldDidBeginEditing(_ sender: UITextField) {
         daysOfTheWeekTableView.isHidden = false
     }
@@ -48,7 +53,7 @@ class WNTimingViewController: UIViewController {
         guard let location = location, let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification else { return }
         let frequency = sortWeekdayArray()
         WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: frequency, specificDate: nil, time: datePicker.date)
-        setAlertNotification(location: location)
+        //setAlertNotification(location: location)
         print(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count)
         DispatchQueue.main.async {
             self.dismiss(animated: true) {
@@ -74,7 +79,7 @@ class WNTimingViewController: UIViewController {
     }
     
     func updateView() {
-        guard let section = section, let city = location?.destination?.locality, let state = location?.destination?.administrativeArea, let country = location?.destination?.country else { return }
+        guard let section = section, let city = location?.city, let state = location?.state, let country = location?.country else { return }
         addNotificationLabel.text = "Add \(section) Notification"
         addressLabel.text = "\(city), \(state), \(country)"
     }
@@ -105,7 +110,7 @@ class WNTimingViewController: UIViewController {
     //MARK: - Notification Alert Controller
     
     func setAlertNotification(location: Location) {
-        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification, let weather = location.weather, let weatherPhrase = weather.current?.phrase, let feelsLikeTemp = weather.current?.feelsLike, let city = location.destination?.locality else { return }
+        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification, let weather = location.weather, let weatherPhrase = weather.current?.phrase, let feelsLikeTemp = weather.current?.feelsLike, let city = location.city else { return }
         let clothingPhrase = "CLOTHING STRING PLACEHOLDER"
         let notificationText = "Hi \(UserController.shared.userName), It's \(weatherPhrase) today in \(city). Feels like \(feelsLikeTemp)°. You'll want to \(clothingPhrase)."
         
@@ -141,8 +146,6 @@ extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cellText = cell.textLabel?.text else { return }
             let day = cellText.replacingOccurrences(of: "Every ", with: "")
             WeatherNotificationController.shared.frequencies.append(day)
-            
-            //frequencies.append(day)
             
         }
     }

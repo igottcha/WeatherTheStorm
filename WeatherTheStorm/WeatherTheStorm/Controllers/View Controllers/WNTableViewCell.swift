@@ -12,6 +12,7 @@ class WNTableViewCell: UITableViewCell {
 
     //MARK: - Outlets
     
+    @IBOutlet weak var isNotificationActiveSwitch: UISwitch!
     @IBOutlet weak var boxView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!

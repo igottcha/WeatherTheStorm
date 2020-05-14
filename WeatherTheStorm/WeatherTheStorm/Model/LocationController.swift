@@ -23,7 +23,7 @@ class LocationController {
     
     init(){
         let request: NSFetchRequest<Location> = Location.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "destination", ascending: true )]
+        request.sortDescriptors = [NSSortDescriptor(key: "city", ascending: true )]
         
         let resultsController: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
         fetchResultsController = resultsController
@@ -84,15 +84,16 @@ class LocationController {
     
     //MARK: - CRUD Function
     
-    func createLocation(destination: CLPlacemark) -> Location {
-        let location = Location(destination: destination, weather: nil)
-        saveToPersistentStore()
+    func createLocation(destination: CLPlacemark) -> Location? {
+        guard let city = destination.locality, let state = destination.administrativeArea, let country = destination.country, let latitude = destination.location?.coordinate.latitude.description, let longitude = destination.location?.coordinate.longitude.description else { return nil}
+        let location = Location(city: city, state: state, country: country, latitutde: latitude, longitude: longitude, weather: nil)
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         return location
     }
     
     func deleteLocation(location: Location) {
         location.managedObjectContext?.delete(location)
-        saveToPersistentStore()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         }
     
     func saveToPersistentStore() {
