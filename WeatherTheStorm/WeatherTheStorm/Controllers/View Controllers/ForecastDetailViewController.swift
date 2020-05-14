@@ -81,7 +81,7 @@ class ForecastDetailViewController: UIViewController {
         guard let hourlyweather = self.location?.weather?.hourlyForecasts,
             let dailyforecasts = self.location?.weather?.dailyForecasts,
             let currentWeather = self.location?.weather?.current,
-            let cityName = self.location?.destination?.locality
+            let cityName = self.location?.city
             else {return}
         
         setupCityName(cityName: cityName)
@@ -98,9 +98,9 @@ class ForecastDetailViewController: UIViewController {
         
     }
     
-    func setupCurrentWeather(currentWeather: CurrentWeather){
+    func setupCurrentWeather(currentWeather: Current){
         let phrase = currentWeather.phrase
-        phraseLabel.text = "Hello, \(userName)! It's a \(phrase) day in \(self.userCity)"
+        phraseLabel.text = "Hello, \(userName)! It's a \(String(describing: phrase)) day in \(self.userCity)"
         phraseLabel.textColor = .white
         let currentTemp = String(currentWeather.temperature)
         tempLabel.text = "\(currentTemp)º"
@@ -110,17 +110,15 @@ class ForecastDetailViewController: UIViewController {
         
     }
     
-    func setupDailyWeather(dailyforecasts: [DailyForecast]){
-        let today = dailyforecasts[0]
-        guard let hiToday = today.maxTemp,
-            let loToday = today.lowTemp else {
-                highLabel.isHidden = true
-                lowLabel.isHidden = true
-                return
+    func setupDailyWeather(dailyforecasts: NSOrderedSet) {
+        guard let today = dailyforecasts.firstObject as? DailyForecast, today.maxTemp != 0, today.lowTemp != 0 else {
+            highLabel.isHidden = true
+            lowLabel.isHidden = true
+            return
         }
         
-        var hi = String(hiToday)
-        var lo = String(loToday)
+        let hi = String(today.maxTemp)
+        let lo = String(today.lowTemp)
         
         highLabel.text = "\(hi)º"
         highLabel.textColor = .white
@@ -128,11 +126,6 @@ class ForecastDetailViewController: UIViewController {
         lowLabel.textColor = .white
         
     }
-    
-    
-    
-    
-    
     
     
     /*
@@ -154,20 +147,21 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell =  dailyForecastTableView.dequeueReusableCell(withIdentifier: "homeDailyCell", for: indexPath) as? HomeDailyForecastTableViewCell else {return UITableViewCell()}
-        guard let dailyWeather = self.location?.weather?.dailyForecasts?[indexPath.row] else {return cell}
+        guard let cell =  dailyForecastTableView.dequeueReusableCell(withIdentifier: "homeDailyCell", for: indexPath) as? HomeDailyForecastTableViewCell, let dailyWeather = self.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast else {return UITableViewCell()}
         
         let day =  dailyWeather.dow
-        if let high = dailyWeather.maxTemp {
+        let high = dailyWeather.maxTemp
+        let low = dailyWeather.lowTemp
+        
+        if high != 0 {
             
             let highTemp = String(high)
             cell.HiLabel.text = "\(highTemp)º"
             cell.HiLabel.textColor = UIColor(named: "HighOrange")
-            
-            
+
         }
         
-        if let low = dailyWeather.lowTemp {
+        if low != 0 {
             let lowTemp = String(low)
             cell.loLabel.text = "\(lowTemp)º"
             cell.loLabel.textColor = UIColor(named: "LowBlue")
