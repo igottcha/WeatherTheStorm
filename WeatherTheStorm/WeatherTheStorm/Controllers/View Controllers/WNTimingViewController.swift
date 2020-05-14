@@ -74,7 +74,7 @@ class WNTimingViewController: UIViewController {
     }
     
     func updateView() {
-        guard let section = section, let city = location?.destination?.locality, let state = location?.destination?.administrativeArea, let country = location?.destination?.country else { return }
+        guard let section = section, let city = location?.city, let state = location?.state, let country = location?.country else { return }
         addNotificationLabel.text = "Add \(section) Notification"
         addressLabel.text = "\(city), \(state), \(country)"
     }
@@ -105,7 +105,7 @@ class WNTimingViewController: UIViewController {
     //MARK: - Notification Alert Controller
     
     func setAlertNotification(location: Location) {
-        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification, let weather = location.weather, let weatherPhrase = weather.current?.phrase, let feelsLikeTemp = weather.current?.feelsLike, let city = location.destination?.locality else { return }
+        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification, let weather = location.weather, let weatherPhrase = weather.current?.phrase, let feelsLikeTemp = weather.current?.feelsLike, let city = location.city else { return }
         let clothingPhrase = "CLOTHING STRING PLACEHOLDER"
         let notificationText = "Hi \(UserController.shared.userName), It's \(weatherPhrase) today in \(city). Feels like \(feelsLikeTemp)°. You'll want to \(clothingPhrase)."
         

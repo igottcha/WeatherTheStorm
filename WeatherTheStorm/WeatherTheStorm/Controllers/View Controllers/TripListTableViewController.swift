@@ -34,9 +34,9 @@ class TripListTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "tripCell", for: indexPath) as? TripTableViewCell else { return UITableViewCell() }
         let trip = TripController.shared.fetchedResultsController.object(at: indexPath)
         
-        guard let city = trip.location?.destination?.locality,
-            let state = trip.location?.destination?.administrativeArea,
-            let country = trip.location?.destination?.country,
+        guard let city = trip.location?.city,
+            let state = trip.location?.state,
+            let country = trip.location?.country,
             let startDate = trip.startDate,
             let endDate = trip.endDate else { return UITableViewCell() }
         

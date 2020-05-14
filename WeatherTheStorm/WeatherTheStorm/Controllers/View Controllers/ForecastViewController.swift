@@ -69,7 +69,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     
     func setupCityLabel() {
         
-        guard let cityName = self.location?.destination?.locality else {return}
+        guard let cityName = self.location?.city else {return}
         cityLabel.textColor = .white
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
         let underlineAttributedString = NSAttributedString(string: "\(cityName)", attributes: underlineAttribute)
@@ -107,14 +107,14 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
                                 self.setupPhrase()
                                 self.setupGreetingLabel()
                                 //self.setupHighLowLabels()
-                                DailyForecastController.fetchForecast(location: home, coordinate: (home.destination?.location!.coordinate)!, firstDate: Date(), secondDate: Date() + 10) { (result) in
+                                DailyForecastController.fetchForecast(location: home, firstDate: Date(), secondDate: Date() + 10) { (result) in
                                     switch (result){
                                         
                                     case .success(let dailyForecasts):
                                         DispatchQueue.main.async {
                                         //self.location?.weather?.dailyForecasts = NSOrderedSet(array: dailyForecasts.forecasts)
                                             self.setupHighLowLabels()
-                                            AirQualityController.shared.fetchAQI(location: home, coordinate: (home.destination?.location!.coordinate)!) { (result) in
+                                            AirQualityController.shared.fetchAQI(location: home) { (result) in
                                                 switch (result) {
                                                     
                                                 case .success(let AQI):

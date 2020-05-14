@@ -12,8 +12,7 @@ import CoreLocation.CLLocation
 class HourlyWeatherController {
     
     static func fetchForecast(location: Location, completion: @escaping (Result<HourlyTopLevelObject, GenericError>) -> Void ) {
-        guard let coordinate = location.destination?.location?.coordinate else {return}
-        guard let apiURL = NetworkController.buildForecastURL(coordinate: coordinate, firstDate: nil, secondDate: nil, isDaily: false) else { return }
+        guard let latitude = location.latitude, let longitude = location.longitude, let apiURL = NetworkController.buildForecastURL(latitude: latitude, longitude: longitude, firstDate: nil, secondDate: nil, isDaily: false) else { return }
         NetworkController.genericAPICall(url: apiURL, type: HourlyTopLevelObject.self) { (result) in
             switch result {
             case .success(let topLevelObject):

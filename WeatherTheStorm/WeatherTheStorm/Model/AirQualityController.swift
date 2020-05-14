@@ -17,11 +17,11 @@ class AirQualityController {
     private let apiKey = "be597a5a-bfb7-412d-8b98-033a96e0e2cf"
     private let baseURL = URL(string: "https://api.airvisual.com/v2/nearest_city")
     
-    func fetchAQI(location: Location, coordinate: CLLocationCoordinate2D, completion: @escaping (Result<AirQuality, GenericError>) -> Void) {
-        guard let baseURL = baseURL else { completion(.failure(.invalidURL)); return }
+    func fetchAQI(location: Location, completion: @escaping (Result<AirQuality, GenericError>) -> Void) {
+        guard let latitude = location.latitude, let longitude = location.longitude, let baseURL = baseURL else { completion(.failure(.invalidURL)); return }
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
-        urlComponents?.queryItems = [URLQueryItem(name: "lat", value: String(coordinate.latitude)),
-                                    URLQueryItem(name: "lon", value: String(coordinate.longitude)),
+        urlComponents?.queryItems = [URLQueryItem(name: "lat", value: latitude),
+                                    URLQueryItem(name: "lon", value: longitude),
                                     URLQueryItem(name: "key", value: apiKey)]
         guard let finalURL = urlComponents?.url else { completion(.failure(.invalidURL)); return }
         print(finalURL)

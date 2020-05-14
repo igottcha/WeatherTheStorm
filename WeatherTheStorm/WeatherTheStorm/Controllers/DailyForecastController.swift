@@ -11,8 +11,8 @@ import CoreLocation.CLLocation
 
 class DailyForecastController {
     
-    static func fetchForecast(location: Location, coordinate: CLLocationCoordinate2D, firstDate: Date, secondDate: Date, completion: @escaping (Result<DailyTopLevelObject, GenericError>) -> Void) {
-        guard let apiURL = NetworkController.buildForecastURL(coordinate: coordinate, firstDate: firstDate, secondDate: secondDate, isDaily: true) else { return }
+    static func fetchForecast(location: Location, firstDate: Date, secondDate: Date, completion: @escaping (Result<DailyTopLevelObject, GenericError>) -> Void) {
+        guard let latitude = location.latitude, let longitude = location.longitude, let apiURL = NetworkController.buildForecastURL(latitude: latitude, longitude: longitude, firstDate: firstDate, secondDate: secondDate, isDaily: true) else { return }
         NetworkController.genericAPICall(url: apiURL, type: DailyTopLevelObject.self) { (result) in
             switch result {
             case .success(let topLevelOjbect):

@@ -42,12 +42,12 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     //MARK: - View functions
     
     func updateViews() {
-        guard let location = trip?.location?.destination?.locality,
+        guard let city = trip?.location?.city,
             let currentTemp = trip?.location?.weather?.current?.temperature,
             let feelsLike =  trip?.location?.weather?.current?.feelsLike,
-            let state = trip?.location?.destination?.administrativeArea else { return }
+            let state = trip?.location?.state else { return }
         
-        weatherForecastLabel.text = "Your trip to \(location), \(state) is coming up. The weather is currently \(currentTemp) degrees. It feels like \(feelsLike) degrees. Have a nice trip!"
+        weatherForecastLabel.text = "Your trip to \(city), \(state) is coming up. The weather is currently \(currentTemp) degrees. It feels like \(feelsLike) degrees. Have a nice trip!"
         
     }
     
@@ -73,11 +73,10 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     
     func getWeather(for trip: Trip) {
         guard let location = trip.location,
-            let coordinate = location.destination?.location?.coordinate,
             let startDate = trip.startDate,
             let endDate = trip.endDate else { return }
         
-        DailyForecastController.fetchForecast(location: location, coordinate: coordinate, firstDate: startDate, secondDate: endDate) { (result) in
+        DailyForecastController.fetchForecast(location: location, firstDate: startDate, secondDate: endDate) { (result) in
             switch result {
             case .success(let dailyForecast):
                 print(dailyForecast)
@@ -106,7 +105,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
                 print(error, error.localizedDescription)
             }
         }
-        AirQualityController.shared.fetchAQI(location: location, coordinate: coordinate) { (result) in
+        AirQualityController.shared.fetchAQI(location: location) { (result) in
             switch result {
             case .success(let airQuality):
                 print(airQuality)
