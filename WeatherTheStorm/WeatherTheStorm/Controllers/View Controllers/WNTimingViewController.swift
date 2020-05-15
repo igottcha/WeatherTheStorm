@@ -25,6 +25,7 @@ class WNTimingViewController: UIViewController {
     var location: Location?
     var section: String?
     let datePicker = UIDatePicker()
+    let name = Notification.Name("didReceiveData")
     
     //MARK: -  Lifecycle
     
@@ -43,7 +44,7 @@ class WNTimingViewController: UIViewController {
     
     @IBAction func closeViewBarButtonTapped(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true) {
-            print("Dismissal is success")
+            print("TimingVC dismissal is success")
         }
     }
     @IBAction func repeatTextFieldDidBeginEditing(_ sender: UITextField) {
@@ -56,10 +57,7 @@ class WNTimingViewController: UIViewController {
         //setAlertNotification(location: location)
         print(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count)
         DispatchQueue.main.async {
-            self.dismiss(animated: true) {
-                print("successfully dismissed")
-            }
-            //self.navigationController?.popToRootViewController(animated: true)
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
         }
     }
     @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {
@@ -106,6 +104,18 @@ class WNTimingViewController: UIViewController {
         timeTextField.text = "\(datePicker.date.hour())"
         self.view.endEditing(true)
     }
+    
+    //MARK: - Notification
+    
+//    func createObserver() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData), name: name, object: nil)
+//    }
+//
+//    @objc func onDidReceiveData() {
+//        self.dismiss(animated: true) {
+//            print("LocationListVC successfully dismissed")
+//        }
+//    }
     
     //MARK: - Notification Alert Controller
     

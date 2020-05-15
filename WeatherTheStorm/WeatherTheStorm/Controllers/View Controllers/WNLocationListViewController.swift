@@ -17,6 +17,10 @@ class WNLocationListViewController: UIViewController {
     @IBOutlet weak var closeViewBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var locationListTableView: UITableView!
     
+    //MARK: - Properties
+    
+    let name = Notification.Name("didReceiveData")
+    
     //MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -29,11 +33,23 @@ class WNLocationListViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func closeViewButtonTapped(_ sender: UIBarButtonItem) {
-            self.dismiss(animated: true) {
+        self.dismiss(animated: true) {
                 print("successfully dismissed")
             }
             //self.navigationController?.popToRootViewController(animated: true)
     }
+    
+    //MARK: - Notification
+    
+//    func createObserver() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData), name: name, object: nil)
+//    }
+//
+//    @objc func onDidReceiveData() {
+//        self.dismiss(animated: true) {
+//            print("LocationListVC successfully dismissed")
+//        }
+//    }
     
     // MARK: - Navigation
 
