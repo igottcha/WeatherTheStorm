@@ -94,7 +94,8 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         HourlyWeatherController.fetchForecast(location: home) { (result) in
             switch (result){
                 
-            case .success(_):
+            case .success(let hourlyForecasts):
+               
                 DispatchQueue.main.async {
                     self.hourleForecastCollectionView.reloadData()
                     CurrentWeatherController.fetchForecast(location: home) { (result) in
@@ -114,7 +115,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
                                         
                                     case .success(let dailyForecasts):
                                         DispatchQueue.main.async {
-                                        //self.location?.weather?.dailyForecasts = NSOrderedSet(array: dailyForecasts.forecasts)
+                                       
                                             self.setupHighLowLabels()
                                             AirQualityController.shared.fetchAQI(location: home) { (result) in
                                                 switch (result) {

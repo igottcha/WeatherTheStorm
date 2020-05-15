@@ -19,6 +19,7 @@ class Onboard3ViewController: UIViewController {
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var askLabel: UILabel!
+    @IBOutlet weak var bubbleImageView: UIImageView!
     
     
     override func viewDidLoad() {
@@ -32,8 +33,14 @@ class Onboard3ViewController: UIViewController {
         setupNextButton()
         citySearchBar.delegate = self
         nextButton.isHidden = true
+        hideBubble()
         
         
+    }
+    
+    func hideBubble() {
+        bubbleImageView.isHidden = true
+       
     }
     
     func setupLiveLabel() {
@@ -60,7 +67,26 @@ class Onboard3ViewController: UIViewController {
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
               let underlineAttributedString = NSAttributedString(string: "Why are we asking?", attributes: underlineAttribute)
              whyLabel.attributedText = underlineAttributedString
+        
+        whyLabel.isUserInteractionEnabled = true
+                     let bubbleTap = UITapGestureRecognizer(target: self, action: #selector(toggleBubble(tap:)))
+                      whyLabel.addGestureRecognizer(bubbleTap)
     }
+    
+    @objc func toggleBubble(tap: UITapGestureRecognizer){
+           
+           if bubbleImageView.isHidden{
+           bubbleImageView.isHidden = false
+         
+           }
+           
+           else {
+         
+               bubbleImageView.isHidden = true
+               
+           }
+           
+       }
     
     func setGradientBackground() {
         

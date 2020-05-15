@@ -31,6 +31,7 @@ class ForecastDetailViewController: UIViewController {
     @IBOutlet weak var topContainer: UIView!
     @IBOutlet weak var middleContainer: UIView!
     @IBOutlet weak var dailyForecastTableView: UITableView!
+    @IBOutlet weak var hourlyForecastCollectionView: UICollectionView!
     
     
     
@@ -46,9 +47,20 @@ class ForecastDetailViewController: UIViewController {
         unwrapForecasts()
         dailyForecastTableView.delegate = self
         dailyForecastTableView.dataSource = self
+        hourlyForecastCollectionView.delegate = self
+        hourlyForecastCollectionView.dataSource = self
         setupDateLabel()
+        makeEdgesRound()
         
+        hourlyForecastCollectionView.register(HourlyForecastDetailCollectionViewCell.self, forCellWithReuseIdentifier: "hourlyDetailCell")
         
+    }
+    
+    func makeEdgesRound() {
+        dailyForecastTableView.layer.cornerRadius = 5
+        dailyForecastTableView.clipsToBounds = true
+        hourlyForecastCollectionView.layer.cornerRadius = 5
+        hourlyForecastCollectionView.clipsToBounds = true
         
     }
     
@@ -99,13 +111,13 @@ class ForecastDetailViewController: UIViewController {
     }
     
     func setupCurrentWeather(currentWeather: Current){
-        let phrase = currentWeather.phrase
-        phraseLabel.text = "Hello, \(userName)! It's a \(String(describing: phrase)) day in \(self.userCity)"
+        guard let phrase = currentWeather.phrase else {return}
+        phraseLabel.text = "Hello, \(userName)! It's a \(phrase) day in \(self.userCity)"
         phraseLabel.textColor = .white
         let currentTemp = String(currentWeather.temperature)
         tempLabel.text = "\(currentTemp)º"
         tempLabel.textColor = .white
-        feelsLikeLAbel.text = "feels Like \(currentWeather.feelsLike)"
+        feelsLikeLAbel.text = "Feels Like \(currentWeather.feelsLike)"
         feelsLikeLAbel.textColor = .white
         
     }
@@ -158,7 +170,7 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
             let highTemp = String(high)
             cell.HiLabel.text = "\(highTemp)º"
             cell.HiLabel.textColor = UIColor(named: "HighOrange")
-
+            
         }
         
         if low != 0 {
@@ -182,6 +194,41 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
         return "10-Day Forecast"
     }
     
+    
+    
+}
+
+extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let hourliesCount = self.location?.weather?.hourlyForecasts?.count else {return 0}
+        return hourliesCount
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hourlyDetailCell", for: indexPath) as? HourlyForecastDetailCollectionViewCell,
+            let hourlyForecast = self.location?.weather?.hourlyForecasts?.object(at: indexPath.row) as? HourlyForecast else {return UICollectionViewCell()}
+        
+        
+        
+        let time = hourlyForecast.time
+        let temp = String(hourlyForecast.temp)
+        
+        cell.timeLabel?.text = time
+        cell.tempLabel?.text = temp
+        
+        return cell
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.frame.size.height
+        let layout = hourlyForecastCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: width, height: width)
+        return layout.itemSize
+    }
     
     
 }

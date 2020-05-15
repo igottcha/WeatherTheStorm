@@ -19,6 +19,8 @@ class TestViewController: UIViewController {
     @IBOutlet weak var whyLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var bubbleImageView: UIImageView!
+   
     
 
     override func viewDidLoad() {
@@ -30,6 +32,7 @@ class TestViewController: UIViewController {
        setupWhyAsking()
         setupProgressLabel()
         setupNextButton()
+        hideBubble()
         
         
        
@@ -46,11 +49,35 @@ class TestViewController: UIViewController {
         performSegue(withIdentifier: "toGenderSelectionVC", sender: self)
     }
     
+    func hideBubble() {
+        bubbleImageView.isHidden = true
+       
+    }
+    
     func setupWhyAsking() {
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
         let underlineAttributedString = NSAttributedString(string: "Why are we asking?", attributes: underlineAttribute)
        whyLabel.attributedText = underlineAttributedString
+        
+        whyLabel.isUserInteractionEnabled = true
+       let bubbleTap = UITapGestureRecognizer(target: self, action: #selector(toggleBubble(tap:)))
+        whyLabel.addGestureRecognizer(bubbleTap)
        
+    }
+    
+    @objc func toggleBubble(tap: UITapGestureRecognizer){
+        
+        if bubbleImageView.isHidden{
+        bubbleImageView.isHidden = false
+      
+        }
+        
+        else {
+      
+            bubbleImageView.isHidden = true
+            
+        }
+        
     }
     
     func setupWelcomeLabel() {

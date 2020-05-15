@@ -27,6 +27,7 @@ class Onboard2ViewController: UIViewController {
     @IBOutlet weak var progressLabel: UILabel!
     
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var bubbleImageView: UIImageView!
     
     
     
@@ -36,7 +37,7 @@ class Onboard2ViewController: UIViewController {
         setupQuestionLabel()
         setupGenderLabels()
         setupCircles()
-        
+        hideBubble()
         
         setupWhyAsking()
         setupProgressLabel()
@@ -64,6 +65,11 @@ class Onboard2ViewController: UIViewController {
             
         }
         
+    }
+    
+    func hideBubble() {
+        bubbleImageView.isHidden = true
+       
     }
     
     func setupCircles() {
@@ -135,6 +141,24 @@ class Onboard2ViewController: UIViewController {
         let underlineAttributedString = NSAttributedString(string: "Why are we asking?", attributes: underlineAttribute)
         WhyLabel.attributedText = underlineAttributedString
         WhyLabel.textColor = .white
+        
+        WhyLabel.isUserInteractionEnabled = true
+              let bubbleTap = UITapGestureRecognizer(target: self, action: #selector(toggleBubble(tap:)))
+               WhyLabel.addGestureRecognizer(bubbleTap)
+    }
+    @objc func toggleBubble(tap: UITapGestureRecognizer){
+        
+        if bubbleImageView.isHidden{
+        bubbleImageView.isHidden = false
+      
+        }
+        
+        else {
+      
+            bubbleImageView.isHidden = true
+            
+        }
+        
     }
     
     func setupProgressLabel() {
