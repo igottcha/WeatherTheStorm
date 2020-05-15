@@ -48,7 +48,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
             let phrase = trip?.location?.weather?.current?.phrase,
             let state = trip?.location?.state else { return }
         
-        weatherForecastLabel.text = "Your trip to \(city), \(state) is coming up, and it is looking mostly \(phrase). The weather is currently \(currentTemp) degrees, and feels like \(feelsLike) degrees. Have a nice trip!"        
+        weatherForecastLabel.text = "Your trip to \(city), \(state) is coming up, and it is looking \(phrase). The weather is currently \(currentTemp) degrees, and feels like \(feelsLike) degrees. Have a nice trip!"        
     }
     
     func setUpRecommendations() {
@@ -128,12 +128,12 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: "forecastCell", for: indexPath) as? ForecastCollectionViewCell else { return UICollectionViewCell() }
-        guard let daily = trip?.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast else { return UICollectionViewCell() }
+        guard let daily = trip?.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast, let days = daily.dow else { return UICollectionViewCell() }
 
         
-        cell.dateLabel.text = "\(daily.dow)"
+        cell.dateLabel.text = "\(days)"
         
-        cell.lowTempLabel.text = "\(daily.lowTemp ?? 0)"
+        cell.lowTempLabel.text = "\(daily.lowTemp )"
         cell.highTempLabel.text = daily.maxTemp != nil ? "\(daily.maxTemp)" : "N/A"
         
         
