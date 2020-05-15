@@ -26,8 +26,8 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         guard let trip = trip else { return }
         getWeather(for: trip)
         updateViews()
-        setUpRecommendations()
-        setUpWeatherImageView()
+        //setUpRecommendations()
+        //setUpWeatherImageView()
        
     }
     
@@ -49,7 +49,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
             let phrase = trip?.location?.weather?.current?.phrase,
             let state = trip?.location?.state else { return }
         
-        weatherForecastLabel.text = "Your trip to \(city), \(state) is coming up, and it is looking \(phrase). The weather is currently \(currentTemp) degrees, and feels like \(feelsLike) degrees. Have a nice trip!"        
+        weatherForecastLabel.text = "Your trip to \(city), \(state) is coming up, and it is looking \(phrase). The weather is currently \(currentTemp) ºF, and feels like \(feelsLike) ºF. Have a nice trip!"        
     }
     
     func setUpRecommendations() {
@@ -78,29 +78,40 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     
     func setUpWeatherImageView() {
         let gender = UserController.shared.isMale
-        guard let phrase = trip?.location?.weather?.current?.phrase,
-            let feelsLikeTemp = trip?.location?.weather?.current?.feelsLike else { return }
+        guard let feelsLikeTemp = trip?.location?.weather?.current?.feelsLike else { return }
 
-        if gender == false && phrase == "Cloudy" && feelsLikeTemp >= 90 {
+        if gender == false && feelsLikeTemp >= 90 {
             weatherImageView.image = UIImage(named: "female_cloudy_shortsshirtsunglassescap") // f
         }
-        else if gender == true && phrase == "Cloudy" && feelsLikeTemp >= 90{
+        else if gender == true && feelsLikeTemp >= 90{
             weatherImageView.image = UIImage(named: "Male_Cloudy_shortsshirt") //m
         }
-        else if gender == false && phrase == "Partly Cloudy" && 70...89 ~= feelsLikeTemp {
+        else if gender == false && 70...89 ~= feelsLikeTemp {
             weatherImageView.image = UIImage(named: "female_partlycloudy_shortsshirt") // f
         }
-        else if gender == true && phrase == "Partly Cloudy" && 70...89 ~= feelsLikeTemp {
+        else if gender == true && 70...89 ~= feelsLikeTemp {
             weatherImageView.image = UIImage(named: "Male_Partlycloudy_shortsshirt") // m
         }
-        else if gender == true && phrase == "Cloudy" && 70...89 ~= feelsLikeTemp {
+        else if gender == true && 70...89 ~= feelsLikeTemp {
             weatherImageView.image = UIImage(named: "Male_Cloudy_shortsshirt") //m
         }
-        else if gender == true && phrase == "Partly Cloudy" && 60...69 ~= feelsLikeTemp {
+        else if gender == true && 60...69 ~= feelsLikeTemp {
             weatherImageView.image = UIImage(named: "Male_Partlycloudy_pantscoat") //m
         }
-        else if gender == false && phrase == "Partly Cloudy" && 60...69 ~= feelsLikeTemp {
+        else if gender == false && 60...69 ~= feelsLikeTemp {
             weatherImageView.image = UIImage(named: "female_partlycloudy_pantscoat") //f
+        }
+        else if gender == true && 40...59 ~= feelsLikeTemp {
+            weatherImageView.image = UIImage(named: "Male_Clearday_pantscoat") //m
+        }
+        else if gender == false && 40...59 ~= feelsLikeTemp {
+            weatherImageView.image = UIImage(named: "female_clearday_pantscoat")
+        }
+        else if gender == true && -1000...39 ~= feelsLikeTemp {
+            weatherImageView.image = UIImage(named: "Male_Clearday_bootscoatglovesscarfhat") //m
+        }
+        else if gender == false && -1000...39 ~= feelsLikeTemp {
+            weatherImageView.image = UIImage(named: "female_clearday_bootscoatglovesscarfhat") //f
         }
         else {
             weatherImageView.image = UIImage(named: "female_clearday_pantscoat")
@@ -139,6 +150,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
                 DispatchQueue.main.async {
                     self.updateViews()
                     self.setUpRecommendations()
+                    self.setUpWeatherImageView()
                 }
                 
             case .failure(let error):
@@ -182,12 +194,12 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
 }
 
 extension TripInformationViewController: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionWidth = forecastCollectionView.bounds.width
         let collectionHeight = forecastCollectionView.bounds.height
-        
-        
+
+
         return CGSize(width: collectionWidth * 0.95, height: collectionHeight * 0.10)
     }
 }
