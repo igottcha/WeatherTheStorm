@@ -27,6 +27,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         getWeather(for: trip)
         updateViews()
         setUpRecommendations()
+        setUpWeatherImageView()
        
     }
     
@@ -53,22 +54,59 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     
     func setUpRecommendations() {
         guard let temp = trip?.location?.weather?.current?.temperature else { return }
-        if temp >= 70 {
-            recommendationsLabel.text = "We recommend bringing the following items for your trip: Short sleeves, breathable fabrics, and shorts."
-        } else if temp <= 69 || temp >= 60 {
-            recommendationsLabel.text = "We recommend bringing the following items for your trip: Long sleeves, light sweater or jacket, and long pants."
-        } else if temp <= 59 || temp >= 50 {
+        switch temp {
+        case 90..<1000:
+            recommendationsLabel.text = "We recommend bringing the following: Short sleeves, shorts, airy clothing, and stay hydrated."
+        case 80...89:
+            recommendationsLabel.text = "We recommend that you bring the folowing: Short sleeves, shorts, and airy clothes."
+        case 70...79:
+            recommendationsLabel.text = "We recommend that you bring the following: Short sleeves, breathable fabrics, shorts."
+        case 60...69:
+            recommendationsLabel.text = "We recommend that you bring the following: Long pants, long sleeves, and a light sweater. or jacket."
+        case 50...59:
             recommendationsLabel.text = "It's sweater weather! Wear pants and a light jacket."
-        } else if temp <= 49 || temp >= 40 {
+        case 40...49:
             recommendationsLabel.text = "It's a bit chilly out today. Wear a warm jacket and long pants."
-        } else if temp <= 39 || temp >= 30 {
+        case 30...39:
             recommendationsLabel.text = "It's pretty chilly today. Best wear a winter coat, hat, and gloves."
-        } else if temp <= 29 {
+        case -1000...29:
             recommendationsLabel.text = "It's a cold one out there! Bundle up with a winter coat, scarf, hat, and gloves. Bonus for wooly socks."
+        default:
+            recommendationsLabel.text = "Cannot get temperature data to make recommendations."
         }
     }
     
-    //TODO: - Set up logic for illustrations
+    func setUpWeatherImageView() {
+        let gender = UserController.shared.isMale
+        guard let phrase = trip?.location?.weather?.current?.phrase,
+            let feelsLikeTemp = trip?.location?.weather?.current?.feelsLike else { return }
+
+        if gender == false && phrase == "Cloudy" && feelsLikeTemp >= 90 {
+            weatherImageView.image = UIImage(named: "female_cloudy_shortsshirtsunglassescap") // f
+        }
+        else if gender == true && phrase == "Cloudy" && feelsLikeTemp >= 90{
+            weatherImageView.image = UIImage(named: "Male_Cloudy_shortsshirt") //m
+        }
+        else if gender == false && phrase == "Partly Cloudy" && 70...89 ~= feelsLikeTemp {
+            weatherImageView.image = UIImage(named: "female_partlycloudy_shortsshirt") // f
+        }
+        else if gender == true && phrase == "Partly Cloudy" && 70...89 ~= feelsLikeTemp {
+            weatherImageView.image = UIImage(named: "Male_Partlycloudy_shortsshirt") // m
+        }
+        else if gender == true && phrase == "Cloudy" && 70...89 ~= feelsLikeTemp {
+            weatherImageView.image = UIImage(named: "Male_Cloudy_shortsshirt") //m
+        }
+        else if gender == true && phrase == "Partly Cloudy" && 60...69 ~= feelsLikeTemp {
+            weatherImageView.image = UIImage(named: "Male_Partlycloudy_pantscoat") //m
+        }
+        else if gender == false && phrase == "Partly Cloudy" && 60...69 ~= feelsLikeTemp {
+            weatherImageView.image = UIImage(named: "female_partlycloudy_pantscoat") //f
+        }
+        else {
+            weatherImageView.image = UIImage(named: "female_clearday_pantscoat")
+        }
+
+    }
     
     
     //MARK: - Weather Info Methods
@@ -121,24 +159,35 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     //MARK: - Collection View Methods
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let dailyWeather = trip?.location?.weather?.dailyForecasts?.count else { return 0 }
-        return dailyWeather
+        guard let dailyForecastsCount = trip?.location?.weather?.dailyForecasts?.count else { return 0 }
+        return dailyForecastsCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: "forecastCell", for: indexPath) as? ForecastCollectionViewCell else { return UICollectionViewCell() }
-        guard let daily = trip?.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast, let days = daily.dow else { return UICollectionViewCell() }
+        guard let daily = trip?.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast,
+            let days = daily.dow else { return UICollectionViewCell() }
 
         
         cell.dateLabel.text = "\(days)"
         
-        cell.lowTempLabel.text = "\(daily.lowTemp )"
+        cell.lowTempLabel.text = "\(daily.lowTemp)"
         cell.highTempLabel.text = daily.maxTemp != nil ? "\(daily.maxTemp)" : "N/A"
         
         
         return cell
     }
-   
 
+}
+
+extension TripInformationViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let collectionWidth = forecastCollectionView.bounds.width
+        let collectionHeight = forecastCollectionView.bounds.height
+        
+        
+        return CGSize(width: collectionWidth * 0.95, height: collectionHeight * 0.10)
+    }
 }
