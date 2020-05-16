@@ -50,7 +50,7 @@
                                                                     </attributedString>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm Frequency and Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUQ-Ab-366">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm Frequency and Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EUQ-Ab-366">
                                                                     <rect key="frame" x="0.0" y="62" width="205.5" height="29"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -268,8 +268,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gZk-dr-vmx">
-                                <rect key="frame" x="32" y="239" width="124" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gZk-dr-vmx">
+                                <rect key="frame" x="32" y="239" width="161.5" height="34"/>
                                 <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -281,7 +281,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3VZ-BT-Xng">
-                                <rect key="frame" x="32" y="322" width="124" height="34"/>
+                                <rect key="frame" x="32" y="322" width="161.5" height="34"/>
                                 <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -316,7 +316,7 @@
                             <constraint firstItem="Zw6-qa-OTk" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="20" id="Aop-KF-zWd"/>
                             <constraint firstItem="gZk-dr-vmx" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="32" id="CqH-se-fPa"/>
                             <constraint firstItem="HmJ-og-tZ4" firstAttribute="top" secondItem="myS-lj-T5V" secondAttribute="bottom" constant="16" id="Cwh-TY-VTh"/>
-                            <constraint firstItem="gZk-dr-vmx" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.33" id="ITX-Lp-9AF"/>
+                            <constraint firstItem="gZk-dr-vmx" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.43" id="ITX-Lp-9AF"/>
                             <constraint firstItem="wT4-z8-jXX" firstAttribute="centerY" secondItem="Zsk-pE-xyu" secondAttribute="centerY" multiplier="1.75" id="Ilv-wn-CbV"/>
                             <constraint firstItem="BWB-Oa-srj" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="32" id="JRS-O6-h7m"/>
                             <constraint firstItem="HA4-r2-wcn" firstAttribute="height" secondItem="JQL-Pe-VJW" secondAttribute="height" multiplier="0.075" id="JeL-ub-WAm"/>
@@ -331,7 +331,7 @@
                             <constraint firstItem="wT4-z8-jXX" firstAttribute="width" secondItem="JQL-Pe-VJW" secondAttribute="width" multiplier="0.45" id="lQO-YT-3y0"/>
                             <constraint firstItem="3VZ-BT-Xng" firstAttribute="top" secondItem="BWB-Oa-srj" secondAttribute="bottom" constant="8" id="lwr-PP-xDv"/>
                             <constraint firstItem="fSq-Wx-z1S" firstAttribute="centerY" secondItem="Zsk-pE-xyu" secondAttribute="centerY" multiplier="0.075" id="n0l-OG-TvE"/>
-                            <constraint firstItem="3VZ-BT-Xng" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.33" id="rmQ-BT-HVJ"/>
+                            <constraint firstItem="3VZ-BT-Xng" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.43" id="rmQ-BT-HVJ"/>
                             <constraint firstItem="3VZ-BT-Xng" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="32" id="vSG-Af-f6H"/>
                             <constraint firstItem="wT4-z8-jXX" firstAttribute="height" secondItem="JQL-Pe-VJW" secondAttribute="height" multiplier="0.167" id="xXy-DV-F1w"/>
                             <constraint firstItem="HA4-r2-wcn" firstAttribute="top" secondItem="JQL-Pe-VJW" secondAttribute="top" id="yUI-tX-1gE"/>

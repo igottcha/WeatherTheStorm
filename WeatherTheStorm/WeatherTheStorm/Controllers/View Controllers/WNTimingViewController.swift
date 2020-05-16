@@ -67,7 +67,7 @@ class WNTimingViewController: UIViewController {
     @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {
         setNotificationButton.isHidden = false
         self.view.endEditing(true)
-        repeatTextField.text = "Every \(sortWeekdayArray().compactMap({$0}).joined(separator: ", "))"
+        repeatTextField.text = "\(sortWeekdayArray().compactMap({$0}).joined(separator: ", "))"
     }
     
     
@@ -76,7 +76,8 @@ class WNTimingViewController: UIViewController {
     func sortWeekdayArray() -> [String] {
         guard let week = DateFormatter().weekdaySymbols else { return [] }
         let frequencies = WeatherNotificationController.shared.frequencies
-        return frequencies.sorted { week.firstIndex(of: $0)! < week.firstIndex(of: $1)!}
+        let sortedFrequencies = frequencies.sorted { week.firstIndex(of: $0)! < week.firstIndex(of: $1)!}
+        return sortedFrequencies.map { String($0.prefix(3)) }
     }
     
     func updateView() {
@@ -102,7 +103,7 @@ class WNTimingViewController: UIViewController {
     
     func createTimePicker() {
         
-        timeTextField.textAlignment = .center
+        timeTextField.textAlignment = .left
         
         let timePickerToolBar = UIToolbar()
         timePickerToolBar.sizeToFit()
@@ -123,7 +124,7 @@ class WNTimingViewController: UIViewController {
     
     func createDatePicker() {
         
-        repeatTextField.textAlignment = .center
+        repeatTextField.textAlignment = .left
         datePickerToolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(dateDonePressed))
