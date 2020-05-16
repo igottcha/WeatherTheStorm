@@ -80,7 +80,7 @@ class WNListTableViewController: UITableViewController {
         cell.nameLabel.text = weatherNotification.name
         cell.addressLabel.text = "\(weatherNotification.location?.city ?? ""), \(weatherNotification.location?.state ?? ""), \(weatherNotification.location?.country ?? "")"
         if weatherNotification.location?.type != "Trip" {
-        cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")), at \(time)"
+        cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")) at \(time)"
         } else {
             cell.frequencyAndTimeLabel.text = "On \(weatherNotification.specificDate?.formatDate() ?? "TBD") at \(time)"
         }
