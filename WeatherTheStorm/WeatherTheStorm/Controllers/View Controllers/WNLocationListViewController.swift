@@ -17,6 +17,8 @@ class WNLocationListViewController: UIViewController {
     @IBOutlet weak var closeViewBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var locationListTableView: UITableView!
     
+    //MARK: - Properties
+        
     //MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -29,10 +31,9 @@ class WNLocationListViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func closeViewButtonTapped(_ sender: UIBarButtonItem) {
-            self.dismiss(animated: true) {
+        self.dismiss(animated: true) {
                 print("successfully dismissed")
             }
-            //self.navigationController?.popToRootViewController(animated: true)
     }
     
     // MARK: - Navigation
@@ -78,6 +79,7 @@ extension WNLocationListViewController: UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reminderLocationCell", for: indexPath)
+        cell.selectionStyle = .none
         guard let locations = LocationController.shared.sortedLocations else { return UITableViewCell() }
         let location = locations[indexPath.section][indexPath.row]
         guard let city = location.city, let state = location.state, let country = location.country else { return UITableViewCell() }

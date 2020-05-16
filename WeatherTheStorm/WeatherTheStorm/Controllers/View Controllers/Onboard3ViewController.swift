@@ -131,7 +131,7 @@ extension Onboard3ViewController : UISearchBarDelegate {
             switch (result) {
                 
             case .success(let placeMark):
-            guard let userHome = LocationController.shared.createLocation(destination: placeMark) else { return }
+                guard let userHome = LocationController.shared.createLocation(destination: placeMark, type: LocationType.home) else { return }
             print(userHome)
             HomeController.shared.homeLocation = userHome
             

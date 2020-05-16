@@ -37,6 +37,7 @@
         <attribute name="latitude" attributeType="String"/>
         <attribute name="longitude" attributeType="String"/>
         <attribute name="state" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="location" inverseEntity="Trip"/>
         <relationship name="weather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather"/>
         <relationship name="weatherNotification" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="WeatherNotification" inverseName="location" inverseEntity="WeatherNotification"/>
@@ -66,7 +67,7 @@
         <element name="Current" positionX="-18" positionY="99" width="128" height="208"/>
         <element name="DailyForecast" positionX="-9" positionY="162" width="128" height="163"/>
         <element name="HourlyForecast" positionX="0" positionY="171" width="128" height="133"/>
-        <element name="Location" positionX="-36" positionY="9" width="128" height="163"/>
+        <element name="Location" positionX="-36" positionY="9" width="128" height="178"/>
         <element name="Trip" positionX="-18" positionY="27" width="128" height="103"/>
         <element name="Weather" positionX="-27" positionY="90" width="128" height="103"/>
         <element name="WeatherNotification" positionX="-27" positionY="45" width="128" height="148"/>

@@ -97,7 +97,7 @@
 		9E83BF862465BB5F00B3830E /* Work Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Work Controller.swift"; path = "WeatherTheStorm/Work Controller.swift"; sourceTree = SOURCE_ROOT; };
 		9E83BF882465BB6B00B3830E /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeController.swift; path = WeatherTheStorm/HomeController.swift; sourceTree = SOURCE_ROOT; };
 		9E83BF8A2465F27B00B3830E /* WNTimingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WNTimingViewController.swift; sourceTree = "<group>"; };
-		9E8700E824535C8C005AD32A /* WeatherTheStorm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherTheStorm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E8700E824535C8C005AD32A /* Weather Wear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Wear.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8700EB24535C8C005AD32A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E8700ED24535C8C005AD32A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9E8700F224535C8C005AD32A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 		9E8700E924535C8C005AD32A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9E8700E824535C8C005AD32A /* WeatherTheStorm.app */,
+				9E8700E824535C8C005AD32A /* Weather Wear.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -248,7 +248,10 @@
 				E9459B2D246D984D008B144A /* HomeDailyForecastTableViewCell.swift */,
 				4E92285F246B30E100136C5B /* TripInformationViewController.swift */,
 				4E922861246B349500136C5B /* ForecastCollectionViewCell.swift */,
+
 				E9459B2F246E1848008B144A /* HourlyForecastDetailCollectionViewCell.swift */,
+
+
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -299,7 +302,7 @@
 			);
 			name = WeatherTheStorm;
 			productName = WeatherTheStorm;
-			productReference = 9E8700E824535C8C005AD32A /* WeatherTheStorm.app */;
+			productReference = 9E8700E824535C8C005AD32A /* Weather Wear.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -560,7 +563,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Gottfredson.WeatherTheStorm;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Weather Wear";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -578,7 +581,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Gottfredson.WeatherTheStorm;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Weather Wear";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -1,11 +1,15 @@
 {
   "images" : [
     {
+
+      "filename" : "clothing preference pop-up.png",
+
       "idiom" : "universal",
       "scale" : "1x"
     },
-    {
+
       "filename" : "clothing preference pop-up.png",
+
       "idiom" : "universal",
       "scale" : "2x"
     },

@@ -84,9 +84,9 @@ class LocationController {
     
     //MARK: - CRUD Function
     
-    func createLocation(destination: CLPlacemark) -> Location? {
+    func createLocation(destination: CLPlacemark, type: LocationType) -> Location? {
         guard let city = destination.locality, let state = destination.administrativeArea, let country = destination.country, let latitude = destination.location?.coordinate.latitude.description, let longitude = destination.location?.coordinate.longitude.description else { return nil}
-        let location = Location(city: city, state: state, country: country, latitutde: latitude, longitude: longitude, weather: nil)
+        let location = Location(type: type.rawValue, city: city, state: state, country: country, latitutde: latitude, longitude: longitude, weather: nil)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         return location
     }
