@@ -41,6 +41,7 @@ class TripDetailViewController: UIViewController {
                 case .success(let placemark):
                     guard let location = LocationController.shared.createLocation(destination: placemark, type: LocationType.trip) else { return }
                     TripController.shared.createTrip(startDate: startDate, endDate: endDate, location: location)
+                    WeatherNotificationController.shared.createWeatherNotification(location: location, name: "Trip")
                 case .failure(let error):
                     print("Error getting the location of the trip: \(error)")
                 }

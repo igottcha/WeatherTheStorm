@@ -28,6 +28,18 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    func short() -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter.string(from: self)
+    }
+    
+    func time() -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        return formatter.string(from: self)
+    }
+    
     func hour() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "h a"

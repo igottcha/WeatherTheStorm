@@ -94,6 +94,7 @@ extension WNLocationListViewController: UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reminderLocationCell", for: indexPath)
+        cell.selectionStyle = .none
         guard let locations = LocationController.shared.sortedLocations else { return UITableViewCell() }
         let location = locations[indexPath.section][indexPath.row]
         guard let city = location.city, let state = location.state, let country = location.country else { return UITableViewCell() }

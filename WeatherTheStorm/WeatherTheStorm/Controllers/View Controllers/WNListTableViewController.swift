@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 class WNListTableViewController: UITableViewController {
 
@@ -24,13 +25,15 @@ class WNListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateEmptyState()
         tableView.backgroundView = previewView
+        //DataManager.shared.firstVC = self
+        updateEmptyState()
         setGradientBackground()
+        WeatherNotificationController.shared.fetchedResultsController.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         updateEmptyState()
         tableView.reloadData()
     }
@@ -52,15 +55,24 @@ class WNListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count ?? 0
-        
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell, let data = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath).frequency else { return UITableViewCell() }
+       guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell else { return UITableViewCell() }
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.clear
+        cell.selectedBackgroundView = backgroundView
         
         let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
+        let frequency: [String]
         
-        let frequency: [String] = try! JSONDecoder().decode([String].self, from: data) ?? ["TBD"]
+        if let data = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath).frequency {
+            frequency = try! JSONDecoder().decode([String].self, from: data)
+        } else {
+            frequency = ["TBD"]
+        }
+        
         let time = weatherNotification.time?.hour() ?? Date().hour()
         
         cell.boxView.layer.cornerRadius = 7
@@ -77,40 +89,14 @@ class WNListTableViewController: UITableViewController {
         cell?.backgroundColor = .clear
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
+            WeatherNotificationController.shared.deleteWeatherNotificaiton(weatherNotification: weatherNotification)
         }    
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation
@@ -121,5 +107,51 @@ class WNListTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+extension WNListTableViewController: NSFetchedResultsControllerDelegate {
+
+func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.beginUpdates()
+}
+
+func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.endUpdates()
+}
+
+func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    
+    switch type {
+    case .delete:
+        guard let indexPath = indexPath else { break }
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    case .insert:
+        guard let newIndexPath = newIndexPath else { break }
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+    case .move:
+        guard let fromIndexPath = indexPath, let newIndexPath = newIndexPath else { break }
+        tableView.moveRow(at: fromIndexPath, to: newIndexPath)
+    case .update:
+        guard let indexPath = indexPath else { break }
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    @unknown default:
+        fatalError()
+    }
+}
+
+func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+    switch type {
+    case .delete:
+        tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+    case .insert:
+        tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+    case .move:
+        break
+    case .update:
+        break
+    @unknown default:
+        fatalError()
+    }
+}
 
 }

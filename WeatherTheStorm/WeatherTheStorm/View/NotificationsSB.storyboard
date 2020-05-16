@@ -12,7 +12,7 @@
         <scene sceneID="YF6-8u-H2h">
             <objects>
                 <tableViewController id="nMu-6d-IvL" customClass="WNListTableViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="133-Uo-GUx">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="133-Uo-GUx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -44,7 +44,7 @@
                                                                     <attributedString key="attributedText">
                                                                         <fragment content="City, State">
                                                                             <attributes>
-                                                                                <font key="NSFont" metaFont="label" size="17"/>
+                                                                                <font key="NSFont" metaFont="system" size="17"/>
                                                                             </attributes>
                                                                         </fragment>
                                                                     </attributedString>
@@ -252,37 +252,37 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the selected Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="398-Uz-kNC">
-                                <rect key="frame" x="28" y="92" width="319" height="21"/>
+                                <rect key="frame" x="28" y="100" width="319" height="21"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When would you like to receive this weather notification?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myS-lj-T5V">
-                                <rect key="frame" x="20" y="121" width="335" height="41"/>
+                                <rect key="frame" x="20" y="153" width="335" height="41"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmJ-og-tZ4">
-                                <rect key="frame" x="45" y="170" width="40" height="21"/>
+                                <rect key="frame" x="32" y="210" width="40" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gZk-dr-vmx">
-                                <rect key="frame" x="54" y="207" width="94" height="34"/>
+                                <rect key="frame" x="32" y="239" width="124" height="34"/>
                                 <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWB-Oa-srj">
-                                <rect key="frame" x="45" y="261" width="57" height="21"/>
+                                <rect key="frame" x="32" y="293" width="57" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3VZ-BT-Xng">
-                                <rect key="frame" x="54" y="290" width="281.5" height="34"/>
+                                <rect key="frame" x="32" y="322" width="124" height="34"/>
                                 <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -291,16 +291,8 @@
                                     <action selector="repeatTextFieldDidBeginEditing:" destination="F4r-Zt-84f" eventType="editingDidBegin" id="BVd-iA-Suw"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wT4-z8-jXX">
-                                <rect key="frame" x="178" y="516" width="169" height="100"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Set Notification"/>
-                                <connections>
-                                    <action selector="setNotificationButtonTapped:" destination="F4r-Zt-84f" eventType="touchUpInside" id="3fQ-SV-hQG"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="34" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NSr-zW-rLD">
-                                <rect key="frame" x="0.0" y="372" width="375" height="275"/>
+                                <rect key="frame" x="0.0" y="404" width="375" height="243"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <toolbar key="tableHeaderView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="OoV-Lr-NHs">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -336,6 +328,14 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wT4-z8-jXX">
+                                <rect key="frame" x="178" y="516" width="169" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Set Notification"/>
+                                <connections>
+                                    <action selector="setNotificationButtonTapped:" destination="F4r-Zt-84f" eventType="touchUpInside" id="3fQ-SV-hQG"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Notification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSq-Wx-z1S">
                                 <rect key="frame" x="117.5" y="14" width="140.5" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -345,20 +345,20 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="398-Uz-kNC" firstAttribute="top" secondItem="Zw6-qa-OTk" secondAttribute="bottom" constant="8" id="1g6-A4-Ngx"/>
+                            <constraint firstItem="398-Uz-kNC" firstAttribute="top" secondItem="Zw6-qa-OTk" secondAttribute="bottom" constant="16" id="1g6-A4-Ngx"/>
                             <constraint firstItem="wT4-z8-jXX" firstAttribute="centerX" secondItem="Zsk-pE-xyu" secondAttribute="centerX" multiplier="1.4" id="6gP-tR-EY0"/>
-                            <constraint firstItem="HmJ-og-tZ4" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="45" id="7X5-1x-f7d"/>
+                            <constraint firstItem="HmJ-og-tZ4" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="32" id="7X5-1x-f7d"/>
                             <constraint firstItem="BWB-Oa-srj" firstAttribute="top" secondItem="gZk-dr-vmx" secondAttribute="bottom" constant="20" id="7hC-p6-sRR"/>
                             <constraint firstItem="Zw6-qa-OTk" firstAttribute="top" secondItem="HA4-r2-wcn" secondAttribute="bottom" constant="18" id="98M-wN-6v1"/>
                             <constraint firstItem="398-Uz-kNC" firstAttribute="centerX" secondItem="JQL-Pe-VJW" secondAttribute="centerX" id="9mQ-YG-3rT"/>
                             <constraint firstItem="Zw6-qa-OTk" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="20" id="Aop-KF-zWd"/>
-                            <constraint firstItem="gZk-dr-vmx" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="54" id="CqH-se-fPa"/>
-                            <constraint firstItem="HmJ-og-tZ4" firstAttribute="top" secondItem="myS-lj-T5V" secondAttribute="bottom" constant="8" id="Cwh-TY-VTh"/>
-                            <constraint firstItem="gZk-dr-vmx" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.25" id="ITX-Lp-9AF"/>
+                            <constraint firstItem="gZk-dr-vmx" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="32" id="CqH-se-fPa"/>
+                            <constraint firstItem="HmJ-og-tZ4" firstAttribute="top" secondItem="myS-lj-T5V" secondAttribute="bottom" constant="16" id="Cwh-TY-VTh"/>
+                            <constraint firstItem="gZk-dr-vmx" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.33" id="ITX-Lp-9AF"/>
                             <constraint firstItem="wT4-z8-jXX" firstAttribute="centerY" secondItem="Zsk-pE-xyu" secondAttribute="centerY" multiplier="1.75" id="Ilv-wn-CbV"/>
-                            <constraint firstItem="BWB-Oa-srj" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="45" id="JRS-O6-h7m"/>
+                            <constraint firstItem="BWB-Oa-srj" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="32" id="JRS-O6-h7m"/>
                             <constraint firstItem="HA4-r2-wcn" firstAttribute="height" secondItem="JQL-Pe-VJW" secondAttribute="height" multiplier="0.075" id="JeL-ub-WAm"/>
-                            <constraint firstItem="myS-lj-T5V" firstAttribute="top" secondItem="398-Uz-kNC" secondAttribute="bottom" constant="8" id="Msn-Kg-qer"/>
+                            <constraint firstItem="myS-lj-T5V" firstAttribute="top" secondItem="398-Uz-kNC" secondAttribute="bottom" constant="32" id="Msn-Kg-qer"/>
                             <constraint firstItem="JQL-Pe-VJW" firstAttribute="trailing" secondItem="myS-lj-T5V" secondAttribute="trailing" constant="20" id="V8K-Pl-Apc"/>
                             <constraint firstItem="NSr-zW-rLD" firstAttribute="top" secondItem="3VZ-BT-Xng" secondAttribute="bottom" priority="750" constant="48" id="VDy-Rv-nh0"/>
                             <constraint firstItem="NSr-zW-rLD" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" id="YYh-Q8-MKb"/>
@@ -366,14 +366,14 @@
                             <constraint firstItem="HA4-r2-wcn" firstAttribute="leading" secondItem="Zsk-pE-xyu" secondAttribute="leading" id="bvg-gF-0XC"/>
                             <constraint firstItem="398-Uz-kNC" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.85" id="goC-Je-ygY"/>
                             <constraint firstItem="myS-lj-T5V" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="20" id="i3j-n5-UNr"/>
-                            <constraint firstItem="gZk-dr-vmx" firstAttribute="top" secondItem="HmJ-og-tZ4" secondAttribute="bottom" constant="16" id="ja5-wt-L6R"/>
+                            <constraint firstItem="gZk-dr-vmx" firstAttribute="top" secondItem="HmJ-og-tZ4" secondAttribute="bottom" constant="8" id="ja5-wt-L6R"/>
                             <constraint firstItem="fSq-Wx-z1S" firstAttribute="centerX" secondItem="Zsk-pE-xyu" secondAttribute="centerX" id="jfO-qO-hGc"/>
                             <constraint firstItem="wT4-z8-jXX" firstAttribute="width" secondItem="JQL-Pe-VJW" secondAttribute="width" multiplier="0.45" id="lQO-YT-3y0"/>
                             <constraint firstItem="3VZ-BT-Xng" firstAttribute="top" secondItem="BWB-Oa-srj" secondAttribute="bottom" constant="8" id="lwr-PP-xDv"/>
                             <constraint firstItem="fSq-Wx-z1S" firstAttribute="centerY" secondItem="Zsk-pE-xyu" secondAttribute="centerY" multiplier="0.075" id="n0l-OG-TvE"/>
-                            <constraint firstItem="3VZ-BT-Xng" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.75" id="rmQ-BT-HVJ"/>
+                            <constraint firstItem="3VZ-BT-Xng" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.33" id="rmQ-BT-HVJ"/>
                             <constraint firstItem="NSr-zW-rLD" firstAttribute="trailing" secondItem="JQL-Pe-VJW" secondAttribute="trailing" id="taM-oD-TrD"/>
-                            <constraint firstItem="3VZ-BT-Xng" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="54" id="vSG-Af-f6H"/>
+                            <constraint firstItem="3VZ-BT-Xng" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="32" id="vSG-Af-f6H"/>
                             <constraint firstAttribute="bottom" secondItem="NSr-zW-rLD" secondAttribute="bottom" id="vXj-kh-Uxb"/>
                             <constraint firstItem="wT4-z8-jXX" firstAttribute="height" secondItem="JQL-Pe-VJW" secondAttribute="height" multiplier="0.167" id="xXy-DV-F1w"/>
                             <constraint firstItem="HA4-r2-wcn" firstAttribute="top" secondItem="JQL-Pe-VJW" secondAttribute="top" id="yUI-tX-1gE"/>
@@ -391,6 +391,7 @@
                         <outlet property="addNotificationLabel" destination="fSq-Wx-z1S" id="car-sb-KT0"/>
                         <outlet property="addressLabel" destination="398-Uz-kNC" id="zZF-Ro-msE"/>
                         <outlet property="daysOfTheWeekTableView" destination="NSr-zW-rLD" id="rza-lr-gd5"/>
+                        <outlet property="repeatLabel" destination="BWB-Oa-srj" id="MxL-W1-jiE"/>
                         <outlet property="repeatTextField" destination="3VZ-BT-Xng" id="xdX-iP-Asu"/>
                         <outlet property="setNotificationButton" destination="wT4-z8-jXX" id="LOx-Fk-7T7"/>
                         <outlet property="tableViewToolBar" destination="OoV-Lr-NHs" id="aoO-iz-fgO"/>

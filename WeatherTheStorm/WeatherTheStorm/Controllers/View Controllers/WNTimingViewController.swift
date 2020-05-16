@@ -15,6 +15,7 @@ class WNTimingViewController: UIViewController {
     @IBOutlet weak var addNotificationLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var timeTextField: UITextField!
+    @IBOutlet weak var repeatLabel: UILabel!
     @IBOutlet weak var repeatTextField: UITextField!
     @IBOutlet weak var tableViewToolBar: UIToolbar!
     @IBOutlet weak var daysOfTheWeekTableView: UITableView!
@@ -24,7 +25,10 @@ class WNTimingViewController: UIViewController {
     
     var location: Location?
     var section: String?
+    let timePicker = UIDatePicker()
+    let timePickerToolBar = UIToolbar()
     let datePicker = UIDatePicker()
+    let datePickerToolBar = UIToolbar()
     let name = Notification.Name("didReceiveData")
     
     //MARK: -  Lifecycle
@@ -32,10 +36,8 @@ class WNTimingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         daysOfTheWeekTableView.isHidden = true
-        daysOfTheWeekTableView.delegate = self
-        daysOfTheWeekTableView.dataSource = self
         updateView()
-        createDatePicker()
+        createTimePicker()
         setNotificationButton.layer.cornerRadius = 7
         setNotificationButton.isHidden = true
     }
@@ -53,11 +55,12 @@ class WNTimingViewController: UIViewController {
     @IBAction func setNotificationButtonTapped(_ sender: UIButton) {
         guard let location = location, let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification else { return }
         let frequency = sortWeekdayArray()
-        WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: frequency, specificDate: nil, time: datePicker.date)
+        WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: frequency, specificDate: nil, time: timePicker.date)
         //setAlertNotification(location: location)
         print(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count)
         DispatchQueue.main.async {
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            //DataManager.shared.firstVC.tableView.reloadData()
         }
     }
     @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {
@@ -80,28 +83,59 @@ class WNTimingViewController: UIViewController {
         guard let section = section, let city = location?.city, let state = location?.state, let country = location?.country else { return }
         addNotificationLabel.text = "Add \(section) Notification"
         addressLabel.text = "\(city), \(state), \(country)"
+        
+        if section == "Trip" {
+            createDatePicker()
+            repeatLabel.text = "Date"
+            repeatTextField.inputAccessoryView = datePickerToolBar
+            repeatTextField.inputView = datePicker
+            tableViewToolBar.isHidden = true
+        } else {
+            repeatLabel.text = "Repeat"
+            daysOfTheWeekTableView.delegate = self
+            daysOfTheWeekTableView.dataSource = self
+            repeatTextField.inputAccessoryView = tableViewToolBar
+            repeatTextField.inputView = daysOfTheWeekTableView
+        }
+
     }
     
     //MARK: - DatePicker
     
-    func createDatePicker() {
+    func createTimePicker() {
         
         timeTextField.textAlignment = .center
         
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
+        let timePickerToolBar = UIToolbar()
+        timePickerToolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-        toolBar.setItems([doneButton], animated: true)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(timeDonePressed))
+        timePickerToolBar.setItems([doneButton], animated: true)
         
-        timeTextField.inputAccessoryView = toolBar
-        timeTextField.inputView = datePicker
+        timeTextField.inputAccessoryView = timePickerToolBar
+        timeTextField.inputView = timePicker
         
-        datePicker.datePickerMode = .time
+        timePicker.datePickerMode = .time
     }
     
-    @objc func donePressed() {
-        timeTextField.text = "\(datePicker.date.hour())"
+    @objc func timeDonePressed() {
+        timeTextField.text = "\(timePicker.date.time())"
+        self.view.endEditing(true)
+    }
+    
+    func createDatePicker() {
+        
+        repeatTextField.textAlignment = .center
+        datePickerToolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(dateDonePressed))
+        datePickerToolBar.setItems([doneButton], animated: true)
+        datePicker.datePickerMode = .date
+    }
+    
+    @objc func dateDonePressed() {
+        repeatTextField.text = "\(datePicker.date.formatDate())"
+        setNotificationButton.isHidden = false
         self.view.endEditing(true)
     }
     
@@ -178,10 +212,7 @@ extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
         
         let tableViewDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(tableViewDonePressed))
         tableViewToolBar.setItems([tableViewDoneButton], animated: true)
-        
         repeatTextField.textAlignment = .left
-        repeatTextField.inputAccessoryView = tableViewToolBar
-        repeatTextField.inputView = daysOfTheWeekTableView
         return tableViewToolBar
     }
     
