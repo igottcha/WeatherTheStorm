@@ -52,9 +52,14 @@ class WNTimingViewController: UIViewController {
     @IBAction func setNotificationButtonTapped(_ sender: UIButton) {
         guard let location = location, let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification else { return }
         let frequency = sortWeekdayArray()
-        WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: frequency, specificDate: nil, time: timePicker.date)
+        if section == "Trip" {
+            WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: [], specificDate: datePicker.date, time: timePicker.date)
+            
+        } else {
+            WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: frequency, specificDate: nil, time: timePicker.date)
+        }
         //setAlertNotification(location: location)
-        print(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count)
+        WeatherNotificationController.shared.frequencies = []
         DispatchQueue.main.async {
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
         }
@@ -84,12 +89,10 @@ class WNTimingViewController: UIViewController {
             repeatLabel.text = "Date"
             repeatTextField.inputAccessoryView = datePickerToolBar
             repeatTextField.inputView = datePicker
-            //tableViewToolBar.isHidden = true
         } else {
             repeatLabel.text = "Repeat"
             daysOfTheWeekTableView.delegate = self
             daysOfTheWeekTableView.dataSource = self
-            //repeatTextField.inputAccessoryView = tableViewToolBar
             repeatTextField.inputView = daysOfTheWeekView
         }
 

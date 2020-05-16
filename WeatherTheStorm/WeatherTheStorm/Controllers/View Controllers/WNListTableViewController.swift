@@ -73,14 +73,17 @@ class WNListTableViewController: UITableViewController {
             frequency = ["TBD"]
         }
         
-        let time = weatherNotification.time?.hour() ?? Date().hour()
+        let time = weatherNotification.time?.time() ?? Date().hour()
         
         cell.boxView.layer.cornerRadius = 7
         cell.isNotificationActiveSwitch.isOn = weatherNotification.isActive
         cell.nameLabel.text = weatherNotification.name
         cell.addressLabel.text = "\(weatherNotification.location?.city ?? ""), \(weatherNotification.location?.state ?? ""), \(weatherNotification.location?.country ?? "")"
+        if weatherNotification.location?.type != "Trip" {
         cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")), at \(time)"
-
+        } else {
+            cell.frequencyAndTimeLabel.text = "On \(weatherNotification.specificDate?.formatDate() ?? "TBD") at \(time)"
+        }
         return cell
     }
     
