@@ -38,6 +38,11 @@ class WeatherNotificationController {
     
     func toggleIsActive(weatherNotifcation: WeatherNotification) {
         weatherNotifcation.isActive = !weatherNotifcation.isActive
+        if weatherNotifcation.isActive {
+            
+        } else {
+            
+        }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     

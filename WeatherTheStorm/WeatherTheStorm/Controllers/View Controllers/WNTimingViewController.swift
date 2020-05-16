@@ -65,7 +65,7 @@ class WNTimingViewController: UIViewController {
         DispatchQueue.main.async {
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
             //MARK: - the notification trigger function called here
-            self.scheduleUserNotification(fireDate: self.datePicker.date, fireTime: self.timePicker.date)
+            self.scheduleUserNotification(for: weatherNotification)
         }
     }
     
@@ -74,10 +74,8 @@ class WNTimingViewController: UIViewController {
         if let timeText = timeTextField?.text, !timeText.isEmpty {
             setNotificationButton.isHidden = false
         }
-        
         self.view.endEditing(true)
     }
-    
     
     //MARK: - Methods
     
@@ -157,7 +155,7 @@ class WNTimingViewController: UIViewController {
     
     //MARK: - Notification Alert Controller
     
-    func setAlertNotification(location: Location) {
+    func setAlertNotification(for location: Location) {
 
         guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification,
             let weather = location.weather,
@@ -176,13 +174,19 @@ class WNTimingViewController: UIViewController {
         self.present(self, animated: true, completion: nil)
     }
     
-    func scheduleUserNotification(fireDate: Date, fireTime: Date) {
+    func scheduleUserNotification(for weatherNotification: WeatherNotification) {
         //Pass in fire date argument in the function parameter (maybe the parameter needs to be changed)
         
-        guard let city = location?.city,
-            let weather = location?.weather,
+        guard let location = weatherNotification.location,
+            let city = location.city,
+            let weather = location.weather,
+            let type = location.type,
             let weatherPhrase = weather.current?.phrase,
-            let feelsLikeTemp = weather.current?.feelsLike else { return }
+            let feelsLikeTemp = weather.current?.feelsLike,
+            let fireTime = weatherNotification.time,
+            let fireDate = weatherNotification.specificDate else { return }
+        
+        let identifier = "\(city)\(type)"
         
         let content = UNMutableNotificationContent()
         content.title = "Your trip to \(city) is coming up!!!"
@@ -199,7 +203,7 @@ class WNTimingViewController: UIViewController {
         components.minute = timeComponents.minute
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-        let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
             if error != nil {
