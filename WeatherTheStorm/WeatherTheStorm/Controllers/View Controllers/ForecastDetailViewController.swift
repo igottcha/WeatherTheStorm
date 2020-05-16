@@ -22,6 +22,7 @@ class ForecastDetailViewController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var phraseLabel: UILabel!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var highLabel: UILabel!
@@ -49,6 +50,7 @@ class ForecastDetailViewController: UIViewController {
         dailyForecastTableView.dataSource = self
         hourlyForecastCollectionView.delegate = self
         hourlyForecastCollectionView.dataSource = self
+        scrollView.delegate = self
         setupDateLabel()
         makeEdgesRound()
         
@@ -230,6 +232,10 @@ extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionVi
         return layout.itemSize
     }
     
+    
+}
+
+extension ForecastDetailViewController: UIScrollViewDelegate {
     
 }
 

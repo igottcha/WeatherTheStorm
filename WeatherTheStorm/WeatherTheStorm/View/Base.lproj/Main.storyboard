@@ -112,7 +112,7 @@
         <scene sceneID="djB-cF-3T7">
             <objects>
                 <viewController id="TQA-xt-3x3" customClass="Onboard2ViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BmP-eN-1lq">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="GenderScreen" id="BmP-eN-1lq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -249,7 +249,7 @@
         <scene sceneID="VFK-th-l6a">
             <objects>
                 <viewController id="e19-G1-LLA" customClass="Onboard3ViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8LW-Ue-Gig">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="LocationScreen" id="8LW-Ue-Gig">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -332,7 +332,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="2I9-2l-kjJ">
             <objects>
-                <tabBarController id="BK0-i4-bfj" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="WelcomeSB" id="BK0-i4-bfj" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="T7f-TO-N9l"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Wp-UW-yRj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -392,7 +392,7 @@
         <!--Navigation Controller-->
         <scene sceneID="KSY-sS-QBY">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="x9y-Ub-ZZb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="WeatherWearSB" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="x9y-Ub-ZZb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="C9b-zl-ivX">
