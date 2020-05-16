@@ -11,13 +11,13 @@
         <!--Notifications-->
         <scene sceneID="YF6-8u-H2h">
             <objects>
-                <tableViewController id="nMu-6d-IvL" customClass="WNListTableViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="nMu-6d-IvL" customClass="WNListTableViewController" customModule="Weather_Wear" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="133-Uo-GUx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="boxCell" rowHeight="195" id="PwF-D5-teV" customClass="WNTableViewCell" customModule="WeatherTheStorm" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="boxCell" rowHeight="195" id="PwF-D5-teV" customClass="WNTableViewCell" customModule="Weather_Wear" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="195"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PwF-D5-teV" id="OZm-FW-mza">
@@ -62,7 +62,7 @@
                                                             <rect key="frame" x="246" y="67.5" width="51" height="31"/>
                                                             <connections>
                                                                 <action selector="activeSwitchToggled:" destination="PwF-D5-teV" eventType="valueChanged" id="r5C-ha-idR"/>
-                                                                <action selector="isActiveSwitch:" destination="PwF-D5-teV" eventType="valueChanged" id="63X-th-6HS"/>
+                                                                <action selector="isActiveSwitchToggled:" destination="PwF-D5-teV" eventType="valueChanged" id="63X-th-6HS"/>
                                                             </connections>
                                                         </switch>
                                                     </subviews>
@@ -101,7 +101,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Notifications" id="A0Y-ve-2wY">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="9gf-2X-rct"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5jE-Pf-47k">
                             <connections>
                                 <segue destination="b33-mq-e8a" kind="presentation" id="J6A-7o-0Ks"/>
@@ -140,7 +139,7 @@
         <!--Location List View Controller-->
         <scene sceneID="DD9-7X-JtP">
             <objects>
-                <viewController id="b33-mq-e8a" customClass="WNLocationListViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="b33-mq-e8a" customClass="WNLocationListViewController" customModule="Weather_Wear" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nTq-TX-PiC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -228,7 +227,7 @@
         <!--Add Notification-->
         <scene sceneID="yF7-Oe-dVr">
             <objects>
-                <viewController id="F4r-Zt-84f" customClass="WNTimingViewController" customModule="WeatherTheStorm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="F4r-Zt-84f" customClass="WNTimingViewController" customModule="Weather_Wear" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zsk-pE-xyu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -291,43 +290,6 @@
                                     <action selector="repeatTextFieldDidBeginEditing:" destination="F4r-Zt-84f" eventType="editingDidBegin" id="BVd-iA-Suw"/>
                                 </connections>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="34" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NSr-zW-rLD">
-                                <rect key="frame" x="0.0" y="404" width="375" height="243"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <toolbar key="tableHeaderView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="OoV-Lr-NHs">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                    <items>
-                                        <barButtonItem style="done" systemItem="done" id="QyD-WC-2LL">
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <connections>
-                                                <action selector="tableViewDoneButtonTapped:" destination="F4r-Zt-84f" id="luw-dy-7St"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </items>
-                                </toolbar>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dayOfTheWeekCell" textLabel="55P-VW-JPa" style="IBUITableViewCellStyleDefault" id="G5W-Q4-0Rk">
-                                        <rect key="frame" x="0.0" y="100.5" width="375" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G5W-Q4-0Rk" id="w92-fH-t8h">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Every Monday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="55P-VW-JPa">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    </tableViewCell>
-                                </prototypes>
-                                <sections/>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wT4-z8-jXX">
                                 <rect key="frame" x="178" y="516" width="169" height="100"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -360,8 +322,6 @@
                             <constraint firstItem="HA4-r2-wcn" firstAttribute="height" secondItem="JQL-Pe-VJW" secondAttribute="height" multiplier="0.075" id="JeL-ub-WAm"/>
                             <constraint firstItem="myS-lj-T5V" firstAttribute="top" secondItem="398-Uz-kNC" secondAttribute="bottom" constant="32" id="Msn-Kg-qer"/>
                             <constraint firstItem="JQL-Pe-VJW" firstAttribute="trailing" secondItem="myS-lj-T5V" secondAttribute="trailing" constant="20" id="V8K-Pl-Apc"/>
-                            <constraint firstItem="NSr-zW-rLD" firstAttribute="top" secondItem="3VZ-BT-Xng" secondAttribute="bottom" priority="750" constant="48" id="VDy-Rv-nh0"/>
-                            <constraint firstItem="NSr-zW-rLD" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" id="YYh-Q8-MKb"/>
                             <constraint firstItem="JQL-Pe-VJW" firstAttribute="trailing" secondItem="HA4-r2-wcn" secondAttribute="trailing" id="bkJ-OD-7I3"/>
                             <constraint firstItem="HA4-r2-wcn" firstAttribute="leading" secondItem="Zsk-pE-xyu" secondAttribute="leading" id="bvg-gF-0XC"/>
                             <constraint firstItem="398-Uz-kNC" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.85" id="goC-Je-ygY"/>
@@ -372,9 +332,7 @@
                             <constraint firstItem="3VZ-BT-Xng" firstAttribute="top" secondItem="BWB-Oa-srj" secondAttribute="bottom" constant="8" id="lwr-PP-xDv"/>
                             <constraint firstItem="fSq-Wx-z1S" firstAttribute="centerY" secondItem="Zsk-pE-xyu" secondAttribute="centerY" multiplier="0.075" id="n0l-OG-TvE"/>
                             <constraint firstItem="3VZ-BT-Xng" firstAttribute="width" secondItem="Zsk-pE-xyu" secondAttribute="width" multiplier="0.33" id="rmQ-BT-HVJ"/>
-                            <constraint firstItem="NSr-zW-rLD" firstAttribute="trailing" secondItem="JQL-Pe-VJW" secondAttribute="trailing" id="taM-oD-TrD"/>
                             <constraint firstItem="3VZ-BT-Xng" firstAttribute="leading" secondItem="JQL-Pe-VJW" secondAttribute="leading" constant="32" id="vSG-Af-f6H"/>
-                            <constraint firstAttribute="bottom" secondItem="NSr-zW-rLD" secondAttribute="bottom" id="vXj-kh-Uxb"/>
                             <constraint firstItem="wT4-z8-jXX" firstAttribute="height" secondItem="JQL-Pe-VJW" secondAttribute="height" multiplier="0.167" id="xXy-DV-F1w"/>
                             <constraint firstItem="HA4-r2-wcn" firstAttribute="top" secondItem="JQL-Pe-VJW" secondAttribute="top" id="yUI-tX-1gE"/>
                         </constraints>
@@ -390,15 +348,67 @@
                     <connections>
                         <outlet property="addNotificationLabel" destination="fSq-Wx-z1S" id="car-sb-KT0"/>
                         <outlet property="addressLabel" destination="398-Uz-kNC" id="zZF-Ro-msE"/>
-                        <outlet property="daysOfTheWeekTableView" destination="NSr-zW-rLD" id="rza-lr-gd5"/>
+                        <outlet property="daysOfTheWeekTableView" destination="BBe-Pd-Tk7" id="TAz-TV-vlj"/>
+                        <outlet property="daysOfTheWeekView" destination="3ds-dM-em8" id="Ufu-9I-fKT"/>
                         <outlet property="repeatLabel" destination="BWB-Oa-srj" id="MxL-W1-jiE"/>
                         <outlet property="repeatTextField" destination="3VZ-BT-Xng" id="xdX-iP-Asu"/>
                         <outlet property="setNotificationButton" destination="wT4-z8-jXX" id="LOx-Fk-7T7"/>
-                        <outlet property="tableViewToolBar" destination="OoV-Lr-NHs" id="aoO-iz-fgO"/>
+                        <outlet property="tableViewToolBar" destination="A8g-09-LgE" id="Nrd-YP-Wy0"/>
                         <outlet property="timeTextField" destination="gZk-dr-vmx" id="QTH-nA-cU7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVo-1O-YPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="3ds-dM-em8">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="241"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="34" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="BBe-Pd-Tk7">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="241"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <toolbar key="tableHeaderView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="A8g-09-LgE">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="45"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="done" systemItem="done" id="qDG-u9-FY1">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="tableViewDoneButtonTapped:" destination="F4r-Zt-84f" id="wH6-up-RVy"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <prototypes>
+                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dayOfTheWeekCell" textLabel="myg-C5-2qQ" style="IBUITableViewCellStyleDefault" id="fOR-W1-hxi">
+                                    <rect key="frame" x="0.0" y="100.5" width="240" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fOR-W1-hxi" id="THR-xv-hG9">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <subviews>
+                                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Every Monday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="myg-C5-2qQ">
+                                                <rect key="frame" x="15" y="0.0" width="210" height="43.5"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </tableViewCellContentView>
+                                    <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </tableViewCell>
+                            </prototypes>
+                            <sections/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="BBe-Pd-Tk7" secondAttribute="bottom" id="VAR-gg-q0y"/>
+                        <constraint firstAttribute="trailing" secondItem="BBe-Pd-Tk7" secondAttribute="trailing" id="WvX-ml-NYD"/>
+                        <constraint firstItem="BBe-Pd-Tk7" firstAttribute="leading" secondItem="3ds-dM-em8" secondAttribute="leading" id="X8C-Ui-x81"/>
+                        <constraint firstItem="BBe-Pd-Tk7" firstAttribute="top" secondItem="3ds-dM-em8" secondAttribute="top" id="kkE-Sc-3Jg"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="mBo-EF-H3t"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="2157.5999999999999" y="555.47226386806597"/>
         </scene>

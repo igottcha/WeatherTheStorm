@@ -20,7 +20,7 @@ class WNTableViewCell: UITableViewCell {
     
     //MARK: - Actions
     
-    @IBAction func isActiveSwitch(_ sender: UISwitch) {
+    @IBAction func isActiveSwitchToggled(_ sender: UISwitch) {
     }
     
     

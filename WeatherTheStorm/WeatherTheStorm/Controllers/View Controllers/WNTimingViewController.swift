@@ -20,13 +20,13 @@ class WNTimingViewController: UIViewController {
     @IBOutlet weak var tableViewToolBar: UIToolbar!
     @IBOutlet weak var daysOfTheWeekTableView: UITableView!
     @IBOutlet weak var setNotificationButton: UIButton!
+    @IBOutlet var daysOfTheWeekView: UIView!
     
     //MARK: - Properties
     
     var location: Location?
     var section: String?
     let timePicker = UIDatePicker()
-    let timePickerToolBar = UIToolbar()
     let datePicker = UIDatePicker()
     let datePickerToolBar = UIToolbar()
     
@@ -34,7 +34,6 @@ class WNTimingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        daysOfTheWeekTableView.isHidden = true
         updateView()
         createTimePicker()
         setNotificationButton.layer.cornerRadius = 7
@@ -49,7 +48,6 @@ class WNTimingViewController: UIViewController {
         }
     }
     @IBAction func repeatTextFieldDidBeginEditing(_ sender: UITextField) {
-        daysOfTheWeekTableView.isHidden = false
     }
     @IBAction func setNotificationButtonTapped(_ sender: UIButton) {
         guard let location = location, let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification else { return }
@@ -62,7 +60,6 @@ class WNTimingViewController: UIViewController {
         }
     }
     @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {
-        daysOfTheWeekTableView.isHidden = true
         setNotificationButton.isHidden = false
         self.view.endEditing(true)
         repeatTextField.text = "Every \(sortWeekdayArray().compactMap({$0}).joined(separator: ", "))"
@@ -87,13 +84,13 @@ class WNTimingViewController: UIViewController {
             repeatLabel.text = "Date"
             repeatTextField.inputAccessoryView = datePickerToolBar
             repeatTextField.inputView = datePicker
-            tableViewToolBar.isHidden = true
+            //tableViewToolBar.isHidden = true
         } else {
             repeatLabel.text = "Repeat"
             daysOfTheWeekTableView.delegate = self
             daysOfTheWeekTableView.dataSource = self
-            repeatTextField.inputAccessoryView = tableViewToolBar
-            repeatTextField.inputView = daysOfTheWeekTableView
+            //repeatTextField.inputAccessoryView = tableViewToolBar
+            repeatTextField.inputView = daysOfTheWeekView
         }
 
     }
@@ -140,7 +137,7 @@ class WNTimingViewController: UIViewController {
     //MARK: - Notification Alert Controller
     
     func setAlertNotification(location: Location) {
-        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification, let weather = location.weather, let weatherPhrase = weather.current?.phrase, let feelsLikeTemp = weather.current?.feelsLike, let city = location.city else { return }
+        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification, let weather = location.weather, let weatherPhrase = weather.current?.phrase, let feelsLikeTemp = weather.current?.feelsLike, let city =  location.city else { return }
         let clothingPhrase = "CLOTHING STRING PLACEHOLDER"
         let notificationText = "Hi \(UserController.shared.userName), It's \(weatherPhrase) today in \(city). Feels like \(feelsLikeTemp)°. You'll want to \(clothingPhrase)."
         
@@ -203,7 +200,6 @@ extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func tableViewDonePressed() {
-        daysOfTheWeekTableView.isHidden = true
         setNotificationButton.isHidden = false
         self.view.endEditing(true)
     }
