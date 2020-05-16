@@ -73,14 +73,18 @@ class WNListTableViewController: UITableViewController {
             frequency = ["TBD"]
         }
         
-        let time = weatherNotification.time?.hour() ?? Date().hour()
+        let time = weatherNotification.time?.time() ?? Date().hour()
         
         cell.boxView.layer.cornerRadius = 7
         cell.isNotificationActiveSwitch.isOn = weatherNotification.isActive
         cell.nameLabel.text = weatherNotification.name
         cell.addressLabel.text = "\(weatherNotification.location?.city ?? ""), \(weatherNotification.location?.state ?? ""), \(weatherNotification.location?.country ?? "")"
-        cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")), at \(time)"
-
+        if weatherNotification.location?.type != "Trip" {
+        cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")) at \(time)"
+        } else {
+            cell.frequencyAndTimeLabel.text = "On \(weatherNotification.specificDate?.formatDate() ?? "TBD") at \(time)"
+        }
+        cell.delegate = self
         return cell
     }
     
@@ -97,18 +101,18 @@ class WNListTableViewController: UITableViewController {
             WeatherNotificationController.shared.deleteWeatherNotificaiton(weatherNotification: weatherNotification)
         }    
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+extension WNListTableViewController: WNTableViewCellDelegate {
+    func toggleCellButtonToggled(_ sender: WNTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: sender) else { return }
+        let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
+        WeatherNotificationController.shared.toggleIsActive(weatherNotifcation: weatherNotification)
+    }
+    
+    
+}
+
 extension WNListTableViewController: NSFetchedResultsControllerDelegate {
 
 func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

@@ -16,8 +16,6 @@ class WeatherNotificationController {
     static let shared = WeatherNotificationController()
     var frequencies: [String] = []
     
-    let daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    
     var fetchedResultsController: NSFetchedResultsController<WeatherNotification>
     
     init() {
@@ -36,6 +34,12 @@ class WeatherNotificationController {
         }
     }
     
+    //MARK: - Methods
+    
+    func toggleIsActive(weatherNotifcation: WeatherNotification) {
+        weatherNotifcation.isActive = !weatherNotifcation.isActive
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    }
     
     //MARK: - CRUD Functions
     
