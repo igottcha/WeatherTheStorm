@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class WNTimingViewController: UIViewController {
     
@@ -52,15 +53,19 @@ class WNTimingViewController: UIViewController {
         daysOfTheWeekTableView.isHidden = false
     }
     @IBAction func setNotificationButtonTapped(_ sender: UIButton) {
-        guard let location = location, let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification else { return }
+        guard let location = location,
+            let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification else { return }
         let frequency = sortWeekdayArray()
         WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: frequency, specificDate: nil, time: timePicker.date)
         //setAlertNotification(location: location)
         print(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count)
         DispatchQueue.main.async {
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            //MARK: - the notification trigger function called here
+            self.scheduleUserNotification(fireDate: self.datePicker.date, fireTime: self.timePicker.date)
         }
     }
+    
     @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {
         daysOfTheWeekTableView.isHidden = true
         setNotificationButton.isHidden = false
@@ -78,7 +83,11 @@ class WNTimingViewController: UIViewController {
     }
     
     func updateView() {
-        guard let section = section, let city = location?.city, let state = location?.state, let country = location?.country else { return }
+        guard let section = section,
+            let city = location?.city,
+            let state = location?.state,
+            let country = location?.country else { return }
+        
         addNotificationLabel.text = "Add \(section) Notification"
         addressLabel.text = "\(city), \(state), \(country)"
         
@@ -140,9 +149,14 @@ class WNTimingViewController: UIViewController {
     //MARK: - Notification Alert Controller
     
     func setAlertNotification(location: Location) {
-        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification, let weather = location.weather, let weatherPhrase = weather.current?.phrase, let feelsLikeTemp = weather.current?.feelsLike, let city = location.city else { return }
+        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification,
+            let weather = location.weather,
+            let weatherPhrase = weather.current?.phrase,
+            let feelsLikeTemp = weather.current?.feelsLike,
+            let city = location.city else { return }
+        
         let clothingPhrase = "CLOTHING STRING PLACEHOLDER"
-        let notificationText = "Hi \(UserController.shared.userName), It's \(weatherPhrase) today in \(city). Feels like \(feelsLikeTemp)°. You'll want to \(clothingPhrase)."
+        let notificationText = "Hi \(UserController.shared.userName), It's \(weatherPhrase) today in \(city). Feels like \(feelsLikeTemp)°F. You'll want to \(clothingPhrase)."
         
         let alert = UIAlertController(title: weatherNotification.name, message: notificationText, preferredStyle: .alert)
         
@@ -150,6 +164,40 @@ class WNTimingViewController: UIViewController {
         
         alert.addAction(closeButton)
         self.present(self, animated: true, completion: nil)
+    }
+    
+    func scheduleUserNotification(fireDate: Date, fireTime: Date) {
+        //Pass in fire date argument in the function parameter (maybe the parameter needs to be changed)
+        
+        guard let city = location?.city,
+            let weather = location?.weather,
+            let weatherPhrase = weather.current?.phrase,
+            let feelsLikeTemp = weather.current?.feelsLike else { return }
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Your trip to \(city) is coming up!!!"
+        content.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check WeatherWear for clothing recommendations."
+        content.sound = UNNotificationSound.default
+        
+        let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: fireTime)
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: fireDate)
+        var components = DateComponents()
+        components.year = dateComponents.year
+        components.month = dateComponents.month
+        components.day = dateComponents.day
+        components.hour = timeComponents.hour
+        components.minute = timeComponents.minute
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+            if error != nil {
+                print("Notification failed")
+            } else {
+                print("Notification triggered")
+            }
+        })
     }
     
 }
