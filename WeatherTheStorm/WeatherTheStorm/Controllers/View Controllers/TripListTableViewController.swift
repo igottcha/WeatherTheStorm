@@ -32,6 +32,7 @@ class TripListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "tripCell", for: indexPath) as? TripTableViewCell else { return UITableViewCell() }
+        cell.boxView.layer.cornerRadius = 10
         let trip = TripController.shared.fetchedResultsController.object(at: indexPath)
         
         guard let city = trip.location?.city,
