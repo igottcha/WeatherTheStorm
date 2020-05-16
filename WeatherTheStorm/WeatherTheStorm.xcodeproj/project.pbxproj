@@ -47,7 +47,6 @@
 		9EB43378246DB6C1008966CF /* DailyForecast+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB43377246DB6C1008966CF /* DailyForecast+Convenience.swift */; };
 		9EC2150C24635329008921FC /* DayOfTheWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC2150B24635329008921FC /* DayOfTheWeek.swift */; };
 		9EC6BC07245CCD250090CA45 /* AirQualityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC6BC06245CCD250090CA45 /* AirQualityController.swift */; };
-		9ED89E9A246F1813003E1AB0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED89E99246F1813003E1AB0 /* DataManager.swift */; };
 		9EDEBCFC2464AA4E003DBEC8 /* WNListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDEBCFB2464AA4E003DBEC8 /* WNListTableViewController.swift */; };
 		9EDEBCFE2464AA7C003DBEC8 /* WNTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDEBCFD2464AA7C003DBEC8 /* WNTableViewCell.swift */; };
 		9EDEBD002464B74F003DBEC8 /* WeatherNotification+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDEBCFF2464B74F003DBEC8 /* WeatherNotification+Convenience.swift */; };
@@ -111,7 +110,6 @@
 		9EB43377246DB6C1008966CF /* DailyForecast+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyForecast+Convenience.swift"; sourceTree = "<group>"; };
 		9EC2150B24635329008921FC /* DayOfTheWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfTheWeek.swift; sourceTree = "<group>"; };
 		9EC6BC06245CCD250090CA45 /* AirQualityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AirQualityController.swift; path = WeatherTheStorm/Model/AirQualityController.swift; sourceTree = SOURCE_ROOT; };
-		9ED89E99246F1813003E1AB0 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		9EDEBCFB2464AA4E003DBEC8 /* WNListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WNListTableViewController.swift; sourceTree = "<group>"; };
 		9EDEBCFD2464AA7C003DBEC8 /* WNTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WNTableViewCell.swift; sourceTree = "<group>"; };
 		9EDEBCFF2464B74F003DBEC8 /* WeatherNotification+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherNotification+Convenience.swift"; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				E978FC062458E5B800E2DD82 /* DateExtension.swift */,
 				E9A4F5C0245CA46800BDCBD1 /* LocationExtension.swift */,
 				9E9D401E2464CCE20022AF39 /* UIViewExtension.swift */,
-				9ED89E99246F1813003E1AB0 /* DataManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -394,7 +391,6 @@
 				4E922860246B30E100136C5B /* TripInformationViewController.swift in Sources */,
 				E978FC052458DE8F00E2DD82 /* ForecastViewController.swift in Sources */,
 				4E92285A246B083E00136C5B /* TripListTableViewController.swift in Sources */,
-				9ED89E9A246F1813003E1AB0 /* DataManager.swift in Sources */,
 				9E731C412458C0C200B5420D /* CurrentWeatherController.swift in Sources */,
 				9E9F3686245753570044086A /* Day.swift in Sources */,
 				4ED327612453A09300558297 /* Trip.swift in Sources */,

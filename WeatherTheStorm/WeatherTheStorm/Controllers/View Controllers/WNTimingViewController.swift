@@ -29,7 +29,6 @@ class WNTimingViewController: UIViewController {
     let timePickerToolBar = UIToolbar()
     let datePicker = UIDatePicker()
     let datePickerToolBar = UIToolbar()
-    let name = Notification.Name("didReceiveData")
     
     //MARK: -  Lifecycle
     
@@ -60,7 +59,6 @@ class WNTimingViewController: UIViewController {
         print(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count)
         DispatchQueue.main.async {
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-            //DataManager.shared.firstVC.tableView.reloadData()
         }
     }
     @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {
@@ -138,18 +136,6 @@ class WNTimingViewController: UIViewController {
         setNotificationButton.isHidden = false
         self.view.endEditing(true)
     }
-    
-    //MARK: - Notification
-    
-//    func createObserver() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData), name: name, object: nil)
-//    }
-//
-//    @objc func onDidReceiveData() {
-//        self.dismiss(animated: true) {
-//            print("LocationListVC successfully dismissed")
-//        }
-//    }
     
     //MARK: - Notification Alert Controller
     
