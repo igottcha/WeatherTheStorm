@@ -61,7 +61,6 @@
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c2u-2C-Vl2">
                                                             <rect key="frame" x="246" y="67.5" width="51" height="31"/>
                                                             <connections>
-                                                                <action selector="activeSwitchToggled:" destination="PwF-D5-teV" eventType="valueChanged" id="r5C-ha-idR"/>
                                                                 <action selector="isActiveSwitchToggled:" destination="PwF-D5-teV" eventType="valueChanged" id="63X-th-6HS"/>
                                                             </connections>
                                                         </switch>

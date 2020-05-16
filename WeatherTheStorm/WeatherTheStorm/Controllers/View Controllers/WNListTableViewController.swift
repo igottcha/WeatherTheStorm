@@ -84,6 +84,7 @@ class WNListTableViewController: UITableViewController {
         } else {
             cell.frequencyAndTimeLabel.text = "On \(weatherNotification.specificDate?.formatDate() ?? "TBD") at \(time)"
         }
+        cell.delegate = self
         return cell
     }
     
@@ -100,18 +101,18 @@ class WNListTableViewController: UITableViewController {
             WeatherNotificationController.shared.deleteWeatherNotificaiton(weatherNotification: weatherNotification)
         }    
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+extension WNListTableViewController: WNTableViewCellDelegate {
+    func toggleCellButtonToggled(_ sender: WNTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: sender) else { return }
+        let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
+        WeatherNotificationController.shared.toggleIsActive(weatherNotifcation: weatherNotification)
+    }
+    
+    
+}
+
 extension WNListTableViewController: NSFetchedResultsControllerDelegate {
 
 func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

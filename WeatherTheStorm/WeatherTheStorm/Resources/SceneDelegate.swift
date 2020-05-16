@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            self.window?.rootViewController = rootVC
 //        }
         else {
-            let rootVC = storyboard.instantiateViewController(withIdentifier: "ForecastSB")
+            let rootVC = storyboard.instantiateViewController(withIdentifier: "WeatherWearSB")
             //let rootNC = UINavigationController(rootViewController: rootVC)
             self.window?.rootViewController = rootVC
         }
