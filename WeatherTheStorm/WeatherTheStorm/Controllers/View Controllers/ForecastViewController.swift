@@ -18,6 +18,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     var phrase: String = ""
     var userIsMale: Bool?
     var userName = ""
+    var menuIsOut = false
     
     
     
@@ -32,6 +33,13 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var HighLabel: UILabel!
     @IBOutlet weak var LowLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var settingsMenuViewLeading: NSLayoutConstraint!
+    @IBOutlet weak var settingsMenuViewTrailing: NSLayoutConstraint!
+    @IBOutlet weak var settingsMenuView: UIView!
+    @IBOutlet weak var changeClothesLabel: UILabel!
+    @IBOutlet weak var changeNameLabel: UILabel!
+    @IBOutlet weak var creditsLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +49,40 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         grabUserDetails()
         hourleForecastCollectionView.delegate = self
         hourleForecastCollectionView.dataSource = self
-        
+        setupMenu()
         setupCollectionView()
         setupBottomContainer()
         
         
+        
+    }
+    
+    @IBAction func gearButtonTapped(_ sender: Any) {
+        
+        print("tapped")
+        if menuIsOut == false {
+            
+            
+            settingsMenuViewTrailing.constant = 200
+            settingsMenuViewLeading.constant  = 0
+            settingsMenuView.isHidden = false
+            menuIsOut = true
+            
+        } else {
+            
+            settingsMenuViewTrailing.constant = -5
+            settingsMenuViewLeading.constant  = -200
+            menuIsOut = false
+            settingsMenuView.isHidden = true
+            
+        }
+        
+    }
+    func setupMenu() {
+        self.menuIsOut = false
+        settingsMenuView.isHidden = true
+        settingsMenuViewTrailing.constant = -5
+        settingsMenuViewLeading.constant  = -200
         
     }
     
@@ -63,6 +100,14 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         setLocationWeather(home: self.location!)
         setupCityLabel()
         
+        
+        
+    }
+    
+    
+    
+  
+     func toggleMenu(tap: UITapGestureRecognizer){
         
         
     }
@@ -94,7 +139,8 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         HourlyWeatherController.fetchForecast(location: home) { (result) in
             switch (result){
                 
-            case .success(_):
+            case .success(let hourlyForecasts):
+                
                 DispatchQueue.main.async {
                     self.hourleForecastCollectionView.reloadData()
                     CurrentWeatherController.fetchForecast(location: home) { (result) in
@@ -106,22 +152,22 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
                                 self.setupFeelsLikelabel()
                                 self.setupPhrase()
                                 self.setupGreetingLabel()
-
+                                
                                 //self.setupHighLowLabels()
                                 DailyForecastController.fetchForecast(location: home, firstDate: Date(), secondDate: Date() + 9) { (result) in
-
+                                    
                                     switch (result){
                                         
                                     case .success(let dailyForecasts):
                                         DispatchQueue.main.async {
-                                        //self.location?.weather?.dailyForecasts = NSOrderedSet(array: dailyForecasts.forecasts)
+                                            
                                             self.setupHighLowLabels()
                                             AirQualityController.shared.fetchAQI(location: home) { (result) in
                                                 switch (result) {
                                                     
                                                 case .success(let AQI):
                                                     print(AQI)
-                                                    //self.location?.weather?.airQualityIndex = Int64(AQI)
+                                                //self.location?.weather?.airQualityIndex = Int64(AQI)
                                                 case .failure(_):
                                                     break
                                                 }
@@ -150,19 +196,19 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     func setupHighLowLabels() {
         HighLabel.textColor = .white
         LowLabel.textColor = .white
-
+        
         guard let today = location?.weather?.dailyForecasts?.object(at: 0) as? DailyForecast else {return}
-      
+        
         if today.lowTemp == nil || today.maxTemp == nil
         {
             HighLabel.isHidden = true
             LowLabel.isHidden = true
-                   }
+        }
         else {
-        HighLabel.text = "\(String(today.maxTemp))"
-        LowLabel.text = "\(String(today.lowTemp))"
-    }
-
+            HighLabel.text = "\(String(today.maxTemp))"
+            LowLabel.text = "\(String(today.lowTemp))"
+        }
+        
     }
     
     
@@ -204,7 +250,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     
     @objc func swipeAction(swipe: UISwipeGestureRecognizer) {
         performSegue(withIdentifier: "toForecastDetail", sender: self)
-       
+        
     }
     
     
@@ -255,9 +301,9 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
-     
-
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toForecastDetail" {
             if let destinationVC = segue.destination as? ForecastDetailViewController {
                 let  location = self.location
@@ -270,8 +316,8 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
                 destinationVC.userCity = userCity
             }
         }
-     }
-     
+    }
+    
     
 }
 

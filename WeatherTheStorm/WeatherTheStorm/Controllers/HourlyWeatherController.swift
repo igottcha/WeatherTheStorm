@@ -21,7 +21,8 @@ class HourlyWeatherController {
                 if (location.weather != nil)  {
                     location.weather?.hourlyForecasts = NSOrderedSet(array: forecasts)
                 } else {
-                    location.weather = Weather(current: nil, hourlyForecasts: forecasts)
+                    location.weather = Weather(current: nil)
+                    location.weather?.hourlyForecasts = NSOrderedSet(array: forecasts)
                 }
             case .failure(let error):
                 print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
