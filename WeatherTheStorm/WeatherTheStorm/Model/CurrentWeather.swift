@@ -21,6 +21,8 @@ struct CurrentWeather: Codable  {
     let visibility: Int
     let windSpeed: Int
     let windDirection: String
+    let sunrise: String
+    let sunset: String
     
     enum CodingKeys: String, CodingKey{
         case pressure = "pressureAltimeter"
@@ -33,6 +35,9 @@ struct CurrentWeather: Codable  {
         case visibility
         case windSpeed
         case windDirection = "windDirectionCardinal"
+        case sunrise = "sunriseTimeLocal"
+        case sunset = "sunsetTimeLocal"
+        
    
     
     }
