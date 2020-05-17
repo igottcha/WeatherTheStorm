@@ -6,6 +6,8 @@
         <attribute name="phrase" optional="YES" attributeType="String"/>
         <attribute name="precipitationAmount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="pressure" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="sunrise" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="sunset" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="temperature" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uvIndex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="visibility" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -64,7 +66,7 @@
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="notification" inverseEntity="Trip"/>
     </entity>
     <elements>
-        <element name="Current" positionX="-18" positionY="99" width="128" height="208"/>
+        <element name="Current" positionX="-18" positionY="99" width="128" height="238"/>
         <element name="DailyForecast" positionX="-9" positionY="162" width="128" height="163"/>
         <element name="HourlyForecast" positionX="0" positionY="171" width="128" height="133"/>
         <element name="Location" positionX="-36" positionY="9" width="128" height="178"/>
