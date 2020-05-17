@@ -17,25 +17,31 @@ class ForecastDetailViewController: UIViewController {
     var userName: String = ""
     var userCity: String = ""
     
-    //MARK:- OUTLETS
-    @IBOutlet weak var gear: UIImageView!
-    @IBOutlet weak var cityLabel: UILabel!
+   
     @IBOutlet weak var phraseLabel: UILabel!
-    
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var pinImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var highLabel: UILabel!
     @IBOutlet weak var lowLabel: UILabel!
-    
-    @IBOutlet weak var feelsLikeLAbel: UILabel!
+    @IBOutlet weak var feelsLikeLabel: UILabel!
     @IBOutlet weak var topContainer: UIView!
     @IBOutlet weak var middleContainer: UIView!
+    @IBOutlet weak var bottomContainer: UIView!
     @IBOutlet weak var dailyForecastTableView: UITableView!
     @IBOutlet weak var hourlyForecastCollectionView: UICollectionView!
-    
-    
-    
+    @IBOutlet weak var sunriseLabel: UILabel!
+    @IBOutlet weak var sunsetLabel: UILabel!
+    @IBOutlet weak var rainLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var windLabel: UILabel!
+    @IBOutlet weak var precipLabel: UILabel!
+    @IBOutlet weak var PressureLabel: UILabel!
+    @IBOutlet weak var VisibilityLabel: UILabel!
+    @IBOutlet weak var UVLabel: UILabel!
+    @IBOutlet weak var AQILabel: UILabel!
+    @IBOutlet weak var airLabel: UILabel!
     
     
     
@@ -50,12 +56,39 @@ class ForecastDetailViewController: UIViewController {
         dailyForecastTableView.dataSource = self
         hourlyForecastCollectionView.delegate = self
         hourlyForecastCollectionView.dataSource = self
-        scrollView.delegate = self
         setupDateLabel()
         makeEdgesRound()
+        setupWeatherLabels()
         
         hourlyForecastCollectionView.register(HourlyForecastDetailCollectionViewCell.self, forCellWithReuseIdentifier: "hourlyDetailCell")
         
+    }
+    
+    
+    func setupWeatherLabels(){
+        guard let weatherToday = location?.weather?.current  else {return}
+        
+        
+        let humidity = String(weatherToday.humidity)
+        let precip = String(weatherToday.precipitationAmount)
+        let pressure = String(weatherToday.pressure)
+        let UVIndex = String(weatherToday.uvIndex)
+        let visibility = String(weatherToday.visibility)
+         
+        humidityLabel.text = "\(humidity)%"
+        precipLabel.text = "\(precip) in"
+        PressureLabel.text = "\(pressure) inHg"
+        UVLabel.text = "\(UVIndex)"
+        VisibilityLabel.text = "\(visibility) mi"
+        
+        
+        guard let wind = weatherToday.windDirection else {return}
+        windLabel.text = "\(wind) mph"
+        
+        guard let AQI = location?.weather?.airQualityIndex else {return}
+        AQILabel.text = "\(AQI)"
+        
+     
     }
     
     func makeEdgesRound() {
@@ -119,8 +152,8 @@ class ForecastDetailViewController: UIViewController {
         let currentTemp = String(currentWeather.temperature)
         tempLabel.text = "\(currentTemp)º"
         tempLabel.textColor = .white
-        feelsLikeLAbel.text = "Feels Like \(currentWeather.feelsLike)"
-        feelsLikeLAbel.textColor = .white
+        feelsLikeLabel.text = "Feels Like \(currentWeather.feelsLike)"
+        feelsLikeLabel.textColor = .white
         
     }
     
