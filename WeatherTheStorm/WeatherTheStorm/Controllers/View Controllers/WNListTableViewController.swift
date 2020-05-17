@@ -11,7 +11,7 @@ import CoreLocation
 import CoreData
 
 class WNListTableViewController: UITableViewController {
-
+    
     
     //MARK: - Outlets
     
@@ -37,7 +37,7 @@ class WNListTableViewController: UITableViewController {
         updateEmptyState()
         tableView.reloadData()
     }
-
+    
     //MARK: - Methods
     
     func setGradientBackground() {
@@ -52,13 +52,13 @@ class WNListTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count ?? 0
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "boxCell", for: indexPath) as? WNTableViewCell else { return UITableViewCell() }
         
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
@@ -79,11 +79,17 @@ class WNListTableViewController: UITableViewController {
         cell.isNotificationActiveSwitch.isOn = weatherNotification.isActive
         cell.nameLabel.text = weatherNotification.name
         cell.addressLabel.text = "\(weatherNotification.location?.city ?? ""), \(weatherNotification.location?.state ?? ""), \(weatherNotification.location?.country ?? "")"
-        if weatherNotification.location?.type != "Trip" {
-        cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")) at \(time)"
-        } else {
+        
+        if weatherNotification.location?.type == "Trip" {
             cell.frequencyAndTimeLabel.text = "On \(weatherNotification.specificDate?.formatDate() ?? "TBD") at \(time)"
+        } else {
+            if frequency.count == 2 {
+               cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: " & ")) at \(time)"
+            } else {
+            cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")) at \(time)"
+            }
         }
+        
         cell.delegate = self
         return cell
     }
@@ -114,48 +120,48 @@ extension WNListTableViewController: WNTableViewCellDelegate {
 }
 
 extension WNListTableViewController: NSFetchedResultsControllerDelegate {
-
-func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    tableView.beginUpdates()
-}
-
-func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    tableView.endUpdates()
-}
-
-func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
     
-    switch type {
-    case .delete:
-        guard let indexPath = indexPath else { break }
-        tableView.deleteRows(at: [indexPath], with: .fade)
-    case .insert:
-        guard let newIndexPath = newIndexPath else { break }
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
-    case .move:
-        guard let fromIndexPath = indexPath, let newIndexPath = newIndexPath else { break }
-        tableView.moveRow(at: fromIndexPath, to: newIndexPath)
-    case .update:
-        guard let indexPath = indexPath else { break }
-        tableView.reloadRows(at: [indexPath], with: .automatic)
-    @unknown default:
-        fatalError()
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
     }
-}
-
-func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-    switch type {
-    case .delete:
-        tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-    case .insert:
-        tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-    case .move:
-        break
-    case .update:
-        break
-    @unknown default:
-        fatalError()
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
     }
-}
-
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .delete:
+            guard let indexPath = indexPath else { break }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        case .insert:
+            guard let newIndexPath = newIndexPath else { break }
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .move:
+            guard let fromIndexPath = indexPath, let newIndexPath = newIndexPath else { break }
+            tableView.moveRow(at: fromIndexPath, to: newIndexPath)
+        case .update:
+            guard let indexPath = indexPath else { break }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            fatalError()
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .move:
+            break
+        case .update:
+            break
+        @unknown default:
+            fatalError()
+        }
+    }
+    
 }
