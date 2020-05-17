@@ -44,12 +44,6 @@ class LocationController {
         let trips = TripController.shared.tripLocations
         var allLocations: [[Location]] = [[]]
         
-//        if let homeLocation = HomeController.shared.homeLocation {
-//            homeLocations = [homeLocation]
-//        } else {
-//            homeLocations = []
-//        }
-        
         if let workLocation = WorkController.shared.workLocation {
             workLocations = [workLocation]
         } else {

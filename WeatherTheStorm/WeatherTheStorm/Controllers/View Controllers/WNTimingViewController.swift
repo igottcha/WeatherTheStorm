@@ -54,14 +54,16 @@ class WNTimingViewController: UIViewController {
         guard let location = location,
             let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification else { return }
         let frequency = sortWeekdayArray()
+        
         if section == "Trip" {
             WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: [], specificDate: datePicker.date, time: timePicker.date)
             
         } else {
             WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: frequency, specificDate: nil, time: timePicker.date)
         }
-        //setAlertNotification(location: location)
+        
         WeatherNotificationController.shared.frequencies = []
+        
         DispatchQueue.main.async {
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
             //MARK: - the notification trigger function called here

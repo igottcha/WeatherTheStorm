@@ -103,4 +103,16 @@ extension WNLocationListViewController: UITableViewDelegate, UITableViewDataSour
             return "Other Locations"
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        switch section {
+        case 1:
+            return 0.0 //"Work"
+        case 3:
+            return 0.0 //"Favs"
+        default:
+            return UITableView.automaticDimension
+        }
+    }
 }

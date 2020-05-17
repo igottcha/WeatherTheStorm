@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3IP-lB-J9i">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -358,11 +358,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVo-1O-YPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="3ds-dM-em8">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="241"/>
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="372"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="34" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="BBe-Pd-Tk7">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="241"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="BBe-Pd-Tk7">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="372"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <toolbar key="tableHeaderView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="A8g-09-LgE">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="45"/>
@@ -404,6 +404,7 @@
                         <constraint firstAttribute="bottom" secondItem="BBe-Pd-Tk7" secondAttribute="bottom" id="VAR-gg-q0y"/>
                         <constraint firstAttribute="trailing" secondItem="BBe-Pd-Tk7" secondAttribute="trailing" id="WvX-ml-NYD"/>
                         <constraint firstItem="BBe-Pd-Tk7" firstAttribute="leading" secondItem="3ds-dM-em8" secondAttribute="leading" id="X8C-Ui-x81"/>
+                        <constraint firstAttribute="height" secondItem="BBe-Pd-Tk7" secondAttribute="height" id="dNA-sf-GkL"/>
                         <constraint firstItem="BBe-Pd-Tk7" firstAttribute="top" secondItem="3ds-dM-em8" secondAttribute="top" id="kkE-Sc-3Jg"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="mBo-EF-H3t"/>
