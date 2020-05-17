@@ -8,8 +8,68 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
-class WeatherNotificationController {
+protocol NotificationScheduler: class {
+    func scheduleUserNotification(for weatherNotification: WeatherNotification)
+    func cancelUserNotifications(for weatherNotification: WeatherNotification)
+}
+
+extension NotificationScheduler {
+    func scheduleUserNotification(for weatherNotification: WeatherNotification) {
+        //Pass in fire date argument in the function parameter (maybe the parameter needs to be changed)
+        
+        guard let location = weatherNotification.location,
+            let city = location.city,
+            let type = location.type,
+            let fireTime = weatherNotification.time,
+            let fireDate = weatherNotification.specificDate else { return }
+        
+        let weather = location.weather ?? Weather(current: nil)
+        let weatherPhrase = weather.current?.phrase ?? "partly cloudy"
+        let feelsLikeTemp = weather.current?.feelsLike ?? 78
+        
+        
+        let identifier = "\(city)\(type)"
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Your trip to \(city) is coming up!!!"
+        content.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check WeatherWear for clothing recommendations."
+        content.sound = UNNotificationSound.default
+        
+        let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: fireTime)
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: fireDate)
+        var components = DateComponents()
+        components.year = dateComponents.year
+        components.month = dateComponents.month
+        components.day = dateComponents.day
+        components.hour = timeComponents.hour
+        components.minute = timeComponents.minute
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+            if error != nil {
+                print("Notification failed")
+            } else {
+                print("Notification triggered")
+            }
+        })
+    }
+    
+    func cancelUserNotifications(for weatherNotification: WeatherNotification) {
+        guard let location = weatherNotification.location,
+            let city = location.city,
+            let type = location.type else { return }
+        
+        let identifier = "\(city)\(type)"
+        
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
+    }
+}
+
+class WeatherNotificationController: NotificationScheduler {
     
     //MARK: - Singleton and Source of Truth
     
@@ -39,12 +99,14 @@ class WeatherNotificationController {
     func toggleIsActive(weatherNotifcation: WeatherNotification) {
         weatherNotifcation.isActive = !weatherNotifcation.isActive
         if weatherNotifcation.isActive {
-            
+            scheduleUserNotification(for: weatherNotifcation)
         } else {
-            
+            cancelUserNotifications(for: weatherNotifcation)
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
+    
+    
     
     //MARK: - CRUD Functions
     

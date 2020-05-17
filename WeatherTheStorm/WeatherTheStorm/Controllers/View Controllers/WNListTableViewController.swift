@@ -108,6 +108,7 @@ extension WNListTableViewController: WNTableViewCellDelegate {
         guard let indexPath = tableView.indexPath(for: sender) else { return }
         let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
         WeatherNotificationController.shared.toggleIsActive(weatherNotifcation: weatherNotification)
+        
     }
     
     
