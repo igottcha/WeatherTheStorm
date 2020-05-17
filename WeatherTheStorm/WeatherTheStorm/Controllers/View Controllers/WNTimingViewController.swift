@@ -176,46 +176,6 @@ class WNTimingViewController: UIViewController {
         self.present(self, animated: true, completion: nil)
     }
     
-//    func scheduleUserNotification(for weatherNotification: WeatherNotification) {
-//        //Pass in fire date argument in the function parameter (maybe the parameter needs to be changed)
-//
-//        guard let location = weatherNotification.location,
-//            let city = location.city,
-//            let weather = location.weather,
-//            let type = location.type,
-//            let weatherPhrase = weather.current?.phrase,
-//            let feelsLikeTemp = weather.current?.feelsLike,
-//            let fireTime = weatherNotification.time,
-//            let fireDate = weatherNotification.specificDate else { return }
-//
-//        let identifier = "\(city)\(type)"
-//
-//        let content = UNMutableNotificationContent()
-//        content.title = "Your trip to \(city) is coming up!!!"
-//        content.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check WeatherWear for clothing recommendations."
-//        content.sound = UNNotificationSound.default
-//
-//        let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: fireTime)
-//        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: fireDate)
-//        var components = DateComponents()
-//        components.year = dateComponents.year
-//        components.month = dateComponents.month
-//        components.day = dateComponents.day
-//        components.hour = timeComponents.hour
-//        components.minute = timeComponents.minute
-//
-//        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-//        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-//
-//        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
-//            if error != nil {
-//                print("Notification failed")
-//            } else {
-//                print("Notification triggered")
-//            }
-//        })
-//    }
-//
 }
 
 extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
