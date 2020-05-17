@@ -39,16 +39,10 @@ class LocationController {
     
     func sortLocations() -> [[Location]] {
         
-        var homeLocations: [Location]
+        let homeLocations: [Location] = HomeController.shared.homeLocation
         var workLocations: [Location]
         let trips = TripController.shared.tripLocations
         var allLocations: [[Location]] = [[]]
-        
-        if let homeLocation = HomeController.shared.homeLocation {
-            homeLocations = [homeLocation]
-        } else {
-            homeLocations = []
-        }
         
         if let workLocation = WorkController.shared.workLocation {
             workLocations = [workLocation]

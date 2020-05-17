@@ -110,7 +110,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func getUserCity() {
-        let home = HomeController.shared.homeLocation
+        let home = HomeController.shared.homeLocation.first
         self.location = home
         setLocationWeather(home: self.location!)
         setupCityLabel()

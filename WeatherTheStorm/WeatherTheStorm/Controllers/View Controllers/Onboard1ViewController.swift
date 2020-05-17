@@ -9,37 +9,28 @@
 import UIKit
 
 class TestViewController: UIViewController {
-
-//MARK: - Outlets
+    
+    //MARK: - Outlets
     
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var nameQuestionLabel: UILabel!
-    
     @IBOutlet weak var whyLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var bubbleImageView: UIImageView!
-   
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setGradientBackground()
         setupWelcomeLabel()
         setupNameQuestionLabel()
         UserController.shared.loadUser()
-       setupWhyAsking()
+        setupWhyAsking()
         setupProgressLabel()
         setupNextButton()
         hideBubble()
-        
-        
-       
     }
-    
-   
-    
     
     //MARK: - Actions
     
@@ -51,33 +42,25 @@ class TestViewController: UIViewController {
     
     func hideBubble() {
         bubbleImageView.isHidden = true
-       
     }
     
     func setupWhyAsking() {
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
         let underlineAttributedString = NSAttributedString(string: "Why are we asking?", attributes: underlineAttribute)
-       whyLabel.attributedText = underlineAttributedString
+        whyLabel.attributedText = underlineAttributedString
         
         whyLabel.isUserInteractionEnabled = true
-       let bubbleTap = UITapGestureRecognizer(target: self, action: #selector(toggleBubble(tap:)))
+        let bubbleTap = UITapGestureRecognizer(target: self, action: #selector(toggleBubble(tap:)))
         whyLabel.addGestureRecognizer(bubbleTap)
-       
     }
     
     @objc func toggleBubble(tap: UITapGestureRecognizer){
         
-        if bubbleImageView.isHidden{
-        bubbleImageView.isHidden = false
-      
-        }
-        
-        else {
-      
+        if bubbleImageView.isHidden {
+            bubbleImageView.isHidden = false
+        } else {
             bubbleImageView.isHidden = true
-            
         }
-        
     }
     
     func setupWelcomeLabel() {
@@ -85,24 +68,18 @@ class TestViewController: UIViewController {
     }
     
     func setGradientBackground() {
-        
         let  gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
         gradientLayer.colors = [UIColor(named: "HomeControllerTopBG")?.cgColor ?? UIColor.blue.cgColor, UIColor(named: "HomeControllerBottBG")?.cgColor ?? UIColor.cyan]
         self.view.layer.insertSublayer(gradientLayer, at: 0)
-        
-        
     }
     
     func setupNameQuestionLabel() {
         nameQuestionLabel.text  = "What is your name?"
         nameQuestionLabel.textColor = .white
-    
-        
     }
     
     func setupTextField() {
-        
         userNameTextField.layer.cornerRadius = 30
         userNameTextField.clipsToBounds = true
     }
@@ -115,8 +92,6 @@ class TestViewController: UIViewController {
     func setupNextButton() {
         nextButton.layer.cornerRadius = 10
         nextButton.clipsToBounds = true
-        
     }
-    
 }
 

@@ -133,7 +133,7 @@ extension Onboard3ViewController : UISearchBarDelegate {
             case .success(let placeMark):
                 guard let userHome = LocationController.shared.createLocation(destination: placeMark, type: LocationType.home) else { return }
             print(userHome)
-            HomeController.shared.homeLocation = userHome
+            //HomeController.shared.homeLocation = userHome
             
             if userHome.weatherNotification?.count == 0 {
             WeatherNotificationController.shared.createWeatherNotification(location: userHome, name: "Home")

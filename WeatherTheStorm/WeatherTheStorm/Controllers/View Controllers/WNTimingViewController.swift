@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class WNTimingViewController: UIViewController {
     
@@ -20,13 +21,13 @@ class WNTimingViewController: UIViewController {
     @IBOutlet weak var tableViewToolBar: UIToolbar!
     @IBOutlet weak var daysOfTheWeekTableView: UITableView!
     @IBOutlet weak var setNotificationButton: UIButton!
+    @IBOutlet var daysOfTheWeekView: UIView!
     
     //MARK: - Properties
     
     var location: Location?
     var section: String?
     let timePicker = UIDatePicker()
-    let timePickerToolBar = UIToolbar()
     let datePicker = UIDatePicker()
     let datePickerToolBar = UIToolbar()
     
@@ -34,7 +35,6 @@ class WNTimingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        daysOfTheWeekTableView.isHidden = true
         updateView()
         createTimePicker()
         setNotificationButton.layer.cornerRadius = 7
@@ -49,36 +49,51 @@ class WNTimingViewController: UIViewController {
         }
     }
     @IBAction func repeatTextFieldDidBeginEditing(_ sender: UITextField) {
-        daysOfTheWeekTableView.isHidden = false
     }
     @IBAction func setNotificationButtonTapped(_ sender: UIButton) {
-        guard let location = location, let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification else { return }
+        guard let location = location,
+            let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification else { return }
         let frequency = sortWeekdayArray()
-        WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: frequency, specificDate: nil, time: timePicker.date)
-        //setAlertNotification(location: location)
-        print(WeatherNotificationController.shared.fetchedResultsController.fetchedObjects?.count)
+        
+        if section == "Trip" {
+            WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: [], specificDate: datePicker.date, time: timePicker.date)
+            
+        } else {
+            WeatherNotificationController.shared.updateWeatherNotification(weatherNotification: weatherNotification, isActive: true, frequency: frequency, specificDate: nil, time: timePicker.date)
+        }
+        
+        WeatherNotificationController.shared.frequencies = []
+        
         DispatchQueue.main.async {
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            //MARK: - the notification trigger function called here
+            WeatherNotificationController.shared.scheduleUserNotification(for: weatherNotification)
         }
     }
-    @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {
-        daysOfTheWeekTableView.isHidden = true
-        setNotificationButton.isHidden = false
-        self.view.endEditing(true)
-        repeatTextField.text = "Every \(sortWeekdayArray().compactMap({$0}).joined(separator: ", "))"
-    }
     
+    @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {
+        repeatTextField.text = "\(sortWeekdayArray().compactMap({$0}).joined(separator: ", "))"
+        if let timeText = timeTextField?.text, !timeText.isEmpty {
+            setNotificationButton.isHidden = false
+        }
+        self.view.endEditing(true)
+    }
     
     //MARK: - Methods
     
     func sortWeekdayArray() -> [String] {
         guard let week = DateFormatter().weekdaySymbols else { return [] }
         let frequencies = WeatherNotificationController.shared.frequencies
-        return frequencies.sorted { week.firstIndex(of: $0)! < week.firstIndex(of: $1)!}
+        let sortedFrequencies = frequencies.sorted { week.firstIndex(of: $0)! < week.firstIndex(of: $1)!}
+        return sortedFrequencies.map { String($0.prefix(3)) }
     }
     
     func updateView() {
-        guard let section = section, let city = location?.city, let state = location?.state, let country = location?.country else { return }
+        guard let section = section,
+            let city = location?.city,
+            let state = location?.state,
+            let country = location?.country else { return }
+        
         addNotificationLabel.text = "Add \(section) Notification"
         addressLabel.text = "\(city), \(state), \(country)"
         
@@ -87,22 +102,20 @@ class WNTimingViewController: UIViewController {
             repeatLabel.text = "Date"
             repeatTextField.inputAccessoryView = datePickerToolBar
             repeatTextField.inputView = datePicker
-            tableViewToolBar.isHidden = true
         } else {
             repeatLabel.text = "Repeat"
             daysOfTheWeekTableView.delegate = self
             daysOfTheWeekTableView.dataSource = self
-            repeatTextField.inputAccessoryView = tableViewToolBar
-            repeatTextField.inputView = daysOfTheWeekTableView
+            repeatTextField.inputView = daysOfTheWeekView
         }
-
+        
     }
     
     //MARK: - DatePicker
     
     func createTimePicker() {
         
-        timeTextField.textAlignment = .center
+        timeTextField.textAlignment = .left
         
         let timePickerToolBar = UIToolbar()
         timePickerToolBar.sizeToFit()
@@ -118,12 +131,15 @@ class WNTimingViewController: UIViewController {
     
     @objc func timeDonePressed() {
         timeTextField.text = "\(timePicker.date.time())"
+        if let text = repeatTextField.text, !text.isEmpty {
+            setNotificationButton.isHidden = false
+        }
         self.view.endEditing(true)
     }
     
     func createDatePicker() {
         
-        repeatTextField.textAlignment = .center
+        repeatTextField.textAlignment = .left
         datePickerToolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(dateDonePressed))
@@ -133,16 +149,24 @@ class WNTimingViewController: UIViewController {
     
     @objc func dateDonePressed() {
         repeatTextField.text = "\(datePicker.date.formatDate())"
-        setNotificationButton.isHidden = false
+        if let text = timeTextField.text, !text.isEmpty {
+            setNotificationButton.isHidden = false
+        }
         self.view.endEditing(true)
     }
     
     //MARK: - Notification Alert Controller
     
-    func setAlertNotification(location: Location) {
-        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification, let weather = location.weather, let weatherPhrase = weather.current?.phrase, let feelsLikeTemp = weather.current?.feelsLike, let city = location.city else { return }
+    func setAlertNotification(for location: Location) {
+
+        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification,
+            let weather = location.weather,
+            let weatherPhrase = weather.current?.phrase,
+            let feelsLikeTemp = weather.current?.feelsLike,
+            let city = location.city else { return }
+
         let clothingPhrase = "CLOTHING STRING PLACEHOLDER"
-        let notificationText = "Hi \(UserController.shared.userName), It's \(weatherPhrase) today in \(city). Feels like \(feelsLikeTemp)°. You'll want to \(clothingPhrase)."
+        let notificationText = "Hi \(UserController.shared.userName), It's \(weatherPhrase) today in \(city). Feels like \(feelsLikeTemp)°F. You'll want to \(clothingPhrase)."
         
         let alert = UIAlertController(title: weatherNotification.name, message: notificationText, preferredStyle: .alert)
         
@@ -152,6 +176,46 @@ class WNTimingViewController: UIViewController {
         self.present(self, animated: true, completion: nil)
     }
     
+//    func scheduleUserNotification(for weatherNotification: WeatherNotification) {
+//        //Pass in fire date argument in the function parameter (maybe the parameter needs to be changed)
+//
+//        guard let location = weatherNotification.location,
+//            let city = location.city,
+//            let weather = location.weather,
+//            let type = location.type,
+//            let weatherPhrase = weather.current?.phrase,
+//            let feelsLikeTemp = weather.current?.feelsLike,
+//            let fireTime = weatherNotification.time,
+//            let fireDate = weatherNotification.specificDate else { return }
+//
+//        let identifier = "\(city)\(type)"
+//
+//        let content = UNMutableNotificationContent()
+//        content.title = "Your trip to \(city) is coming up!!!"
+//        content.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check WeatherWear for clothing recommendations."
+//        content.sound = UNNotificationSound.default
+//
+//        let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: fireTime)
+//        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: fireDate)
+//        var components = DateComponents()
+//        components.year = dateComponents.year
+//        components.month = dateComponents.month
+//        components.day = dateComponents.day
+//        components.hour = timeComponents.hour
+//        components.minute = timeComponents.minute
+//
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+//        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+//
+//        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+//            if error != nil {
+//                print("Notification failed")
+//            } else {
+//                print("Notification triggered")
+//            }
+//        })
+//    }
+//
 }
 
 extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
@@ -184,15 +248,15 @@ extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = cell.accessoryType == .checkmark ? .none : .checkmark
             cell.accessoryView?.tintColor = .black
-            var frequencies = WeatherNotificationController.shared.frequencies
-            guard let day = cell.textLabel?.text,let dayIndex = frequencies.firstIndex(of: day)
+            let frequencies = WeatherNotificationController.shared.frequencies
+            guard let day = cell.textLabel?.text?.replacingOccurrences(of: "Every ", with: ""), let dayIndex = frequencies.firstIndex(of: day)
                 else { return }
-            frequencies.remove(at: dayIndex)
+            WeatherNotificationController.shared.frequencies.remove(at: dayIndex)
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-  
+        
         tableViewToolBar.barTintColor = .systemRed
         tableViewToolBar.tintColor = .black
         
@@ -203,8 +267,10 @@ extension WNTimingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func tableViewDonePressed() {
-        daysOfTheWeekTableView.isHidden = true
+        repeatTextField.text = "\(sortWeekdayArray().compactMap({$0}).joined(separator: ", "))"
         setNotificationButton.isHidden = false
         self.view.endEditing(true)
     }
 }
+
+

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol WNTableViewCellDelegate {
+    func toggleCellButtonToggled(_ sender: WNTableViewCell)
+}
+
 class WNTableViewCell: UITableViewCell {
 
     //MARK: - Outlets
@@ -18,10 +22,16 @@ class WNTableViewCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var frequencyAndTimeLabel: UILabel!
     
+    //MARK: - Properties
+    
+    var delegate: WNTableViewCellDelegate?
+    
     //MARK: - Actions
     
-    @IBAction func isActiveSwitch(_ sender: UISwitch) {
+    @IBAction func isActiveSwitchToggled(_ sender: UISwitch) {
+        delegate?.toggleCellButtonToggled(self)
     }
+    
     
     
     
