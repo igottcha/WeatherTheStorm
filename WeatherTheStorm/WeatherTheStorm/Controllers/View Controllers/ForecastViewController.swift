@@ -52,7 +52,9 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         setupMenu()
         setupCollectionView()
         setupBottomContainer()
-        
+        setupChangeClothesLabel()
+        setupChangeNameLabel()
+        setupCreditsLabel()
         
         
     }
@@ -77,6 +79,19 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
             
         }
         
+    }
+    
+    func setupChangeClothesLabel(){
+        changeClothesLabel.text = "Change Clothing Preference"
+        
+    }
+    
+    func setupCreditsLabel() {
+        creditsLabel?.text = "Weather Wear created by Brendan Smith, Chris Gottfredson, Hin Wong, Jon Bellio, and Sean Jones"
+    }
+    
+    func setupChangeNameLabel() {
+        changeNameLabel.text = "Change your name"
     }
     func setupMenu() {
         self.menuIsOut = false
