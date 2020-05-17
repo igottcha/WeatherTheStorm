@@ -169,7 +169,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
                                 self.setupGreetingLabel()
                                 
                                 //self.setupHighLowLabels()
-                                DailyForecastController.fetchForecast(location: home, firstDate: Date(), secondDate: Date() + 9) { (result) in
+                                DailyForecastController.fetchForecast(location: home, firstDate: Date() + 1, secondDate: Date() + 10) { (result) in
                                     
                                     switch (result){
                                         

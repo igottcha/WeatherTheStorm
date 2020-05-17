@@ -88,6 +88,12 @@ class ForecastDetailViewController: UIViewController {
         guard let AQI = location?.weather?.airQualityIndex else {return}
         AQILabel.text = "\(AQI)"
         
+        guard let today = location?.weather?.dailyForecasts?.object(at: 0) as? DailyForecast else {return}
+        let rain = String(today.chanceOfPrecipitation)
+        rainLabel.text = "\(rain)%"
+        
+        
+        
      
     }
     
@@ -194,27 +200,27 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell =  dailyForecastTableView.dequeueReusableCell(withIdentifier: "homeDailyCell", for: indexPath) as? HomeDailyForecastTableViewCell, let dailyWeather = self.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast else {return UITableViewCell()}
+        guard let cell =  dailyForecastTableView.dequeueReusableCell(withIdentifier: "homeDailyCell", for: indexPath) as? HomeDailyForecastDetailTableViewCell, let dailyWeather = self.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast else {return UITableViewCell()}
         
         let day =  dailyWeather.dow
         let high = dailyWeather.maxTemp
         let low = dailyWeather.lowTemp
         
-        if high != 0 {
-            
-            let highTemp = String(high)
-            cell.HiLabel.text = "\(highTemp)º"
-            cell.HiLabel.textColor = UIColor(named: "HighOrange")
-            
-        }
-        
-        if low != 0 {
-            let lowTemp = String(low)
-            cell.loLabel.text = "\(lowTemp)º"
-            cell.loLabel.textColor = UIColor(named: "LowBlue")
-        }
-        
-        cell.dayLabel.text = day
+     if high != 0 {
+     
+         let highTemp = String(high)
+        cell.HiLabel.text = "\(highTemp)º" 
+         cell.HiLabel.textColor = UIColor(named: "HighOrange")
+     
+     }
+     
+     if low != 0 {
+         let lowTemp = String(low)
+         cell.LoLabel.text = "\(lowTemp)º"
+         cell.LoLabel.textColor = UIColor(named: "LowBlue")
+     }
+     
+     cell.dayLabel.text = day
         
         
         
