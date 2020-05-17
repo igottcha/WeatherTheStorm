@@ -15,9 +15,9 @@ protocol NotificationScheduler: class {
     func cancelUserNotifications(for weatherNotification: WeatherNotification)
 }
 
+
 extension NotificationScheduler {
     func scheduleUserNotification(for weatherNotification: WeatherNotification) {
-        //Pass in fire date argument in the function parameter (maybe the parameter needs to be changed)
         
         guard let location = weatherNotification.location,
             let city = location.city,
@@ -29,13 +29,12 @@ extension NotificationScheduler {
         let weatherPhrase = weather.current?.phrase ?? "partly cloudy"
         let feelsLikeTemp = weather.current?.feelsLike ?? 78
         
-        
         let identifier = "\(city)\(type)"
         
-        let content = UNMutableNotificationContent()
-        content.title = "Your trip to \(city) is coming up!!!"
-        content.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check WeatherWear for clothing recommendations."
-        content.sound = UNNotificationSound.default
+        let tripContent = UNMutableNotificationContent()
+        tripContent.title = "Your trip to \(city) is coming up!!!"
+        tripContent.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check WeatherWear for clothing recommendations."
+        tripContent.sound = UNNotificationSound.default
         
         let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: fireTime)
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: fireDate)
@@ -47,7 +46,7 @@ extension NotificationScheduler {
         components.minute = timeComponents.minute
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: identifier, content: tripContent, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
             if error != nil {
@@ -56,6 +55,15 @@ extension NotificationScheduler {
                 print("Notification triggered")
             }
         })
+        
+        if location.type == "Home" {
+            let homeContent = UNMutableNotificationContent()
+            homeContent.title = "Your weather forecast of \(type)"
+            homeContent.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) at \(type). Feels like \(feelsLikeTemp)°F. Please check WeatherWear for clothing recommendations."
+            homeContent.sound = UNNotificationSound.defaultCritical
+            
+            let frequency: [String]
+        }
     }
     
     func cancelUserNotifications(for weatherNotification: WeatherNotification) {
