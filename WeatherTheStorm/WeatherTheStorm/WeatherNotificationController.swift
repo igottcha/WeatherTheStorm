@@ -62,8 +62,36 @@ extension NotificationScheduler {
             homeContent.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) at \(type). Feels like \(feelsLikeTemp)°F. Please check WeatherWear for clothing recommendations."
             homeContent.sound = UNNotificationSound.defaultCritical
             
-            let frequency: [String]
+            let selectedFrequencies = WeatherNotificationController.shared.frequencies
+            
+            func getWeekDaySymbol(array: [String]) {
+                let week = DateFormatter().calendar.weekdaySymbols
+                
+                for day in array {
+                    let index = week.firstIndex(of: day) ?? 9
+                    let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: fireTime)
+                    let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: fireDate)
+                    var dateComponent = DateComponents()
+                    components.year = dateComponents.year
+                    components.month = dateComponents.month
+                    components.day = dateComponents.day
+                    components.hour = timeComponents.hour
+                    components.minute = timeComponents.minute
+                    dateComponent.weekday = Int(day)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
+                    let request = UNNotificationRequest(identifier: identifier, content: homeContent, trigger: trigger)
+                }
+            }
+            print(getWeekDaySymbol(array: selectedFrequencies))
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+                if error != nil {
+                    print("Notification failed")
+                } else {
+                    print("Notification triggered")
+                }
+            })
         }
+        
     }
     
     func cancelUserNotifications(for weatherNotification: WeatherNotification) {
