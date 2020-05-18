@@ -22,7 +22,7 @@ class DailyForecastController {
                     let maxTemp = forecast.maxTemp ?? 0
                     let chanceOfPrecipitation = day?.chanceOfPrecipitation ?? 0
                     let cloudCoverPercentage = day?.cloudCoverPercentage ?? 0
-                    return DailyForecast(lowTemp: Int64(lowTemp), maxTemp: Int64(maxTemp), dow: forecast.dow, chanceOfPrecipitation: Int64(chanceOfPrecipitation), cloudCoverPercentage: Int64(cloudCoverPercentage), precipitationType: day?.precipitationType, shortPhrase: day?.shortPhrase)
+                    return DailyForecast(date: forecast.date.stringToDate(),lowTemp: Int64(lowTemp), maxTemp: Int64(maxTemp), dow: forecast.dow, chanceOfPrecipitation: Int64(chanceOfPrecipitation), cloudCoverPercentage: Int64(cloudCoverPercentage), precipitationType: day?.precipitationType, shortPhrase: day?.shortPhrase)
                 }
                 if location.weather != nil {
                     location.weather?.dailyForecasts = NSOrderedSet(array: forecasts)

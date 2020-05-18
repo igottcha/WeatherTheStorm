@@ -23,12 +23,13 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         super.viewDidLoad()
         forecastCollectionView.delegate = self
         forecastCollectionView.dataSource = self
+        forecastCollectionView.layer.cornerRadius = 7
         guard let trip = trip else { return }
         getWeather(for: trip)
         updateViews()
         //setUpRecommendations()
         //setUpWeatherImageView()
-       
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,13 +57,13 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         guard let temp = trip?.location?.weather?.current?.temperature else { return }
         switch temp {
         case 90..<1000:
-            recommendationsLabel.text = "We recommend bringing the following: Short sleeves, shorts, airy clothing, and stay hydrated."
+            recommendationsLabel.text = "~ Short sleeves\n shorts\n airy clothing\n Stay hydrated!"
         case 80...89:
             recommendationsLabel.text = "We recommend that you bring the folowing: Short sleeves, shorts, and airy clothes."
         case 70...79:
             recommendationsLabel.text = "We recommend that you bring the following: Short sleeves, breathable fabrics, shorts."
         case 60...69:
-            recommendationsLabel.text = "We recommend that you bring the following: Long pants, long sleeves, and a light sweater. or jacket."
+            recommendationsLabel.text = "\n ~ Long pants\n\n ~ Long sleeves\n\n ~ Light sweater\n\t or jacket"
         case 50...59:
             recommendationsLabel.text = "It's sweater weather! Wear pants and a light jacket."
         case 40...49:
@@ -79,7 +80,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     func setUpWeatherImageView() {
         let gender = UserController.shared.isMale
         guard let feelsLikeTemp = trip?.location?.weather?.current?.feelsLike else { return }
-
+        
         if gender == false && feelsLikeTemp >= 90 {
             weatherImageView.image = UIImage(named: "female_cloudy_shortsshirtsunglassescap") // f
         }
@@ -116,7 +117,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         else {
             weatherImageView.image = UIImage(named: "female_clearday_pantscoat")
         }
-
+        
     }
     
     
@@ -177,29 +178,26 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: "forecastCell", for: indexPath) as? ForecastCollectionViewCell else { return UICollectionViewCell() }
-        guard let daily = trip?.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast,
-            let days = daily.dow else { return UICollectionViewCell() }
-
+        guard let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: "forecastCell", for: indexPath) as? ForecastCollectionViewCell, let daily = trip?.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast, let date = daily.date else { return UICollectionViewCell() }
         
-        cell.dateLabel.text = "\(days)"
+        cell.dateLabel.text = "\(date.month()) \(date.day())"
         
         cell.lowTempLabel.text = "\(daily.lowTemp)"
-        cell.highTempLabel.text = daily.maxTemp != nil ? "\(daily.maxTemp)" : "N/A"
+        cell.highTempLabel.text = "\(daily.maxTemp)"
         
         
         return cell
     }
-
+    
 }
 
 extension TripInformationViewController: UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionWidth = forecastCollectionView.bounds.width
         let collectionHeight = forecastCollectionView.bounds.height
-
-
+        
+        
         return CGSize(width: collectionWidth * 0.95, height: collectionHeight * 0.10)
     }
 }
