@@ -16,7 +16,7 @@ class HourlyWeatherController {
         NetworkController.genericAPICall(url: apiURL, type: HourlyTopLevelObject.self) { (result) in
             switch result {
             case .success(let topLevelObject):
-                let forecasts = topLevelObject.forecasts.map { HourlyForecast(cloudCoverPercentage: Int64($0.cloudCoverPercentage), feelsLike: Int64($0.feelsLike), temp: Int64($0.temp), time: $0.time, shortPhrase: $0.shortPhrase) }
+                let forecasts = topLevelObject.forecasts.map { HourlyForecast(cloudCoverPercentage: Int64($0.cloudCoverPercentage), feelsLike: Int64($0.feelsLike), temp: Int64($0.temp), time: $0.time, shortPhrase: $0.shortPhrase, iconCode: Int64($0.iconCode)) }
                 
                 if (location.weather != nil)  {
                     location.weather?.hourlyForecasts = NSOrderedSet(array: forecasts)

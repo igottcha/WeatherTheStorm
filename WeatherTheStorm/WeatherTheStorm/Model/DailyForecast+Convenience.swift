@@ -11,7 +11,7 @@ import CoreData
 
 extension DailyForecast {
     @discardableResult
-    convenience init(date: Date = Date(), lowTemp: Int64, maxTemp: Int64, dow: String, chanceOfPrecipitation: Int64, cloudCoverPercentage: Int64, precipitationType: String?, shortPhrase: String?, moc: NSManagedObjectContext = CoreDataStack.context ) {
+    convenience init(date: Date = Date(), lowTemp: Int64, maxTemp: Int64, dow: String, chanceOfPrecipitation: Int64, cloudCoverPercentage: Int64, precipitationType: String?, shortPhrase: String?, iconCode: Int64, moc: NSManagedObjectContext = CoreDataStack.context ) {
         self.init(context: moc)
         self.date = date
         self.lowTemp = lowTemp
@@ -21,5 +21,6 @@ extension DailyForecast {
         self.cloudCoverPercentage = cloudCoverPercentage
         self.precipitationType = precipitationType
         self.shortPhrase = shortPhrase
+        self.iconCode = iconCode
     }
 }

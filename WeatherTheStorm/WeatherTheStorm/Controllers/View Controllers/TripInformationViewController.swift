@@ -181,7 +181,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         guard let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: "forecastCell", for: indexPath) as? ForecastCollectionViewCell, let daily = trip?.location?.weather?.dailyForecasts?.object(at: indexPath.row) as? DailyForecast, let date = daily.date else { return UICollectionViewCell() }
         
         cell.dateLabel.text = "\(date.month()) \(date.day())"
-        
+        cell.conditionImageView.image = UIImage(named: "\(daily.iconCode)")
         cell.lowTempLabel.text = "\(daily.lowTemp)"
         cell.highTempLabel.text = "\(daily.maxTemp)"
         
