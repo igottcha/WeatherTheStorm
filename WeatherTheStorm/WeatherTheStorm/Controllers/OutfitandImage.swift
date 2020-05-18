@@ -8,18 +8,14 @@
 
 import UIKit
 
-protocol OutfitandImage {
-    func getWeatherIcont(weather: Weather)
-    func getClothingRecommendations(location: Location)
-    func getWeatherWearAvatar(location: Location)
+protocol OutfitandImage: class {
+//    func getClothingRecommendations(location: Location)
+//    func getWeatherWearAvatar(location: Location)
 }
 
 extension OutfitandImage {
-//    func getWeatherIcon(weather: Weather) -> UIImage? {
-//        guard let weather = weather.dailyForecasts else { return #imageLiteral(resourceName: "Male_Clearday_pantscoatgloveshat")}
-//    }
     
-    func getClothingRecommendations(location: Location) -> String {
+    func getClothingRecommendations(for location: Location) -> String {
         guard let temp = location.weather?.current?.temperature else { return ""}
         switch temp {
         case 90..<1000:
@@ -43,7 +39,7 @@ extension OutfitandImage {
         }
     }
     
-    func getWeatherWearAvatarImage(location: Location) -> UIImage? {
+    func getWeatherWearAvatar(for location: Location) -> UIImage? {
         let gender = UserController.shared.isMale
         guard let feelsLikeTemp = location.weather?.current?.feelsLike else { return #imageLiteral(resourceName: "Male_Partlycloudy_shortshirtsunglassescap") }
 
