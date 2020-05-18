@@ -22,6 +22,7 @@ class TestViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userNameTextField.delegate = self
         setGradientBackground()
         setupWelcomeLabel()
         setupNameQuestionLabel()
@@ -93,5 +94,12 @@ class TestViewController: UIViewController {
         nextButton.layer.cornerRadius = 10
         nextButton.clipsToBounds = true
     }
+    
 }
 
+extension TestViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
