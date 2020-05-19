@@ -33,7 +33,7 @@ extension NotificationScheduler {
         
         let tripContent = UNMutableNotificationContent()
         tripContent.title = "Your trip to \(city) is coming up!!!"
-        tripContent.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check WeatherWear for clothing recommendations."
+        tripContent.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check app name for clothing recommendations."
         tripContent.sound = UNNotificationSound.default
         
         let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: fireTime)
@@ -59,11 +59,39 @@ extension NotificationScheduler {
         if location.type == "Home" {
             let homeContent = UNMutableNotificationContent()
             homeContent.title = "Your weather forecast of \(type)"
-            homeContent.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) at \(type). Feels like \(feelsLikeTemp)°F. Please check WeatherWear for clothing recommendations."
+            homeContent.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) at \(type). Feels like \(feelsLikeTemp)°F. Please check app name for clothing recommendations."
             homeContent.sound = UNNotificationSound.defaultCritical
             
-            let frequency: [String]
+            let selectedFrequencies = WeatherNotificationController.shared.frequencies
+            
+            func getWeekDaySymbol(array: [String]) {
+                let week = DateFormatter().calendar.weekdaySymbols
+                
+                for day in array {
+                    let index = week.firstIndex(of: day) ?? 9
+                    let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .minute, .day], from: fireDate)
+                    var dateComponent = DateComponents()
+                    components.year = dateComponents.year
+                    components.month = dateComponents.month
+                    components.day = dateComponents.day
+                    components.hour = dateComponents.hour
+                    components.minute = dateComponents.minute
+                    dateComponent.weekday = Int(day)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
+                    let request = UNNotificationRequest(identifier: identifier, content: homeContent, trigger: trigger)
+                    UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+                        if error != nil {
+                            print("Notification failed")
+                        } else {
+                            print("Notification triggered")
+                        }
+                    })
+                }
+            }
+            print(getWeekDaySymbol(array: selectedFrequencies))
+            
         }
+        
     }
     
     func cancelUserNotifications(for weatherNotification: WeatherNotification) {
