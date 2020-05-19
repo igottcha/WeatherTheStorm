@@ -82,10 +82,10 @@ extension NotificationScheduler {
         switch type {
         case "Home":
             content.title = "Your weather forecast of \(type)"
-            content.body = "Hi \(userName), it's \(weatherPhrase) at \(type). Feels like \(feelsLikeTemp)°F. Please check app name for clothing recommendations."
+            content.body = "Hi \(userName), it's \(weatherPhrase) at \(type). Feels like \(feelsLikeTemp)°F. Please check Weather the Weather for clothing recommendations."
         case "Trip":
             content.title = "Your trip to \(city) is coming up!!!"
-            content.body = "Hi \(userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check app name for clothing recommendations."
+            content.body = "Hi \(userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check Weather the Weather for clothing recommendations."
         default:
             print("Location Type does not exist")
         }
