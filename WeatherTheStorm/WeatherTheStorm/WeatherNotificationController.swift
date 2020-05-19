@@ -26,9 +26,10 @@ extension NotificationScheduler {
         let content = getContent(location: location, userName: UserController.shared.userName)
         content.sound = UNNotificationSound.default
         let triggers = getTrigger(type: type, fireDate: weatherNotification.specificDate, fireTime: weatherNotification.time, frequencyData: weatherNotification.frequency)
-        let identifier = "\(city)\(type)"
         
         for trigger in triggers {
+            guard let index = triggers.firstIndex(of: trigger) else { return }
+            let identifier = "\(city)\(type)\(index)"
             let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
             
             UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
@@ -45,10 +46,28 @@ extension NotificationScheduler {
         guard let location = weatherNotification.location,
             let city = location.city,
             let type = location.type else { return }
+        var identifiers: [String] = []
         
-        let identifier = "\(city)\(type)"
+        switch type {
+        case "Home":
+            guard let data = weatherNotification.frequency else { return }
+            var days: [String] = []
+            do {
+                days = try JSONDecoder().decode([String].self, from: data)
+            } catch {
+                print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
+            }
+            for day in days {
+                guard let index = days.firstIndex(of: day) else { return }
+                identifiers.append("\(city)\(type)\(index)")
+            }
+        case "Trip":
+            identifiers.append("\(city)\(type)\(0)")
+        default:
+            print("No identifiers identified in \(#function)")
+        }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
         
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
     }
     
     private func getContent(location: Location, userName: String) -> UNMutableNotificationContent {
