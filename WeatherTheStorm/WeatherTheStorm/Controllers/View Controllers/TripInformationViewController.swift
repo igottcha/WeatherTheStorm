@@ -116,8 +116,8 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         
         cell.dateLabel.text = "\(date.month()) \(date.day())"
         cell.conditionImageView.image = UIImage(named: "\(daily.iconCode)")
+        cell.maxTempLabel.text = "\(daily.maxTemp)"
         cell.lowTempLabel.text = "\(daily.lowTemp)"
-        cell.highTempLabel.text = "\(daily.maxTemp)"
         
         
         return cell

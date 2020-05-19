@@ -12,7 +12,7 @@ class ForecastCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var conditionImageView: UIImageView!
+    @IBOutlet weak var maxTempLabel: UILabel!
     @IBOutlet weak var lowTempLabel: UILabel!
-    @IBOutlet weak var highTempLabel: UILabel!
     
 }
