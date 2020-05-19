@@ -163,7 +163,7 @@ class Onboard2ViewController: UIViewController {
     
     func setupProgressLabel() {
         progressLabel.textColor = .white
-        progressLabel.text = "2 of 4"
+        progressLabel.text = "2 of 3"
     }
     
     func setupNextButton() {

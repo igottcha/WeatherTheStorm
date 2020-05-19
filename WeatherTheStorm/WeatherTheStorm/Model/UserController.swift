@@ -31,6 +31,7 @@ class UserController {
     
     func saveGender(gender: IsMale) {
         UserDefaults.standard.set(gender, forKey: UserController.genderKey)
+        self.isMale = gender
     }
     
     func loadGender() {

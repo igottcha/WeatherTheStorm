@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForecastDetailViewController: UIViewController {
+class ForecastDetailViewController: UIViewController, OutfitandImage {
     //MARK: PROPERTIES
     
     var date: Date = Date()
@@ -16,8 +16,10 @@ class ForecastDetailViewController: UIViewController {
     var userIsMale: Bool?
     var userName: String = ""
     var userCity: String = ""
+    var phrase: String = ""
     
-   
+    
+    
     @IBOutlet weak var phraseLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var pinImageView: UIImageView!
@@ -66,7 +68,7 @@ class ForecastDetailViewController: UIViewController {
         
     }
     
-    
+   
     func setupWeatherLabels(){
         guard let weatherToday = location?.weather?.current  else {return}
         
@@ -78,7 +80,7 @@ class ForecastDetailViewController: UIViewController {
         let visibility = String(weatherToday.visibility)
         let sunriseDate = weatherToday.sunrise?.hourMinute()
         let sunsetDate = weatherToday.sunset?.hourMinute()
-         
+        
         humidityLabel.text = "\(humidity)%"
         precipLabel.text = "\(precip) in"
         PressureLabel.text = "\(pressure) inHg"
@@ -101,7 +103,7 @@ class ForecastDetailViewController: UIViewController {
         
         
         
-     
+        
     }
     
     func makeEdgesRound() {
@@ -160,7 +162,7 @@ class ForecastDetailViewController: UIViewController {
     
     func setupCurrentWeather(currentWeather: Current){
         guard let phrase = currentWeather.phrase else {return}
-        phraseLabel.text = "Hello, \(userName)! It's a \(phrase) day in \(self.userCity)"
+        phraseLabel.text = self.phrase
         phraseLabel.textColor = .white
         let currentTemp = String(currentWeather.temperature)
         tempLabel.text = "\(currentTemp)º"
@@ -188,13 +190,13 @@ class ForecastDetailViewController: UIViewController {
     }
     
     func stringToDate(_ dateString: String) -> Date {
-          let formatter = DateFormatter()
-          formatter.locale = .current
-          formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-          guard let date = formatter.date(from: dateString) else { return Date()}
-          return date
-          
-      }
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        guard let date = formatter.date(from: dateString) else { return Date()}
+        return date
+        
+    }
     
     
     /*
@@ -223,21 +225,21 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
         let low = dailyWeather.lowTemp
         let icon = String(dailyWeather.iconCode)
         
-     if high != 0 {
-     
-         let highTemp = String(high)
-        cell.HiLabel.text = "\(highTemp)º" 
-         cell.HiLabel.textColor = UIColor(named: "HighOrange")
-     
-     }
-     
-     if low != 0 {
-         let lowTemp = String(low)
-         cell.LoLabel.text = "\(lowTemp)º"
-         cell.LoLabel.textColor = UIColor(named: "LowBlue")
-     }
-     
-     cell.dayLabel.text = day
+        if high != 0 {
+            
+            let highTemp = String(high)
+            cell.HiLabel.text = "\(highTemp)º"
+            cell.HiLabel.textColor = UIColor(named: "HighOrange")
+            
+        }
+        
+        if low != 0 {
+            let lowTemp = String(low)
+            cell.LoLabel.text = "\(lowTemp)º"
+            cell.LoLabel.textColor = UIColor(named: "LowBlue")
+        }
+        
+        cell.dayLabel.text = day
         cell.weatherIcon.image = UIImage(named: icon)
         
         
@@ -251,9 +253,11 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return "8-Day Forecast"
+        
+        
+        
+        
     }
-    
-    
     
 }
 
@@ -271,9 +275,9 @@ extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionVi
         let time = stringToDate(hourlyForecast.time!)
         let hour = time.hour()
         let icon = String(hourlyForecast.iconCode)
-       
         
-       
+        
+        
         cell.timeLabel.text = hour
         let temp = String(hourlyForecast.temp)
         cell.tempLabel.text = "\(temp)º"
@@ -288,7 +292,7 @@ extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = hourlyForecastCollectionView.frame.size.height / 2
-       // let layout = hourlyForecastCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        // let layout = hourlyForecastCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
         return CGSize(width: width, height: width)
     }
@@ -299,11 +303,11 @@ extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionVi
 extension ForecastDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-       
+        
         scrollView.contentOffset.x = 0
-    
-    
-}
+        
+        
+    }
 }
 
 

@@ -9,13 +9,15 @@
 import UIKit
 import CoreLocation
 
-class ForecastViewController: UIViewController, CLLocationManagerDelegate {
+class ForecastViewController: UIViewController, CLLocationManagerDelegate, OutfitandImage {
     
     var location: Location?
     var date: Date = Date()
     var locationManager: CLLocationManager?
     var userCity: String = ""
-    var phrase: String = ""
+    var phrase1: String = ""
+    var phrase2: String = ""
+    var fullPhrase: String = ""
     var userIsMale: Bool?
     var userName = ""
     var menuIsOut = false
@@ -37,8 +39,9 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var settingsMenuViewTrailing: NSLayoutConstraint!
     @IBOutlet weak var settingsMenuView: UIView!
     @IBOutlet weak var changeClothesLabel: UILabel!
-    @IBOutlet weak var changeNameLabel: UILabel!
+   
     @IBOutlet weak var creditsLabel: UILabel!
+    @IBOutlet weak var avatarImageView: UIImageView!
     
     
     override func viewDidLoad() {
@@ -53,9 +56,16 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         setupCollectionView()
         setupBottomContainer()
         setupChangeClothesLabel()
-        setupChangeNameLabel()
+        
         setupCreditsLabel()
         
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        grabUserDetails()
         
     }
     
@@ -81,18 +91,33 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    func setupAvatarImage() {
+           guard let location = self.location else {return}
+        avatarImageView.image = getWeatherWearAvatar(for: location)
+        
+          
+           
+       }
+    
     func setupChangeClothesLabel(){
-        changeClothesLabel.text = "Change Clothing Preference"
+        changeClothesLabel.text = "Update Preferences"
+        changeClothesLabel.isUserInteractionEnabled = true
+        let settingsTap = UITapGestureRecognizer(target: self, action: #selector(toSettingsPage(tap:)))
+        changeClothesLabel.addGestureRecognizer(settingsTap)
+        
+    }
+    
+    
+    @objc func toSettingsPage(tap: UITapGestureRecognizer){
+        performSegue(withIdentifier: "toSettingsVC", sender: self)
         
     }
     
     func setupCreditsLabel() {
-        creditsLabel?.text = "Weather Wear created by Brendan Smith, Chris Gottfredson, Hin Wong, Jon Bellio, and Sean Jones"
+        creditsLabel?.text = "Weather the Weather created by Brendan Smith, Chris Gottfredson, Hin Wong, Jon Bellio, and Sean Jones"
     }
     
-    func setupChangeNameLabel() {
-        changeNameLabel.text = "Change your name"
-    }
+    
     func setupMenu() {
         self.menuIsOut = false
         settingsMenuView.isHidden = true
@@ -105,12 +130,13 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         getUserCity()
         getUserName()
         getUserGender()
+       
         
         
     }
     
     func getUserCity() {
-        let home = HomeController.shared.homeLocation.first
+        let home = HomeController.shared.homeLocation.last
         self.location = home
         setLocationWeather(home: self.location!)
         setupCityLabel()
@@ -144,7 +170,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func getUserGender() {
-        UserController.shared.loadGender()
+      let gender = UserController.shared.loadGender()
         self.userIsMale = UserController.shared.isMale
         
         
@@ -204,7 +230,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
                 break
             }
         }
-        
+         
     }
     
     
@@ -229,7 +255,8 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func setupGreetingLabel(){
-        greetingLabel.text = "Hello, \(UserController.shared.userName)! it's a \(phrase) day in \(userCity)"
+        greetingLabel.text = "Hello, \(UserController.shared.userName)! it's a \(phrase1) day in \(userCity)" + " " + "\(phrase2)"
+        self.fullPhrase = "Hello, \(UserController.shared.userName)! it's a \(phrase1) day in \(userCity)" + " " + "\(phrase2)"
         greetingLabel.textColor = .white
         
     }
@@ -250,6 +277,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         guard let feelLike = self.location?.weather?.current?.feelsLike else {return}
         feelsLikeLabel.text = "Feels like \(feelLike)º"
         feelsLikeLabel.textColor = .white
+        setupAvatarImage()
     }
     
     func setupSwipeUp() {
@@ -281,7 +309,9 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     }
     func setupPhrase(){
         guard let weatherPhrase = self.location?.weather?.current?.phrase else {return}
-        self.phrase = weatherPhrase
+        let fashion = getClothingRecommendations(for: self.location!)
+        self.phrase1 = weatherPhrase
+        self.phrase2 = fashion
     }
     
     func setGradientBackground() {
@@ -329,6 +359,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
                 destinationVC.userIsMale = userIsMale
                 destinationVC.userName = userName
                 destinationVC.userCity = userCity
+                destinationVC.phrase = self.fullPhrase
             }
         }
     }
@@ -352,6 +383,7 @@ extension ForecastViewController: UICollectionViewDelegate, UICollectionViewData
         guard let hourlyWeather = location.weather?.hourlyForecasts?[indexPath.row] as? HourlyForecast else {return cell}
         let time = stringToDate(hourlyWeather.time ?? "12:00")
         let hour = time.hour()
+        
         
         let icon = String(hourlyWeather.iconCode)
         cell.hourlyTimeLabel.text = hour
