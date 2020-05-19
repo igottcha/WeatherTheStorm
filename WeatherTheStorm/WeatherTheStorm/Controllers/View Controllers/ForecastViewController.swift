@@ -339,7 +339,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
 extension ForecastViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let hourliesCount = self.location?.weather?.hourlyForecasts?.count else {return 0}
-        return hourliesCount
+        return 12
         
         
     }
@@ -366,7 +366,7 @@ extension ForecastViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = view.frame.size.height
+        let width = hourleForecastCollectionView.frame.size.height
         let layout = hourleForecastCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
         return layout.itemSize

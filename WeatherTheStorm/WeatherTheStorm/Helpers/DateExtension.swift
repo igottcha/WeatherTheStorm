@@ -46,6 +46,12 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    func hourMinute() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm a"
+        return formatter.string(from: self)
+    }
+    
    
     
 }

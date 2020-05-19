@@ -42,6 +42,7 @@ class ForecastDetailViewController: UIViewController {
     @IBOutlet weak var UVLabel: UILabel!
     @IBOutlet weak var AQILabel: UILabel!
     @IBOutlet weak var airLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     
     
@@ -56,11 +57,12 @@ class ForecastDetailViewController: UIViewController {
         dailyForecastTableView.dataSource = self
         hourlyForecastCollectionView.delegate = self
         hourlyForecastCollectionView.dataSource = self
+        scrollView.delegate = self
         setupDateLabel()
         makeEdgesRound()
         setupWeatherLabels()
         
-        hourlyForecastCollectionView.register(HourlyForecastDetailCollectionViewCell.self, forCellWithReuseIdentifier: "hourlyDetailCell")
+        //hourlyForecastCollectionView.register(HourlyForecastDetailCollectionViewCell.self, forCellWithReuseIdentifier: "hourlyDetailCell")
         
     }
     
@@ -74,12 +76,17 @@ class ForecastDetailViewController: UIViewController {
         let pressure = String(weatherToday.pressure)
         let UVIndex = String(weatherToday.uvIndex)
         let visibility = String(weatherToday.visibility)
+        let sunriseDate = weatherToday.sunrise?.hourMinute()
+        let sunsetDate = weatherToday.sunset?.hourMinute()
          
         humidityLabel.text = "\(humidity)%"
         precipLabel.text = "\(precip) in"
         PressureLabel.text = "\(pressure) inHg"
         UVLabel.text = "\(UVIndex)"
         VisibilityLabel.text = "\(visibility) mi"
+        sunriseLabel.text = sunriseDate
+        sunsetLabel.text = sunsetDate
+        
         
         
         guard let wind = weatherToday.windDirection else {return}
@@ -180,6 +187,15 @@ class ForecastDetailViewController: UIViewController {
         
     }
     
+    func stringToDate(_ dateString: String) -> Date {
+          let formatter = DateFormatter()
+          formatter.locale = .current
+          formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+          guard let date = formatter.date(from: dateString) else { return Date()}
+          return date
+          
+      }
+    
     
     /*
      // MARK: - Navigation
@@ -232,43 +248,45 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        return "10-Day Forecast"
+        return "8-Day Forecast"
     }
     
     
     
 }
 
-extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let hourliesCount = self.location?.weather?.hourlyForecasts?.count else {return 0}
-        return hourliesCount
+        return 12
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hourlyDetailCell", for: indexPath) as? HourlyForecastDetailCollectionViewCell,
-            let hourlyForecast = self.location?.weather?.hourlyForecasts?.object(at: indexPath.row) as? HourlyForecast else {return UICollectionViewCell()}
+        guard let cell = hourlyForecastCollectionView.dequeueReusableCell(withReuseIdentifier: "hourlyDetailCell", for: indexPath) as? HourlyForecastDetailCollectionViewCell else {return UICollectionViewCell()}
+        guard let hourlyForecast = self.location?.weather?.hourlyForecasts?.object(at: indexPath.row) as? HourlyForecast else {return cell}
         
         
+        let time = stringToDate(hourlyForecast.time!)
+        let hour = time.hour()
+       
         
-        let time = hourlyForecast.time
+       
+        cell.timeLabel.text = hour
         let temp = String(hourlyForecast.temp)
-        
-        cell.timeLabel?.text = time
-        cell.tempLabel?.text = temp
+        cell.tempLabel.text = "\(temp)º"
         
         return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = view.frame.size.height
-        let layout = hourlyForecastCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width)
-        return layout.itemSize
+        let width = hourlyForecastCollectionView.frame.size.height / 2
+       // let layout = hourlyForecastCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        
+        return CGSize(width: width, height: width)
     }
     
     
@@ -276,6 +294,12 @@ extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionVi
 
 extension ForecastDetailViewController: UIScrollViewDelegate {
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+       
+        scrollView.contentOffset.x = 0
+    
+    
+}
 }
 
 
