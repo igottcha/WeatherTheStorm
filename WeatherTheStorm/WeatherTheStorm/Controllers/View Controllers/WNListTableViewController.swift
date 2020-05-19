@@ -84,9 +84,9 @@ class WNListTableViewController: UITableViewController {
             cell.frequencyAndTimeLabel.text = "On \(weatherNotification.specificDate?.formatDate() ?? "TBD") at \(time)"
         } else {
             if frequency.count == 2 {
-               cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: " & ")) at \(time)"
+               cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0.prefix(3)}).joined(separator: " & ")) at \(time)"
             } else {
-            cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0}).joined(separator: ", ")) at \(time)"
+            cell.frequencyAndTimeLabel.text = "Every \(frequency.compactMap({$0.prefix(3)}).joined(separator: ", ")) at \(time)"
             }
         }
         
