@@ -9,13 +9,14 @@
 import UIKit
 import CoreLocation
 
-class ForecastViewController: UIViewController, CLLocationManagerDelegate {
+class ForecastViewController: UIViewController, CLLocationManagerDelegate, OutfitandImage {
     
     var location: Location?
     var date: Date = Date()
     var locationManager: CLLocationManager?
     var userCity: String = ""
-    var phrase: String = ""
+    var phrase1: String = ""
+    var phrase2: String = ""
     var userIsMale: Bool?
     var userName = ""
     var menuIsOut = false
@@ -39,6 +40,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var changeClothesLabel: UILabel!
     @IBOutlet weak var changeNameLabel: UILabel!
     @IBOutlet weak var creditsLabel: UILabel!
+    @IBOutlet weak var avatarImageView: UIImageView!
     
     
     override func viewDidLoad() {
@@ -53,8 +55,9 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         setupCollectionView()
         setupBottomContainer()
         setupChangeClothesLabel()
-        setupChangeNameLabel()
+        
         setupCreditsLabel()
+        setupAvatarImage()
         
         
     }
@@ -80,6 +83,14 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
         }
         
     }
+    
+    func setupAvatarImage() {
+           guard let location = self.location else {return}
+        avatarImageView.image = getWeatherWearAvatar(for: location)
+        
+          
+           
+       }
     
     func setupChangeClothesLabel(){
         changeClothesLabel.text = "Change Clothing Preference"
@@ -229,7 +240,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func setupGreetingLabel(){
-        greetingLabel.text = "Hello, \(UserController.shared.userName)! it's a \(phrase) day in \(userCity)"
+        greetingLabel.text = "Hello, \(UserController.shared.userName)! it's a \(phrase1) day in \(userCity)" + " " + "\(phrase2)"
         greetingLabel.textColor = .white
         
     }
@@ -281,7 +292,9 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     }
     func setupPhrase(){
         guard let weatherPhrase = self.location?.weather?.current?.phrase else {return}
-        self.phrase = weatherPhrase
+        let fashion = getClothingRecommendations(for: self.location!)
+        self.phrase1 = weatherPhrase
+        self.phrase2 = fashion
     }
     
     func setGradientBackground() {
@@ -352,6 +365,7 @@ extension ForecastViewController: UICollectionViewDelegate, UICollectionViewData
         guard let hourlyWeather = location.weather?.hourlyForecasts?[indexPath.row] as? HourlyForecast else {return cell}
         let time = stringToDate(hourlyWeather.time ?? "12:00")
         let hour = time.hour()
+        
         
         let icon = String(hourlyWeather.iconCode)
         cell.hourlyTimeLabel.text = hour
