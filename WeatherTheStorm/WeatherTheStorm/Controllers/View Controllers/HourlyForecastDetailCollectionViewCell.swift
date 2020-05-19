@@ -10,9 +10,20 @@ import UIKit
 
 class HourlyForecastDetailCollectionViewCell: UICollectionViewCell {
     
+
+    var hourlyForecast: HourlyForecast?
+    
+    
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
+    
+    
+    override func awakeFromNib() {
+        
+    }
+    
+    
     
     
     
