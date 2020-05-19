@@ -58,3 +58,10 @@ class TripDetailViewController: UIViewController {
     }
  
 }
+
+extension TripDetailViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
