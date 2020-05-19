@@ -248,11 +248,11 @@
 				9E7835AB2460BE5A008B4CF1 /* NewWNTableViewController.swift */,
 				9E9CEFBB246B20F200F76A9A /* WNLocationListViewController.swift */,
 				9E83BF8A2465F27B00B3830E /* WNTimingViewController.swift */,
+				4E922861246B349500136C5B /* ForecastCollectionViewCell.swift */,
 				4E922859246B083E00136C5B /* TripListTableViewController.swift */,
 				4E92285B246B08AB00136C5B /* TripDetailViewController.swift */,
 				4E92285D246B090B00136C5B /* TripTableViewCell.swift */,
 				4E92285F246B30E100136C5B /* TripInformationViewController.swift */,
-				4E922861246B349500136C5B /* ForecastCollectionViewCell.swift */,
 				E9459B2F246E1848008B144A /* HourlyForecastDetailCollectionViewCell.swift */,
 				E9FDBA202470D45A0013E269 /* HomeDailyForecastDetailTableViewCell.swift */,
 			);
