@@ -60,7 +60,7 @@ class Onboard3ViewController: UIViewController {
     
     func setupProgressLabel() {
         progressLabel.textColor = .white
-        progressLabel.text = "3 of 4"
+        progressLabel.text = "3 of 3"
     }
     
     func setupWhyLabel() {

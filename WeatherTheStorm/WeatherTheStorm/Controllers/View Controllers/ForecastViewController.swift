@@ -17,6 +17,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
     var userCity: String = ""
     var phrase1: String = ""
     var phrase2: String = ""
+    var fullPhrase: String = ""
     var userIsMale: Bool?
     var userName = ""
     var menuIsOut = false
@@ -38,7 +39,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
     @IBOutlet weak var settingsMenuViewTrailing: NSLayoutConstraint!
     @IBOutlet weak var settingsMenuView: UIView!
     @IBOutlet weak var changeClothesLabel: UILabel!
-    @IBOutlet weak var changeNameLabel: UILabel!
+   
     @IBOutlet weak var creditsLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     
@@ -57,8 +58,14 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         setupChangeClothesLabel()
         
         setupCreditsLabel()
-        setupAvatarImage()
         
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        grabUserDetails()
         
     }
     
@@ -93,17 +100,24 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
        }
     
     func setupChangeClothesLabel(){
-        changeClothesLabel.text = "Change Clothing Preference"
+        changeClothesLabel.text = "Update Preferences"
+        changeClothesLabel.isUserInteractionEnabled = true
+        let settingsTap = UITapGestureRecognizer(target: self, action: #selector(toSettingsPage(tap:)))
+        changeClothesLabel.addGestureRecognizer(settingsTap)
+        
+    }
+    
+    
+    @objc func toSettingsPage(tap: UITapGestureRecognizer){
+        performSegue(withIdentifier: "toSettingsVC", sender: self)
         
     }
     
     func setupCreditsLabel() {
-        creditsLabel?.text = "Weather Wear created by Brendan Smith, Chris Gottfredson, Hin Wong, Jon Bellio, and Sean Jones"
+        creditsLabel?.text = "Weather the Weather created by Brendan Smith, Chris Gottfredson, Hin Wong, Jon Bellio, and Sean Jones"
     }
     
-    func setupChangeNameLabel() {
-        changeNameLabel.text = "Change your name"
-    }
+    
     func setupMenu() {
         self.menuIsOut = false
         settingsMenuView.isHidden = true
@@ -116,12 +130,13 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         getUserCity()
         getUserName()
         getUserGender()
+       
         
         
     }
     
     func getUserCity() {
-        let home = HomeController.shared.homeLocation.first
+        let home = HomeController.shared.homeLocation.last
         self.location = home
         setLocationWeather(home: self.location!)
         setupCityLabel()
@@ -155,7 +170,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
     }
     
     func getUserGender() {
-        UserController.shared.loadGender()
+      let gender = UserController.shared.loadGender()
         self.userIsMale = UserController.shared.isMale
         
         
@@ -215,7 +230,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
                 break
             }
         }
-        
+         
     }
     
     
@@ -241,6 +256,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
     
     func setupGreetingLabel(){
         greetingLabel.text = "Hello, \(UserController.shared.userName)! it's a \(phrase1) day in \(userCity)" + " " + "\(phrase2)"
+        self.fullPhrase = "Hello, \(UserController.shared.userName)! it's a \(phrase1) day in \(userCity)" + " " + "\(phrase2)"
         greetingLabel.textColor = .white
         
     }
@@ -261,6 +277,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         guard let feelLike = self.location?.weather?.current?.feelsLike else {return}
         feelsLikeLabel.text = "Feels like \(feelLike)º"
         feelsLikeLabel.textColor = .white
+        setupAvatarImage()
     }
     
     func setupSwipeUp() {
@@ -342,6 +359,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
                 destinationVC.userIsMale = userIsMale
                 destinationVC.userName = userName
                 destinationVC.userCity = userCity
+                destinationVC.phrase = self.fullPhrase
             }
         }
     }

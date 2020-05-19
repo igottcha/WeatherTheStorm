@@ -16,6 +16,7 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
     var userIsMale: Bool?
     var userName: String = ""
     var userCity: String = ""
+    var phrase: String = ""
     
     
     
@@ -161,7 +162,7 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
     
     func setupCurrentWeather(currentWeather: Current){
         guard let phrase = currentWeather.phrase else {return}
-        phraseLabel.text = "Hello, \(userName)! It's a \(phrase) day in \(self.userCity)"
+        phraseLabel.text = self.phrase
         phraseLabel.textColor = .white
         let currentTemp = String(currentWeather.temperature)
         tempLabel.text = "\(currentTemp)º"
