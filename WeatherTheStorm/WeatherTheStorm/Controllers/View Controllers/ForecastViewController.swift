@@ -353,9 +353,11 @@ extension ForecastViewController: UICollectionViewDelegate, UICollectionViewData
         let time = stringToDate(hourlyWeather.time ?? "12:00")
         let hour = time.hour()
         
-        
+        let icon = String(hourlyWeather.iconCode)
         cell.hourlyTimeLabel.text = hour
         cell.hourlyTempLabel.text = "\(String(hourlyWeather.temp))º"
+        cell.hourlyIconImageView.image = UIImage(named: icon)
+        
         
         
         return cell

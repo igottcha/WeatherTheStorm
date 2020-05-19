@@ -221,6 +221,7 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
         let day =  dailyWeather.dow
         let high = dailyWeather.maxTemp
         let low = dailyWeather.lowTemp
+        let icon = String(dailyWeather.iconCode)
         
      if high != 0 {
      
@@ -237,6 +238,7 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
      }
      
      cell.dayLabel.text = day
+        cell.weatherIcon.image = UIImage(named: icon)
         
         
         
@@ -268,12 +270,14 @@ extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionVi
         
         let time = stringToDate(hourlyForecast.time!)
         let hour = time.hour()
+        let icon = String(hourlyForecast.iconCode)
        
         
        
         cell.timeLabel.text = hour
         let temp = String(hourlyForecast.temp)
         cell.tempLabel.text = "\(temp)º"
+        cell.weatherIcon.image = UIImage(named: icon)
         
         return cell
     }
