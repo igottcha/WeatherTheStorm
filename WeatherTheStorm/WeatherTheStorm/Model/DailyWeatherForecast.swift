@@ -14,12 +14,14 @@ struct DailyTopLevelObject: Codable {
 
 struct DailyWeatherForecast: Codable {
     
+    let date: String
     let lowTemp: Int?
     let maxTemp: Int?
     let dow: String
     let day: Day?
        
     enum CodingKeys: String, CodingKey {
+        case date = "fcst_valid_local"
         case lowTemp = "min_temp"
         case maxTemp = "max_temp"
         case dow

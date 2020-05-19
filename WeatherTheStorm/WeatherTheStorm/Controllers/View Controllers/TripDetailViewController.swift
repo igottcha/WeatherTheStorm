@@ -56,4 +56,5 @@ class TripDetailViewController: UIViewController {
         toDatePicker.date = trip.endDate ?? Date()
         destinationTextField.text = trip.location?.city ?? ""
     }
+ 
 }

@@ -23,13 +23,15 @@ class HourlyWeatherForecast: Codable {
     let temp: Int
     let time: String
     let shortPhrase: String
+    let iconCode: Int
     
-    init(cloudCoverPercentage: Double, feelsLike: Int, temp: Int, time: String, shortPhrase: String){
+    init(cloudCoverPercentage: Double, feelsLike: Int, temp: Int, time: String, shortPhrase: String, iconCode: Int){
         self.cloudCoverPercentage = cloudCoverPercentage
         self.feelsLike = feelsLike
         self.temp = temp
         self.time = time
         self.shortPhrase = shortPhrase
+        self.iconCode = iconCode
     }
     
     enum CodingKeys: String, CodingKey{
@@ -39,6 +41,7 @@ class HourlyWeatherForecast: Codable {
         case temp
         case time = "fcst_valid_local"
         case shortPhrase = "phrase_32char"
+        case iconCode = "icon_code"
     }
     
     

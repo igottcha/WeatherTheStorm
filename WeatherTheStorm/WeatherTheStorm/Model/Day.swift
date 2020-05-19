@@ -14,13 +14,14 @@ struct Day: Codable {
     let cloudCoverPercentage: Int
     let precipitationType: String
     let shortPhrase: String
-    
+    let iconCode: Int
     
     enum CodingKeys: String, CodingKey {
         case chanceOfPrecipitation = "pop"
         case cloudCoverPercentage = "clds"
         case precipitationType = "precip_type"
         case shortPhrase = "phrase_32char"
+        case iconCode = "icon_code"
     }
 }
 
