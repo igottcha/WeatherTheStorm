@@ -57,3 +57,10 @@ class TripDetailViewController: UIViewController {
         destinationTextField.text = trip.location?.city ?? ""
     }
 }
+
+extension TripDetailViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
