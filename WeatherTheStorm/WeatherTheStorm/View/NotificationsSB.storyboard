@@ -11,13 +11,13 @@
         <!--Notifications-->
         <scene sceneID="YF6-8u-H2h">
             <objects>
-                <tableViewController id="nMu-6d-IvL" customClass="WNListTableViewController" customModule="Weather_Wear" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="nMu-6d-IvL" customClass="WNListTableViewController" customModule="Weather_the_Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="133-Uo-GUx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="boxCell" rowHeight="195" id="PwF-D5-teV" customClass="WNTableViewCell" customModule="Weather_Wear" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="boxCell" rowHeight="195" id="PwF-D5-teV" customClass="WNTableViewCell" customModule="Weather_the_Weather" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="195"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PwF-D5-teV" id="OZm-FW-mza">
@@ -133,7 +133,7 @@
         <!--Location List View Controller-->
         <scene sceneID="DD9-7X-JtP">
             <objects>
-                <viewController id="b33-mq-e8a" customClass="WNLocationListViewController" customModule="Weather_Wear" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="b33-mq-e8a" customClass="WNLocationListViewController" customModule="Weather_the_Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nTq-TX-PiC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -221,7 +221,7 @@
         <!--Add Notification-->
         <scene sceneID="yF7-Oe-dVr">
             <objects>
-                <viewController id="F4r-Zt-84f" customClass="WNTimingViewController" customModule="Weather_Wear" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="F4r-Zt-84f" customClass="WNTimingViewController" customModule="Weather_the_Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zsk-pE-xyu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -364,6 +364,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="done" systemItem="done" id="qDG-u9-FY1">
+                                        <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="tableViewDoneButtonTapped:" destination="F4r-Zt-84f" id="wH6-up-RVy"/>
                                         </connections>

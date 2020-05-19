@@ -72,7 +72,7 @@ class WNTimingViewController: UIViewController {
     }
     
     @IBAction func tableViewDoneButtonTapped(_ sender: UIBarButtonItem) {
-        repeatTextField.text = "\(sortWeekdayArray().compactMap({$0}).joined(separator: ", "))"
+        repeatTextField.text = "\(sortWeekdayArray().compactMap({$0.prefix(3)}).joined(separator: ", "))"
         if let timeText = timeTextField?.text, !timeText.isEmpty {
             setNotificationButton.isHidden = false
         }
@@ -85,7 +85,7 @@ class WNTimingViewController: UIViewController {
         guard let week = DateFormatter().weekdaySymbols else { return [] }
         let frequencies = WeatherNotificationController.shared.frequencies
         let sortedFrequencies = frequencies.sorted { week.firstIndex(of: $0)! < week.firstIndex(of: $1)!}
-        return sortedFrequencies.map { String($0.prefix(3)) }
+        return sortedFrequencies.map { String($0) }
     }
     
     func updateView() {
@@ -157,24 +157,24 @@ class WNTimingViewController: UIViewController {
     
     //MARK: - Notification Alert Controller
     
-    func setAlertNotification(for location: Location) {
-
-        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification,
-            let weather = location.weather,
-            let weatherPhrase = weather.current?.phrase,
-            let feelsLikeTemp = weather.current?.feelsLike,
-            let city = location.city else { return }
-
-        let clothingPhrase = "CLOTHING STRING PLACEHOLDER"
-        let notificationText = "Hi \(UserController.shared.userName), It's \(weatherPhrase) today in \(city). Feels like \(feelsLikeTemp)°F. You'll want to \(clothingPhrase)."
-        
-        let alert = UIAlertController(title: weatherNotification.name, message: notificationText, preferredStyle: .alert)
-        
-        let closeButton = UIAlertAction(title: "Close", style: .cancel, handler: nil)
-        
-        alert.addAction(closeButton)
-        self.present(self, animated: true, completion: nil)
-    }
+//    func setAlertNotification(for location: Location) {
+//
+//        guard let weatherNotification = location.weatherNotification?.firstObject as? WeatherNotification,
+//            let weather = location.weather,
+//            let weatherPhrase = weather.current?.phrase,
+//            let feelsLikeTemp = weather.current?.feelsLike,
+//            let city = location.city else { return }
+//
+//        let clothingPhrase = "CLOTHING STRING PLACEHOLDER"
+//        let notificationText = "Hi \(UserController.shared.userName), It's \(weatherPhrase) today in \(city). Feels like \(feelsLikeTemp)°F. You'll want to \(clothingPhrase)."
+//
+//        let alert = UIAlertController(title: weatherNotification.name, message: notificationText, preferredStyle: .alert)
+//
+//        let closeButton = UIAlertAction(title: "Close", style: .cancel, handler: nil)
+//
+//        alert.addAction(closeButton)
+//        self.present(self, animated: true, completion: nil)
+//    }
     
 }
 

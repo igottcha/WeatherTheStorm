@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,13 +12,13 @@
         <!--Upcoming Trips-->
         <scene sceneID="rim-E9-vgd">
             <objects>
-                <tableViewController id="0YI-5b-UB0" customClass="TripListTableViewController" customModule="Weather_Wear" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="0YI-5b-UB0" customClass="TripListTableViewController" customModule="Weather_the_Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wIQ-PI-FEn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tripCell" rowHeight="250" id="EBE-Pt-uKJ" customClass="TripTableViewCell" customModule="Weather_Wear" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tripCell" rowHeight="250" id="EBE-Pt-uKJ" customClass="TripTableViewCell" customModule="Weather_the_Weather" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="250"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EBE-Pt-uKJ" id="cbQ-8M-69b">
@@ -89,7 +90,7 @@
         <!--Trip Information View Controller-->
         <scene sceneID="2LJ-AK-2Qr">
             <objects>
-                <viewController id="LJT-nT-h2m" customClass="TripInformationViewController" customModule="Weather_Wear" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="LJT-nT-h2m" customClass="TripInformationViewController" customModule="Weather_the_Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4D1-6d-yIB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,16 +99,16 @@
                                 <rect key="frame" x="10.5" y="194.5" width="393" height="290"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="753" axis="vertical" distribution="fillEqually" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="5L0-lt-c66">
-                                        <rect key="frame" x="0.0" y="0.0" width="149.5" height="290"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="157" height="290"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Recommendation" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fx5-cX-gdC">
-                                                <rect key="frame" x="3" y="0.0" width="143.5" height="144"/>
+                                                <rect key="frame" x="7" y="0.0" width="143.5" height="144"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" text="Recommendation Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vyv-GN-fPa">
-                                                <rect key="frame" x="12.5" y="146" width="124" height="144"/>
+                                                <rect key="frame" x="16.5" y="146" width="124" height="144"/>
                                                 <color key="backgroundColor" red="0.1668256675" green="0.65629688980000001" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -116,12 +117,12 @@
                                         </subviews>
                                     </stackView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smoke" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tW1-Qn-ZSa">
-                                        <rect key="frame" x="157.5" y="2" width="235.5" height="286"/>
+                                        <rect key="frame" x="165" y="2" width="228" height="286"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="5L0-lt-c66" firstAttribute="width" secondItem="pCG-Sj-8kM" secondAttribute="width" multiplier="0.38" id="MgG-YP-Hdi"/>
+                                    <constraint firstItem="5L0-lt-c66" firstAttribute="width" secondItem="pCG-Sj-8kM" secondAttribute="width" multiplier="0.4" id="MgG-YP-Hdi"/>
                                 </constraints>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ekb-5K-Spy">
@@ -134,7 +135,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="forecastCell" id="GIl-0Z-b5R" customClass="ForecastCollectionViewCell" customModule="Weather_Wear" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="forecastCell" id="GIl-0Z-b5R" customClass="ForecastCollectionViewCell" customModule="Weather_the_Weather" customModuleProvider="target">
                                         <rect key="frame" x="30.5" y="0.0" width="332" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xlR-8W-C7A">
@@ -142,17 +143,18 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xs-e5-fmo">
-                                                    <rect key="frame" x="16" y="17.5" width="112" height="20.5"/>
+                                                    <rect key="frame" x="16" y="17.5" width="143" height="20.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="112" id="8TB-Uy-eMw"/>
+                                                        <constraint firstAttribute="width" constant="75" id="8TB-Uy-eMw"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="254" verticalHuggingPriority="254" image="cloud" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="BVg-fO-mnY">
-                                                    <rect key="frame" x="136" y="2" width="56" height="51"/>
+                                                    <rect key="frame" x="167" y="17.5" width="25" height="20"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="0JF-wD-T2t"/>
                                                         <constraint firstAttribute="width" secondItem="BVg-fO-mnY" secondAttribute="height" multiplier="1:1" id="XQd-bz-AgD"/>
                                                     </constraints>
                                                 </imageView>
@@ -162,7 +164,7 @@
                                                         <constraint firstAttribute="width" constant="50" id="bKX-nc-zZ6"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" name="LowBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYg-Z8-OYi">
@@ -171,13 +173,12 @@
                                                         <constraint firstAttribute="width" constant="50" id="aSU-wo-2N9"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" name="HighOrange"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="uYg-Z8-OYi" firstAttribute="centerY" secondItem="xlR-8W-C7A" secondAttribute="centerY" id="75E-CA-7sb"/>
-                                                <constraint firstItem="BVg-fO-mnY" firstAttribute="width" secondItem="1xs-e5-fmo" secondAttribute="width" multiplier="0.5" id="Bci-xq-wQz"/>
                                                 <constraint firstItem="1xs-e5-fmo" firstAttribute="leading" secondItem="xlR-8W-C7A" secondAttribute="leading" constant="16" id="RYM-GL-zHX"/>
                                                 <constraint firstItem="7tE-CW-DzC" firstAttribute="leading" secondItem="uYg-Z8-OYi" secondAttribute="trailing" constant="8" id="UW5-dq-Hsz"/>
                                                 <constraint firstItem="uYg-Z8-OYi" firstAttribute="leading" secondItem="BVg-fO-mnY" secondAttribute="trailing" constant="16" id="cRh-mf-J9V"/>
@@ -192,8 +193,8 @@
                                         <connections>
                                             <outlet property="conditionImageView" destination="BVg-fO-mnY" id="aRc-Ik-IN9"/>
                                             <outlet property="dateLabel" destination="1xs-e5-fmo" id="KGt-fQ-Cls"/>
-                                            <outlet property="highTempLabel" destination="7tE-CW-DzC" id="b4n-kj-UpR"/>
-                                            <outlet property="lowTempLabel" destination="uYg-Z8-OYi" id="Wco-uR-NEm"/>
+                                            <outlet property="lowTempLabel" destination="7tE-CW-DzC" id="b4n-kj-UpR"/>
+                                            <outlet property="maxTempLabel" destination="uYg-Z8-OYi" id="Wco-uR-NEm"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -239,7 +240,7 @@
         <!--Trip Detail View Controller-->
         <scene sceneID="W4l-U7-C9X">
             <objects>
-                <viewController id="93G-y1-frc" customClass="TripDetailViewController" customModule="Weather_Wear" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="93G-y1-frc" customClass="TripDetailViewController" customModule="Weather_the_Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="b4t-gf-bTy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -351,5 +352,11 @@
         <image name="airplane" catalog="system" width="128" height="115"/>
         <image name="cloud" catalog="system" width="128" height="87"/>
         <image name="smoke" catalog="system" width="128" height="93"/>
+        <namedColor name="HighOrange">
+            <color red="0.96078431372549022" green="0.65098039215686276" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="LowBlue">
+            <color red="0.29019607843137257" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

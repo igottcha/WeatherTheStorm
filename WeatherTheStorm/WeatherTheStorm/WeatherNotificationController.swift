@@ -21,88 +21,122 @@ extension NotificationScheduler {
         
         guard let location = weatherNotification.location,
             let city = location.city,
-            let type = location.type,
-            let fireTime = weatherNotification.time,
-            let fireDate = weatherNotification.specificDate else { return }
+            let type = location.type else { return }
         
-        let weather = location.weather ?? Weather(current: nil)
-        let weatherPhrase = weather.current?.phrase ?? "partly cloudy"
-        let feelsLikeTemp = weather.current?.feelsLike ?? 78
+        let content = getContent(location: location, userName: UserController.shared.userName)
+        content.sound = UNNotificationSound.default
+        let triggers = getTrigger(type: type, fireDate: weatherNotification.specificDate, fireTime: weatherNotification.time, frequencyData: weatherNotification.frequency)
         
-        let identifier = "\(city)\(type)"
-        
-        let tripContent = UNMutableNotificationContent()
-        tripContent.title = "Your trip to \(city) is coming up!!!"
-        tripContent.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check app name for clothing recommendations."
-        tripContent.sound = UNNotificationSound.default
-        
-        let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: fireTime)
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: fireDate)
-        var components = DateComponents()
-        components.year = dateComponents.year
-        components.month = dateComponents.month
-        components.day = dateComponents.day
-        components.hour = timeComponents.hour
-        components.minute = timeComponents.minute
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-        let request = UNNotificationRequest(identifier: identifier, content: tripContent, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
-            if error != nil {
-                print("Notification failed")
-            } else {
-                print("Notification triggered")
-            }
-        })
-        
-        if location.type == "Home" {
-            let homeContent = UNMutableNotificationContent()
-            homeContent.title = "Your weather forecast of \(type)"
-            homeContent.body = "Hi \(UserController.shared.userName), it's \(weatherPhrase) at \(type). Feels like \(feelsLikeTemp)°F. Please check app name for clothing recommendations."
-            homeContent.sound = UNNotificationSound.defaultCritical
+        for trigger in triggers {
+            guard let index = triggers.firstIndex(of: trigger) else { return }
+            let identifier = "\(city)\(type)\(index)"
+            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
             
-            let selectedFrequencies = WeatherNotificationController.shared.frequencies
-            
-            func getWeekDaySymbol(array: [String]) {
-                let week = DateFormatter().calendar.weekdaySymbols
-                
-                for day in array {
-                    let index = week.firstIndex(of: day) ?? 9
-                    let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .minute, .day], from: fireDate)
-                    var dateComponent = DateComponents()
-                    components.year = dateComponents.year
-                    components.month = dateComponents.month
-                    components.day = dateComponents.day
-                    components.hour = dateComponents.hour
-                    components.minute = dateComponents.minute
-                    dateComponent.weekday = Int(day)
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-                    let request = UNNotificationRequest(identifier: identifier, content: homeContent, trigger: trigger)
-                    UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
-                        if error != nil {
-                            print("Notification failed")
-                        } else {
-                            print("Notification triggered")
-                        }
-                    })
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+                if error != nil {
+                    print("Notification failed")
+                } else {
+                    print("Notification triggered")
                 }
-            }
-            print(getWeekDaySymbol(array: selectedFrequencies))
-            
+            })
         }
-        
     }
     
     func cancelUserNotifications(for weatherNotification: WeatherNotification) {
         guard let location = weatherNotification.location,
             let city = location.city,
             let type = location.type else { return }
+        var identifiers: [String] = []
         
-        let identifier = "\(city)\(type)"
+        switch type {
+        case "Home":
+            guard let data = weatherNotification.frequency else { return }
+            var days: [String] = []
+            do {
+                days = try JSONDecoder().decode([String].self, from: data)
+            } catch {
+                print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
+            }
+            for day in days {
+                guard let index = days.firstIndex(of: day) else { return }
+                identifiers.append("\(city)\(type)\(index)")
+            }
+        case "Trip":
+            identifiers.append("\(city)\(type)\(0)")
+        default:
+            print("No identifiers identified in \(#function)")
+        }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
         
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
     }
+    
+    private func getContent(location: Location, userName: String) -> UNMutableNotificationContent {
+        guard let type = location.type,
+            let city = location.city else { return UNMutableNotificationContent() }
+        
+        let weather = location.weather ?? Weather(current: nil)
+        let weatherPhrase = weather.current?.phrase ?? "partly cloudy"
+        let feelsLikeTemp = weather.current?.feelsLike ?? 78
+        let content = UNMutableNotificationContent()
+        
+        switch type {
+        case "Home":
+            content.title = "Your weather forecast of \(type)"
+            content.body = "Hi \(userName), it's \(weatherPhrase) at \(type). Feels like \(feelsLikeTemp)°F. Please check Weather the Weather for clothing recommendations."
+        case "Trip":
+            content.title = "Your trip to \(city) is coming up!!!"
+            content.body = "Hi \(userName), it's \(weatherPhrase) in \(city). Feels like \(feelsLikeTemp)°F. Please check Weather the Weather for clothing recommendations."
+        default:
+            print("Location Type does not exist")
+        }
+        print(content)
+        return content
+    }
+    
+    private func getTrigger(type: String, fireDate: Date?, fireTime: Date?, frequencyData: Data?) -> [UNCalendarNotificationTrigger] {
+        guard let fireTime = fireTime else { return [] }
+        let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: fireTime)
+        var triggers: [UNCalendarNotificationTrigger] = []
+        
+        switch type {
+        case "Home":
+            guard let data = frequencyData else { return [] }
+            var days: [String] = []
+            
+            do {
+                days = try JSONDecoder().decode([String].self, from: data)
+            } catch {
+                print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
+            }
+            
+            for day in days {
+                let week = DateFormatter().calendar.weekdaySymbols
+                let index = week.firstIndex(of: day) ?? 9
+                var dateComponents = DateComponents()
+                dateComponents.weekday = index + 1
+                dateComponents.hour = timeComponents.hour
+                dateComponents.minute = timeComponents.minute
+                triggers.append(UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true))
+            }
+        case "Trip":
+            guard let fireDate = fireDate else { return [] }
+            let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: fireDate)
+            var components = DateComponents()
+            components.year = dateComponents.year
+            components.month = dateComponents.month
+            components.day = dateComponents.day
+            components.hour = timeComponents.hour
+            components.minute = timeComponents.minute
+            
+            triggers.append(UNCalendarNotificationTrigger(dateMatching: components, repeats: false))
+        default:
+            print("Location Type does not exist")
+        }
+        
+        print(triggers)
+        return triggers
+    }
+    
 }
 
 class WeatherNotificationController: NotificationScheduler {
