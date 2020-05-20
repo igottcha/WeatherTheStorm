@@ -10,7 +10,6 @@ import UIKit
 
 class UpdateSettingsViewController: UIViewController {
 
-    
     var isSelected = UIImage(systemName: "circle.fill")
     var notSelected = UIImage(systemName: "circle")
     var toggleStateM = 1
@@ -30,11 +29,6 @@ class UpdateSettingsViewController: UIViewController {
     @IBOutlet weak var homeSearchBar: UISearchBar!
     @IBOutlet weak var updateHomeButton: UIButton!
     
-    
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
@@ -42,8 +36,6 @@ class UpdateSettingsViewController: UIViewController {
         setupCircles()
         homeSearchBar.delegate = self
     }
-    
-    
     
     @IBAction func updateNameButtonTapped(_ sender: Any) {
         
@@ -67,7 +59,6 @@ class UpdateSettingsViewController: UIViewController {
                   maleCircle.isEnabled = true
                   isMale = true
                   UserController.shared.saveGender(gender: true)
-                  
               }
               else {
                   toggleStateM = 1
@@ -75,11 +66,8 @@ class UpdateSettingsViewController: UIViewController {
                   femaleCircle.isEnabled = true
                   isMale = false
                   UserController.shared.saveGender(gender: false)
-                  
-                  
               }
     }
-    
     
     @IBAction func femaleButtonIsTapped(_ sender: Any) {
         
@@ -90,7 +78,6 @@ class UpdateSettingsViewController: UIViewController {
                 femaleCircle.isEnabled = true
                 isMale = false
                 UserController.shared.saveGender(gender: false)
-                
             }
             else {
                 toggleStateM = 1
@@ -98,18 +85,13 @@ class UpdateSettingsViewController: UIViewController {
                 maleCircle.isEnabled = true
                 isMale = true
                 UserController.shared.saveGender(gender: true)
-                
-                
             }
     }
     
-    
     func setupCircles() {
-      
         maleCircle.setImage(UIImage(systemName: "circle"), for: .normal)
         femaleCircle.setImage(UIImage(systemName: "circle"), for: .normal)
     }
-    
     
     func setupBackground() {
         let  gradientLayer = CAGradientLayer()
@@ -130,50 +112,33 @@ class UpdateSettingsViewController: UIViewController {
     }
     
     func setupSearchBar() {
-          
           homeSearchBar.layer.cornerRadius = 15
           homeSearchBar.clipsToBounds = true
-           
-           
        }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 extension UpdateSettingsViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     
         guard let searchTerm = homeSearchBar.text, !searchTerm.isEmpty else {return}
-        print(searchTerm)
         LocationController.getPlacemark(searchTerm: searchTerm) { (result) in
             switch (result) {
                 
             case .success(let placeMark):
                 guard let userHome = LocationController.shared.createLocation(destination: placeMark, type: LocationType.home) else { return }
-            print(userHome)
-            //HomeController.shared.homeLocation = userHome
             
             if userHome.weatherNotification?.count == 0 {
             WeatherNotificationController.shared.createWeatherNotification(location: userHome, name: "Home")
             }
-            
-            
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
         self.homeSearchBar.endEditing(true)
     }
+    
 }
 
 extension UpdateSettingsViewController: UITextFieldDelegate {

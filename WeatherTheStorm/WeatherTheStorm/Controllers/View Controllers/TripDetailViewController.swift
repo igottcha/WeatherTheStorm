@@ -14,6 +14,7 @@ class TripDetailViewController: UIViewController {
     var trip: Trip?
     
     //MARK: - Outlets
+    
     @IBOutlet weak var fromDatePicker: UIDatePicker!
     @IBOutlet weak var toDatePicker: UIDatePicker!
     @IBOutlet weak var destinationTextField: UITextField!
@@ -60,8 +61,10 @@ class TripDetailViewController: UIViewController {
 }
 
 extension TripDetailViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
+    
 }

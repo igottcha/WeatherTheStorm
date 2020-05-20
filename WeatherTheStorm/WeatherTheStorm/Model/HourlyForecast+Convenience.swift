@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 extension HourlyForecast {
+    
     @discardableResult
     convenience init(cloudCoverPercentage: Int64, feelsLike: Int64, temp: Int64, time: String, shortPhrase: String, iconCode: Int64, moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
@@ -20,4 +21,5 @@ extension HourlyForecast {
         self.shortPhrase = shortPhrase
         self.iconCode = iconCode
     }
+    
 }

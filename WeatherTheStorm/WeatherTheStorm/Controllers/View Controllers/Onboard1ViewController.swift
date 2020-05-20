@@ -95,13 +95,13 @@ class TestViewController: UIViewController {
         nextButton.clipsToBounds = true
     }
     
-    
-    
 }
 
 extension TestViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
+    
 }

@@ -9,7 +9,8 @@
 import UIKit
 
 class ForecastDetailViewController: UIViewController, OutfitandImage {
-    //MARK: PROPERTIES
+    
+    //MARK: Properties
     
     var date: Date = Date()
     var location: Location?
@@ -18,7 +19,7 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
     var userCity: String = ""
     var phrase: String = ""
     
-    
+    //MARK: - Outlets
     
     @IBOutlet weak var phraseLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
@@ -45,10 +46,8 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
     @IBOutlet weak var AQILabel: UILabel!
     @IBOutlet weak var airLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
-    
-    
-    
-    
+
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,15 +62,10 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
         setupDateLabel()
         makeEdgesRound()
         setupWeatherLabels()
-        
-        //hourlyForecastCollectionView.register(HourlyForecastDetailCollectionViewCell.self, forCellWithReuseIdentifier: "hourlyDetailCell")
-        
     }
     
-   
     func setupWeatherLabels(){
         guard let weatherToday = location?.weather?.current  else {return}
-        
         
         let humidity = String(weatherToday.humidity)
         let precip = String(weatherToday.precipitationAmount)
@@ -89,8 +83,6 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
         sunriseLabel.text = sunriseDate
         sunsetLabel.text = sunsetDate
         
-        
-        
         guard let wind = weatherToday.windDirection else {return}
         windLabel.text = "\(wind) mph"
         
@@ -100,10 +92,6 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
         guard let today = location?.weather?.dailyForecasts?.object(at: 0) as? DailyForecast else {return}
         let rain = String(today.chanceOfPrecipitation)
         rainLabel.text = "\(rain)%"
-        
-        
-        
-        
     }
     
     func makeEdgesRound() {
@@ -111,13 +99,11 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
         dailyForecastTableView.clipsToBounds = true
         hourlyForecastCollectionView.layer.cornerRadius = 5
         hourlyForecastCollectionView.clipsToBounds = true
-        
     }
     
     func setupDateLabel() {
         dateLabel.text = self.date.formatDate()
         dateLabel.textColor = .white
-        
     }
     
     func setupTopContainer() {
@@ -125,13 +111,10 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
     }
     
     func setGradientBackground() {
-        
         let  gradientLayer = CAGradientLayer()
         gradientLayer.frame = topContainer.bounds
         gradientLayer.colors = [UIColor(named: "HomeControllerTopBG")?.cgColor ?? UIColor.blue.cgColor, UIColor(named: "HomeControllerBottBG")?.cgColor ?? UIColor.cyan]
         topContainer.layer.insertSublayer(gradientLayer, at: 0)
-        
-        
     }
     
     func setupMiddleContainer() {
@@ -140,8 +123,7 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
         middleContainer.clipsToBounds = true
     }
     func unwrapForecasts() {
-        guard let hourlyweather = self.location?.weather?.hourlyForecasts,
-            let dailyforecasts = self.location?.weather?.dailyForecasts,
+        guard let dailyforecasts = self.location?.weather?.dailyForecasts,
             let currentWeather = self.location?.weather?.current,
             let cityName = self.location?.city
             else {return}
@@ -149,15 +131,11 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
         setupCityName(cityName: cityName)
         setupCurrentWeather(currentWeather: currentWeather)
         setupDailyWeather(dailyforecasts: dailyforecasts)
-        
-        
-        
     }
     
     func setupCityName(cityName: String) {
         cityLabel.text = cityName
         cityLabel.textColor = .white
-        
     }
     
     func setupCurrentWeather(currentWeather: Current){
@@ -169,7 +147,6 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
         tempLabel.textColor = .white
         feelsLikeLabel.text = "Feels Like \(currentWeather.feelsLike)"
         feelsLikeLabel.textColor = .white
-        
     }
     
     func setupDailyWeather(dailyforecasts: NSOrderedSet) {
@@ -198,20 +175,10 @@ class ForecastDetailViewController: UIViewController, OutfitandImage {
         
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 
 extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let dailiesCount = self.location?.weather?.dailyForecasts?.count else {return 0}
         return dailiesCount
@@ -230,15 +197,11 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
             let highTemp = String(high)
             cell.HiLabel.text = "\(highTemp)º"
             cell.HiLabel.textColor = UIColor(named: "HighOrange")
-            
         }
-        
         else {
             guard  let currentTemp = location?.weather?.current?.feelsLike else {return cell}
             cell.HiLabel.text = "\(currentTemp)º"
             cell.HiLabel.textColor = UIColor(named: "HighOrange")
-            
-            
         }
         
         if low != 0 {
@@ -250,26 +213,17 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
         cell.dayLabel.text = day
         cell.weatherIcon.image = UIImage(named: icon)
         
-        
-        
-        
-        
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         return "8-Day Forecast"
-        
-        
-        
-        
     }
     
 }
 
 extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let hourliesCount = self.location?.weather?.hourlyForecasts?.count else {return 0}
         return 12
@@ -279,12 +233,9 @@ extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionVi
         guard let cell = hourlyForecastCollectionView.dequeueReusableCell(withReuseIdentifier: "hourlyDetailCell", for: indexPath) as? HourlyForecastDetailCollectionViewCell else {return UICollectionViewCell()}
         guard let hourlyForecast = self.location?.weather?.hourlyForecasts?.object(at: indexPath.row) as? HourlyForecast else {return cell}
         
-        
         let time = stringToDate(hourlyForecast.time!)
         let hour = time.hour()
         let icon = String(hourlyForecast.iconCode)
-        
-        
         
         cell.timeLabel.text = hour
         let temp = String(hourlyForecast.temp)
@@ -300,22 +251,18 @@ extension ForecastDetailViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = hourlyForecastCollectionView.frame.size.height / 2
-        // let layout = hourlyForecastCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
         return CGSize(width: width, height: width)
     }
-    
     
 }
 
 extension ForecastDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         scrollView.contentOffset.x = 0
-        
-        
     }
+    
 }
 
 

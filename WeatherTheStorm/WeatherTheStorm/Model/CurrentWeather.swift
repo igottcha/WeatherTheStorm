@@ -39,10 +39,8 @@ struct CurrentWeather: Codable  {
         case sunrise = "sunriseTimeLocal"
         case sunset = "sunsetTimeLocal"
         case iconCode = "iconCode"
-        
-   
-    
     }
+    
 }
 
 

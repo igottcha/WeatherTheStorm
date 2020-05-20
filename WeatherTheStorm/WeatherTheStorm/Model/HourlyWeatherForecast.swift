@@ -9,11 +9,13 @@
 import Foundation
 
 class HourlyTopLevelObject: Codable {
+    
     var forecasts: [HourlyWeatherForecast]
     
     init(forecasts: [HourlyWeatherForecast]) {
         self.forecasts = forecasts
     }
+    
 }
 
 class HourlyWeatherForecast: Codable {
@@ -43,7 +45,6 @@ class HourlyWeatherForecast: Codable {
         case shortPhrase = "phrase_32char"
         case iconCode = "icon_code"
     }
-    
     
 }
 

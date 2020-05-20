@@ -9,8 +9,7 @@
 import UIKit
 
 protocol OutfitandImage: class {
-//    func getClothingRecommendations(location: Location)
-//    func getWeatherWearAvatar(location: Location)
+
 }
 
 extension OutfitandImage {

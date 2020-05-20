@@ -12,14 +12,10 @@ import CoreData
 
 class WNListTableViewController: UITableViewController {
     
-    
     //MARK: - Outlets
     
     @IBOutlet var previewView: UIView!
     @IBOutlet weak var previewLabel: UILabel!
-    
-    //MARK: - Properties
-    
     
     //MARK: - Lifecycle
     
@@ -99,7 +95,6 @@ class WNListTableViewController: UITableViewController {
         cell?.backgroundColor = .clear
     }
     
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
@@ -107,16 +102,16 @@ class WNListTableViewController: UITableViewController {
             WeatherNotificationController.shared.deleteWeatherNotificaiton(weatherNotification: weatherNotification)
         }    
     }
+    
 }
 
 extension WNListTableViewController: WNTableViewCellDelegate {
+    
     func toggleCellButtonToggled(_ sender: WNTableViewCell) {
         guard let indexPath = tableView.indexPath(for: sender) else { return }
         let weatherNotification = WeatherNotificationController.shared.fetchedResultsController.object(at: indexPath)
         WeatherNotificationController.shared.toggleIsActive(weatherNotifcation: weatherNotification)
-        
     }
-    
     
 }
 

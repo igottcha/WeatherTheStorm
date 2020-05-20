@@ -9,7 +9,9 @@
 import UIKit
 
 protocol WNTableViewCellDelegate {
+    
     func toggleCellButtonToggled(_ sender: WNTableViewCell)
+    
 }
 
 class WNTableViewCell: UITableViewCell {
@@ -31,8 +33,5 @@ class WNTableViewCell: UITableViewCell {
     @IBAction func isActiveSwitchToggled(_ sender: UISwitch) {
         delegate?.toggleCellButtonToggled(self)
     }
-    
-    
-    
-    
+
 }

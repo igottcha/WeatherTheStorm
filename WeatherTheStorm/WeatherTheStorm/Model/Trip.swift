@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 extension Trip {
+    
     @discardableResult
     convenience init(startDate: Date = Date(), endDate: Date = Date(), location: Location, moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
@@ -17,13 +18,6 @@ extension Trip {
         self.endDate = endDate
         self.location = location
     }
+    
 }
 
-//extension Trip {
-//    //Coding Key goes here
-//    enum CodingKeys: String, CodingKey {
-//        case country
-//        case state
-//        case city
-//    }
-//}

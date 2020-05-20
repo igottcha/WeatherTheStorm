@@ -38,12 +38,5 @@ class UserController {
         let savedGender = UserDefaults.standard.bool(forKey: UserController.genderKey)
         self.isMale = savedGender
     }
-    
-    
-//    var usersName: String {
-//        get { UserDefaults.standard.string(forKey: #function) }
-//        set { UserDefaults.standard.setValue(newValue, forKey: #function) }
-//    }
-    
 
 }

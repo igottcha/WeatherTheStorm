@@ -11,10 +11,11 @@ import CoreData
 import UserNotifications
 
 protocol NotificationScheduler: class {
+    
     func scheduleUserNotification(for weatherNotification: WeatherNotification)
     func cancelUserNotifications(for weatherNotification: WeatherNotification)
+    
 }
-
 
 extension NotificationScheduler {
     func scheduleUserNotification(for weatherNotification: WeatherNotification) {
@@ -89,7 +90,6 @@ extension NotificationScheduler {
         default:
             print("Location Type does not exist")
         }
-        print(content)
         return content
     }
     
@@ -133,7 +133,6 @@ extension NotificationScheduler {
             print("Location Type does not exist")
         }
         
-        print(triggers)
         return triggers
     }
     
@@ -176,8 +175,6 @@ class WeatherNotificationController: NotificationScheduler {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
-    
-    
     //MARK: - CRUD Functions
     
     func createWeatherNotification(location: Location, name: String) {
@@ -202,11 +199,4 @@ class WeatherNotificationController: NotificationScheduler {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
-    func saveToPersistentStore() {
-        do {
-            try CoreDataStack.context.save()
-        } catch  {
-            print("Error when trying to save. \(error.localizedDescription)\(#function)")
-        }
-    }
 }

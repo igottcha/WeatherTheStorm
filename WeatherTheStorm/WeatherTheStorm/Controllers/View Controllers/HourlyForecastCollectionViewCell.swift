@@ -13,8 +13,5 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var hourlyTimeLabel: UILabel!
     @IBOutlet weak var hourlyIconImageView: UIImageView!
     @IBOutlet weak var hourlyTempLabel: UILabel!
-    
-    
-    
    
 }
