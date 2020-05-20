@@ -233,6 +233,14 @@ extension ForecastDetailViewController: UITableViewDelegate, UITableViewDataSour
             
         }
         
+        else {
+            guard  let currentTemp = location?.weather?.current?.feelsLike else {return cell}
+            cell.HiLabel.text = "\(currentTemp)º"
+            cell.HiLabel.textColor = UIColor(named: "HighOrange")
+            
+            
+        }
+        
         if low != 0 {
             let lowTemp = String(low)
             cell.LoLabel.text = "\(lowTemp)º"

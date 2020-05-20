@@ -87,7 +87,7 @@ class TestViewController: UIViewController {
     
     func setupProgressLabel() {
         progressLabel.textColor = .white
-        progressLabel.text = "1 of 4"
+        progressLabel.text = "1 of 3"
     }
     
     func setupNextButton() {
