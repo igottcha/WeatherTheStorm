@@ -10,12 +10,16 @@ import UIKit
 
 class UpdateSettingsViewController: UIViewController {
 
+    //MARK: - Properties
+    
     var isSelected = UIImage(systemName: "circle.fill")
     var notSelected = UIImage(systemName: "circle")
     var toggleStateM = 1
     var toggleStateF = 1
     var isMale = true
    
+    //MARK: - Outlets
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var updateNameButton: UIButton!
@@ -29,6 +33,8 @@ class UpdateSettingsViewController: UIViewController {
     @IBOutlet weak var homeSearchBar: UISearchBar!
     @IBOutlet weak var updateHomeButton: UIButton!
     
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
@@ -36,6 +42,8 @@ class UpdateSettingsViewController: UIViewController {
         setupCircles()
         homeSearchBar.delegate = self
     }
+    
+    //MARK: - Actions
     
     @IBAction func updateNameButtonTapped(_ sender: Any) {
         
