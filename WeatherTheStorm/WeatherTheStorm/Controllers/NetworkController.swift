@@ -28,6 +28,7 @@ enum GenericError: LocalizedError {
             return "The server responded with bad data"
         }
     }
+    
 }
 
 class NetworkController {
@@ -45,10 +46,7 @@ class NetworkController {
             .appendingPathComponent(longitude)
             .appendingPathComponent("forecast")
             
-        if isDaily {
-//            guard let firstDate = firstDate,
-//                let secondDate = secondDate else {return nil}
-//            let numOfDays = TripController.calcNumOfDays(between: firstDate, and: secondDate)
+        if isDaily {            
             newBaseURL.appendPathComponent("daily")
             newBaseURL.appendPathComponent("7day")
         } else {

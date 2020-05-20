@@ -11,6 +11,8 @@ import CoreLocation
 
 class ForecastViewController: UIViewController, CLLocationManagerDelegate, OutfitandImage {
     
+    //MARK: - Properties
+    
     var location: Location?
     var date: Date = Date()
     var locationManager: CLLocationManager?
@@ -22,9 +24,8 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
     var userName = ""
     var menuIsOut = false
     
-    
-    
     //MARK:- OUTLETS
+    
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
@@ -39,10 +40,10 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
     @IBOutlet weak var settingsMenuViewTrailing: NSLayoutConstraint!
     @IBOutlet weak var settingsMenuView: UIView!
     @IBOutlet weak var changeClothesLabel: UILabel!
-   
     @IBOutlet weak var creditsLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,47 +57,33 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         setupCollectionView()
         setupBottomContainer()
         setupChangeClothesLabel()
-        
         setupCreditsLabel()
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         grabUserDetails()
-        
     }
     
     @IBAction func gearButtonTapped(_ sender: Any) {
         
         print("tapped")
         if menuIsOut == false {
-            
-            
             settingsMenuViewTrailing.constant = 200
             settingsMenuViewLeading.constant  = 0
             settingsMenuView.isHidden = false
             menuIsOut = true
-            
         } else {
-            
             settingsMenuViewTrailing.constant = -5
             settingsMenuViewLeading.constant  = -200
             menuIsOut = false
             settingsMenuView.isHidden = true
-            
         }
-        
     }
     
     func setupAvatarImage() {
-           guard let location = self.location else {return}
+        guard let location = self.location else {return}
         avatarImageView.image = getWeatherWearAvatar(for: location)
-        
-          
-           
        }
     
     func setupChangeClothesLabel(){
@@ -104,13 +91,11 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         changeClothesLabel.isUserInteractionEnabled = true
         let settingsTap = UITapGestureRecognizer(target: self, action: #selector(toSettingsPage(tap:)))
         changeClothesLabel.addGestureRecognizer(settingsTap)
-        
     }
     
     
     @objc func toSettingsPage(tap: UITapGestureRecognizer){
         performSegue(withIdentifier: "toSettingsVC", sender: self)
-        
     }
     
     func setupCreditsLabel() {
@@ -123,16 +108,12 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         settingsMenuView.isHidden = true
         settingsMenuViewTrailing.constant = -5
         settingsMenuViewLeading.constant  = -200
-        
     }
     
     func grabUserDetails() {
         getUserCity()
         getUserName()
         getUserGender()
-       
-        
-        
     }
     
     func getUserCity() {
@@ -140,21 +121,13 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         self.location = home
         setLocationWeather(home: self.location!)
         setupCityLabel()
-        
-        
-        
     }
-    
-    
-    
-  
+
      func toggleMenu(tap: UITapGestureRecognizer){
-        
         
     }
     
     func setupCityLabel() {
-        
         guard let cityName = self.location?.city else {return}
         cityLabel.textColor = .white
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
@@ -166,27 +139,21 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
     func getUserName() {
         UserController.shared.loadUser()
         self.userName = UserController.shared.userName
-        
     }
     
     func getUserGender() {
       let gender = UserController.shared.loadGender()
         self.userIsMale = UserController.shared.isMale
-        
-        
     }
     
     func setLocationWeather(home: Location) {
         HourlyWeatherController.fetchForecast(location: home) { (result) in
             switch (result){
-                
-            case .success(let hourlyForecasts):
-                
+            case .success(_):
                 DispatchQueue.main.async {
                     self.hourleForecastCollectionView.reloadData()
                     CurrentWeatherController.fetchForecast(location: home) { (result) in
                         switch (result) {
-                            
                         case .success(_):
                             DispatchQueue.main.async {
                                 self.setupTempLabel()
@@ -194,21 +161,15 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
                                 self.setupPhrase()
                                 self.setupGreetingLabel()
                                 
-                                //self.setupHighLowLabels()
                                 DailyForecastController.fetchForecast(location: home, firstDate: Date() + 1, secondDate: Date() + 10) { (result) in
-                                    
                                     switch (result){
-                                        
-                                    case .success(let dailyForecasts):
+                                    case .success(_):
                                         DispatchQueue.main.async {
-                                            
                                             self.setupHighLowLabels()
                                             AirQualityController.shared.fetchAQI(location: home) { (result) in
                                                 switch (result) {
-                                                    
                                                 case .success(let AQI):
                                                     print(AQI)
-                                                //self.location?.weather?.airQualityIndex = Int64(AQI)
                                                 case .failure(_):
                                                     break
                                                 }
@@ -230,9 +191,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
                 break
             }
         }
-         
     }
-    
     
     func setupHighLowLabels() {
         HighLabel.textColor = .white
@@ -249,31 +208,26 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
             HighLabel.text = "\(String(today.maxTemp))"
             LowLabel.text = "\(String(today.lowTemp))"
         }
-        
     }
     
-    
-    
-    func setupGreetingLabel(){
+    func setupGreetingLabel() {
         greetingLabel.text = "Hello, \(UserController.shared.userName)! it's a \(phrase1) day in \(userCity)" + " " + "\(phrase2)"
         self.fullPhrase = "Hello, \(UserController.shared.userName)! it's a \(phrase1) day in \(userCity)" + " " + "\(phrase2)"
         greetingLabel.textColor = .white
-        
     }
     
     func setupDateLabel() {
         dateLabel.text = self.date.formatDate()
         dateLabel.textColor = .white
-        
     }
     
-    func setupTempLabel(){
+    func setupTempLabel() {
         guard let currentTemp = self.location?.weather?.current?.temperature else {return}
         tempLabel.text = "\(currentTemp)º"
         tempLabel.textColor = .white
     }
     
-    func setupFeelsLikelabel(){
+    func setupFeelsLikelabel() {
         guard let feelLike = self.location?.weather?.current?.feelsLike else {return}
         feelsLikeLabel.text = "Feels like \(feelLike)º"
         feelsLikeLabel.textColor = .white
@@ -285,19 +239,11 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
         swipeGesture.direction = UISwipeGestureRecognizer.Direction.up
         upArrowImageView.addGestureRecognizer(swipeGesture)
-        
-        //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.presentPicker))
-        //      avatar.addGestureRecognizer(tapGesture)
-        
     }
     
     @objc func swipeAction(swipe: UISwipeGestureRecognizer) {
         performSegue(withIdentifier: "toForecastDetail", sender: self)
-        
     }
-    
-    
-    
     
     func stringToDate(_ dateString: String) -> Date {
         let formatter = DateFormatter()
@@ -305,9 +251,9 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         guard let date = formatter.date(from: dateString) else { return Date()}
         return date
-        
     }
-    func setupPhrase(){
+    
+    func setupPhrase() {
         guard let weatherPhrase = self.location?.weather?.current?.phrase else {return}
         let fashion = getClothingRecommendations(for: self.location!)
         self.phrase1 = weatherPhrase
@@ -320,8 +266,6 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         gradientLayer.frame = self.view.bounds
         gradientLayer.colors = [UIColor(named: "HomeControllerTopBG")?.cgColor ?? UIColor.blue.cgColor, UIColor(named: "HomeControllerBottBG")?.cgColor ?? UIColor.cyan]
         self.view.layer.insertSublayer(gradientLayer, at: 0)
-        
-        
     }
     
     func setupCollectionView() {
@@ -334,19 +278,6 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         bottomContainer.layer.cornerRadius = 15
         bottomContainer.clipsToBounds = true
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toForecastDetail" {
@@ -364,15 +295,13 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate, Outfi
         }
     }
     
-    
 }
 
 extension ForecastViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let hourliesCount = self.location?.weather?.hourlyForecasts?.count else {return 0}
         return 12
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -384,13 +313,10 @@ extension ForecastViewController: UICollectionViewDelegate, UICollectionViewData
         let time = stringToDate(hourlyWeather.time ?? "12:00")
         let hour = time.hour()
         
-        
         let icon = String(hourlyWeather.iconCode)
         cell.hourlyTimeLabel.text = hour
         cell.hourlyTempLabel.text = "\(String(hourlyWeather.temp))º"
         cell.hourlyIconImageView.image = UIImage(named: icon)
-        
-        
         
         return cell
     }
@@ -405,8 +331,6 @@ extension ForecastViewController: UICollectionViewDelegate, UICollectionViewData
         layout.itemSize = CGSize(width: width, height: width)
         return layout.itemSize
     }
-    
-    
     
 }
 

@@ -39,4 +39,5 @@ class DailyForecastController {
             completion(result)
         }
     }
+    
 }

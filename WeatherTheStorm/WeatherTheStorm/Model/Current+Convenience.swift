@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 extension Current {
+    
     @discardableResult
     convenience init(pressure: Double, feelsLike: Int64, humidity: Int64, phrase: String, precipitationAmount: Double, temperature: Int64, uvIndex: Int64, visibility: Int64, windSpeed: Int64, windDirection: String, sunrise: Date = Date(), sunset: Date = Date(), iconCode: Int64, moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
@@ -27,4 +28,5 @@ extension Current {
         self.sunset = sunset
         self.iconCode = iconCode
     }
+    
 }

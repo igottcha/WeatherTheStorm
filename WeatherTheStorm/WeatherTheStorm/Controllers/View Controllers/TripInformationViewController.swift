@@ -10,7 +10,6 @@ import UIKit
 
 class TripInformationViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, OutfitandImage {
     
-    
     //MARK: - Outlets
     
     @IBOutlet weak var weatherForecastLabel: UILabel!
@@ -28,8 +27,6 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         guard let trip = trip else { return }
         getWeather(for: trip)
         updateViews()
-        //setUpRecommendations()
-        //setUpWeatherImageView()
         
     }
     
@@ -54,7 +51,6 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         weatherForecastLabel.text = "Your trip to \(city), \(state) is coming up, and it is looking \(phrase). The weather is currently \(currentTemp) °F, and feels like \(feelsLike) °F. Have a nice trip!"        
     }
     
-    
     //MARK: - Weather Info Methods
     
     func getWeather(for trip: Trip) {
@@ -64,20 +60,20 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         
         DailyForecastController.fetchForecast(location: location, firstDate: startDate, secondDate: endDate) { (result) in
             switch result {
-            case .success(let dailyForecast):
-                print(dailyForecast)
+            case .success(_):
                 DispatchQueue.main.async {
                     self.forecastCollectionView.reloadData()
-                    
                 }
             case .failure(let error):
                 print(error, error.localizedDescription)
             }
             
         }
+        
         HourlyWeatherController.fetchForecast(location: location) { _ in
             
         }
+        
         CurrentWeatherController.fetchForecast(location: location) { (result) in
             switch result {
             case .success(let currentWeather):
@@ -92,6 +88,7 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
                 print(error, error.localizedDescription)
             }
         }
+        
         AirQualityController.shared.fetchAQI(location: location) { (result) in
             switch result {
             case .success(let airQuality):
@@ -101,7 +98,6 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
             }
         }
     }
-    
     
     //MARK: - Collection View Methods
     
@@ -119,7 +115,6 @@ class TripInformationViewController: UIViewController, UICollectionViewDelegate,
         cell.maxTempLabel.text = "\(daily.maxTemp)"
         cell.lowTempLabel.text = "\(daily.lowTemp)"
         
-        
         return cell
     }
     
@@ -131,7 +126,7 @@ extension TripInformationViewController: UICollectionViewDelegateFlowLayout {
         let collectionWidth = forecastCollectionView.bounds.width
         let collectionHeight = forecastCollectionView.bounds.height
         
-        
         return CGSize(width: collectionWidth * 0.95, height: collectionHeight * 0.10)
     }
+    
 }

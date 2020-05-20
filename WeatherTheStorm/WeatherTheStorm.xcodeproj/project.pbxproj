@@ -18,6 +18,7 @@
 		4ED3275D2453A07600558297 /* AirQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED3275C2453A07600558297 /* AirQuality.swift */; };
 		4ED3275F2453A08500558297 /* Location+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED3275E2453A08500558297 /* Location+Convenience.swift */; };
 		4ED327612453A09300558297 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED327602453A09200558297 /* Trip.swift */; };
+		9E10E02C2475A21200D4106C /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E10E02B2475A21200D4106C /* NotificationScheduler.swift */; };
 		9E370DA42470F40000DC966E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E370DA32470F40000DC966E /* StringExtension.swift */; };
 		9E54966D246DA3F0008385CC /* Weather+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E54966C246DA3F0008385CC /* Weather+Convenience.swift */; };
 		9E54966F246DA499008385CC /* Current+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E54966E246DA499008385CC /* Current+Convenience.swift */; };
@@ -26,13 +27,11 @@
 		9E731C37245899FE00B5420D /* WeatherTheStorm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E731C35245899FD00B5420D /* WeatherTheStorm.xcdatamodeld */; };
 		9E731C3924589F5C00B5420D /* Onboard1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E731C3824589F5C00B5420D /* Onboard1ViewController.swift */; };
 		9E731C3B2458A66400B5420D /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E731C3A2458A66400B5420D /* ErrorExtension.swift */; };
-		9E731C3D2458B5C500B5420D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E731C3C2458B5C500B5420D /* Weather.swift */; };
 		9E731C3F2458BAEF00B5420D /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E731C3E2458BAEF00B5420D /* NetworkController.swift */; };
 		9E731C412458C0C200B5420D /* CurrentWeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E731C402458C0C200B5420D /* CurrentWeatherController.swift */; };
 		9E731C432458C0F300B5420D /* HourlyWeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E731C422458C0F300B5420D /* HourlyWeatherController.swift */; };
 		9E731C452458C12600B5420D /* DailyForecastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E731C442458C12600B5420D /* DailyForecastController.swift */; };
 		9E7835AC2460BE5A008B4CF1 /* NewWNTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7835AB2460BE5A008B4CF1 /* NewWNTableViewController.swift */; };
-		9E7835AE2460BF45008B4CF1 /* LocationSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7835AD2460BF45008B4CF1 /* LocationSearchTableViewCell.swift */; };
 		9E83BF852465B9A700B3830E /* WeatherNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E83BF842465B9A700B3830E /* WeatherNotificationController.swift */; };
 		9E83BF872465BB5F00B3830E /* Work Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E83BF862465BB5F00B3830E /* Work Controller.swift */; };
 		9E83BF892465BB6B00B3830E /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E83BF882465BB6B00B3830E /* HomeController.swift */; };
@@ -83,6 +82,7 @@
 		4ED3275C2453A07600558297 /* AirQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirQuality.swift; sourceTree = "<group>"; };
 		4ED3275E2453A08500558297 /* Location+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+Convenience.swift"; sourceTree = "<group>"; };
 		4ED327602453A09200558297 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		9E10E02B2475A21200D4106C /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		9E370DA32470F40000DC966E /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		9E54966C246DA3F0008385CC /* Weather+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Weather+Convenience.swift"; sourceTree = "<group>"; };
 		9E54966E246DA499008385CC /* Current+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Current+Convenience.swift"; sourceTree = "<group>"; };
@@ -91,13 +91,11 @@
 		9E731C36245899FD00B5420D /* WeatherTheStorm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherTheStorm.xcdatamodel; sourceTree = "<group>"; };
 		9E731C3824589F5C00B5420D /* Onboard1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard1ViewController.swift; sourceTree = "<group>"; };
 		9E731C3A2458A66400B5420D /* ErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
-		9E731C3C2458B5C500B5420D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		9E731C3E2458BAEF00B5420D /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		9E731C402458C0C200B5420D /* CurrentWeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CurrentWeatherController.swift; path = WeatherTheStorm/Controllers/CurrentWeatherController.swift; sourceTree = SOURCE_ROOT; };
 		9E731C422458C0F300B5420D /* HourlyWeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HourlyWeatherController.swift; path = WeatherTheStorm/Controllers/HourlyWeatherController.swift; sourceTree = SOURCE_ROOT; };
 		9E731C442458C12600B5420D /* DailyForecastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DailyForecastController.swift; path = WeatherTheStorm/Controllers/DailyForecastController.swift; sourceTree = SOURCE_ROOT; };
 		9E7835AB2460BE5A008B4CF1 /* NewWNTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWNTableViewController.swift; sourceTree = "<group>"; };
-		9E7835AD2460BF45008B4CF1 /* LocationSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewCell.swift; sourceTree = "<group>"; };
 		9E83BF842465B9A700B3830E /* WeatherNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherNotificationController.swift; path = WeatherTheStorm/WeatherNotificationController.swift; sourceTree = SOURCE_ROOT; };
 		9E83BF862465BB5F00B3830E /* Work Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Work Controller.swift"; path = "WeatherTheStorm/Work Controller.swift"; sourceTree = SOURCE_ROOT; };
 		9E83BF882465BB6B00B3830E /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeController.swift; path = WeatherTheStorm/HomeController.swift; sourceTree = SOURCE_ROOT; };
@@ -208,7 +206,6 @@
 				4ED3275A2453A02800558297 /* CoreDataStack.swift */,
 				4ED327602453A09200558297 /* Trip.swift */,
 				4ED3275E2453A08500558297 /* Location+Convenience.swift */,
-				9E731C3C2458B5C500B5420D /* Weather.swift */,
 				E9B6BC0924575F3A00F0209A /* CurrentWeather.swift */,
 				E9B6BC0B24575F6500F0209A /* HourlyWeatherForecast.swift */,
 				9E9F3685245753560044086A /* DailyWeatherForecast.swift */,
@@ -229,6 +226,7 @@
 			children = (
 				9E731C3E2458BAEF00B5420D /* NetworkController.swift */,
 				9E68398A2470A54E00266CEE /* OutfitandImage.swift */,
+				9E10E02B2475A21200D4106C /* NotificationScheduler.swift */,
 				9E87010724535D59005AD32A /* Model Controllers */,
 				9E87010624535D51005AD32A /* View Controllers */,
 			);
@@ -243,7 +241,6 @@
 				E9A307A324662F3F00B3A29B /* Onboard3ViewController.swift */,
 				E978FC042458DE8F00E2DD82 /* ForecastViewController.swift */,
 				E92E8A1F245A0C3B00E5354B /* ForecastDetailViewController.swift */,
-				9E7835AD2460BF45008B4CF1 /* LocationSearchTableViewCell.swift */,
 				E9BB5B3B24632B730024CB8F /* HourlyForecastCollectionViewCell.swift */,
 				9EDEBCFB2464AA4E003DBEC8 /* WNListTableViewController.swift */,
 				9EDEBCFD2464AA7C003DBEC8 /* WNTableViewCell.swift */,
@@ -370,7 +367,7 @@
 				4E92285E246B090B00136C5B /* TripTableViewCell.swift in Sources */,
 				E9A4F5C1245CA46800BDCBD1 /* LocationExtension.swift in Sources */,
 				9E8700EC24535C8C005AD32A /* AppDelegate.swift in Sources */,
-				9E731C3D2458B5C500B5420D /* Weather.swift in Sources */,
+				9E10E02C2475A21200D4106C /* NotificationScheduler.swift in Sources */,
 				9E9D401F2464CCE20022AF39 /* UIViewExtension.swift in Sources */,
 				4ED3275D2453A07600558297 /* AirQuality.swift in Sources */,
 				9E83BF852465B9A700B3830E /* WeatherNotificationController.swift in Sources */,
@@ -379,7 +376,6 @@
 				9E7835AC2460BE5A008B4CF1 /* NewWNTableViewController.swift in Sources */,
 				9E9F3687245753570044086A /* DailyWeatherForecast.swift in Sources */,
 				9E731C452458C12600B5420D /* DailyForecastController.swift in Sources */,
-				9E7835AE2460BF45008B4CF1 /* LocationSearchTableViewCell.swift in Sources */,
 				4E92285C246B08AB00136C5B /* TripDetailViewController.swift in Sources */,
 				9E83BF8B2465F27B00B3830E /* WNTimingViewController.swift in Sources */,
 				E9A307A424662F3F00B3A29B /* Onboard3ViewController.swift in Sources */,

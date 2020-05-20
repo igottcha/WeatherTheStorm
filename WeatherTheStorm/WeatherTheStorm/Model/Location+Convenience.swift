@@ -11,11 +11,14 @@ import CoreData
 import CoreLocation
 
 enum LocationType: String {
+    
     case home = "Home"
     case trip = "Trip"
+    
 }
 
 extension Location {
+   
     @discardableResult
     convenience init(type: String, city: String, state: String, country: String, latitutde: String, longitude: String, weather: Weather?, weatherNotification: [WeatherNotification] = [], moc: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: moc)
@@ -27,6 +30,7 @@ extension Location {
         self.longitude = longitude
         self.weather = weather
     }
+    
 }
 
 

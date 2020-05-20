@@ -9,7 +9,9 @@
 import Foundation
 
 struct DailyTopLevelObject: Codable {
+    
     var forecasts: [DailyWeatherForecast]
+    
 }
 
 struct DailyWeatherForecast: Codable {
@@ -27,5 +29,6 @@ struct DailyWeatherForecast: Codable {
         case dow
         case day
     }
+    
 }
 

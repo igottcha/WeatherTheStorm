@@ -23,6 +23,7 @@ struct Day: Codable {
         case shortPhrase = "phrase_32char"
         case iconCode = "icon_code"
     }
+    
 }
 
 

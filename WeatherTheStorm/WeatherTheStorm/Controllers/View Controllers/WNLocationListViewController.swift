@@ -17,15 +17,12 @@ class WNLocationListViewController: UIViewController {
     @IBOutlet weak var closeViewBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var locationListTableView: UITableView!
     
-    //MARK: - Properties
-        
     //MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationListTableView.delegate = self
         locationListTableView.dataSource = self
-
     }
     
     //MARK: - Actions
@@ -115,4 +112,5 @@ extension WNLocationListViewController: UITableViewDelegate, UITableViewDataSour
             return UITableView.automaticDimension
         }
     }
+    
 }

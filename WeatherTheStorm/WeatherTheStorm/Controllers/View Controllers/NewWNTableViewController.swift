@@ -9,9 +9,6 @@
 import UIKit
 
 class NewWNTableViewController: UITableViewController {
-
-    //MARK: - Outlets
-    
     
     //MARK: - Lifecycle
     
@@ -19,11 +16,6 @@ class NewWNTableViewController: UITableViewController {
         super.viewDidLoad()
 
     }
-    
-    //MARK: - Actions
-    
-
-    
 
     // MARK: - Table view data source
 
@@ -31,12 +23,12 @@ class NewWNTableViewController: UITableViewController {
         guard let locations = LocationController.shared.sortedLocations else { return 0 }
         return locations.count
     }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let locations = LocationController.shared.sortedLocations else { return 0 }
         return locations[section].count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reminderLocationCell", for: indexPath)
         guard let locations = LocationController.shared.sortedLocations else { return UITableViewCell() }
@@ -62,7 +54,6 @@ class NewWNTableViewController: UITableViewController {
             return "Other Locations"
         }
     }
-
    
     // MARK: - Navigation
 
@@ -70,7 +61,6 @@ class NewWNTableViewController: UITableViewController {
         if segue.identifier == "toAddNotificationTiming" {
             guard let indexPath = tableView.indexPathForSelectedRow, let destinationVC = segue.destination as? WNTimingViewController, let locations = LocationController.shared.sortedLocations else { return }
             let location = locations[indexPath.section][indexPath.row]
-            
             destinationVC.location = location
         }
     }

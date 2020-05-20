@@ -90,13 +90,4 @@ class LocationController {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         }
     
-    func saveToPersistentStore() {
-        do {
-            try CoreDataStack.context.save()
-        } catch  {
-            print("Error when trying to save. \(error.localizedDescription)\(#function)")
-        }
-    }
-    
-    
 }

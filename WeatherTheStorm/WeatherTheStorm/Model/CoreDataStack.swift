@@ -13,6 +13,6 @@ enum CoreDataStack {
     
     private static let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     static let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-    
+
 }
 
