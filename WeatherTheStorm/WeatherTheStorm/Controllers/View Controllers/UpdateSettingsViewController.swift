@@ -41,6 +41,7 @@ class UpdateSettingsViewController: UIViewController {
         setupButtons()
         setupCircles()
         homeSearchBar.delegate = self
+        nameTextField.delegate = self
     }
     
     //MARK: - Actions
