@@ -39,7 +39,7 @@ class Onboard3ViewController: UIViewController {
         UserController.shared.loadUser()
         let userName = UserController.shared.userName
         
-        LiveLabel.text = "Where do you live, \(userName)?"
+        LiveLabel.text = "Where do you live, \(userName)? Please press Search when completed."
     }
     
     func setupSearchBar() {
