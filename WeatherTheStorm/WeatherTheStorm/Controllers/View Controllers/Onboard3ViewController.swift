@@ -10,6 +10,8 @@ import UIKit
 
 class Onboard3ViewController: UIViewController {
     
+    //MARK: - Outlets
+    
     @IBOutlet weak var LiveLabel: UILabel!
     @IBOutlet weak var citySearchBar: UISearchBar!
     @IBOutlet weak var whyLabel: UILabel!
@@ -17,6 +19,8 @@ class Onboard3ViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var askLabel: UILabel!
     @IBOutlet weak var bubbleImageView: UIImageView!
+    
+    //MARK: - Lifecycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +31,21 @@ class Onboard3ViewController: UIViewController {
         setupProgressLabel()
         setupNextButton()
         citySearchBar.delegate = self
-        nextButton.isHidden = true
+        nextButton.isEnabled = false
+        nextButton.backgroundColor = .lightGray
         hideBubble()
     }
+    
+    //MARK: - Actions
+    
+    @IBAction func nextButtonTapped(_ sender: UIButton) {
+        let homeViewController = self.storyboard?.instantiateViewController(identifier: "WelcomeSB") as! UITabBarController
+        self.view.window?.rootViewController = homeViewController
+        self.view.window?.makeKeyAndVisible()
+    }
+    
+    
+    //MARK: - Methods
     
     func hideBubble() {
         bubbleImageView.isHidden = true
@@ -103,7 +119,8 @@ extension Onboard3ViewController : UISearchBarDelegate {
                     WeatherNotificationController.shared.createWeatherNotification(location: userHome, name: "Home")
                 }
                 
-                self.nextButton.isHidden = false
+                self.nextButton.isEnabled = true
+                self.nextButton.backgroundColor = .white
             case .failure(let error):
                 print(error.localizedDescription)
             }

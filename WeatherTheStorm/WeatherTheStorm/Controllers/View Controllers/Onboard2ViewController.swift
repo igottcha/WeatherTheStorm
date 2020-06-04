@@ -89,8 +89,8 @@ class Onboard2ViewController: UIViewController {
     }
     
     func setupGenderLabels(){
-        maleLabel.text = "Male"
-        femaleLabel.text = "Female"
+        maleLabel.text = "Masculine"
+        femaleLabel.text = "Feminine"
     }
     
     func setGradientBackground() {
@@ -103,7 +103,7 @@ class Onboard2ViewController: UIViewController {
     
     func setupQuestionLabel() {
         QuestionLabel.textColor = .white
-        QuestionLabel.text = "Would you prefer male or female clothing recommendations?"
+        QuestionLabel.text = "Would you prefer more masculine or feminine clothing recommendations?"
     }
     
     func setupGenderSelection() {

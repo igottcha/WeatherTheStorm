@@ -23,20 +23,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         UserController.shared.loadUser()
         let userName = UserController.shared.userName
-        //let homeLocation = HomeController.shared.homeLocation
+        let homeLocation = HomeController.shared.homeLocation.last
 
-        if userName != "" {
-            let rootVC = storyboard.instantiateViewController(identifier: "WelcomeSB") as! UITabBarController
-            self.window?.rootViewController = rootVC
-        }
-//        else if homeLocation != nil {
-//            let rootVC = storyboard.instantiateViewController(withIdentifier: "HomeLocationSB")
-//            //let rootNC = UINavigationController(rootViewController: rootVC)
-//            self.window?.rootViewController = rootVC
-//        }
-        else {
+        if userName == "" {
             let rootVC = storyboard.instantiateViewController(withIdentifier: "WeatherWearSB")
             //let rootNC = UINavigationController(rootViewController: rootVC)
+            self.window?.rootViewController = rootVC
+        } else if homeLocation == nil {
+            let rootVC = storyboard.instantiateViewController(withIdentifier: "Onboarding3VC")
+            //let rootNC = UINavigationController(rootViewController: rootVC)
+            self.window?.rootViewController = rootVC
+        } else {
+            let rootVC = storyboard.instantiateViewController(identifier: "WelcomeSB") as! UITabBarController
             self.window?.rootViewController = rootVC
         }
         self.window?.makeKeyAndVisible()

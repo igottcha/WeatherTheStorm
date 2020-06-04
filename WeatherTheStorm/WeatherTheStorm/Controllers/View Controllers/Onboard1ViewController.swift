@@ -65,7 +65,7 @@ class TestViewController: UIViewController {
     }
     
     func setupWelcomeLabel() {
-        welcomeLabel.text = "Hello! Thank you for using Weather or Not. Before you get started, we just have a couple of questions."
+        welcomeLabel.text = "Hello! Thank you for using Weather the Weather. Before you get started, we just have a couple of questions."
     }
     
     func setGradientBackground() {
