@@ -288,9 +288,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9E8700E724535C8C005AD32A /* ]  */ = {
+		9E8700E724535C8C005AD32A /* WeatherTheStorm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9E8700FF24535C8F005AD32A /* Build configuration list for PBXNativeTarget "] " */;
+			buildConfigurationList = 9E8700FF24535C8F005AD32A /* Build configuration list for PBXNativeTarget "WeatherTheStorm" */;
 			buildPhases = (
 				9E8700E424535C8C005AD32A /* Sources */,
 				9E8700E524535C8C005AD32A /* Frameworks */,
@@ -300,7 +300,7 @@
 			);
 			dependencies = (
 			);
-			name = "] ";
+			name = WeatherTheStorm;
 			productName = WeatherTheStorm;
 			productReference = 9E8700E824535C8C005AD32A /* Weather the Weather.app */;
 			productType = "com.apple.product-type.application";
@@ -333,7 +333,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9E8700E724535C8C005AD32A /* ]  */,
+				9E8700E724535C8C005AD32A /* WeatherTheStorm */,
 			);
 		};
 /* End PBXProject section */
@@ -602,7 +602,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9E8700FF24535C8F005AD32A /* Build configuration list for PBXNativeTarget "] " */ = {
+		9E8700FF24535C8F005AD32A /* Build configuration list for PBXNativeTarget "WeatherTheStorm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9E87010024535C8F005AD32A /* Debug */,
