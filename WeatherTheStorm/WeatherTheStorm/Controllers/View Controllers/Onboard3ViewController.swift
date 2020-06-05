@@ -105,7 +105,30 @@ class Onboard3ViewController: UIViewController {
 extension Onboard3ViewController : UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
-        
+
+        guard let searchTerm = citySearchBar.text, !searchTerm.isEmpty else {return}
+        print(searchTerm)
+        LocationController.getPlacemark(searchTerm: searchTerm) { (result) in
+            switch (result) {
+
+            case .success(let placeMark):
+                guard let userHome = LocationController.shared.createLocation(destination: placeMark, type: LocationType.home) else { return }
+                print(userHome)
+
+                if userHome.weatherNotification?.count == 0 {
+                    WeatherNotificationController.shared.createWeatherNotification(location: userHome, name: "Home")
+                }
+
+                self.nextButton.isEnabled = true
+                self.nextButton.backgroundColor = .white
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        self.citySearchBar.endEditing(true)
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         guard let searchTerm = citySearchBar.text, !searchTerm.isEmpty else {return}
         print(searchTerm)
         LocationController.getPlacemark(searchTerm: searchTerm) { (result) in
@@ -127,7 +150,6 @@ extension Onboard3ViewController : UISearchBarDelegate {
         }
         self.citySearchBar.endEditing(true)
     }
-    
 }
 
 
